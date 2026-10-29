@@ -7,9 +7,10 @@
 
 import { h, store } from "../ui/dom.js";
 import { note, pageHead } from "../ui/kit.js";
-import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, centerPlan, hybridPlan, onePlan } from "../ui/build-controls.js";
+import { track } from "../ui/track.js";
+import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, centerPlan, hybridPlan, onePlan, pairId } from "../ui/build-controls.js";
 import { resultsPanel, verdictSentence } from "../ui/build-results.js";
-import { PLAN_A, PLAN_TODAY, decodePlan, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
+import { PLAN_A, PLAN_TODAY, closedSchools, decodePlan, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
 import { PATH_A_CUTS } from "../../data/budget.js";
 
 // every query key encodePlan can write; absent keys are cleared from the URL. "n" is the district's
@@ -39,6 +40,40 @@ function tidy(plan) {
 
 const samePlan = (a, b) => encodePlan(a) === encodePlan(b);
 const basisOf = (v) => (v === "exclusion" ? "exclusion" : "district");
+
+// Analytics: the parts of a plan that "Plan Changed" names when they change. canon() ignores object key order.
+const PARTS = ["open", "valleyTop", "msMerge", "cuts", "septicWES", "portables", "receiving", "split", "prekCenter", "roadmap"];
+const canon = (v) => JSON.stringify(v && typeof v === "object" && !Array.isArray(v) ? Object.entries(v).sort() : v);
+
+// The "Plan Changed" event's properties: the plan's settings and its main results (evaluate's r)
+function planProps(p, r) {
+  const { budget: b, capacity: cap } = r;
+  return {
+    plan_code: encodePlan(p),
+    open_schools: p.open,
+    closed_schools: closedSchools(p),
+    valley_top: p.valleyTop,
+    middle_merge: p.msMerge,
+    cuts: p.cuts,
+    prek_center: p.prekCenter?.school ?? null,
+    prek_center_scope: p.prekCenter?.scope ?? null,
+    splits: Object.entries(p.split).map(([town, s]) => `${town}>${s.school} ${Math.round(s.share * 100)}%`),
+    portable_units: Object.values(p.portables).reduce((a, n) => a + n, 0),
+    waitsfield_300: p.septicWES,
+    roadmap: Boolean(p.roadmap),
+    savings: Math.round(b.savings),
+    gap: Math.round(b.gap), // negative: over the target
+    meets_target: b.gap <= 0,
+    upper_bound: b.upperBound,
+    buildings_in_use: r.buildingsOpen,
+    max_schools_per_child: r.maxYoung.all,
+    students_changing_schools: r.moved.k12,
+    over_wastewater: cap.overPeople,
+    over_classrooms: [...cap.overConsultant, ...cap.overMiddle], // the consultant's classroom space
+    target_basis: b.basis === "exclusion" ? "lower" : "district",
+    reading: cap.reading,
+  };
+}
 
 export default {
   title: "Build a plan",
@@ -96,9 +131,35 @@ export default {
       }, 450);
     };
 
+    // Analytics. Changes from the controls go out about 1.2 seconds after the last one, as one "Plan Changed"
+    // listing the parts that differ from the plan last sent (and "Class Sizes Changed"). A starting point or
+    // Undo sends its own event instead. flush() sends what is waiting before any other event, so they stay in order.
+    let shown = null; // the latest evaluate() result
+    let sent = { plan: state.plan, cs: csToString(state.cs) };
+    let timer = null;
+    const flush = () => {
+      clearTimeout(timer);
+      const changed = PARTS.filter((k) => canon(state.plan[k]) !== canon(sent.plan[k]));
+      if (changed.length) track("Plan Changed", { changed, ...planProps(state.plan, shown) });
+      const cs = csToString(state.cs);
+      if (cs !== sent.cs) track("Class Sizes Changed", { class_sizes: cs });
+      sent = { plan: state.plan, cs };
+    };
+    const later = () => {
+      clearTimeout(timer);
+      timer = setTimeout(flush, 1200);
+    };
+    const send = (event, props) => {
+      flush();
+      track(event, props);
+    };
+    const onHide = () => document.visibilityState === "hidden" && flush();
+    document.addEventListener("visibilitychange", onHide);
+
     const refresh = ({ speak = true } = {}) => {
       const classSize = csExpand(state.cs);
       const r = evaluate(state.plan, { classSize, basis: state.basis, reading: state.reading });
+      shown = r;
       controls.sync(state.plan, r);
       results.update(state.plan, r, { cs: state.cs, classSize });
       if (speak) announce(r);
@@ -116,12 +177,16 @@ export default {
       }
       persist();
       refresh();
+      if (preset) sent.plan = state.plan;
+      else later();
     };
 
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top, closed }) =>
+      onPreset: (kind, { pair, top, closed }) => {
+        const which = kind === "B" ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" } : kind === "one" ? { closed_school: closed } : {};
+        send("Starting Point Chosen", { preset: kind, ...which });
         setPlan(
           kind === "today"
             ? PLAN_TODAY
@@ -135,11 +200,14 @@ export default {
                     ? centerPlan()
                     : pathB(pair, top),
           { kind }
-        ),
+        );
+      },
       onUndo: () => {
         if (!state.undo) return;
+        send("Plan Undone", { preset_before: state.undo.kind });
         state.plan = tidy(state.undo.plan);
         state.undo = null;
+        sent.plan = state.plan;
         persist();
         refresh();
       },
@@ -147,19 +215,24 @@ export default {
         state.cs = cs;
         persist();
         refresh();
+        later();
       },
       onBasis: (basis) => {
+        send("Savings Target Changed", { target: basisOf(basis) === "exclusion" ? "lower" : "district" });
         state.basis = basisOf(basis);
         persist();
         refresh();
       },
       onReading: (reading) => {
+        send("Wastewater Reading Changed", { reading: reading === "permits" ? "permits" : "slides" });
         state.reading = reading === "permits" ? "permits" : "slides";
         persist();
         refresh();
       },
     });
     const results = resultsPanel({ onShowBasis: () => controls.showBasis() });
+    // a click in the results (copy the link, your child's path, compare) sends a change still waiting first
+    results.el.addEventListener("click", flush, true);
 
     el.append(
       h(
@@ -198,6 +271,8 @@ export default {
     return () => {
       clearTimeout(liveTimer);
       results.destroy();
+      flush(); // leaving the page: a change still waiting goes out now
+      document.removeEventListener("visibilitychange", onHide);
     };
   },
 };

@@ -6,6 +6,7 @@ import { cite, cites, note, pageHead, schoolShort, section, tag, term } from "..
 import { comparisonTable } from "../ui/compare-table.js";
 import { scoreSection } from "../ui/compare-score.js";
 import { MEASURES, SETUPS, jumpTo, nameWithSetup, pairLabel, setReading, versionList } from "../ui/compare-versions.js";
+import { track } from "../ui/track.js";
 import { PK_PLAN, evaluate, tableMismatches } from "../model/index.js";
 import { BUDGET, PATH_B_SAVINGS } from "../../data/budget.js";
 import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
@@ -47,6 +48,7 @@ export default {
     // Said right at the radios: on a phone the table is far below them
     const readingSaid = h("p", { class: "hint cmp-reading-said", role: "status" });
     const openHowTo = () => {
+      track("Measures Explained");
       howTo.open = true;
       howTo.scrollIntoView({ block: "start" });
       howTo.querySelector("summary")?.focus({ preventScroll: true });
@@ -65,6 +67,7 @@ export default {
             reading = value;
             setParams({ w: value === "permits" ? "permits" : null });
             draw();
+            track("Wastewater Reading Changed", { reading: value });
           },
         }),
         h("span", {}, h("strong", {}, title), h("br"), h("span", { class: "small" }, sub))

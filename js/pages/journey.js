@@ -1,8 +1,9 @@
 import { h, num, plural, store } from "../ui/dom.js";
 import { cite, fold, note, pageHead, schoolName, schoolShort, section, tag } from "../ui/kit.js";
 import { strip, countLine } from "../ui/strip.js";
-import { childForm, decodeChild, encodeChild } from "../ui/child-form.js";
+import { childForm, childProps, decodeChild, encodeChild } from "../ui/child-form.js";
 import { heatGrid } from "../ui/heat.js";
+import { track } from "../ui/track.js";
 import { TOWNS, VALLEY } from "../../data/schools.js";
 import { PAIRS } from "../../data/district-scenarios.js";
 import { ref } from "../../data/sources.js";
@@ -55,8 +56,9 @@ export default {
     const gridHost = h("div", {});
     // Announces what a control changed; the cards it redraws are not announced on their own.
     const live = h("p", { class: "wonk-sr", role: "status" });
-    // Children whose "All twelve Path B versions" fold is open, kept across redraws.
-    const openVersions = new Set();
+    // Each child's "All twelve Path B versions" fold, kept across redraws (only its table is redrawn): an open
+    // fold stays open without being reopened in code, which analytics would count as a reader opening it.
+    const versionFolds = [];
 
     // Redraw every child card. focusId: the control or heading to put focus back on, since the
     // redraw replaces the element that had it. say: a short message for the live region.
@@ -209,10 +211,9 @@ export default {
 
     function removeChild(i) {
       state.kids.splice(i, 1);
-      // the fold memory follows the children that moved up one place
-      const open = [...openVersions].filter((k) => k !== i).map((k) => (k > i ? k - 1 : k));
-      openVersions.clear();
-      open.forEach((k) => openVersions.add(k));
+      track("Child Removed", { child_count: state.kids.length });
+      // the folds follow the children that moved up one place
+      versionFolds.splice(i, 1);
       sync();
       draw(`kid-${Math.max(0, i - 1)}`, "Child removed.");
     }
@@ -229,7 +230,10 @@ export default {
             value: state.kids[i],
             onSubmit: (code) => {
               const kid = decodeChild(code);
-              if (kid) state.kids[i] = kid;
+              if (kid) {
+                state.kids[i] = kid;
+                track("Child Edited", childProps(code));
+              }
               sync();
               draw(`kid-${i}`, "Child updated.");
             },
@@ -244,6 +248,7 @@ export default {
       const id = `recv-${i}-${kid.town}`;
       const sel = h("select", { class: "wonk-select", id }, choices.map((sid) => h("option", { value: sid, selected: sid === receivingSchool(plan, kid.town) }, schoolName(sid))));
       sel.addEventListener("change", () => {
+        track("Receiving School Chosen", { town: kid.town, school: sel.value });
         const others = state.recv.split(".").filter((p) => p && !p.startsWith(`${kid.town}~`));
         state.recv = [...others, `${kid.town}~${sel.value}`].join(".");
         sync();
@@ -276,9 +281,9 @@ export default {
                 "aria-pressed": on ? "true" : "false",
                 "aria-label": `${pairLabel(pair)}, ${gradesWord(top)}: ${plural(c.counts.schools, "school")}. Show this version.`,
                 onclick: () => {
+                  track("Path B Version Chosen", { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" });
                   state.pair = pair;
                   state.top = top;
-                  openVersions.add(i);
                   sync();
                   draw(id, `Showing Path B with ${pairLabel(pair)} open, ${gradesWord(top)}.`);
                 },
@@ -289,8 +294,9 @@ export default {
         });
         return h("tr", {}, h("th", { scope: "row" }, pairLabel(pair)), cells);
       });
-      const d = fold(
-        "All twelve Path B versions for this child",
+      // the same fold on every redraw, so an open one stays open and focus can return to the button that was used
+      const d = (versionFolds[i] ??= fold("All twelve Path B versions for this child"));
+      d.querySelector(":scope > .body").replaceChildren(
         h("p", { class: "small" }, "Number of different K-12 schools. Select a number to show that version above."),
         h(
           "div",
@@ -304,9 +310,6 @@ export default {
           )
         )
       );
-      // keep the fold open across redraws, so focus can return to the button that was used
-      d.open = openVersions.has(i);
-      d.addEventListener("toggle", () => (d.open ? openVersions.add(i) : openVersions.delete(i)));
       return d;
     }
 
@@ -320,7 +323,10 @@ export default {
     if (custom) gridPlans.push(["custom", "Your plan", () => custom]);
     gridPlanSel.append(...gridPlans.map(([v, label]) => h("option", { value: v }, label)));
     gridPlanSel.value = `B:${pairId(state.pair)}:${state.top}`;
-    gridPlanSel.addEventListener("change", drawGrid);
+    gridPlanSel.addEventListener("change", () => {
+      track("Grid Plan Chosen", { plan: gridPlanSel.value });
+      drawGrid();
+    });
 
     function drawGrid() {
       const entry = gridPlans.find(([v]) => v === gridPlanSel.value) ?? gridPlans[1];
@@ -343,6 +349,7 @@ export default {
     const pkToggle = h("input", { type: "checkbox", id: "pk-toggle", checked: state.pk });
     pkToggle.addEventListener("change", () => {
       state.pk = pkToggle.checked;
+      track("Pre-K Counting Toggled", { included: state.pk });
       sync();
       draw(null, state.pk ? "Pre-K now counts in the totals." : "Pre-K no longer counts in the totals.");
     });
@@ -354,6 +361,7 @@ export default {
     );
     roadmapSel.addEventListener("change", () => {
       state.rtop = Number(roadmapSel.value);
+      track("Roadmap Grade Chosen", { top: state.rtop });
       sync();
       draw(null, `The draft roadmap's new valley school now teaches Pre-K to ${state.rtop}.`);
     });
@@ -373,7 +381,10 @@ export default {
         value: { ...state.kids[state.kids.length - 1] },
         onSubmit: (code) => {
           const kid = decodeChild(code);
-          if (kid) state.kids.push(kid);
+          if (kid) {
+            state.kids.push(kid);
+            track("Child Added", { ...childProps(code), child_count: state.kids.length });
+          }
           addHost.hidden = true;
           addBtn.setAttribute("aria-expanded", "false");
           sync();

@@ -2,6 +2,7 @@
 // A link can point at a section: #/findings?at=questions opens the page scrolled to the element with
 // id "questions", with focus on its heading.
 
+import { track, pageview } from "./ui/track.js";
 import { h, scrollRegions } from "./ui/dom.js";
 import { GLOSSARY } from "./ui/glossary.js";
 
@@ -90,6 +91,7 @@ async function route() {
     else a.removeAttribute("aria-current");
   }
   window.wonk?.init(view);
+  pageview(path, params);
   const at = params.get("at");
   const wasFirst = first;
   first = false;
@@ -179,6 +181,7 @@ function boot() {
   // Tables that scroll sideways take keyboard focus, including ones a page redraws later.
   scrollRegions(view);
   printFolds();
+  trackShared();
   watchTopbar();
   wireDrawer();
   window.addEventListener(
@@ -191,6 +194,37 @@ function boot() {
   );
   window.addEventListener("hashchange", route);
   route();
+}
+
+// Interactions every page shares, tracked in one place: opening a fold, following a source or other
+// outside link, opening a glossary definition, and printing. A fold counts when the reader clicks its
+// summary while it is closed (Enter and Space click too), not when code opens it (?at= links, settings in
+// a link, redraws, printing): those fire the same toggle event, but no click.
+function trackShared() {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest?.("a[href]");
+    if (a && a.host && a.host !== location.host) {
+      const label = a.getAttribute("aria-label") ?? "";
+      track("Source Opened", {
+        link_text: a.textContent.replace(/\s+/g, " ").trim().slice(0, 80),
+        source: label.includes("Source: ") ? label.split("Source: ")[1].slice(0, 160) : null,
+        host: a.host,
+        url: a.href.slice(0, 300),
+      });
+      return;
+    }
+    const s = e.target.closest?.("summary");
+    const d = s?.parentElement;
+    if (d instanceof HTMLDetailsElement && !d.open && !e.defaultPrevented && s === d.querySelector(":scope > summary") && view.contains(d)) {
+      // a card fold by its headline alone, without its changing facts ("Scored 2 of 7")
+      const section = (s.querySelector(".headline") ?? s).textContent.replace(/\s+/g, " ").trim().slice(0, 120);
+      track("Section Expanded", { section: section || d.id || "untitled" });
+    }
+    // a click on a label also clicks its control: count the term once, by its glossary key
+    const term = e.target.closest?.("[data-term], .wonk-term");
+    if (term && !e.target.closest("input, select, textarea")) track("Glossary Term Opened", { term: term.closest("[data-term]")?.dataset.term ?? term.textContent.trim().slice(0, 60) });
+  });
+  window.addEventListener("beforeprint", () => track("Page Printed"));
 }
 
 // A closed <details> never prints its contents, whatever the CSS says, so a printed page would show the
@@ -234,6 +268,7 @@ function wireDrawer() {
     if (open === wasOpen) return;
     wasOpen = open;
     for (const el of behind) el.inert = open;
+    if (open) track("Menu Opened");
     const focused = document.activeElement;
     if (open) {
       if (!nav.contains(focused)) (nav.querySelector('[aria-current="page"]') ?? nav.querySelector("a[href]"))?.focus();

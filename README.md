@@ -39,7 +39,7 @@ So there is no plan that is clearly safe, closes nothing, and keeps every progra
 
 ## How the numbers work
 
-A static site: plain HTML, CSS, and JavaScript modules. No build step, no server, no tracking.
+A static site: plain HTML, CSS, and JavaScript modules. No build step, no server.
 
 - `data/` holds every number, transcribed from the sources, each with a reference to its document and page or slide.
 - `js/model/` is the plan model: which school a child attends each year under a plan, building loads and capacity checks, budget effects, and student-level impacts. Pure functions, tested with Node.

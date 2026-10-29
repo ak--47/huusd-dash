@@ -235,6 +235,14 @@ export const SOURCES = {
     kind: "district",
     url: "https://drive.google.com/file/d/1GfZsknL0ChNGqI3oatn58oSRFoCnn9Do/view",
   },
+  truexEval: {
+    title: "Facility Evaluation Report: Elementary & Middle Schools of HUUSD",
+    by: "TruexCullins, for HUUSD",
+    date: "2025-10-27",
+    kind: "district",
+    url: "https://github.com/ak--47/huusd-dash/blob/main/sources/consultant/truexcullins-2025-10-facility-evaluation.txt",
+    note: "Text copy kept with this site's sources. Crossett Brook: $10,187,109 of deferred maintenance, $489,663 of it priority 1.",
+  },
   wwRules: {
     title: "Wastewater System and Potable Water Supply Rules (effective November 6, 2023), Table 8-3",
     by: "Vermont Department of Environmental Conservation",

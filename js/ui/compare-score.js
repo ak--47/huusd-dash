@@ -9,6 +9,7 @@ import { ref } from "../../data/sources.js";
 import { evaluate, makePlan } from "../model/index.js";
 import { h, listJoin, money, num, store } from "./dom.js";
 import { cite, note, schoolShort, status, tag, term } from "./kit.js";
+import { track } from "./track.js";
 import {
   SETUPS,
   buildHref,
@@ -542,6 +543,7 @@ export function scoreSection() {
 
   function setScore(id, key, n) {
     (scores[id] ??= {})[key] = n;
+    track("Pairing Scored", { pairing: id, criterion: key, score: n });
     // a new score ends the offer to undo "Clear my scores", which would otherwise drop it
     clearSaid.textContent = "";
     save();
@@ -627,7 +629,8 @@ export function scoreSection() {
     const card = h(
       "details",
       { class: "wonk-card wonk-card--fold cmp-pair", "data-fold-key": `cmp-pair-${d.id}` },
-      h("summary", {}, h("span", { class: "headline" }, `${d.label} stay open`), facts),
+      // tracked on the reader's click while closed (Enter and Space click too), not when a redraw reopens a remembered fold
+      h("summary", { onclick: () => card.open || track("Pairing Opened", { pairing: d.id }) }, h("span", { class: "headline" }, `${d.label} stay open`), facts),
       h(
         "div",
         { class: "body" },
@@ -651,7 +654,18 @@ export function scoreSection() {
         h(
           "p",
           { class: "no-print" },
-          h("button", { type: "button", class: "wonk-btn wonk-btn--quiet", onclick: () => jumpTo(rankingCard) }, "See your ranking")
+          h(
+            "button",
+            {
+              type: "button",
+              class: "wonk-btn wonk-btn--quiet",
+              onclick: () => {
+                jumpTo(rankingCard);
+                track("Ranking Viewed");
+              },
+            },
+            "See your ranking"
+          )
         )
       )
     );
@@ -666,7 +680,10 @@ export function scoreSection() {
     h("option", { value: "district" }, SHEET_LABEL),
     h("option", { value: "all" }, ADDED_LABEL)
   );
-  rankBy.addEventListener("change", paintRanking);
+  rankBy.addEventListener("change", () => {
+    paintRanking();
+    track("Ranking Changed", { rank_by: rankBy.value });
+  });
   const rankBody = h("tbody", { role: "rowgroup" });
   const rankTable = h(
     "div",
@@ -724,6 +741,7 @@ export function scoreSection() {
   // time instead of falling back to the page.
   clearBtn.addEventListener("click", () => {
     const before = scores;
+    track("Scores Cleared", { scored_pairings: Object.values(before).filter((s) => s && Object.keys(s).length).length });
     scores = {};
     save();
     repaintAll();
@@ -738,6 +756,7 @@ export function scoreSection() {
           repaintAll();
           clearBtn.focus();
           clearSaid.textContent = "Your scores are back.";
+          track("Scores Restored");
         },
       },
       "Undo"

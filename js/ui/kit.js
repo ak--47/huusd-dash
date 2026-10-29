@@ -83,7 +83,7 @@ const SHORT_LABEL = {
   permitMES: "Moretown permit",
   truexCap: "Consultant capacities",
   truexReport: "Consultant report",
-  truexUpdate: "Consultant update",
+  truexUpdate: "Consultant update", truexEval: "Consultant evaluation",
   wwRules: "State rules",
 };
 

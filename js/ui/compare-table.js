@@ -8,6 +8,7 @@
 import { ref } from "../../data/sources.js";
 import { h, listJoin, moneyShort, num } from "./dom.js";
 import { cite, schoolShort, status, tag, unsure } from "./kit.js";
+import { track } from "./track.js";
 import {
   BUILD_TEXT,
   CHILD_TEXT,
@@ -22,6 +23,7 @@ import {
   lowerFirst,
   maxTownsText,
   millions,
+  pairId,
   placeName,
 } from "./compare-versions.js";
 
@@ -169,6 +171,8 @@ function repairsCell(v) {
 function versionCell(v) {
   const letter = v.kind === "A" ? "A" : v.kind === "B" ? "B" : null;
   const isB = v.kind === "B";
+  // as the analytics events name it: "A", or the pairing and its setup, "MES+WRN pk4" or "MES+WRN k6"
+  const version = isB ? `${pairId(v.pair)} ${v.top === 6 ? "k6" : "pk4"}` : v.id;
   return h(
     "div",
     { class: "cmp-v" },
@@ -183,8 +187,8 @@ function versionCell(v) {
       : h(
           "span",
           { class: "cmp-v-links" },
-          h("a", { href: childHref(v), "aria-label": `${CHILD_TEXT}: ${fullName(v)}` }, CHILD_TEXT),
-          h("a", { href: buildHref(v.plan), "aria-label": `${BUILD_TEXT}: ${fullName(v)}` }, BUILD_TEXT)
+          h("a", { href: childHref(v), "aria-label": `${CHILD_TEXT}: ${fullName(v)}`, onclick: () => track("Version Child Path Opened", { version }) }, CHILD_TEXT),
+          h("a", { href: buildHref(v.plan), "aria-label": `${BUILD_TEXT}: ${fullName(v)}`, onclick: () => track("Version Opened in Build", { version }) }, BUILD_TEXT)
         )
   );
 }
@@ -285,6 +289,8 @@ export function comparisonTable(versions, { sort = null, onSort, onExplain } = {
   const said = h("p", { class: "wonk-sr", role: "status" });
 
   function show(key, announce = false) {
+    // announce: a reader's "Show" button; sorting also shows its measure, which is not tracked here
+    if (announce && key !== shown) track("Measure Shown", { measure: key });
     shown = key;
     table.dataset.show = key;
     for (const [k, b] of showButtons) b.setAttribute("aria-pressed", String(k === key));
@@ -323,6 +329,7 @@ export function comparisonTable(versions, { sort = null, onSort, onExplain } = {
         ? `Sorted by ${lowerFirst(m.label)}, ${current.dir === "asc" ? m.low : m.high}. No change stays first, for reference.`
         : "Shown in the district's order.";
       onSort?.(current);
+      track("Versions Sorted", { measure: current?.key ?? "district_order", direction: current?.dir ?? null });
     }
   }
   show(shown);

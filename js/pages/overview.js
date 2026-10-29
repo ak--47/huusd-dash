@@ -1,6 +1,7 @@
 import { h, moneyShort, num, dateLong } from "../ui/dom.js";
 import { cite, cites, fold, pageHead, section, tag, term, unsure } from "../ui/kit.js";
-import { childForm } from "../ui/child-form.js";
+import { childForm, childProps } from "../ui/child-form.js";
+import { track } from "../ui/track.js";
 import { BUDGET, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { PREK_2026 } from "../../data/enrollment.js";
 import { TIMELINE } from "../../data/timeline.js";
@@ -18,6 +19,9 @@ const cutAmount = (id) => moneyShort(PATH_A_CUTS.items.find((c) => c.id === id).
 
 // The district's savings assume valley 5th and 6th graders move to Crossett Brook (October 28 meeting).
 const fiveSixCite = () => cite(ref("meeting1028", "keeping grades 5-6 in the valley"));
+
+// tracks a Start here button that opens another page, e.g. opens("Options Opened")
+const opens = (event) => () => track(event, { from: "start" });
 
 export default {
   title: "Start here",
@@ -62,12 +66,22 @@ export default {
           h("li", {}, h("strong", {}, "Not decided: "), "which two schools, where grades 5 and 6 go, and the later phases of the district's draft roadmap, including a new valley building in 2029. ", cite(ref("oct14", "Draft Proposal for School Reconfiguration & Consolidation Roadmap"))),
           h("li", {}, h("strong", {}, "What we checked: "), "several items in the district's numbers that could change which options work, including the wastewater limits and the size of the cut. ", h("a", { href: "#/findings" }, "See them, and questions to ask the board"))
         ),
-        h("div", { class: "btn-row" }, h("a", { class: "wonk-btn", href: "#/options" }, "See options beyond A and B"))
+        h("div", { class: "btn-row" }, h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "See options beyond A and B"))
       ),
 
       section(
         { id: "child", title: "Your child's path", intro: "Pick your town and your child's grade this year to see every school they would attend under each path." },
-        h("div", { class: "wonk-card quick-child" }, childForm({ compact: true, onSubmit: (child) => go("your-child", { c: child }) }))
+        h(
+          "div",
+          { class: "wonk-card quick-child" },
+          childForm({
+            compact: true,
+            onSubmit: (child) => {
+              track("Child Path Requested", { ...childProps(child), from: "start" });
+              go("your-child", { c: child });
+            },
+          })
+        )
       ),
 
       section(
@@ -217,7 +231,12 @@ export default {
           " For closing one school we use half the district's figure for closing two; the board's question-and-answer document says closing one “does not look like it would save enough money to make it worthwhile.” ",
           cite(ref("qdoc", "closing one school"))
         ),
-        h("div", { class: "btn-row" }, h("a", { class: "wonk-btn", href: "#/options" }, "Compare all the options"), h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build" }, "Build your own"))
+        h(
+          "div",
+          { class: "btn-row" },
+          h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "Compare all the options"),
+          h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build", onclick: opens("Build Opened") }, "Build your own")
+        )
       ),
 
       section(
@@ -286,8 +305,8 @@ export default {
           "div",
           { class: "btn-row" },
           h("a", { class: "wonk-btn", href: "#/findings" }, "See everything we checked"),
-          h("a", { class: "wonk-btn", href: "#/findings?at=questions" }, "Questions to ask the board"),
-          h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build" }, "Build your own plan")
+          h("a", { class: "wonk-btn", href: "#/findings?at=questions", onclick: opens("Questions Opened") }, "Questions to ask the board"),
+          h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build", onclick: opens("Build Opened") }, "Build your own plan")
         )
       ),
 
