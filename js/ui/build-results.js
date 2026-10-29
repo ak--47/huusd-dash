@@ -3,7 +3,7 @@
 
 import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { ATTENDING } from "../../data/enrollment.js";
-import { FACILITIES, SCHOOLS, TOWNS } from "../../data/schools.js";
+import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
 import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
@@ -623,10 +623,17 @@ function schoolCap(s, receives) {
 
 function buildingsSection(plan, r, cs, keptFold) {
   const cap = r.capacity;
+  // which towns' children each school takes: every valley school that no longer teaches K-6 (a Pre-K center
+  // included), with the share when part of a town goes to a second school
   const receivers = {};
-  for (const id of r.closed) {
+  const part = (share) => (share > 0.6 ? "about two thirds of" : share > 0.4 ? "about half of" : share > 0.3 ? "about a third of" : share > 0.2 ? "about a quarter of" : "some of");
+  for (const id of VALLEY.filter((v) => !plan.open.includes(v))) {
     const town = SCHOOLS[id].town;
-    (receivers[receivingSchool(plan, town)] ??= []).push(townName(town));
+    const main = receivingSchool(plan, town);
+    const sp = plan.split?.[town];
+    const alt = sp && sp.school !== main ? sp : null;
+    (receivers[main] ??= []).push(alt ? `${part(1 - alt.share)} ${townName(town)}'s` : `${townName(town)}`);
+    if (alt) (receivers[alt.school] ??= []).push(`${part(alt.share)} ${townName(town)}'s`);
   }
   const overP = cap.schools.filter((s) => s.overPeople);
   const overR = cap.schools.filter((s) => s.overConsultant);

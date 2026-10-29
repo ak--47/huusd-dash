@@ -6,6 +6,12 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: the Pre-K center plan, as refined by its suggester
+
+- Options card `B-center` now matches the resident's full plan: close Fayston; all district Pre-K at Moretown; Waitsfield and Warren K-6; two thirds of Fayston's children to Waitsfield and a third to Warren; two thirds of Moretown's K-6 children to Waitsfield and a third to Brookside (then Crossett Brook for 5-6); every 7th and 8th grader to Harwood, Crossett Brook keeping grades 5-6 for Waterbury-area children. Result: about $3.74M on paper (merger an upper limit), Waitsfield about 252 students (over the slides' 230 and 78 over the consultant's 174; about 2 portable units, not included), Warren about 116, Brookside about 315, Crossett Brook 5-6 about 146.
+- Split shares are now kept to the whole percent, and Build offers a third and two thirds as well as a quarter, half, and three quarters.
+- The card says it was suggested by a resident after launch (it came from the owner's household; keep that disclosure).
+
 ## 2026-10-29: Pre-K center, split towns, Brookside in Build (owner's family's feedback)
 
 - Feedback: "You don't have Brookside in here anywhere? Not all Fayston kids would go to Waitsfield. What if we close Fayston, turn Moretown into Pre-K for everyone, have Waitsfield and Warren as K-6, and merge the middle?"

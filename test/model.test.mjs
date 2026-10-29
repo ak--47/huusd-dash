@@ -328,7 +328,8 @@ test("option: close Fayston, Moretown as a Pre-K center, Waitsfield and Warren K
   const o = M.OPTIONS.find((x) => x.id === "B-center");
   const r = M.evaluate(o.plan);
   assert.equal(r.budget.savings, 3743601);
-  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 281);
-  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 133);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 252);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 116);
+  assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 315);
   assert.equal(r.buildingsOpen, 6);
 });
