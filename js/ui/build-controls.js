@@ -6,8 +6,8 @@ import { PAIRS } from "../../data/district-scenarios.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { CLASS_SIZE_DEFAULT, TARGET, TARGET_WITH_EXCLUSION, matchNamed, receivingOptions, receivingSchool } from "../model/index.js";
-import { h, money, num } from "./dom.js";
+import { CLASS_SIZE_DEFAULT, TARGET, TARGET_WITH_EXCLUSION, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
+import { h, listJoin, money, num } from "./dom.js";
 import { cite, note, schoolShort, term } from "./kit.js";
 
 export const pairId = (pair) => [...pair].sort().join("+");
@@ -15,6 +15,15 @@ export const pairLabel = (pair) => pair.map(schoolShort).join(" + ");
 export const townName = (id) => TOWNS.find((t) => t.id === id)?.name ?? id;
 const sum = (o) => Object.values(o ?? {}).reduce((a, b) => a + b, 0);
 const clampInt = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(Number(v))));
+
+// Each valley school's wastewater limit in step 2, in the words of the reading chosen under Advanced.
+const PERMIT_WORDS = {
+  FES: "Permit: 235 students and staff",
+  MES: "Permit: 2,820 gallons a day, about 235 people",
+  WES: "Permit: 300 students (1991)",
+  WRN: "Permit: 237 students and staff",
+};
+const slidesLimit = (f) => `Wastewater limit ${f.wastewater} on the slides${f.wastewaterExpandable ? ` (“amenable to ${f.wastewaterExpandable}”)` : ""}`;
 
 // Where valley 5th and 6th graders go, in words (no hyphens, so a line never breaks inside "K-6").
 export const topWords = (top) => (top === 4 ? "grades 5 and 6 at Crossett Brook" : "grades 5 and 6 in the valley");
@@ -30,6 +39,23 @@ export function namedLabel(named) {
 export function presetKind(named) {
   if (!named) return null;
   return named.id === "today" ? "today" : named.id === "A" ? "A" : "B";
+}
+
+// How a plan relates to the district's plans:
+//   { named }          it is one of them
+//   { base, extras }   it is one of them plus portable units or Waitsfield at 300 ("5 portable units")
+//   { nearB }          it keeps two valley schools open but not the middle-school move: one step from that Path B
+//   {}                 none of these
+export function relation(plan) {
+  const named = matchNamed(plan);
+  if (named) return { named };
+  const base = matchNamed({ ...plan, portables: {}, septicWES: false });
+  if (base) {
+    const units = sum(plan.portables);
+    return { base, extras: [units ? `${units} portable unit${units === 1 ? "" : "s"}` : null, plan.septicWES ? "300 for Waitsfield" : null].filter(Boolean) };
+  }
+  if (plan.open.length === 2 && !plan.msMerge && !plan.cuts.length && !plan.roadmap) return { nearB: pathB(plan.open, plan.valleyTop) };
+  return {};
 }
 
 // Set aria-describedby to `ids`, keeping the token wonk.js adds while a tip is showing for the control.
@@ -119,17 +145,25 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ["B", "Path B"],
   ].map(([kind, label]) => h("button", { type: "button", class: "wonk-btn bp-preset", "aria-pressed": "false", "data-kind": kind }, label));
 
-  const pairSel = h("select", { class: "wonk-select", id: "bp-pair", "aria-describedby": "bp-bversion-hint" }, PAIRS.map((p) => h("option", { value: pairId(p) }, pairLabel(p))));
+  // Each starts on an empty choice unless exactly two valley schools are open, so the box never disagrees
+  // with steps 2 and 3. Path B with an empty choice loads Moretown + Warren with grades 5-6 at Crossett Brook.
+  const pairSel = h(
+    "select",
+    { class: "wonk-select", id: "bp-pair", "aria-describedby": "bp-bversion-hint" },
+    h("option", { value: "", disabled: true }, "Pick two schools"),
+    PAIRS.map((p) => h("option", { value: pairId(p) }, pairLabel(p)))
+  );
   // same words and order as step 3
   const topSel = h(
     "select",
     { class: "wonk-select", id: "bp-btop", "aria-describedby": "bp-bversion-hint" },
+    h("option", { value: "", disabled: true }, "Pick one"),
     h("option", { value: "6" }, "Stay in valley schools"),
     h("option", { value: "4" }, "Move to Crossett Brook")
   );
   const startPlan = state.plan;
-  pairSel.value = startPlan.open.length === 2 ? pairId(startPlan.open) : "MES+WRN";
-  topSel.value = startPlan.open.length === 2 ? String(startPlan.valleyTop) : "4";
+  pairSel.value = startPlan.open.length === 2 ? pairId(startPlan.open) : "";
+  topSel.value = startPlan.open.length === 2 ? String(startPlan.valleyTop) : "";
   const chosenB = () => ({ pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2], top: Number(topSel.value) === 6 ? 6 : 4 });
   for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosenB()));
   pairSel.addEventListener("change", () => onPreset("B", chosenB()));
@@ -172,6 +206,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       onPlan((p) => ({ ...p, open: on ? [...p.open, id] : p.open.filter((x) => x !== id) }));
     });
     const status = h("span", { class: "bp-school-status", id: `${base}-status` });
+    // the slides' limit, or the permit's words when the state permits reading is on (sync)
+    const limitEl = h("span", {}, slidesLimit(f));
     // facts sit on their own lines in the two-column grid and run together, dot-separated, on phones
     const sep = () => [h("span", { class: "wonk-sr" }, ", "), h("span", { class: "bp-dot", "aria-hidden": "true" }, " · ")];
     const label = h(
@@ -189,12 +225,12 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
           sep(),
           h("span", {}, `${f.classrooms} classrooms`),
           sep(),
-          h("span", {}, `Wastewater limit ${f.wastewater}${f.wastewaterExpandable ? ` (could be ${f.wastewaterExpandable})` : ""}`)
+          limitEl
         ),
         status
       )
     );
-    return { id, cb, status, label };
+    return { id, cb, status, label, limitEl };
   });
   const allClosed = h("div", { class: "bp-allclosed", "aria-live": "polite" });
 
@@ -213,7 +249,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         "span",
         { class: "bp-hint-line bp-def" },
         term("wastewater", "Wastewater limit"),
-        ": the most people a building's septic permit allows. The district compares it to students, including Pre-K."
+        ": the most people a building's septic permit allows. The slides compare it to students, including Pre-K; read the state permits' way (under Advanced), staff count too, except at Waitsfield."
       ),
     ],
     h("div", { class: "bp-schools" }, schoolCards.map((c) => c.label)),
@@ -236,7 +272,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const g3 = group(
     3,
     "Grades 5 and 6",
-    "Where valley 5th and 6th graders go. The district did not publish separate savings for this choice.",
+    "Where valley 5th and 6th graders go. The district's Path B savings assume they move to Crossett Brook; on October 28 an administrator said keeping them in the valley would save less.",
     h("div", { class: "choice bp-choice-stack" }, topRadios.map((r) => r.label)),
     topOff
   );
@@ -288,14 +324,16 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     h("div", { class: "bp-cuts" }, cutBoxes.map((c) => c.label))
   );
 
-  // ---- 6. building fixes ----
-  // "does not apply" joins the description only while Waitsfield is closed (sync)
+  // ---- 6. building changes ----
+  // a note on why the Waitsfield choice does nothing joins its description while Waitsfield is closed, or while
+  // the state permits reading (already 300) is on (sync)
   const septic = h("input", { type: "checkbox", id: "bp-septic", "aria-describedby": "bp-septic-d" });
   septic.addEventListener("change", () => {
     const on = septic.checked;
     onPlan((p) => ({ ...p, septicWES: on }));
   });
   const septicOff = h("span", { class: "bp-fix-off", id: "bp-septic-off", hidden: true }, "Waitsfield closes in this plan, so this does not apply.");
+  const septicPermits = h("span", { class: "bp-fix-off", id: "bp-septic-permits", hidden: true }, "The state permits reading already uses 300 for Waitsfield.");
   const septicRow = h(
     "div",
     { class: "bp-fix" },
@@ -311,7 +349,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "Waitsfield's 1991 state permit sets an approved maximum student population of 300, but the design behind it counted students and staff, and a 1996 letter in the state's file says 230. The slides use 230 and list the school as “amenable to 300.” ",
       cite(ref("permitWES", "condition 1.2"), "Waitsfield permit 1991")
     ),
-    septicOff
+    septicOff,
+    septicPermits
   );
 
   const ports = PORT_SCHOOLS.map((id) => {
@@ -340,8 +379,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   const g6 = group(
     6,
-    "Building fixes the district did not test",
-    "These change how many students a building can hold, not the yearly budget.",
+    "Building changes not in the district's capacity tables",
+    "These change how many students a building can hold. Portable classrooms also cost money; see Budget in the results.",
     septicRow,
     h(
       "div",
@@ -350,8 +389,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "p",
         { class: "bp-fix-note" },
-        `Each unit has 2 classrooms. The district estimates ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units, so about ${money(perUnitLo)} to ${money(perUnitHi)} per unit, one-time. `,
-        cite(MODULAR.src)
+        `Each unit has 2 classrooms. The district's best preliminary quote is ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units for a two-year period, mostly site preparation, so about ${money(perUnitLo)} to ${money(perUnitHi)} per unit for those two years. `,
+        cite(MODULAR.src),
+        " ",
+        cite(ref("meeting1028", "portable classrooms"))
       ),
       h("div", { class: "bp-ports" }, ports.map((p) => p.row))
     )
@@ -361,7 +402,11 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   // the savings target: the district's, or the lower one if older bond payments are left out (the Options page's choice)
   const basisRadios = [
     ["district", `${money(TARGET)}: the district's target`, "As presented on October 14 and 28."],
-    ["exclusion", `${money(TARGET_WITH_EXCLUSION)}: if older bond payments are left out`, "State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test. The district's target counts them."],
+    [
+      "exclusion",
+      `${money(TARGET_WITH_EXCLUSION)}: if older bond payments are left out`,
+      "State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test. The district's figures appear to count them; it has not said why.",
+    ],
   ].map(([v, title, sub]) => {
     const input = h("input", { type: "radio", name: "bp-basis", value: v });
     input.addEventListener("change", () => {
@@ -372,8 +417,16 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   // the wastewater limits: as the slides apply them, or as each state permit is written
   const readingRadios = [
-    ["slides", "As on the slides", "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), and 237 (Warren), as the district compared them."],
-    ["permits", "As the state permits read", "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate."],
+    [
+      "slides",
+      "As on the slides",
+      "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), 237 (Warren), and Brookside's occupancy of 480, as the district compared them.",
+    ],
+    [
+      "permits",
+      "As the state permits read",
+      "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate.",
+    ],
   ].map(([v, title, sub]) => {
     const input = h("input", { type: "radio", name: "bp-reading", value: v });
     input.addEventListener("change", () => {
@@ -477,7 +530,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const el = h(
     "div",
     { class: "bp-controls" },
-    h("h2", { class: "bp-col-title", id: "bp-controls-title" }, "Your choices"),
+    // tabindex: the results' "Back to your choices" buttons move focus here
+    h("h2", { class: "bp-col-title", id: "bp-controls-title", tabindex: "-1" }, "Your choices"),
     g1,
     g2,
     g3,
@@ -487,20 +541,44 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     advanced
   );
 
+  // A plan that keeps two valley schools open but not the middle-school move: add the move in one step, and put
+  // focus on the step 4 choice it sets (this paragraph, and the button, are redrawn).
+  function addMove() {
+    onPlan((p) => ({ ...p, msMerge: true }));
+    msRadios.find((m) => m.v).input.focus();
+  }
+
   function sync(plan, r) {
-    const named = matchNamed(plan);
+    const rel = relation(plan);
+    const named = rel.named ?? null;
     const kind = presetKind(named);
     for (const b of presetBtns) b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
-    if (kind === "B") {
-      pairSel.value = pairId(named.open);
-      topSel.value = String(named.valleyTop);
+    if (plan.open.length === 2) {
+      pairSel.value = pairId(plan.open);
+      topSel.value = String(plan.valleyTop);
+    } else {
+      pairSel.value = "";
+      topSel.value = "";
     }
     matched.replaceChildren(
       kind === "today"
         ? h("span", {}, "Right now this is ", h("strong", {}, "no change"), ": every school open and no cuts.")
         : named
           ? h("span", {}, "Your plan matches ", h("strong", {}, namedLabel(named)), ".")
-          : h("span", {}, "Your own combination. It does not match one of the district's plans.")
+          : rel.base
+            ? h("span", {}, "Your plan is ", h("strong", {}, rel.base.id === "today" ? "no change" : namedLabel(rel.base)), `, plus ${listJoin(rel.extras)}.`)
+            : rel.nearB
+              ? h(
+                  "span",
+                  {},
+                  "One step from ",
+                  h("strong", {}, namedLabel(rel.nearB)),
+                  `: Path B also moves Crossett Brook's 7th and 8th graders to Harwood (step 4), which the district says saves ${money(PATH_B_SAVINGS.middle.amount)} a year${
+                    plan.valleyTop === 6 ? ", though it said keeping grades 5 and 6 in the valley would save less" : ""
+                  }. `,
+                  h("button", { type: "button", class: "bp-textbtn", onclick: addMove }, "Add that move")
+                )
+              : h("span", {}, "Your own combination. It does not match one of the district's plans.")
     );
     undoRow.hidden = !state.undo;
     if (state.undo) {
@@ -511,12 +589,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     }
 
     // valley schools
+    const permitsOn = r.capacity.reading === "permits";
     for (const c of schoolCards) {
       const open = plan.open.includes(c.id);
       c.cb.checked = open;
       c.label.classList.toggle("is-closed", !open);
       const town = SCHOOLS[c.id].town;
       c.status.textContent = open ? "Stays open" : `Closes. ${townName(town)} children go to ${schoolShort(receivingSchool(plan, town))}.`;
+      c.limitEl.textContent = permitsOn ? PERMIT_WORDS[c.id] : slidesLimit(FACILITIES[c.id]);
     }
     // the warning sits in a polite live region: touch it only when its words change
     const bps = r.capacity.schools.find((s) => s.id === "BPS");
@@ -548,13 +628,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     for (const m of msRadios) m.input.checked = plan.msMerge === m.v;
     for (const c of cutBoxes) c.cb.checked = plan.cuts.includes(c.id);
 
-    // building fixes
+    // building changes: using 300 for Waitsfield does nothing while it is closed, or under the state permits
+    // reading, which already uses 300
     const wesOpen = plan.open.includes("WES");
     septic.checked = plan.septicWES;
-    septic.disabled = !wesOpen;
-    septicRow.classList.toggle("is-off", !wesOpen);
+    septic.disabled = !wesOpen || permitsOn;
+    septicRow.classList.toggle("is-off", !wesOpen || permitsOn);
     septicOff.hidden = wesOpen;
-    describedBy(septic, wesOpen ? ["bp-septic-d"] : ["bp-septic-d", "bp-septic-off"]);
+    septicPermits.hidden = !wesOpen || !permitsOn;
+    describedBy(septic, ["bp-septic-d", ...(!wesOpen ? ["bp-septic-off"] : permitsOn ? ["bp-septic-permits"] : [])]);
     for (const p of ports) {
       const on = p.id === "BPS" || plan.open.includes(p.id);
       p.row.hidden = !on;

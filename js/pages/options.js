@@ -6,12 +6,12 @@ import { MODULAR } from "../../data/budget.js";
 
 const VALLEY_TOWNS = ["moretown", "waitsfield", "fayston", "warren"];
 const pairId = (plan) => [...plan.open].sort().join("+");
-const MOST_SCHOOLS = "Most schools (valley / Waterbury-Duxbury)";
+const MOST_SCHOOLS = "Most schools for any child (valley / Waterbury-Duxbury)";
 
 // The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. Where a plan keeps
 // them in the valley, the model marks its savings as an upper limit (budget.upperBound).
 const fiveSixNote = (which, it) =>
-  `The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so ${which} would save less. The district has not costed ${it}. `;
+  `The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so ${which} would save less, with “an impact in terms of a penalty”: staff would have to stay to serve those students or be shared with Brookside. The district has not costed ${it}. `;
 const fiveSixCite = () => cite(ref("meeting1028", "keeping grades 5-6 in the valley"));
 
 function score(plan, basis, reading) {
@@ -94,8 +94,16 @@ export default {
         h(
           "div",
           { class: "choice choice--stack" },
-          readingRadio("slides", "As on the slides", "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), and 237 (Warren), as the district compared them."),
-          readingRadio("permits", "As the state permits read", "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate.")
+          readingRadio(
+            "slides",
+            "As on the slides",
+            "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), 237 (Warren), and Brookside's occupancy of 480, as the district compared them."
+          ),
+          readingRadio(
+            "permits",
+            "As the state permits read",
+            "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate."
+          )
         ),
         h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/findings?at=finding-permits" }, "What we checked"), ". ", cite(ref("permitWES", "PDF p. 12, condition 1.2")))
       )
@@ -141,7 +149,12 @@ export default {
               ": the wastewater limits, read the way you choose above, and Brookside's occupancy of 480. Classrooms are checked against the capacities the district's consultant, TruexCullins, calculated in March 2025, plus 40 students for each portable unit of two classrooms. For the middle schools: Crossett Brook 359, and Harwood Middle 166, which counts only the rooms the middle school uses now in the building it shares with the high school. ",
               cite(ref("truexCap", "Capacities"))
             ),
-            h("li", {}, h("strong", {}, "Change schools next fall"), ": this year's K-12 students who would start fall 2027 somewhere they would not otherwise go."),
+            h(
+              "li",
+              {},
+              h("strong", {}, "Change schools next fall"),
+              ": students in K-12 next fall (this year's 4-year-olds in Pre-K through grade 11) who would start fall 2027 somewhere they would not otherwise go."
+            ),
             h("li", {}, h("strong", {}, MOST_SCHOOLS), ": the highest number of different K-12 schools any child now in Pre-K to grade 2 would attend. Today it is 3 everywhere.")
           ),
           h("p", {}, "These rows are not recommendations. They apply the district's figures, and our labeled estimates where it has none, to combinations it did not present.")
@@ -192,13 +205,23 @@ export default {
     const muted = (...text) => [h("br"), h("span", { class: "small muted" }, ...text)];
 
     function cardFor({ o, s, family }) {
+      const kids = store.get("kids");
       const actions = (plan) =>
         h(
           "p",
           { class: "opt-actions no-print" },
           h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${reading === "permits" ? "&w=permits" : ""}` }, "Open in Build a plan"),
           plan.open.length === 2 && plan.msMerge
-            ? [" · ", h("a", { href: `#/your-child?${new URLSearchParams({ pair: pairId(plan), top: plan.valleyTop, ...(store.get("kids") ? { c: store.get("kids") } : {}) })}` }, "See a child's path")]
+            ? [
+                " · ",
+                h(
+                  "a",
+                  {
+                    href: `#/your-child?${new URLSearchParams({ pair: pairId(plan), top: plan.valleyTop, ...(typeof kids === "string" && kids ? { c: kids } : {}) })}`,
+                  },
+                  "See a child's path"
+                ),
+              ]
             : null
         );
       if (family) {
@@ -290,7 +313,7 @@ export default {
       ];
     }
 
-    // One-time cost of the portable classrooms in a plan, from the district's preliminary quote.
+    // Cost of the portable classrooms in a plan over about two years, from the district's preliminary quote.
     function portablesNote(p) {
       if (!p) return null;
       return h(

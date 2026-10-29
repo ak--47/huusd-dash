@@ -1,15 +1,26 @@
 /* Harwood School Plans Explorer: app styles on top of WONK (paper theme, demogorgon pair).
-   Colors come only from WONK tokens. Loaded after wonk.css. */
+   Colors come only from WONK tokens, or mixes of them. Loaded after wonk.css. */
 
 :root {
   --col-read: 44rem;
   --seg-a: var(--ak-surface-2);
-  --seg-b: color-mix(in srgb, var(--ak-a1) 12%, var(--ak-surface-2));
+  /* Plain colors first, for browsers without color-mix() (Safari before 16.2): the mixes below, as
+     Chromium resolves them on this site's paper theme and demogorgon pair. */
+  --seg-b: #dfe1e2;
   --heat-0: var(--ak-surface-2);
-  --heat-1: color-mix(in srgb, var(--ak-a1) 14%, var(--ak-surface-2));
-  --heat-2: color-mix(in srgb, var(--ak-a1) 34%, var(--ak-surface-2));
+  --heat-1: #dbdee1;
+  --heat-2: #b3c0d6;
   --heat-3: var(--ak-a1);
   --heat-4: var(--ak-a2);
+  --wrong-bg: rgba(192, 47, 47, 0.09);
+}
+@supports (color: color-mix(in srgb, red, blue)) {
+  :root {
+    --seg-b: color-mix(in srgb, var(--ak-a1) 12%, var(--ak-surface-2));
+    --heat-1: color-mix(in srgb, var(--ak-a1) 14%, var(--ak-surface-2));
+    --heat-2: color-mix(in srgb, var(--ak-a1) 34%, var(--ak-surface-2));
+    --wrong-bg: color-mix(in srgb, var(--ak-err) 9%, transparent);
+  }
 }
 
 /* Scrolling to a section (?at= links, "At a glance") stops below the sticky top bar on phones.
@@ -115,6 +126,7 @@ strong { color: var(--ak-ink); }
 .status { font-weight: 600; white-space: nowrap; }
 .status--ok { color: var(--ak-ok); }
 .status--bad { color: var(--ak-err); }
+.status--unsure { color: var(--ak-ink-2); }
 .delta--more { color: var(--ak-err); font-weight: 600; }
 .delta--fewer { color: var(--ak-ok); font-weight: 600; }
 
@@ -273,7 +285,7 @@ fieldset.group > legend { font-weight: 700; font-size: var(--ak-text-md); color:
 .wonk-table caption { text-align: left; }
 .wonk-table tbody th[scope="row"] { font-family: var(--ak-font-sans); text-transform: none; letter-spacing: 0; font-size: var(--ak-text-md); font-weight: 600; color: var(--ak-ink); text-align: left; }
 .wonk-table tbody th[scope="row"] .small { font-weight: 400; }
-tr.is-wrong td { background: color-mix(in srgb, var(--ak-err) 9%, transparent); }
+tr.is-wrong td { background: var(--wrong-bg); }
 .strike { text-decoration: line-through; text-decoration-color: var(--ak-err); text-decoration-thickness: 2px; }
 
 /* ---- findings ---- */
@@ -288,7 +300,7 @@ tr.is-wrong td { background: color-mix(in srgb, var(--ak-err) 9%, transparent); 
   .wonk-main { padding: 0; max-width: none; }
   body, .wonk body { background: #fff; }
   .wonk-card { break-inside: avoid; border-color: #999; }
-  .wonk-fold > .body { display: block !important; }
+  /* closed folds are opened for printing by js/app.js; CSS cannot show a closed <details> */
   a.cite::after { content: " (" attr(href) ")"; font-size: 0.6rem; }
 }
 

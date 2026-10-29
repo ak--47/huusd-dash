@@ -5,7 +5,7 @@
   "description": "Harwood School Plans Explorer: an independent guide to the HUUSD FY28 consolidation decision",
   "scripts": {
     "serve": "node scripts/serve.mjs",
-    "test": "node --test test/",
+    "test": "node --test test/*.test.mjs",
     "test:browser": "node scripts/browser-check.mjs --axe-mobile",
     "format": "npx prettier@3 --write \"js/**/*.js\" \"data/**/*.js\" \"css/**/*.css\" \"scripts/**/*.mjs\" \"test/**/*.mjs\""
   },

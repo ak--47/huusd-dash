@@ -3,7 +3,7 @@
 //   valleyTop   highest grade in the valley elementary schools: 6 (K-6, today) or 4 (PK-4; grades 5-6 go to Crossett Brook)
 //   msMerge     Crossett Brook's grades 7-8 move to Harwood Union Middle School; Crossett Brook keeps 5-6
 //   cuts        Path A reductions applied (ids from PATH_A_CUTS)
-//   septicWES   Waitsfield's wastewater permit raised from 230 to 300 (the deck: "amenable to 300")
+//   septicWES   use 300 for Waitsfield (its 1991 permit) instead of the slides' 230
 //   portables   two-classroom portable units added, by school id
 //   receiving   for a town whose school closes, the school its children go to (overrides the nearest-school default)
 //   roadmap     the district's draft roadmap (Oct 14, 2026): from fall `fall`, every valley elementary student
@@ -35,7 +35,13 @@ export function makePlan(p = {}) {
     portables: Object.fromEntries(
       Object.entries(p.portables ?? {}).filter(([id, n]) => SCHOOLS[id] && n > 0).map(([id, n]) => [id, Math.min(6, Math.round(n))])
     ),
-    receiving: { ...(p.receiving ?? {}) },
+    // valley towns and real school ids only: a link like r=constructor~FES would otherwise reach lookups
+    // by town or school id, where inherited names such as "constructor" and "toString" resolve
+    receiving: Object.fromEntries(
+      Object.entries(p.receiving ?? {}).filter(
+        ([town, id]) => VALLEY.some((v) => SCHOOLS[v].town === town) && Object.prototype.hasOwnProperty.call(SCHOOLS, id)
+      )
+    ),
     roadmap: p.roadmap ? { fall: Number(p.roadmap.fall) || ROADMAP_FALL, top: [4, 5, 6].includes(Number(p.roadmap.top)) ? Number(p.roadmap.top) : 4 } : null,
   };
 }
@@ -133,9 +139,10 @@ export function decodePlan(str) {
     const [town, id] = part.split("~");
     if (town && SCHOOLS[id]) receiving[town] = id;
   }
+  // n=<fall>.<top>: the roadmap always starts in ROADMAP_FALL, which the controls show, whatever year a link carries
   const [rf, rt] = (q.get("n") ?? "").split(".").map(Number);
   return makePlan({
-    roadmap: rf ? { fall: rf, top: rt } : null,
+    roadmap: rf ? { fall: ROADMAP_FALL, top: rt } : null,
     open: o === "-" ? [] : [...o].map((c) => FROM_LETTER[c]).filter(Boolean),
     valleyTop: Number(q.get("t")) === 4 ? 4 : 6,
     msMerge: q.get("m") === "1",

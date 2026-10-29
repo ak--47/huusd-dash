@@ -10,6 +10,7 @@ import { note, pageHead } from "../ui/kit.js";
 import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString } from "../ui/build-controls.js";
 import { resultsPanel, verdictSentence } from "../ui/build-results.js";
 import { PLAN_A, PLAN_TODAY, decodePlan, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
+import { PATH_A_CUTS } from "../../data/budget.js";
 
 // every query key encodePlan can write; absent keys are cleared from the URL. "n" is the district's
 // draft roadmap (a new valley building in fall 2029).
@@ -45,6 +46,9 @@ export default {
     const o = params.get("o");
     const unreadable = o != null && !readableOpen(o);
     const fromUrl = unreadable ? null : decodePlan(params.toString());
+    // Program cuts this page does not know (a link cut short mid-word, say) are dropped by decodePlan. Say so,
+    // since the plan that opens is then a different one: Path A minus a cut misses the target.
+    const badCuts = fromUrl ? (params.get("c") ?? "").split(".").filter((t) => t && !PATH_A_CUTS.items.some((c) => c.id === t)) : [];
     const saved = store.get("plan", null);
     const fromStore = !fromUrl && typeof saved === "string" ? decodePlan(saved) : null;
     const urlCs = csFromString(params.get("cs"));
@@ -79,10 +83,16 @@ export default {
 
     const live = h("p", { class: "wonk-sr", role: "status", "aria-live": "polite" });
     let liveTimer = null;
+    // The same words twice in a row are not read again, so a change whose results read the same (a receiving
+    // school the district's table ignores, say) empties the region first and then speaks it again.
     const announce = (r) => {
       clearTimeout(liveTimer);
       liveTimer = setTimeout(() => {
-        live.textContent = verdictSentence(r);
+        const next = verdictSentence(r);
+        if (next === live.textContent) {
+          live.textContent = "";
+          liveTimer = setTimeout(() => (live.textContent = next), 50);
+        } else live.textContent = next;
       }, 450);
     };
 
@@ -153,6 +163,13 @@ export default {
               `The list of schools in it is not one this page knows, so the page starts from ${fromStore ? "the plan you last built here" : "no change"} instead. The link may have been cut short.`
             )
           : null,
+        badCuts.length
+          ? note(
+              "warn",
+              h("strong", {}, "Part of this link could not be read. "),
+              "Some program cuts in it are not ones this page knows, so they were left out. The link may have been cut short."
+            )
+          : null,
         h("div", { class: "bp-layout" }, h("div", { class: "bp-controls-col" }, controls.el, results.bar), results.el),
         live
       )
@@ -164,6 +181,9 @@ export default {
     if (fromUrl) store.set("plan", encodePlan(state.plan));
     refresh({ speak: false });
 
-    return () => clearTimeout(liveTimer);
+    return () => {
+      clearTimeout(liveTimer);
+      results.destroy();
+    };
   },
 };

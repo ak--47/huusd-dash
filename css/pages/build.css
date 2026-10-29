@@ -33,7 +33,7 @@
 
 /* 1. start from */
 .bp-presets { display: flex; flex-wrap: wrap; gap: var(--ak-s2); }
-.bp-preset { min-height: 2.5rem; }
+.bp-preset { min-height: 2.75rem; }
 .bp-preset[aria-pressed="true"] { background: var(--ak-a1); border-color: var(--ak-a1); color: var(--ak-a1-ink); font-weight: 700; }
 .bp-preset[aria-pressed="true"]:not([disabled]):hover { background: var(--ak-a1); filter: brightness(1.1); }
 .bp-bversion { display: grid; gap: var(--ak-s3); margin-top: var(--ak-s4); padding: var(--ak-s3) var(--ak-s4) var(--ak-s4); border: 1px dashed var(--ak-hairline-strong); border-radius: var(--ak-radius); }
@@ -121,7 +121,7 @@
 /* number steppers (portables and class sizes) */
 .bp-stepper { display: inline-flex; align-items: stretch; }
 .bp-step-btn {
-  display: inline-grid; place-items: center; width: 2.5rem; min-height: 2.5rem; padding: 0;
+  display: inline-grid; place-items: center; width: 2.75rem; min-height: 2.75rem; padding: 0;
   font-family: var(--ak-font-mono); font-size: var(--ak-text-lg); line-height: 1; color: var(--ak-ink);
   background: var(--ak-surface-2); border: 1px solid var(--ak-hairline-strong); cursor: pointer;
 }
@@ -130,7 +130,7 @@
 .bp-step-btn:hover { background: var(--ak-hover); }
 .bp-step-btn:active { background: var(--ak-active); }
 .wonk-input.bp-num {
-  width: 3.25rem; min-height: 2.5rem; padding: 0.3rem 0.25rem; border-radius: 0; text-align: center;
+  width: 3.25rem; min-height: 2.75rem; padding: 0.3rem 0.25rem; border-radius: 0; text-align: center;
   font-family: var(--ak-font-mono); font-weight: 700; font-variant-numeric: tabular-nums;
   border-color: var(--ak-hairline-strong); -moz-appearance: textfield; appearance: textfield;
 }
@@ -155,6 +155,9 @@
 .bp-results-head { padding: var(--ak-s4) var(--ak-s6); border-bottom: 1px solid var(--ak-hairline); background: var(--ak-surface); border-radius: var(--ak-radius) var(--ak-radius) 0 0; container: bphead / inline-size; }
 .wonk .bp-results-match { margin: var(--ak-s1) 0 0; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
 .bp-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ak-s3); margin-top: var(--ak-s3); }
+/* "Back to your choices": at the top of the results and after Share, on screens where the results sit below the controls */
+.bp-back { min-height: 2.75rem; }
+.bp-results-head .bp-back { margin-top: var(--ak-s3); }
 .bp-kpi { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
 .bp-kpi .wonk-label { font-size: var(--ak-text-xs); line-height: 1.3; }
 .bp-kpi-val { font-size: var(--ak-text-lg); line-height: 1.2; color: var(--ak-ink); }
@@ -185,6 +188,8 @@
 /* budget */
 .wonk .bp-verdict { font-size: var(--ak-text-xl); line-height: 1.25; margin: 0; }
 .bp-verdict .status { white-space: normal; }
+/* why a plan may fall short: under the headline, at reading size */
+.bp-verdict-why { display: block; margin-top: var(--ak-s1); font-size: var(--ak-text-md); line-height: 1.4; font-weight: 500; color: var(--ak-ink-2); }
 .bp-meter { display: grid; gap: var(--ak-s1); }
 .bp-meter .meter { height: 1.1rem; }
 .bp-meter-scale { position: relative; height: 1.4rem; font-family: var(--ak-font-mono); font-size: var(--ak-text-xs); color: var(--ak-ink-2); }
@@ -218,21 +223,23 @@
 .bp-cap-school h4 { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ak-s1) var(--ak-s3); }
 .bp-receives { font-size: var(--ak-text-sm); font-weight: 500; color: var(--ak-ink-2); }
 .bp-cap-school .cap { gap: var(--ak-s2); }
+/* narrow by default (browsers without container queries keep this): name and numbers on one line, the bar and
+   the verdict under them */
 .bp-cap-school .cap-row {
-  grid-template-columns: 5.75rem minmax(0, 1fr) 9.25rem 6.75rem; grid-template-areas: "name bar nums status";
-  gap: var(--ak-s2) var(--ak-s3);
+  grid-template-columns: minmax(0, 1fr) 9.25rem; grid-template-areas: "name nums" "bar status";
+  gap: var(--ak-s1) var(--ak-s3);
 }
 .bp-cap-school .cap-row .name { grid-area: name; }
 .bp-cap-school .cap-row .cap-bar { grid-area: bar; }
 .bp-cap-school .cap-row .nums { grid-area: nums; }
-.bp-cap-school .cap-row .bp-cap-status { grid-area: status; }
+.bp-cap-school .cap-row .bp-cap-status { grid-area: status; text-align: right; }
 .bp-cap-school .cap-row .name { font-weight: 500; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
 .bp-cap-status { font-size: var(--ak-text-sm); }
 .bp-cap-status .status { font-weight: 500; }
-/* narrow: name and numbers on one line, the bar and the verdict under them */
-@container bpres (max-width: 30rem) {
-  .bp-cap-school .cap-row { grid-template-columns: minmax(0, 1fr) 9.25rem; grid-template-areas: "name nums" "bar status"; row-gap: var(--ak-s1); }
-  .bp-cap-school .cap-row .bp-cap-status { text-align: right; }
+/* wide: one line each, name, bar, numbers, verdict */
+@container bpres (min-width: 30.01rem) {
+  .bp-cap-school .cap-row { grid-template-columns: 5.75rem minmax(0, 1fr) 9.25rem 6.75rem; grid-template-areas: "name bar nums status"; gap: var(--ak-s2) var(--ak-s3); }
+  .bp-cap-school .cap-row .bp-cap-status { text-align: left; }
 }
 .wonk .bp-legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ak-s2); margin-top: var(--ak-s1); font-size: var(--ak-text-xs); color: var(--ak-ink-3); }
 .bp-legend-bar { position: relative; display: inline-block; width: 3rem; height: 0.75rem; background: var(--ak-surface-2); border: 1px solid var(--ak-hairline); border-radius: 3px; }
@@ -280,6 +287,8 @@
   .bp-cmp th, .bp-cmp td { padding: var(--ak-s2) 0.35rem; }
   .bp-cmp tbody th[scope="row"] { padding-left: var(--ak-s2); }
   .bp-cmp thead th.num { white-space: normal; }
+  .bp-cmp .bp-upto { display: block; }
+  .bp-cmp .status--unsure { white-space: normal; }
 }
 @container bpres (max-width: 19rem) {
   .bp-cmp tbody th[scope="row"], .bp-cmp td { font-size: var(--ak-text-xs); }
@@ -298,13 +307,14 @@
 .bp-textbtn:focus-visible { outline: 2px solid var(--ak-a1-text); outline-offset: 2px; border-radius: var(--ak-radius); }
 
 /* share */
+.bp-share .wonk-btn { min-height: 2.75rem; }
 .bp-share-fallback { margin: var(--ak-s3) 0 0; max-width: 36rem; }
 .bp-share-fallback[hidden] { display: none; }
 
 /* ---- the summary bar that follows the controls on narrower screens ---- */
 .bp-bar {
   position: sticky; bottom: max(var(--ak-s2), env(safe-area-inset-bottom)); z-index: 20;
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "save btn" "kids kids";
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "save btn" "kids kids" "fits fits";
   align-items: center; gap: var(--ak-s1) var(--ak-s3);
   padding: calc(var(--ak-s2) + 4px) var(--ak-s3) var(--ak-s2) var(--ak-s4);
   background: var(--ak-surface); border: 1px solid var(--ak-hairline-strong); border-radius: var(--ak-radius);
@@ -315,21 +325,29 @@
 .wonk .bp-bar-line { margin: 0; min-width: 0; font-size: var(--ak-text-sm); line-height: 1.35; color: var(--ak-ink-2); }
 .bp-bar-save { grid-area: save; }
 .bp-bar-kids { grid-area: kids; }
+.bp-bar-fits { grid-area: fits; }
+.bp-bar-fits .status { white-space: normal; }
 .bp-bar-val { font-size: var(--ak-text-md); color: var(--ak-ink); }
 .bp-bar-unit { color: var(--ak-ink-2); white-space: nowrap; }
-.bp-bar-sub { white-space: nowrap; }
-.bp-bar-sub .status { font-size: var(--ak-text-sm); }
-.bp-bar-btn { grid-area: btn; padding: 0.5rem 0.75rem; }
-html:has(.bp-bar) { scroll-padding-bottom: 7rem; }
+/* the status stays beside the savings where it fits, or moves under them; a long one ("Short of lower target by
+   $1.01M or more") wraps within the bar on narrow phones */
+.wonk .bp-bar-save { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.3em; }
+.bp-bar-sub { min-width: 0; }
+.bp-bar-sub .status { font-size: var(--ak-text-sm); white-space: normal; }
+.bp-bar-btn { grid-area: btn; padding: 0.5rem 0.75rem; min-height: 2.75rem; }
+html:has(.bp-bar) { scroll-padding-bottom: 8.5rem; }
 
 /* ---- two columns on wide screens: the results stay in view while the controls change ---- */
 @media (min-width: 1100px) {
   .bp-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
-  .bp-results { position: sticky; top: var(--ak-s4); max-height: calc(100vh - 2 * var(--ak-s4)); overflow-y: auto; scroll-padding-top: 10rem; }
+  /* scroll-padding-top: a fallback; build-results.js sets it to the sticky head's height as the head changes */
+  .bp-results { position: sticky; top: var(--ak-s4); max-height: calc(100vh - 2 * var(--ak-s4)); overflow-y: auto; scroll-padding-top: 19rem; }
   /* -1px and a shadow above: scrolled content never shows between the panel's border and the head */
   .bp-results-head { position: sticky; top: -1px; z-index: 3; box-shadow: 0 -2px 0 var(--ak-surface); }
   .bp-bar { display: none; }
   html:has(.bp-bar) { scroll-padding-bottom: 0; }
+  /* the controls stay beside the results */
+  .bp-back, .bp-back-row { display: none; }
 }
 @media (max-width: 1099px) {
   .bp-strip { display: none; }
@@ -339,5 +357,5 @@ html:has(.bp-bar) { scroll-padding-bottom: 7rem; }
 @media print {
   .bp-layout { grid-template-columns: 1fr; }
   .bp-results, .bp-results-head { position: static; max-height: none; overflow: visible; }
-  .bp-bar, .bp-share { display: none; }
+  .bp-bar, .bp-share, .bp-back { display: none; }
 }

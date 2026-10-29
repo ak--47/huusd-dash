@@ -22,7 +22,7 @@ export function strip(years, { base = null, showPreK = false, label = "" } = {})
   const baseBy = new Map((base ?? []).map((y) => [y.fall, y.school]));
   const segs = [];
   for (const y of shown) {
-    const last = segs.at(-1);
+    const last = segs[segs.length - 1];
     const changed = base ? baseBy.get(y.fall) !== y.school : false;
     if (last && last.school === y.school && last.to === y.grade - 1) {
       last.to = y.grade;
@@ -63,7 +63,7 @@ export function strip(years, { base = null, showPreK = false, label = "" } = {})
             s.to - s.from < 1 ? "seg--narrow" : s.to - s.from < 2 ? "seg--two" : "",
           ].join(" "),
           style: `--start:${s.from - first + 1};--span:${s.to - s.from + 1}`,
-          "data-tip": `${schoolName(s.school)} · ${rangeLabel(s.from, s.to)}${s.years[0] ? ` · ${s.years[0].schoolYear}${s.years.length > 1 ? ` to ${s.years.at(-1).schoolYear}` : ""}` : ""}${s.changed ? " · differs from no change" : ""}`,
+          "data-tip": `${schoolName(s.school)} · ${rangeLabel(s.from, s.to)}${s.years[0] ? ` · ${s.years[0].schoolYear}${s.years.length > 1 ? ` to ${s.years[s.years.length - 1].schoolYear}` : ""}` : ""}${s.changed ? " · differs from no change" : ""}`,
           "data-tip-focus": "off",
         },
         h("span", { class: "seg-name" }, schoolShort(s.school)),

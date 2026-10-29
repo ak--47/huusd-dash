@@ -27,10 +27,11 @@ import {
 
 const TIPS = {
   savings:
-    "Yearly savings in the district's presentation, against the $3,339,273 it says the FY28 budget needs. The district gives every Path B version the same $3,929,469; it said on October 28 that the versions keeping grades 5-6 in the valley would save less.",
+    "Yearly savings in the district's presentation, against the $3,339,273 it says the FY28 budget needs. The district gives every Path B version the same $3,929,469; it said on October 28 that the versions keeping grades 5-6 in the valley would save less and could mean a penalty.",
   buildings: "School buildings in use, out of 7. For Path B: where children from the towns whose schools close would go, the nearest open school.",
   fits: "Whether every open school stays within its wastewater limit (Brookside: its occupancy of 480), counting Pre-K, as in the district's tables or as the state permits read, whichever you choose above. The last line compares students with the classroom capacity the district's consultant calculated.",
-  moved: "This year's K-12 students who would start fall 2027 in a different school than they would with no change.",
+  moved:
+    "Students in kindergarten to grade 12 next fall (this year's 4-year-olds in Pre-K through grade 11) who would start in a different school than with no change. Children who would be in Pre-K next fall are shown separately.",
   schools: "The most different K-12 schools a child now in Pre-K to grade 2 would attend, and the towns where that happens. Today it is 3 everywhere.",
   five: "This year's students in Pre-K to grade 8 who would attend 5 or more different K-12 schools.",
   repairs: "The district's deferred maintenance figures, added up for the elementary buildings that stay open and for those that close.",
@@ -60,7 +61,7 @@ export function savingsCell(v) {
   const b = v.r.budget;
   const vs = b.gap > 0 ? `${moneyShort(b.gap)} short of target` : b.gap < 0 ? `${moneyShort(-b.gap)} above target` : "Meets the target";
   // keeping grades 5-6 in the valley: the district said these versions save less than its figure
-  if (b.upperBound) return [numLine(`Up to ${moneyShort(b.savings)}`), sub(`At most ${vs}`), sub("Less, the district said, with grades 5-6 in the valley")];
+  if (b.upperBound) return [numLine(`Up to ${moneyShort(b.savings)}`), sub(`At most ${vs}`), sub("The district said it saves less and could mean a penalty")];
   return [numLine(moneyShort(b.savings)), sub(vs)];
 }
 
@@ -95,12 +96,21 @@ export function fitsCell(v, { rooms = true } = {}) {
     h(
       "span",
       { class: "cmp-status" },
-      status(!over.length, mismatch ? "All fit, by the grade rows" : "All fit", `${listJoin(over.map((s) => schoolShort(s.id)))} over`)
+      status(
+        !over.length,
+        mismatch ? "Wastewater fits, by the grade rows" : "Wastewater fits",
+        `Wastewater over at ${listJoin(over.map((s) => schoolShort(s.id)))}`
+      )
     ),
   ];
   const who = (s) => (s.countsStaff ? `${num(s.total)} students + about ${num(Math.round(s.staff))} staff` : `${num(s.total)} students`);
-  if (over.length === 1) out.push(sub(`${who(over[0])}, limit ${num(over[0].limit)}`));
-  else for (const s of over) out.push(sub(`${schoolShort(s.id)}: ${who(s)}, limit ${num(s.limit)}`));
+  // The district's tables count Pre-K at planning numbers, not this year's classes; say when those seats alone put a school over.
+  const pkOnly = (s) => {
+    const pk = c.source === "district" ? (s.byGrade.PK ?? 0) : 0;
+    return pk && s.counted - pk <= s.limit ? `; within it without the ${num(pk)} planned Pre-K seats` : "";
+  };
+  if (over.length === 1) out.push(sub(`${who(over[0])}, limit ${num(over[0].limit)}${pkOnly(over[0])}`));
+  else for (const s of over) out.push(sub(`${schoolShort(s.id)}: ${who(s)}, limit ${num(s.limit)}${pkOnly(s)}`));
   if (mismatch) {
     // the note under the table spells this out: the slide's Brookside total is 513; its rows add to 439
     out.push(subAs("cmp-flag", h("span", { class: "cmp-flag-mark", "aria-hidden": "true" }, "!"), " District table total does not add up ", cite(c.table.src)));
@@ -108,14 +118,26 @@ export function fitsCell(v, { rooms = true } = {}) {
   if (c.source === "model" && v.plan.open.length < 4) out.push(sub("Students per school: our estimate"));
   if (rooms) {
     const short = c.schools.filter((s) => s.overConsultant);
-    out.push(subAs("cmp-rooms", short.length ? `Classroom space: ${listJoin(short.map((s) => schoolShort(s.id)))} over the consultant's capacity` : "Classroom space: within the consultant's capacity"));
+    out.push(
+      subAs(
+        "cmp-rooms",
+        short.length
+          ? `Classrooms: over the consultant's capacity at ${listJoin(short.map((s) => schoolShort(s.id)))}`
+          : "Classrooms: within the consultant's capacity"
+      )
+    );
   }
   return out;
 }
 
 export function movedCell(v) {
   const m = v.r.moved;
-  const pk = m.preK ? (v.plan.cuts.includes("prek") ? `plus ${num(m.preK)} in Pre-K who would need another program` : `plus ${num(m.preK)} in Pre-K`) : null;
+  // k12 counts this year's 4-year-olds in Pre-K, who start kindergarten next fall; preK, this year's 3-year-olds
+  const pk = m.preK
+    ? v.plan.cuts.includes("prek")
+      ? `plus ${num(m.preK)} who would need another Pre-K program next fall`
+      : `plus ${num(m.preK)} in Pre-K next fall`
+    : null;
   return [numLine(num(m.k12)), pk ? sub(pk) : null];
 }
 
@@ -167,7 +189,7 @@ const COLUMNS = [
   { key: "buildings", label: "Buildings in use", cell: buildingsCell },
   { key: "fits", label: "Fits the buildings?", cell: (v) => fitsCell(v) },
   { key: "moved", label: "Changing schools next fall", cell: movedCell },
-  { key: "schools", label: "Most schools for one child", cell: schoolsCell },
+  { key: "schools", label: "Most schools for any child", cell: schoolsCell },
   { key: "five", label: "Students at 5+ schools", cell: fiveCell },
   { key: "repairs", label: "Deferred repairs, elementary buildings", cell: repairsCell },
 ];
@@ -193,7 +215,14 @@ export function comparisonTable(versions, { sort = null, onSort, onExplain } = {
   const headCell = (col) => {
     const arrow = h("span", { class: "wonk-sort-arrow", "aria-hidden": "true" });
     const btn = h("button", { type: "button", class: "wonk-sort", onclick: () => toggle(col.key) }, col.label, arrow);
-    const th = h("th", { scope: "col", role: "columnheader", class: `cmp-h cmp-h--${col.key}`, "data-tip": TIPS[col.key], "data-tip-focus": "off" }, btn);
+    // Print shows this plain copy: Chromium leaves button text blank in the header it repeats on each page.
+    const printed = h("span", { class: "cmp-h-print", "aria-hidden": "true" }, col.label);
+    const th = h(
+      "th",
+      { scope: "col", role: "columnheader", class: `cmp-h cmp-h--${col.key}`, "data-tip": TIPS[col.key], "data-tip-focus": "off" },
+      btn,
+      printed
+    );
     heads.set(col.key, { th, arrow });
     return th;
   };
@@ -336,16 +365,32 @@ export function comparisonTable(versions, { sort = null, onSort, onExplain } = {
     onExplain ? h("button", { type: "button", class: "wonk-btn cmp-explain", onclick: onExplain }, "What each measure means") : null
   );
 
+  // The key comes after the table, so on a phone the first row is not a screen or more down the page.
   const block = h(
     "div",
     { class: "cmp-compare" },
-    key,
     showBar,
     tools,
     h("p", { class: "cmp-swipe" }, "Scroll the table sideways to see every measure; the version column stays put."),
     scroll,
-    said
+    said,
+    key
   );
+  // On a phone the "Show" buttons stick under the top bar. The browser keeps a focused link clear of the top
+  // bar (scroll-padding in app.css) but not of these buttons, so a link that Tab or Shift+Tab reaches under
+  // them is moved into the clear. This runs before the browser's own scroll, which then has nothing to do.
+  block.addEventListener("focusin", (e) => {
+    if (showBar.contains(e.target) || getComputedStyle(showBar).position !== "sticky") return;
+    const bar = showBar.getBoundingClientRect();
+    const r = e.target.getBoundingClientRect();
+    if (r.top >= bar.bottom || r.bottom <= bar.top) return;
+    const root = document.documentElement;
+    const was = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollBy(0, r.top - bar.bottom - 8);
+    root.style.scrollBehavior = was;
+  });
+
   block.cleanup = () => observer?.disconnect();
   return block;
 }

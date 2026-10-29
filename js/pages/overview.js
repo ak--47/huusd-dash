@@ -149,7 +149,11 @@ export default {
           h(
             "ul",
             {},
-            h("li", {}, "Students changing schools next fall: this year's students who would start fall 2027 in a different school than they would with no change, not counting normal moves like 6th graders going on to Harwood."),
+            h(
+              "li",
+              {},
+              "Students changing schools next fall: students in K-12 next fall (this year's 4-year-olds in Pre-K through grade 11) who would start fall 2027 in a different school than they would with no change, not counting normal moves like 6th graders going on to Harwood."
+            ),
             h(
               "li",
               {},
@@ -176,7 +180,7 @@ export default {
             const r = evaluate(o.plan);
             const { gap, upperBound, oneTime } = r.budget;
             const valleyMax = Math.max(r.maxYoung.moretown, r.maxYoung.waitsfield, r.maxYoung.fayston, r.maxYoung.warren);
-            const lessNote = "; the district says keeping grades 5-6 in the valley saves less than its figure";
+            const lessNote = "; the district says keeping grades 5-6 in the valley saves less than its figure, with “an impact in terms of a penalty”";
             return h(
               "article",
               { class: "wonk-card beyond-card" },
@@ -192,7 +196,10 @@ export default {
                 r.budget.hasEstimate ? [" ", tag("estimate")] : null,
                 upperBound ? [" ", fiveSixCite()] : null,
                 oneTime.portables
-                  ? [h("br"), `Plus about ${moneyShort(oneTime.portables.low)} to ${moneyShort(oneTime.portables.high)} one-time for portable classrooms (district quote covering two years), not counted above`]
+                  ? [
+                      h("br"),
+                      `Plus about ${moneyShort(oneTime.portables.low)} to ${moneyShort(oneTime.portables.high)} for portable classrooms over about two years (the district's preliminary quote), not counted above`,
+                    ]
                   : null,
                 h("br"),
                 `Highest number of K-12 schools for a valley child now in Pre-K to grade 2: ${valleyMax} (today: 3)`

@@ -22,8 +22,10 @@ const townName = (id) => TOWNS.find((t) => t.id === id)?.name ?? id;
 export default {
   title: "Your child's path",
   render(el, { params, setParams }) {
+    // stored values are only ever strings from this page and Build; anything else is ignored
+    const savedKids = store.get("kids");
     const state = {
-      kids: (params.get("c") ?? store.get("kids", "waitsfield.0.WES")).split("~").map(decodeChild).filter(Boolean),
+      kids: (params.get("c") ?? (typeof savedKids === "string" ? savedKids : "waitsfield.0.WES")).split("~").map(decodeChild).filter(Boolean),
       pair: PAIRS.find((p) => pairId(p) === (params.get("pair") ?? "").replace(/ /g, "+")) ?? PAIRS[0],
       top: params.get("top") === "6" ? 6 : 4,
       rtop: ["4", "5", "6"].includes(params.get("rt")) ? Number(params.get("rt")) : 4,
@@ -32,7 +34,7 @@ export default {
     };
     if (!state.kids.length) state.kids = [decodeChild("waitsfield.0.WES")];
     const saved = store.get("plan", null);
-    const custom = saved ? decodePlan(saved) : null;
+    const custom = typeof saved === "string" ? decodePlan(saved) : null;
 
     const sync = () => {
       const c = state.kids.map(encodeChild).join("~");
@@ -71,7 +73,7 @@ export default {
       const opts = { includePreK: state.pk };
       const B = planB();
       const rows = [
-        { plan: PLAN_TODAY, title: "No change", sub: "For comparison. Over the state limit, so not on the table as is." },
+        { plan: PLAN_TODAY, title: "No change", sub: "For comparison. It spends over the state's per-pupil limit, so it is not on the table as is." },
         {
           plan: PLAN_A,
           title: "Path A",
@@ -88,6 +90,8 @@ export default {
           isB: true,
         },
       ];
+      // the plan saved in Build a plan comes right after the Path B row, before the roadmap
+      if (custom) rows.push({ plan: custom, title: "Your plan", sub: "From Build a plan." });
       const roadmap = withRoadmap(B, state.rtop);
       rows.push({
         plan: roadmap,
@@ -95,11 +99,11 @@ export default {
         sub: `The district's October 14 draft, which its author called a suggestion: in fall 2029 the two valley schools move into one new building for Pre-K to ${state.rtop}.`,
         isRoadmap: true,
       });
-      if (custom) rows.push({ plan: custom, title: "Your plan", sub: "From Build a plan." });
 
-      const results = rows
-        .map((r) => ({ ...r, cmp: compareJourney(r.plan, kid, opts) }))
-        .filter((r, _, all) => !r.isRoadmap || r.cmp.years.some((y, k) => y.school !== all[2].cmp.years[k]?.school));
+      // The roadmap row is shown only where it changes this child's path from the Path B row's.
+      const computed = rows.map((r) => ({ ...r, cmp: compareJourney(r.plan, kid, opts) }));
+      const bYears = computed.find((r) => r.isB).cmp.years;
+      const results = computed.filter((r) => !r.isRoadmap || r.cmp.years.some((y, k) => y.school !== bYears[k]?.school));
       const today = results[0].cmp.counts.schools;
       const showPreK = state.pk || kid.grade < 0;
       // The school whose fate decides this child's Path B: the valley school they attend now (which
@@ -359,7 +363,7 @@ export default {
     addHost.append(
       childForm({
         submitLabel: "Add this child",
-        value: { ...state.kids.at(-1) },
+        value: { ...state.kids[state.kids.length - 1] },
         onSubmit: (code) => {
           const kid = decodeChild(code);
           if (kid) state.kids.push(kid);

@@ -166,10 +166,26 @@ function boot() {
   });
   // Tables that scroll sideways take keyboard focus, including ones a page redraws later.
   scrollRegions(view);
+  printFolds();
   watchTopbar();
   wireDrawer();
   window.addEventListener("hashchange", route);
   route();
+}
+
+// A closed <details> never prints its contents, whatever the CSS says, so a printed page would show the
+// folds (study lists, scoring cards, "How to read this") as empty boxes. Open them for printing, then
+// close again the ones that were closed. Dropdown menus stay as they are.
+function printFolds() {
+  let opened = [];
+  window.addEventListener("beforeprint", () => {
+    opened = [...view.querySelectorAll("details:not([open]):not(.wonk-menu)")];
+    for (const d of opened) d.open = true;
+  });
+  window.addEventListener("afterprint", () => {
+    for (const d of opened) d.open = false;
+    opened = [];
+  });
 }
 
 // css/app.css offsets the open drawer and scrolled-to sections by the sticky top bar's height, which grows

@@ -15,6 +15,7 @@ import {
   childHref,
   closures,
   fiveByTownText,
+  jumpTo,
   maxTownsText,
   pairId,
   pairLabel,
@@ -148,6 +149,19 @@ function capacityBody(d) {
       sub(`Classroom space for ${num(CB_CAPACITY)}, by the district's consultant`, cbK6 > CB_CAPACITY ? mark("short") : null),
     ],
   ]);
+  // Harwood Middle takes Crossett Brook's 7th and 8th graders in every Path B version, whichever setup
+  const hums = d.res[4].capacity.middle.find((m) => m.id === "HUMS");
+  if (hums) {
+    rows.push([
+      rowHead("Harwood Middle, grades 7-8", `${num(ATT.HU[7] + ATT.HU[8])} students this year`),
+      ...SETUPS.map(() => [
+        h("span", { class: "cmp-num-inline" }, `About ${num(hums.total)}`),
+        " students",
+        sub("Its own 7th and 8th graders plus Crossett Brook's, the same in every pairing ", tag("derived")),
+        sub(`Classroom space for ${num(hums.capacity)}, by the district's consultant`, hums.over ? mark("short") : null),
+      ]),
+    ]);
+  }
   return [
     miniTable(`Students and classrooms at each receiving school, ${d.label}`, ["School", setupLabel(4), setupLabel(6)], rows),
     sourceLine(
@@ -227,17 +241,18 @@ function limitText(r, id) {
   const staff = s.countsStaff ? ", students and staff" : "";
   if (id === "BPS") return `${num(s.limit)} occupancy${staff}`;
   if (r.capacity.reading === "permits") return `${num(s.limit)} permit${staff}`;
-  if (id === "WES" && FACILITIES.WES.wastewaterNote) return `${num(s.limit)} permit (“amenable to 300”)`;
-  return `${num(s.limit)} permit`;
+  // the slides' numbers are not all the permits' (Fayston's permit says 235 students and staff), so say whose they are
+  if (id === "WES" && FACILITIES.WES.wastewaterNote) return `${num(s.limit)} on the slides (“amenable to 300”)`;
+  return `${num(s.limit)} on the slides`;
 }
 
-// Under a school's name: "Wastewater limit 250", "Occupancy limit 480".
+// Under a school's name: "Wastewater limit 250 on the slides", "Occupancy limit 480".
 function limitLine(r, id) {
   const s = schoolOf(r, id);
   const staff = s.countsStaff ? ", students and staff" : "";
   if (id === "BPS") return `Occupancy limit ${num(s.limit)}${staff}`;
   if (r.capacity.reading === "permits") return `Wastewater limit ${num(s.limit)}${staff} (state permit)`;
-  return `Wastewater limit ${num(s.limit)}${id === "WES" && FACILITIES.WES.wastewaterNote ? " (“amenable to 300”)" : ""}`;
+  return `Wastewater limit ${num(s.limit)} on the slides${id === "WES" && FACILITIES.WES.wastewaterNote ? " (“amenable to 300”)" : ""}`;
 }
 
 function verdict(r) {
@@ -267,18 +282,27 @@ function mismatchNote(d) {
     return listJoin(tops.map((t) => `${num(o[t])} ${setupWith(t)}`));
   };
   const item = (e) => {
-    const r = d.res[SETUPS.find((t) => e.rows[t] != null)];
-    const s = schoolOf(r, e.id);
-    const what = e.id === "BPS" ? "occupancy" : "wastewater limit";
     const tops = SETUPS.filter((t) => e.rows[t] != null);
-    const printedOver = tops.some((t) => e.printed[t] > s.limit);
-    const rowsOver = tops.some((t) => e.rows[t] > s.limit);
-    const effect =
-      printedOver === rowsOver
-        ? `Within its ${what} of ${num(s.limit)} either way.`
-        : printedOver
-          ? `The printed total is over its ${what} of ${num(s.limit)}; the rows are not.`
-          : `The rows are over its ${what} of ${num(s.limit)}; the printed total is not.`;
+    const s = schoolOf(d.res[tops[0]], e.id);
+    const what = e.id === "BPS" ? "occupancy" : "wastewater limit";
+    // the verdicts above add estimated staff where the reading counts them, so this comparison does too
+    const at = (t) => {
+      const x = schoolOf(d.res[t], e.id);
+      const staff = x.countsStaff ? x.staff : 0;
+      return { p: e.printed[t] + staff > x.limit, r: e.rows[t] + staff > x.limit };
+    };
+    const words = ({ p, r }) =>
+      p === r
+        ? `${r ? "over" : "within"} its ${what} of ${num(s.limit)} either way`
+        : p
+          ? `the printed total is over its ${what} of ${num(s.limit)}; the rows are not`
+          : `the rows are over its ${what} of ${num(s.limit)}; the printed total is not`;
+    const cap = (x) => x.charAt(0).toUpperCase() + x.slice(1);
+    const v = tops.map(at);
+    const counting = s.countsStaff ? "counting our staff estimate" : "";
+    const effect = v.every((x) => x.p === v[0].p && x.r === v[0].r)
+      ? `${cap(counting ? `${counting}, ${words(v[0])}` : words(v[0]))}.`
+      : tops.map((t, i) => `${cap(setupWith(t))}${counting ? `, ${counting}` : ""}: ${words(v[i])}.`).join(" ");
     return h("li", {}, h("strong", {}, `${placeName(e.id)}: `), `printed ${inTables(e.printed)}; the grade rows add to ${inTables(e.rows)}. ${effect}`);
   };
   const box = note(
@@ -312,8 +336,15 @@ function wastewaterBody(d) {
         limitText(d.res[4], id),
         ...SETUPS.map((top) => {
           const s = schoolOf(d.res[top], id);
+          // the tables' Pre-K rows are the district's planning numbers, not this year's classes, and
+          // sometimes they alone put a school over
+          const pk = s.byGrade.PK ?? 0;
           const who = s.countsStaff ? `${num(s.total)} students + about ${num(Math.round(s.staff))} staff` : `${num(s.total)} students`;
-          return status(!s.overPeople, who, `${who}, ${num(Math.round(s.counted - s.limit))} over`);
+          return [
+            status(!s.overPeople, who, `${who}, ${num(Math.round(s.counted - s.limit))} over`),
+            pk ? sub(`including ${num(pk)} Pre-K seats the district plans`) : null,
+            s.overPeople && pk && s.counted - pk <= s.limit ? sub("Within the limit without the planned Pre-K seats") : null,
+          ];
         }),
       ]),
       { widths: [null, "17%"] }
@@ -326,9 +357,15 @@ function wastewaterBody(d) {
           h(
             "p",
             { class: "small" },
-            h("strong", {}, "If Waitsfield's permit were raised to 300. "),
-            "The facility slide lists it as 230, “amenable to 300.” The cost of that work has not been published. ",
-            cite(ref("deck", "slide 23"))
+            h("strong", {}, "If Waitsfield's limit were 300. "),
+            "Its 1991 state permit says 300 students; the slides use 230 and call the school “amenable to 300,” and a 1996 letter in the state's file says 230. The district has not said whether using 300 would need any work or cost. ",
+            cite(ref("deck", "slide 23")),
+            " ",
+            // short labels: this box is about Waitsfield, and inside its padding the full "Waitsfield permit 1991"
+            // (citations do not wrap) pushes the page sideways at large text sizes
+            cite(FACILITIES.WES.permit.src, "1991 permit"),
+            " ",
+            cite(ref("permitWES1996", "PDF pp. 9-10"), "1996 letter")
           ),
           h(
             "ul",
@@ -337,9 +374,16 @@ function wastewaterBody(d) {
           )
         )
       : d.reading === "slides"
-        ? h("p", { class: "small" }, "Waitsfield closes in this pairing, so raising its permit to 300 would not change anything here.")
+        ? h("p", { class: "small" }, "Waitsfield closes in this pairing, so a 300 limit for Waitsfield would not change anything here.")
         : d.pair.includes("WES")
-          ? h("p", { class: "small" }, "Waitsfield's 1991 permit allows 300 students, so this reading uses 300 rather than the slides' 230. ", cite(FACILITIES.WES.permit.src, "Waitsfield permit"))
+          ? h(
+              "p",
+              { class: "small" },
+              "Waitsfield's 1991 permit allows 300 students, so this reading uses 300 rather than the slides' 230. The design behind it counted students and staff, and a 1996 letter in the state's file says 230. ",
+              cite(FACILITIES.WES.permit.src),
+              " ",
+              cite(ref("permitWES1996", "PDF pp. 9-10"))
+            )
           : null,
     sourceLine(
       tag("district"),
@@ -369,7 +413,7 @@ function movesBody(d) {
       [
         ["Students changing schools next fall (K-12)", ...SETUPS.map((top) => h("span", { class: "cmp-num" }, num(r[top].moved.k12)))],
         [
-          "Most K-12 schools for a child now in Pre-K to grade 2",
+          "Most schools for any child now in Pre-K to grade 2",
           ...SETUPS.map((top) => [h("span", { class: "cmp-num" }, String(r[top].maxYoung.all)), sub(maxTownsText(r[top]))]),
         ],
         [
@@ -414,12 +458,27 @@ function receivingBody(d) {
       cite(ref("deck", "slides 27-32")),
       " ",
       cite(ref("aoa", "Article 6(E)"), "Articles"),
-      " Bus routes and ride times for each pairing have not been published; the board asked for them on October 14. ",
-      cite(ref("minutes1014", "Discussion: Budget"), "Oct 14 minutes")
+      " Bus routes and ride times for each pairing have not been published. The board asked for them on October 14; on October 28 an administrator said routes would be modeled with the bus contractor once the board narrows the options, and estimated 5 to 10 more minutes for valley 5th and 6th graders riding to Crossett Brook. ",
+      cite(ref("minutes1014", "Discussion: Budget"), "Oct 14 minutes"),
+      " ",
+      cite(ref("meeting1028", "transportation"))
     ),
   ];
 }
 
+// The sheet's fifth scored column (slide 34). It has a score box like the four criteria; the sheet says no more about it.
+const rankingBody = () => [
+  h(
+    "p",
+    { class: "small" },
+    "The district's sheet has a “Score: ___” box in this column like the four criteria, on the same 1 to 5 scale: your overall judgment of this pairing. The sheet does not say which grade 5-6 setup to assume, so the data above shows both. ",
+    cite(BOARD_CRITERIA.src)
+  ),
+];
+
+// The sheet's five scored columns in its order, then the two this site adds. The ranking column comes last
+// on the page, after all the data. Scores saved before it was added (the four criteria and the two added
+// ones) still load; the ranking column is simply unscored.
 const CRITERIA = [
   { key: "capacity", name: BOARD_CRITERIA.criteria[0], body: capacityBody },
   { key: "condition", name: BOARD_CRITERIA.criteria[1], body: conditionBody },
@@ -427,8 +486,11 @@ const CRITERIA = [
   { key: "wastewater", name: BOARD_CRITERIA.criteria[3], body: wastewaterBody },
   { key: "moves", name: "Student moves", added: true, body: movesBody },
   { key: "receiving", name: "Where closed towns' children go", added: true, body: receivingBody },
+  { key: "ranking", name: BOARD_CRITERIA.criteria[4], badge: "On the district's sheet", body: rankingBody },
 ];
 const DISTRICT_KEYS = CRITERIA.filter((c) => !c.added).map((c) => c.key);
+const DMAX = DISTRICT_KEYS.length * 5; // the district's sheet: five scores, out of 25
+const AMAX = CRITERIA.length * 5; // with the two this site adds, out of 35
 
 // ---- the reader's scores ----
 
@@ -461,7 +523,11 @@ const outOf = (n, max, scored, of) => (scored ? `${n} of ${max}${scored < of ? `
 
 // The same total for a table cell: the number in mono, how much is scored on the line under it.
 const outOfCell = (n, max, scored, of) =>
-  scored ? [h("span", { class: "cmp-num-inline" }, `${n} of ${max}`), scored < of ? sub(`${scored} of ${of} criteria scored`) : null] : "—";
+  scored ? [h("span", { class: "cmp-num-inline" }, `${n} of ${max}`), scored < of ? sub(`${scored} of ${of} scored`) : null] : "—";
+
+// Labels for the two totals, the same in the cards, the "Rank by" menu, and the ranking table.
+const SHEET_LABEL = "The district's sheet (five scores)";
+const ADDED_LABEL = "With this site's two added";
 
 export function scoreSection() {
   let scores = loadScores();
@@ -471,6 +537,8 @@ export function scoreSection() {
 
   function setScore(id, key, n) {
     (scores[id] ??= {})[key] = n;
+    // a new score ends the offer to undo "Clear my scores", which would otherwise drop it
+    clearSaid.textContent = "";
     save();
     painters.get(id)?.();
     paintRanking();
@@ -482,24 +550,25 @@ export function scoreSection() {
     const total = h("div", { class: "cmp-total", "aria-live": "polite" });
     const paint = () => {
       const t = totals(scores[d.id]);
+      const nD = DISTRICT_KEYS.length;
       const yours = !t.allScored
         ? "Not scored yet"
-        : t.allScored === CRITERIA.length
-          ? `Your total: ${t.all} of 30`
-          : `Your total so far: ${t.all} (${t.allScored} of ${CRITERIA.length} scored)`;
+        : t.districtScored === nD
+          ? `Sheet total: ${t.district} of ${DMAX}`
+          : `Scored ${t.allScored} of ${CRITERIA.length}`;
       facts.textContent = `${listJoin(d.closed.map((c) => schoolShort(c.id)))} close · ${yours}`;
       total.replaceChildren(
         h(
           "span",
           { class: "cmp-total-item" },
-          h("span", { class: "wonk-label" }, "District's four criteria"),
-          h("span", { class: "wonk-num" }, outOf(t.district, 20, t.districtScored, 4))
+          h("span", { class: "wonk-label" }, SHEET_LABEL),
+          h("span", { class: "wonk-num" }, outOf(t.district, DMAX, t.districtScored, nD))
         ),
         h(
           "span",
           { class: "cmp-total-item" },
-          h("span", { class: "wonk-label" }, "All six criteria"),
-          h("span", { class: "wonk-num" }, outOf(t.all, 30, t.allScored, 6))
+          h("span", { class: "wonk-label" }, ADDED_LABEL),
+          h("span", { class: "wonk-num" }, outOf(t.all, AMAX, t.allScored, CRITERIA.length))
         )
       );
     };
@@ -515,7 +584,9 @@ export function scoreSection() {
           "div",
           { class: "cmp-crit-head" },
           h("h3", { id: hid }, c.name, h("span", { class: "wonk-sr" }, `, ${d.label}`)),
-          c.added ? h("span", { class: "wonk-badge wonk-badge--accent" }, "Added on this site") : h("span", { class: "wonk-badge" }, "District criterion")
+          c.added
+            ? h("span", { class: "wonk-badge wonk-badge--accent" }, "Added on this site")
+            : h("span", { class: "wonk-badge" }, c.badge ?? "District criterion")
         ),
         c.body(d),
         h(
@@ -570,7 +641,13 @@ export function scoreSection() {
           "."
         ),
         CRITERIA.map(crit),
-        total
+        total,
+        // the ranking is several phone screens below the last card
+        h(
+          "p",
+          { class: "no-print" },
+          h("button", { type: "button", class: "wonk-btn wonk-btn--quiet", onclick: () => jumpTo(rankingCard) }, "See your ranking")
+        )
       )
     );
     paint();
@@ -581,8 +658,8 @@ export function scoreSection() {
   const rankBy = h(
     "select",
     { class: "wonk-select", id: "cmp-rank-by" },
-    h("option", { value: "district" }, "The district's four criteria"),
-    h("option", { value: "all" }, "All six criteria")
+    h("option", { value: "district" }, SHEET_LABEL),
+    h("option", { value: "all" }, ADDED_LABEL)
   );
   rankBy.addEventListener("change", paintRanking);
   const rankBody = h("tbody", { role: "rowgroup" });
@@ -599,7 +676,7 @@ export function scoreSection() {
         h(
           "tr",
           { role: "row" },
-          ["Pairing", "Your rank", "District's four", "All six"].map((label) => h("th", { scope: "col", role: "columnheader" }, label))
+          ["Pairing", "Your rank", "District's sheet", "With the two added"].map((label) => h("th", { scope: "col", role: "columnheader" }, label))
         )
       ),
       rankBody
@@ -627,8 +704,8 @@ export function scoreSection() {
           { role: "row" },
           h("th", { scope: "row", role: "rowheader" }, x.d.label),
           labeledCell("rank", "Your rank", x.rank ? h("span", { class: "cmp-num" }, String(x.rank)) : "—"),
-          labeledCell("district", "District's four", outOfCell(x.t.district, 20, x.t.districtScored, 4)),
-          labeledCell("all", "All six", outOfCell(x.t.all, 30, x.t.allScored, 6))
+          labeledCell("district", "District's sheet", outOfCell(x.t.district, DMAX, x.t.districtScored, DISTRICT_KEYS.length)),
+          labeledCell("all", "With the two added", outOfCell(x.t.all, AMAX, x.t.allScored, CRITERIA.length))
         )
       )
     );
@@ -665,6 +742,18 @@ export function scoreSection() {
   });
 
   const cards = h("div", { class: "cmp-pairs" }, pairs.map(pairCard));
+  // each card's "See your ranking" button scrolls here and moves focus to the heading
+  const rankingCard = h(
+    "div",
+    { class: "wonk-card cmp-ranking", id: "cmp-ranking" },
+    h("h3", { id: "cmp-ranking-title" }, "Your ranking"),
+    h("p", { class: "small" }, "Pairings you have scored, highest total first. Totals compare fairly once every pairing is fully scored."),
+    h("div", { class: "wonk-field cmp-rank-field" }, h("label", { class: "wonk-label", for: "cmp-rank-by" }, "Rank by"), rankBy),
+    rankEmpty,
+    rankTable,
+    h("div", { class: "btn-row" }, clearBtn, h("span", { class: "small muted" }, "Scores are saved only in this browser.")),
+    clearSaid
+  );
 
   function repaintAll() {
     for (const input of cards.querySelectorAll("input[type=radio]")) {
@@ -711,12 +800,12 @@ export function scoreSection() {
         h(
           "p",
           {},
-          `The district's sheet lists four criteria and a last row, “${BOARD_CRITERIA.criteria[4]}.” Your ranking at the end of this section comes only from your own scores.`
+          `The district's sheet has five scored columns, the four criteria and “${BOARD_CRITERIA.criteria[4]},” each 1 to 5, and a total. Your ranking at the end of this section comes only from your own scores.`
         ),
         h(
           "p",
           {},
-          "Two criteria are added on this site and marked that way: student moves (how many students change schools and how many schools a child attends), and where closed towns' children would go. Your totals show the district's four on their own and all six together."
+          "Two criteria are added on this site and marked that way: student moves (how many students change schools and how many schools a child attends), and where closed towns' children would go. Your totals show the district's five scores on their own, and with the two added."
         ),
         h(
           "p",
@@ -733,16 +822,6 @@ export function scoreSection() {
       )
     ),
     cards,
-    h(
-      "div",
-      { class: "wonk-card cmp-ranking" },
-      h("h3", {}, "Your ranking"),
-      h("p", { class: "small" }, "Pairings you have scored, highest total first. Totals compare fairly once every criterion is scored."),
-      h("div", { class: "wonk-field cmp-rank-field" }, h("label", { class: "wonk-label", for: "cmp-rank-by" }, "Rank by"), rankBy),
-      rankEmpty,
-      rankTable,
-      h("div", { class: "btn-row" }, clearBtn, h("span", { class: "small muted" }, "Scores are saved only in this browser.")),
-      clearSaid
-    ),
+    rankingCard,
   ];
 }

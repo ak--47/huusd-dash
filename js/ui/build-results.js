@@ -5,11 +5,11 @@ import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, matchNamed, pathB, receivingSchool, townSchool } from "../model/index.js";
+import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
-import { cite, note, schoolName, schoolShort, status, tag, term } from "./kit.js";
+import { cite, note, schoolName, schoolShort, status, tag, term, unsure } from "./kit.js";
 import { heatGrid } from "./heat.js";
-import { namedLabel, pairLabel, topWords, townName } from "./build-controls.js";
+import { namedLabel, pairLabel, relation, topWords, townName } from "./build-controls.js";
 
 const pc = (x) => `${Math.max(0, Math.min(100, x * 100)).toFixed(2)}%`;
 const fte = (n) => (Number.isInteger(n) ? num(n) : num(n, 1));
@@ -24,23 +24,73 @@ const PK_WORDS = `${PK_PLAN.FES} at each valley school that stays open (${PK_PLA
 const lowerTarget = (b) => b.basis === "exclusion";
 const targetWord = (b) => (lowerTarget(b) ? "the lower target" : "the target");
 
-// The sentence the screen-reader live region reads after a change: the budget verdict only.
+// What the plan would save if the portable classrooms' cost all came out of next year's budget, at the high
+// and low ends of the district's quote ({ lo, hi }); null when the plan adds none.
+const afterPortables = (b) => (b.oneTime.portables ? { lo: b.savings - b.oneTime.portables.high, hi: b.savings - b.oneTime.portables.low } : null);
+// Portable classrooms that could use up the plan's margin over the target.
+const portablesShort = (b) => Boolean(b.oneTime.portables) && afterPortables(b).lo < b.target;
+// "would" when even the low end of the quote uses up the margin, "could" when only the high end does
+const portWould = (b) => (afterPortables(b).hi < b.target ? "would" : "could");
+// Savings that reach the target only on a figure that may not hold: the district's full figure where it said this
+// version saves less, or savings before portable classrooms that could use up the margin. For these plans the
+// verdict, the summary, the bar, spending per pupil, and the comparison all stop short of "meets the target".
+const mayFallShort = (b) => b.gap <= 0 && (b.upperBound || portablesShort(b));
+const spare = (b) => (b.gap === 0 ? "exactly" : `with ${money(-b.gap)} to spare`);
+
+// The sentence the screen-reader live region reads after a change: the plan's main results, so a change that
+// leaves the savings alone (a grade 5-6 choice, a reading, a portable unit, class sizes) is still spoken.
 export function verdictSentence(r) {
   const b = r.budget;
-  const head = b.upperBound
-    ? `This plan saves at most ${money(b.savings)} a year; the district said keeping grades 5-6 in the valley saves less.`
-    : `This plan saves ${money(b.savings)} a year.`;
-  if (b.gap < 0) return `${head} It meets ${targetWord(b)} with ${money(-b.gap)} to spare.`;
-  if (b.gap === 0) return `${head} It meets ${targetWord(b)} exactly.`;
-  return `${head} It is ${money(b.gap)} short of ${targetWord(b)}.`;
+  const cap = r.capacity;
+  const names = (ids) => ids.map((id) => schoolShort(id));
+  const over = names(cap.overPeople);
+  const rooms = names([...cap.overConsultant, ...cap.overMiddle]);
+  const classes = names(cap.overRooms);
+  const vs =
+    b.gap > 0
+      ? `It is ${b.upperBound ? "at least " : ""}${money(b.gap)} short of ${targetWord(b)}.`
+      : b.upperBound
+        ? `It would meet ${targetWord(b)} only if the district's full figure holds.`
+        : portablesShort(b)
+          ? `It meets ${targetWord(b)} before portable classrooms, but ${portWould(b)} fall short if their cost all came out of next year's budget.`
+          : `It meets ${targetWord(b)} ${spare(b)}.`;
+  const port = b.oneTime.portables;
+  return [
+    `This plan saves ${b.upperBound ? "at most " : ""}${money(b.savings)} a year. ${vs}`,
+    port ? `${plural(port.units, "portable unit")}, about ${moneyShort(port.low)} to ${moneyShort(port.high)} over two years, not counted in the savings.` : "",
+    `${r.buildingsOpen} of 7 buildings in use.`,
+    over.length ? `Over the wastewater or occupancy limit: ${listJoin(over)}.` : "Every school within its wastewater or occupancy limit.",
+    rooms.length ? `Over the consultant's classroom space: ${listJoin(rooms)}.` : "",
+    classes.length ? `Short of classrooms at your class sizes: ${listJoin(classes)}.` : "",
+    `Most schools for any child: ${r.maxYoung.all}. ${num(r.moved.k12)} students change schools next fall.`,
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
-const verdictWords = (b) =>
-  b.gap < 0
-    ? `Meets ${targetWord(b)} with ${b.upperBound ? "at most " : ""}${money(-b.gap)} to spare`
-    : b.gap === 0
-      ? `Meets ${targetWord(b)} exactly`
-      : `Short of ${targetWord(b)} by ${b.upperBound ? "at least " : ""}${money(b.gap)}`;
+// The budget verdict: the headline, and for a plan that may fall short, the reason (set smaller under it).
+function verdictWords(b) {
+  if (b.gap > 0) return [`Short of ${targetWord(b)} by ${b.upperBound ? "at least " : ""}${money(b.gap)}`];
+  if (b.upperBound) {
+    return [
+      `Meets ${targetWord(b)} only if the district's full figure holds (then ${b.gap === 0 ? "nothing" : money(-b.gap)} to spare${b.oneTime.portables ? ", before portable classrooms" : ""}).`,
+      "The district said this version saves less and could mean a penalty.",
+    ];
+  }
+  if (portablesShort(b))
+    return [
+      `Meets ${targetWord(b)} ${spare(b)} before portable classrooms.`,
+      `If their cost all came out of next year's budget, it ${portWould(b)} fall short.`,
+    ];
+  return [`Meets ${targetWord(b)} ${spare(b)}`];
+}
+
+const shortText = (b) => `${lowerTarget(b) ? `Short of lower target by ${moneyShort(b.gap)}` : `Short ${moneyShort(b.gap)}`}${b.upperBound ? " or more" : ""}`;
+// The savings status in the summary strip and (brief) the phone bar.
+const budgetMark = (b, brief = false) =>
+  mayFallShort(b)
+    ? unsure(brief ? "May fall short" : `May fall short of ${targetWord(b)}`)
+    : status(b.gap <= 0, lowerTarget(b) ? "Meets lower target" : "Meets target", shortText(b));
 
 function kpi(label, value, sub) {
   return h("div", { class: "bp-kpi" }, h("span", { class: "wonk-label" }, label), h("span", { class: "wonk-num bp-kpi-val" }, value), sub ? h("span", { class: "bp-kpi-sub" }, sub) : null);
@@ -62,13 +112,20 @@ export function resultsPanel({ onShowBasis } = {}) {
   const strip = h("div", { class: "bp-strip" });
   const body = h("div", { class: "bp-results-body" });
   const share = shareBlock();
-  const el = h("section", { class: "bp-results", id: "bp-results", "aria-labelledby": "bp-results-title" }, h("header", { class: "bp-results-head" }, title, matched, strip), body, share);
+  const head = h("header", { class: "bp-results-head" }, title, matched, backButton(), strip);
+  const el = h("section", { class: "bp-results", id: "bp-results", "aria-labelledby": "bp-results-title" }, head, body, share);
+  // On wide screens the panel scrolls under its sticky head, which grows and shrinks with the plan. Keep a control
+  // that gets focus clear of it (WCAG 2.4.11); build.css has a fallback for browsers without ResizeObserver.
+  const headSize =
+    typeof ResizeObserver === "function" ? new ResizeObserver(() => el.style.setProperty("scroll-padding-top", `${head.offsetHeight + 16}px`)) : null;
+  headSize?.observe(head);
 
   // the compact summary that sticks to the bottom of the screen on phones while the controls scroll
   const barFill = h("span", { class: "bp-bar-fill" });
   const barSave = h("strong", { class: "wonk-num bp-bar-val" });
   const barSaveSub = h("span", { class: "bp-bar-sub" });
   const barSchools = h("strong", { class: "wonk-num bp-bar-val" });
+  const barFits = h("p", { class: "bp-bar-line bp-bar-fits" });
   const barBtn = h("button", { type: "button", class: "wonk-btn bp-bar-btn" }, "Results");
   barBtn.addEventListener("click", () => {
     el.scrollIntoView({ block: "start" });
@@ -79,39 +136,47 @@ export function resultsPanel({ onShowBasis } = {}) {
     { class: "bp-bar", role: "group", "aria-label": "Plan summary" },
     h("span", { class: "bp-bar-meter", "aria-hidden": "true" }, barFill),
     h("p", { class: "bp-bar-line bp-bar-save" }, h("span", { class: "wonk-sr" }, "Savings: "), barSave, h("span", { class: "bp-bar-unit" }, " a year "), barSaveSub),
-    h("p", { class: "bp-bar-line bp-bar-kids" }, "Most schools per child: ", barSchools, h("span", { class: "bp-bar-unit" }, ` (${TODAY_SCHOOLS} today)`)),
+    h("p", { class: "bp-bar-line bp-bar-kids" }, "Most schools for any child: ", barSchools, h("span", { class: "bp-bar-unit" }, ` (${TODAY_SCHOOLS} today)`)),
+    barFits,
     barBtn
   );
 
   // cs: the four class-size inputs ({ PK, K2, G34, G56 }); classSize: the same, per grade, as evaluate() takes
   function update(plan, r, { cs, classSize }) {
     const b = r.budget;
-    const meets = b.gap <= 0;
-    const named = matchNamed(plan);
+    const rel = relation(plan);
 
     matched.replaceChildren(
-      named?.id === "today"
+      rel.named?.id === "today"
         ? "No change: every school open and no cuts."
-        : named
-          ? h("span", {}, "Matches ", h("strong", {}, namedLabel(named)), ".")
-          : "Your own combination of choices."
+        : rel.named
+          ? h("span", {}, "Matches ", h("strong", {}, namedLabel(rel.named)), ".")
+          : rel.base
+            ? h("span", {}, h("strong", {}, namedLabel(rel.base)), `, plus ${listJoin(rel.extras)}.`)
+            : rel.nearB
+              ? h("span", {}, "One step from ", h("strong", {}, namedLabel(rel.nearB)), ": add the middle-school move in step 4.")
+              : "Your own combination of choices."
     );
     const saveText = b.upperBound ? `Up to ${moneyShort(b.savings)}` : moneyShort(b.savings);
-    const meetsText = b.upperBound ? "Meets target, if the full figure holds" : "Meets target";
     strip.replaceChildren(
-      kpi("Yearly savings", saveText, status(meets, meetsText, `Short ${moneyShort(b.gap)}${b.upperBound ? " or more" : ""}`)),
+      kpi("Yearly savings", saveText, budgetMark(b)),
       kpi("Buildings in use", `${r.buildingsOpen} of 7`),
-      kpi("Most schools per child", String(r.maxYoung.all), moreThanToday(r.maxYoung.all)),
+      kpi("Most schools for any child", String(r.maxYoung.all), moreThanToday(r.maxYoung.all)),
       kpi("Changing schools", num(r.moved.k12), "K-12 students, fall 2027")
     );
 
     barFill.style.width = pc(b.savings / b.target);
     barSave.textContent = saveText;
-    barSaveSub.replaceChildren(status(meets, b.upperBound ? "Meets target, if it holds" : "Meets target", `Short ${moneyShort(b.gap)}${b.upperBound ? " or more" : ""}`));
+    barSaveSub.replaceChildren(budgetMark(b, true));
     barSchools.textContent = String(r.maxYoung.all);
+    const over = r.capacity.overPeople;
+    barFits.replaceChildren(
+      status(!over.length, "Every school within its limit", `${listJoin(over.map(schoolShort))} over ${over.length === 1 ? "its" : "their"} limit`)
+    );
 
     body.replaceChildren(
-      budgetSection(plan, r, named, keptFold, onShowBasis),
+      // a district plan plus portable units or Waitsfield at 300 still has that plan's savings and sources
+      budgetSection(plan, r, rel.named ?? rel.base ?? null, keptFold, onShowBasis),
       buildingsSection(plan, r, cs, keptFold),
       studentsSection(plan, r, keptFold),
       compareSection(plan, r, classSize)
@@ -119,7 +184,24 @@ export function resultsPanel({ onShowBasis } = {}) {
     window.wonk?.init(el);
   }
 
-  return { el, bar, update };
+  return { el, bar, update, destroy: () => headSize?.disconnect() };
+}
+
+// On phones the results sit below the controls; this takes the reader back up to them.
+function backButton() {
+  return h(
+    "button",
+    {
+      type: "button",
+      class: "wonk-btn wonk-btn--quiet bp-back",
+      onclick: () => {
+        const to = document.getElementById("bp-controls-title");
+        to?.scrollIntoView({ block: "start" });
+        to?.focus({ preventScroll: true });
+      },
+    },
+    "Back to your choices"
+  );
 }
 
 // ---------------------------------------------------------------- budget
@@ -130,7 +212,11 @@ function savingsMeter(b) {
   const label = lowerTarget(b) ? "Lower target" : "Target";
   return h(
     "div",
-    { class: "bp-meter", role: "img", "aria-label": `Savings of ${money(b.savings)} a year, against ${targetWord(b)} of ${money(b.target)}.` },
+    {
+      class: "bp-meter",
+      role: "img",
+      "aria-label": `Savings of ${b.upperBound ? "at most " : ""}${money(b.savings)} a year, against ${targetWord(b)} of ${money(b.target)}.`,
+    },
     h("div", { class: "meter" }, h("span", { class: "fill", style: `width:${at(b.savings)}` }), h("span", { class: "mark", style: `left:${at(b.target)}` })),
     h(
       "div",
@@ -191,27 +277,64 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
             cite(BUDGET.src),
           ]
       : null;
+  // what portable classrooms would add to spending per pupil if their cost all came out of next year's budget
+  const port = b.oneTime.portables;
+  const portPP = port ? [port.low / PUPILS, port.high / PUPILS] : null;
+  const portAdds = port
+    ? `If the portable classrooms' cost all came out of next year's budget, it would add about ${money(Math.round(portPP[0]))} to ${money(Math.round(portPP[1]))} per pupil`
+    : "";
+  // from under the threshold: "would" when even the low end of the quote puts spending over it, "could" when the high end does
+  const portOver = port && b.vsThreshold <= 0 ? (b.vsThreshold + portPP[0] > 0 ? "would" : b.vsThreshold + portPP[1] > 0 ? "could" : null) : null;
   let perPupil;
   if (b.vsThreshold > 0) {
+    const more = b.upperBound ? " or more" : "";
     perPupil = h(
       "p",
       {},
-      `Spending per pupil would be about ${money(pp)} over the `,
+      `Spending per pupil would be about ${money(pp)}${more} over the `,
       thresholdTerm,
       ", so HUUSD taxpayers would pay an ",
       term("penalty", "excess spending penalty"),
-      ` of about ${moneyShort(b.penalty)} a year. `,
+      ` of about ${moneyShort(b.penalty)}${more} a year. `,
+      port ? `${portAdds}. ` : null,
       tag("derived")
     );
-  } else if (meets) {
-    perPupil = h("p", {}, `Spending per pupil would be about ${money(pp)} under the `, thresholdTerm, ", so there would be no excess spending penalty. ", tag("derived"));
+  } else if (b.upperBound) {
+    // under the threshold only on the district's full figure, which it said this version would not reach
+    perPupil = h(
+      "p",
+      {},
+      `If the district's full figure held, spending per pupil would be about ${money(pp)} under the `,
+      thresholdTerm,
+      ". ",
+      port ? `${portAdds}${portOver ? `, which ${portOver} put it over` : ""}. ` : null,
+      "On October 28 an administrator said keeping grades 5-6 in the valley would save less and would have “an impact in terms of a penalty,” because staff would have to stay to serve about 126 students at Crossett Brook, or be shared between Brookside and Crossett Brook. The district has not said how much. ",
+      cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
+      " ",
+      tag("derived")
+    );
+  } else if (portOver) {
+    // under the threshold before portable classrooms; paying for them out of next year's budget could put it over
+    perPupil = h(
+      "p",
+      {},
+      `Before portable classrooms, spending per pupil would be about ${money(pp)} under the `,
+      thresholdTerm,
+      `. ${portAdds}, which ${portOver} put it over and mean an `,
+      term("penalty", "excess spending penalty"),
+      ". ",
+      tag("derived")
+    );
   } else {
     perPupil = h(
       "p",
       {},
-      `Spending per pupil would still be about ${money(pp)} under the `,
+      `Spending per pupil would ${meets ? "" : "still "}be about ${money(pp)} under the `,
       thresholdTerm,
-      ", so there would be no excess spending penalty, but less margin than the target leaves. ",
+      ", so there would be no excess spending penalty",
+      meets ? "" : ", but less margin than the target leaves",
+      port ? ", even if the portable classrooms' cost all came out of next year's budget" : "",
+      ". ",
       tag("derived")
     );
   }
@@ -274,38 +397,74 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
     staff = h("p", { class: "bp-muted" }, `Staff positions: ${cutsNote}`);
   }
 
+  // costs outside the yearly savings: portable classrooms (the district's quote covers about two years), and
+  // whatever using 300 for Waitsfield might take (the state permits reading already uses 300, so not then)
   const oneTime = [];
-  if (b.oneTime.portables) {
-    const p = b.oneTime.portables;
+  if (port) {
+    const after = afterPortables(b);
+    const vsT =
+      after.lo >= b.target
+        ? `still ${money(after.lo - b.target)} or more above ${targetWord(b)}`
+        : after.hi <= b.target
+          ? `${money(b.target - after.hi)} to ${money(b.target - after.lo)} short of ${targetWord(b)}`
+          : `between ${money(b.target - after.lo)} short of ${targetWord(b)} and ${money(after.hi - b.target)} above it`;
     oneTime.push(
       h(
         "li",
         {},
-        h("span", { class: "bp-item-name" }, `Portable classrooms: ${plural(p.units, "unit")}, ${plural(p.units * 2, "classroom")}`),
-        h("span", { class: "bp-item-amt" }, `${moneyShort(p.low)} to ${moneyShort(p.high)}`),
-        h("span", { class: "bp-item-meta" }, tag("derived"), cite(MODULAR.src), h("span", {}, `From the district's estimate of ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units.`))
+        h("span", { class: "bp-item-name" }, `Portable classrooms: ${plural(port.units, "unit")}, ${plural(port.units * 2, "classroom")}`),
+        h("span", { class: "bp-item-amt" }, `${moneyShort(port.low)} to ${moneyShort(port.high)}`),
+        h(
+          "span",
+          { class: "bp-item-meta" },
+          tag("estimate"),
+          cite(MODULAR.src),
+          cite(ref("meeting1028", "portable classrooms")),
+          h(
+            "span",
+            {},
+            `The district's preliminary quote: ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units over about two years, scaled here by the number of units. ${
+              b.upperBound ? "If the district's full figure held and the cost all came out of next year's budget" : "If it all came out of next year's budget"
+            }, this plan would save ${money(after.lo)} to ${money(after.hi)}, ${vsT}.`
+          )
+        )
       )
     );
   }
-  if (plan.septicWES && plan.open.includes("WES")) {
+  if (plan.septicWES && plan.open.includes("WES") && r.capacity.reading === "slides") {
     oneTime.push(
       h(
         "li",
         {},
-        h("span", { class: "bp-item-name" }, "Raise Waitsfield's wastewater limit to 300"),
-        h("span", { class: "bp-item-amt bp-unknown" }, "Not published"),
-        h("span", { class: "bp-item-meta" }, cite(FACILITIES.WES.src), h("span", {}, "The district lists Waitsfield as “amenable to 300” but gives no cost."))
+        h("span", { class: "bp-item-name" }, "Waitsfield at 300 instead of 230"),
+        h("span", { class: "bp-item-amt bp-unknown" }, "Cost, if any, not published"),
+        h(
+          "span",
+          { class: "bp-item-meta" },
+          cite(FACILITIES.WES.permit.src),
+          h(
+            "span",
+            {},
+            "The slides list 230, “amenable to 300”; the 1991 state permit says 300 students. The district has not said whether using 300 needs any work or cost."
+          )
+        )
       )
     );
   }
 
   // the per-pupil amount slide 10 moved its level-funded figure by when it removed the debt exclusion
   const correction = money(EXCLUSION_PER_PUPIL);
+  const [verdict, why] = verdictWords(b);
   return h(
     "section",
     { class: "bp-sec", "aria-labelledby": "bp-budget-h" },
     h("h3", { id: "bp-budget-h" }, "Budget"),
-    h("p", { class: "bp-verdict" }, status(meets, verdictWords(b), verdictWords(b))),
+    h(
+      "p",
+      { class: "bp-verdict" },
+      mayFallShort(b) ? unsure(verdict) : status(meets, verdict, verdict),
+      why ? h("span", { class: "bp-verdict-why" }, ` ${why}`) : null
+    ),
     savingsMeter(b),
     targetLine,
     lower && onShowBasis ? h("p", { class: "bp-note" }, h("button", { type: "button", class: "bp-textbtn", onclick: onShowBasis }, "Change the target")) : null,
@@ -318,8 +477,20 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
       ? h(
           "div",
           { class: "bp-onetime" },
-          h("h4", {}, "One-time costs"),
-          h("p", { class: "bp-muted" }, "Paid once, not every year. They are not part of the yearly savings above."),
+          h("h4", {}, "Costs not in the yearly savings"),
+          h(
+            "p",
+            { class: "bp-muted" },
+            "Not part of the yearly savings above.",
+            port
+              ? [
+                  " Slide 26 calls portable classrooms “unbudgeted capital outlay for short-term modular leasing”; the district has not said how they would be paid for. On October 28 an administrator offered to show whether keeping grades 5-6 in the valley in temporary classrooms would exceed the excess spending threshold. ",
+                  cite(ref("deck", "slide 26")),
+                  " ",
+                  cite(ref("meeting1028", "portable classrooms")),
+                ]
+              : null
+          ),
           h("ul", { class: "bp-items" }, oneTime)
         )
       : null,
@@ -468,16 +639,31 @@ function buildingsSection(plan, r, cs, keptFold) {
   );
   if (overM.length) summary.push(`${listJoin(overM.map((m) => schoolName(m.id)))} would hold more students than the consultant counted classroom space for (see the middle schools below).`);
 
+  // the Pre-K cut ends Pre-K classes in district buildings, so the model leaves Pre-K out of every count
+  const noPreK = plan.cuts.includes("prek");
+  const preKWords = noPreK ? "without Pre-K (this plan ends district Pre-K classes)" : "including Pre-K";
   let source;
   if (cap.source === "district") {
-    source = h("p", { class: "bp-source" }, "Student counts for the elementary schools: the district's table for this pairing. ", tag("district"), cite(cap.table.src));
+    source = h(
+      "p",
+      { class: "bp-source" },
+      `Student counts for the elementary schools: the district's table for this pairing${noPreK ? ", without its Pre-K rows (this plan ends district Pre-K classes)" : ""}. `,
+      tag("district"),
+      cite(cap.table.src)
+    );
   } else if (plan.open.length === 4 && plan.valleyTop === 6) {
-    source = h("p", { class: "bp-source" }, "Student counts: this year's enrollment on October 1, including Pre-K. ", tag("district"), cite(ATTENDING.src, "Oct 1 report"));
+    source = h(
+      "p",
+      { class: "bp-source" },
+      `Student counts: this year's enrollment on October 1, ${preKWords}. `,
+      tag("district"),
+      cite(ATTENDING.src, "Oct 1 report")
+    );
   } else if (plan.open.length === 4) {
     source = h(
       "p",
       { class: "bp-source" },
-      "Student counts are our estimate: this year's students, including Pre-K, with valley 5th and 6th graders counted at Crossett Brook. ",
+      `Student counts are our estimate: this year's students, ${preKWords}, with valley 5th and 6th graders counted at Crossett Brook. `,
       tag("estimate"),
       cite(ATTENDING.src, "Oct 1 report")
     );
@@ -485,7 +671,9 @@ function buildingsSection(plan, r, cs, keptFold) {
     source = h(
       "p",
       { class: "bp-source" },
-      `The district did not publish a table for this combination, so the counts are our estimate: this year's students move with their school to the school that receives them, and Pre-K follows the district's planning numbers, ${PK_WORDS}. `,
+      `The district did not publish a table for this combination, so the counts are our estimate: this year's students move with their school to the school that receives them, and ${
+        noPreK ? "Pre-K is left out (this plan ends district Pre-K classes)" : `Pre-K follows the district's planning numbers, ${PK_WORDS}`
+      }. `,
       tag("estimate"),
       cite(ATTENDING.src, "Oct 1 report"),
       " ",
@@ -560,7 +748,7 @@ function buildingsSection(plan, r, cs, keptFold) {
         h(
           "li",
           {},
-          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. `,
+          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. With the Pre-K cut, Pre-K is left out of every building. `,
           cite(ref("deck", "slides 27-32"))
         ),
         h("li", {}, "A portable unit adds 2 classrooms but does not change the wastewater limit. Using 300 for Waitsfield changes only its limit.")
@@ -613,7 +801,12 @@ function studentsSection(plan, r, keptFold) {
     moves = h(
       "div",
       { class: "bp-moves" },
-      h("p", {}, h("strong", { class: "wonk-num" }, num(m.k12)), " of this year's K-12 students would start fall 2027 in a different school than they would with no change:"),
+      h(
+        "p",
+        {},
+        h("strong", { class: "wonk-num" }, num(m.k12)),
+        " of next fall's K-12 students (this year's 4-year-olds in Pre-K through grade 11) would start fall 2027 in a different school than they would with no change:"
+      ),
       h("ul", {}, reasons.map(([n, why]) => h("li", {}, h("strong", { class: "wonk-num" }, num(n)), ` ${why}`)))
     );
   } else {
@@ -624,7 +817,7 @@ function studentsSection(plan, r, keptFold) {
       ? h(
           "p",
           {},
-          `Also ${plural(m.preK, "child", "children")} now in Pre-K would change programs: `,
+          `Also ${plural(m.preK, "child", "children")} who would be in Pre-K next fall would change programs: `,
           listJoin(
             [
               preKClosure ? `${num(preKClosure)} because their school closes` : null,
@@ -636,8 +829,14 @@ function studentsSection(plan, r, keptFold) {
         )
       : null;
 
-  // the Your child's path page shows the saved plan as "Your plan"; save it on the way there
-  const childLink = h("a", { class: "wonk-btn", href: "#/your-child" }, "See your child's path under this plan");
+  // the Your child's path page shows the saved plan as "Your plan"; save it on the way there. With two valley
+  // schools open, the link also sets that page's Path B row to the same pairing and grade 5-6 setup.
+  const q = new URLSearchParams();
+  if (plan.open.length === 2) {
+    q.set("pair", [...plan.open].sort().join("+"));
+    q.set("top", String(plan.valleyTop));
+  }
+  const childLink = h("a", { class: "wonk-btn", href: `#/your-child${q.toString() ? `?${q}` : ""}` }, "See your child's path under this plan");
   childLink.addEventListener("click", () => store.set("plan", encodePlan(plan)));
 
   return h(
@@ -647,7 +846,7 @@ function studentsSection(plan, r, keptFold) {
     h(
       "div",
       { class: "bp-stats" },
-      kpiCard("Most K-12 schools", String(r.maxYoung.all), `for a child now in Pre-K to grade 2; ${moreThanToday(r.maxYoung.all)}`),
+      kpiCard("Most schools for any child", String(r.maxYoung.all), `now in Pre-K to grade 2; ${moreThanToday(r.maxYoung.all)}`),
       kpiCard("Changing schools", num(m.k12), "K-12 students next fall, beyond the usual moves"),
       kpiCard("5 or more schools", num(r.fivePlus.total), "students now in Pre-K to grade 8 who would attend that many")
     ),
@@ -707,6 +906,7 @@ function kpiCard(label, value, sub) {
 // ---------------------------------------------------------------- comparison
 function compareSection(plan, r, classSize) {
   const basis = r.budget.basis;
+  const lower = lowerTarget(r.budget);
   const pairB = plan.open.length === 2;
   const planB = pairB ? pathB(plan.open, plan.valleyTop) : pathB(["MES", "WRN"], 4);
   const reading = r.capacity.reading;
@@ -718,10 +918,11 @@ function compareSection(plan, r, classSize) {
     ["Path B", bb],
   ];
   const rows = [
-    ["Savings a year", (x) => moneyShort(x.budget.savings)],
-    [lowerTarget(r.budget) ? "Meets the lower target" : "Meets the target", (x) => status(x.budget.gap <= 0, "Yes", "No")],
+    // "Up to" sits on its own line in a narrow panel (build.css), so all three plans still fit
+    ["Savings a year", (x) => [x.budget.upperBound ? h("span", { class: "bp-upto" }, "Up to ") : null, moneyShort(x.budget.savings)]],
+    [lower ? "Meets the lower target" : "Meets the target", (x) => (mayFallShort(x.budget) ? unsure("Not known") : status(x.budget.gap <= 0, "Yes", "No"))],
     ["Buildings in use", (x) => `${x.buildingsOpen} of 7`],
-    ["Most K-12 schools for a child", (x) => String(x.maxYoung.all)],
+    ["Most schools for any child", (x) => String(x.maxYoung.all)],
     ["Changing schools next fall", (x) => num(x.moved.k12)],
     ["At 5 or more schools", (x) => num(x.fivePlus.total)],
   ];
@@ -744,8 +945,13 @@ function compareSection(plan, r, classSize) {
     h(
       "p",
       { class: "bp-muted" },
-      `Path B here: ${bName}${pairB ? ", the same schools as your plan" : ", one of twelve versions"}. “Most K-12 schools” is for a child now in Pre-K to grade 2; “changing schools” counts K-12 students. Savings for Path A and Path B are the district's figures; the rest is calculated${lowerTarget(r.budget) ? `, against the lower target of ${moneyShort(r.budget.target)}` : ""}. `,
-      h("a", { href: "#/compare" }, "Compare all the plans")
+      `Path B here: ${bName}${pairB ? ", the same schools as your plan" : ", one of twelve versions"}. “Most schools for any child” is for a child now in Pre-K to grade 2; “changing schools” counts K-12 students. Savings for Path A and Path B are the district's figures (an upper limit when grades 5 and 6 stay in the valley); the rest is calculated${lower ? `, against the lower target of ${moneyShort(r.budget.target)}` : ""}. `,
+      portablesShort(r.budget) && !r.budget.upperBound
+        ? `Your plan's savings do not count its portable classrooms; if their cost all came out of next year's budget, it ${portWould(r.budget)} fall short. `
+        : null,
+      // keep the reader's wastewater reading; Compare has no lower target, so say which one it uses
+      h("a", { href: `#/compare${reading === "permits" ? "?w=permits" : ""}` }, "Compare all the plans"),
+      lower ? ` (Compare measures savings against the district's ${money(TARGET)} target.)` : null
     )
   );
 }
@@ -758,7 +964,7 @@ function shareBlock() {
     { class: "wonk-field bp-share-fallback", hidden: true },
     h("label", { class: "wonk-label", for: "bp-share-url" }, "Link to this plan"),
     input,
-    h("span", { class: "wonk-help" }, "The link is selected. Copy it with Ctrl+C, or Command+C on a Mac.")
+    h("span", { class: "wonk-help" }, "Press and hold the link and choose Copy. On a computer: Ctrl+C, or Command+C on a Mac.")
   );
   const btn = h("button", { type: "button", class: "wonk-btn wonk-btn--primary" }, "Copy link to this plan");
   btn.addEventListener("click", async () => {
@@ -768,17 +974,24 @@ function shareBlock() {
       await navigator.clipboard.writeText(url);
       window.wonk?.toast("Link copied", "ok");
     } catch {
+      // no clipboard API (some in-app browsers): show the link, selected, and try the older copy command
       input.value = url;
       fallback.hidden = false;
       input.focus();
       input.select();
+      input.setSelectionRange(0, input.value.length);
       let copied = false;
       try {
         copied = document.execCommand("copy");
       } catch {
         copied = false;
       }
-      if (copied) window.wonk?.toast("Link copied", "ok");
+      if (copied) {
+        // copied after all: the instructions would only contradict the toast
+        window.wonk?.toast("Link copied", "ok");
+        fallback.hidden = true;
+        btn.focus();
+      }
     }
   });
   return h(
@@ -787,6 +1000,7 @@ function shareBlock() {
     h("h3", { id: "bp-share-h" }, "Share this plan"),
     h("p", {}, "The link opens this page with the same choices, so others can see exactly what you see."),
     h("div", { class: "btn-row" }, btn),
-    fallback
+    fallback,
+    h("p", { class: "bp-back-row" }, backButton())
   );
 }

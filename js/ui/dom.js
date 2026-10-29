@@ -126,7 +126,7 @@ export const plural = (n, one, many = `${one}s`) => `${num(n)} ${n === 1 ? one :
 export function listJoin(items, word = "and") {
   if (items.length <= 1) return items.join("");
   if (items.length === 2) return `${items[0]} ${word} ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, ${word} ${items.at(-1)}`;
+  return `${items.slice(0, -1).join(", ")}, ${word} ${items[items.length - 1]}`;
 }
 
 export function dateLong(iso) {

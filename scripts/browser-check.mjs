@@ -30,6 +30,7 @@ const ROUTES = [
   ["compare-permits", "#/compare?w=permits&sort=fits"],
   ["options-permits", "#/options?w=permits&x=1"],
   ["build-permits", "#/build?w=permits&x=1"],
+  ["build-k6-portables", "#/build?o=FR&t=6&m=1&p=FES2.BPS1"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 

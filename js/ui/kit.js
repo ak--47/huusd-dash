@@ -146,3 +146,8 @@ export function term(key, text) {
 export function status(ok, okText, badText) {
   return h("span", { class: `status ${ok ? "status--ok" : "status--bad"}` }, h("span", { "aria-hidden": "true" }, ok ? "✓ " : "✕ "), ok ? okText : badText);
 }
+
+// Neither yes nor no: a result that depends on a figure nobody has published.
+export function unsure(text) {
+  return h("span", { class: "status status--unsure" }, h("span", { "aria-hidden": "true" }, "? "), text);
+}

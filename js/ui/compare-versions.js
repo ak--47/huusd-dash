@@ -65,10 +65,31 @@ export function pathBVersion(pair, top, plan = pathB(pair, top)) {
 
 export function versionList() {
   return [
-    version({ id: "today", kind: "today", name: "No change", sub: "For reference: over the state limit", plan: PLAN_TODAY }),
-    version({ id: "A", kind: "A", name: "Path A", sub: "Keep all 7 buildings, cut programs", plan: PLAN_A }),
+    version({ id: "today", kind: "today", name: "No change", sub: "For reference: spends over the state's per-pupil limit", plan: PLAN_TODAY }),
+    // Path B's line names the schools that close; Path A's names what it cuts (deck slide 13, as on the Overview)
+    version({
+      id: "A",
+      kind: "A",
+      name: "Path A",
+      sub: "Keep all 7 buildings; cut bus routes, district Pre-K classes, intervention teachers and aides, 70% of athletics and activities, and more",
+      plan: PLAN_A,
+    }),
     ...PAIRS.flatMap((pair) => SETUPS.map((top) => pathBVersion(pair, top))),
   ];
+}
+
+// A version's name with its grade 5-6 setup, for sentences that list versions:
+// "Moretown + Waitsfield (grades 5-6 at Crossett Brook)".
+export const nameWithSetup = (v) => `${v.name} (${lowerFirst(v.sub)})`;
+
+// Scroll to a part of the page and move focus there too, so keyboard and screen reader users land in the
+// same place. (A #fragment link would be read by the hash router as a route.)
+export function jumpTo(target, focus = target?.querySelector("h2, h3") ?? target) {
+  if (!target) return;
+  target.scrollIntoView({ block: "start" });
+  if (!focus) return;
+  if (!focus.matches("a[href], button, input, select, textarea, summary, [tabindex]")) focus.setAttribute("tabindex", "-1");
+  focus.focus({ preventScroll: true });
 }
 
 // A version's name for screen readers and link labels.
@@ -91,7 +112,7 @@ export const MEASURES = [
     high: "most over a limit first",
   },
   { key: "moved", label: "Changing schools next fall", value: (v) => v.r.moved.k12, low: "fewest first", high: "most first" },
-  { key: "schools", label: "Most schools for one child", value: (v) => v.r.maxYoung.all, low: "fewest first", high: "most first" },
+  { key: "schools", label: "Most schools for any child", value: (v) => v.r.maxYoung.all, low: "fewest first", high: "most first" },
   { key: "five", label: "Students at 5 or more schools", value: (v) => v.r.fivePlus.total, low: "fewest first", high: "most first" },
   { key: "repairs", label: "Deferred repairs in elementary buildings kept open", value: (v) => v.r.deferredKept, low: "least first", high: "most first" },
 ];

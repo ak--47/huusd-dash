@@ -137,7 +137,7 @@
   color: var(--ak-ink);
   cursor: pointer;
   padding: 0.4rem 0.7rem;
-  min-height: 2.25rem;
+  min-height: 2.75rem;
   border: 1px solid var(--ak-hairline-strong);
   border-radius: var(--ak-radius);
   background: var(--ak-surface-2);
@@ -246,6 +246,7 @@
   background: var(--ak-surface);
 }
 .cmp-main tr:hover th[scope="row"] {
+  background: #e5e0d4; /* the color-mix below, for browsers without it */
   background: color-mix(in srgb, var(--ak-ink) 6%, var(--ak-surface));
 }
 /* letter and name on one line; the setup and the links run the full width under them */
@@ -342,8 +343,36 @@
   .cmp-swipe {
     display: none;
   }
+  /* the "Show" buttons stay in reach while the rows scroll by: one line that scrolls sideways */
   .cmp-show {
     display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: var(--ak-ground);
+    padding: var(--ak-s2) 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .cmp-show > .wonk-label {
+    flex: none;
+  }
+  .cmp-chip {
+    flex: none;
+  }
+  /* what keyboard focus scrolls to stops below the sticky buttons, not under them */
+  .cmp-tools :is(a, button, select),
+  .cmp-scroll :is(a, button, [tabindex]) {
+    scroll-margin-top: 4.5rem;
+  }
+  .cmp-v-links {
+    row-gap: var(--ak-s2);
+  }
+  .cmp-v-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-top: 0;
   }
   .cmp-scroll {
     overflow: visible;
@@ -380,6 +409,18 @@
   .cmp-v-links {
     font-size: var(--ak-text-sm);
   }
+}
+
+/* on phones the top bar is sticky too, so the "Show" buttons stop under it (top only applies once they stick) */
+@media (max-width: 800px) {
+  .cmp-show {
+    top: var(--topbar-h, 4.5rem);
+  }
+}
+
+/* the header's plain copy for print (see the print rules) */
+.cmp-h-print {
+  display: none;
 }
 
 /* ---- small tables inside cards: stack into labeled rows when narrow ---- */
@@ -628,6 +669,7 @@ fieldset.group.cmp-score > legend.wonk-label {
 }
 .cmp-score .choice label {
   padding: var(--ak-s2) var(--ak-s3) var(--ak-s2) var(--ak-s2);
+  min-height: 2.75rem;
 }
 .cmp-score .choice label:has(input:checked) .cmp-score-n {
   background: var(--ak-a1);
@@ -651,8 +693,10 @@ fieldset.group.cmp-score > legend.wonk-label {
   font-size: var(--ak-text-md);
   color: var(--ak-ink);
 }
+/* one shrinkable track: at large text sizes the select would otherwise set the width and push the page sideways */
 .cmp-ranking {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ak-s3);
 }
 .cmp-ranking > * {
@@ -664,6 +708,10 @@ fieldset.group.cmp-score > legend.wonk-label {
 .cmp-rank-field {
   margin: 0;
   max-width: 22rem;
+}
+.cmp-rank-field .wonk-select {
+  width: 100%;
+  min-width: 0;
 }
 .cmp-rank-empty {
   font-size: var(--ak-text-sm);
@@ -808,19 +856,77 @@ fieldset.group.cmp-score > legend.wonk-label {
   color: var(--ak-ink-2);
 }
 
+/* ---- the reading and the jump to the scoring ---- */
+fieldset.group.cmp-reading {
+  max-width: 56rem;
+  margin-bottom: var(--ak-s4);
+}
+.cmp-reading-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--ak-s3);
+}
+.cmp-reading-choices label {
+  align-items: flex-start;
+  padding: var(--ak-s3) var(--ak-s4);
+}
+.cmp-reading-choices input {
+  margin-top: 0.3rem;
+}
+/* what the chosen reading means for the twelve versions, said where the reader just chose it */
+.cmp-reading-said {
+  color: var(--ak-ink-2);
+  max-width: var(--col-read);
+}
+.cmp-jump {
+  margin: 0 0 var(--ak-s8);
+}
+
 @media print {
   .cmp-tools,
   .cmp-show,
   .cmp-swipe,
-  .cmp-score,
-  .cmp-ranking .btn-row {
+  .cmp-ranking .btn-row,
+  .cmp-v-links,
+  .cmp-main .wonk-sort {
     display: none !important;
   }
-  .cmp-pair > .body {
-    display: grid !important;
+  /* a reader's chosen scores print; the choices they did not pick do not */
+  .cmp-score label:not(:has(input:checked)) {
+    display: none !important;
+  }
+  /* Chromium leaves button text blank in the header row it repeats on each page, so print a plain copy */
+  .cmp-h-print {
+    display: inline;
+  }
+  /* the whole table across the page: no sideways scroll, smaller type, rows kept whole */
+  .cmp-scroll {
+    overflow: visible !important;
+  }
+  .cmp-main {
+    min-width: 0 !important;
+    font-size: 8.5pt;
+  }
+  .cmp-main thead th {
+    font-size: 7pt;
+  }
+  .cmp-main tr {
+    break-inside: avoid;
+  }
+  /* on paper the version column gives up a little room, so town names in the narrow columns break between words */
+  .cmp-main .cmp-h--version {
+    width: 19%;
+  }
+  .cmp-main .cmp-h--savings {
+    width: 10%;
+  }
+  .cmp-main .cmp-h--moved {
+    width: 9.5%;
+  }
+  .cmp-main .cmp-h--schools {
+    width: 11%;
+  }
+  .cmp-main .cmp-h--five {
+    width: 10%;
   }
 }
-fieldset.group.cmp-reading { max-width: 56rem; margin-bottom: var(--ak-s8); }
-.cmp-reading-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--ak-s3); }
-.cmp-reading-choices label { align-items: flex-start; padding: var(--ak-s3) var(--ak-s4); }
-.cmp-reading-choices input { margin-top: 0.3rem; }
