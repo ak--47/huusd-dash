@@ -130,7 +130,7 @@ export default {
               { class: "wonk-card idea" },
               h("h3", {}, idea.title),
               h("p", {}, idea.text),
-              idea.record ? h("p", { class: "small" }, h("strong", {}, "On the record: "), idea.record, " ", idea.ref ? cite(idea.ref, idea.refLabel) : null) : null,
+              idea.record ? h("p", { class: "small" }, h("strong", {}, "On the record: "), idea.record, " ", idea.ref ? cite(idea.ref, idea.refLabel) : null, idea.ref2 ? [" ", cite(idea.ref2)] : null) : null,
               idea.build ? h("p", { class: "small" }, h("a", { href: idea.build }, "Try it on Build a plan")) : null
             )
           )

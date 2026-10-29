@@ -22,6 +22,10 @@ const view = document.getElementById("view");
 let cleanup = null;
 let first = true;
 let token = 0;
+// Back and Forward return readers to where they were on a page. Each history entry gets an id, and the
+// scroll position for it is kept as the reader scrolls (in memory: history.replaceState is rate-limited).
+const spots = new Map();
+let spotCount = 0;
 
 export function parseHash(hash = location.hash) {
   const raw = hash.replace(/^#\/?/, "");
@@ -37,7 +41,7 @@ export function setParams(obj) {
     else params.set(k, String(v));
   }
   const q = params.toString();
-  history.replaceState(null, "", `#/${path}${q ? `?${q}` : ""}`);
+  history.replaceState(history.state, "", `#/${path}${q ? `?${q}` : ""}`);
 }
 
 export function go(path, params) {
@@ -47,6 +51,10 @@ export function go(path, params) {
 
 async function route() {
   const mine = ++token;
+  const spot = history.state?.spot;
+  const backTo = spot ? spots.get(spot) : undefined;
+  // ids stay unique across reloads, which keep history entries but empty the map
+  if (!spot) history.replaceState({ ...history.state, spot: `${Date.now().toString(36)}-${++spotCount}` }, "");
   const { path, params } = parseHash();
   const load = ROUTES[path];
   if (!load) {
@@ -86,7 +94,11 @@ async function route() {
   const wasFirst = first;
   first = false;
   // On the first load the browser keeps its own scroll position; later page changes start at the top.
-  if (at) {
+  // Back and Forward return to where the reader was, even on a page opened at a section.
+  if (!wasFirst && backTo != null) {
+    jump(() => window.scrollTo(0, backTo));
+    document.getElementById("page-title")?.focus({ preventScroll: true });
+  } else if (at) {
     requestAnimationFrame(() => {
       if (mine === token && !reveal(at) && !wasFirst) toTop();
     });
@@ -169,6 +181,14 @@ function boot() {
   printFolds();
   watchTopbar();
   wireDrawer();
+  window.addEventListener(
+    "scroll",
+    () => {
+      const id = history.state?.spot;
+      if (id) spots.set(id, window.scrollY);
+    },
+    { passive: true }
+  );
   window.addEventListener("hashchange", route);
   route();
 }

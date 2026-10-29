@@ -12,7 +12,7 @@ export const OPTIONS = [
     name: "Path A",
     what: "Keep all seven buildings and make the full cut from programs and services.",
     plan: PLAN_A,
-    notes: ["Ends most daily busing and district Pre-K classes, and cuts athletics and clubs by 70%."],
+    notes: ["Cuts $1.36M from transportation (daily routes, field trips, and technical-school rides; the deck does not say which routes would end), ends district Pre-K classes, and cuts athletics and activities by 70%."],
   },
   {
     id: "B",

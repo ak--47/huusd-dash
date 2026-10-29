@@ -237,7 +237,7 @@ function huCard() {
           ["Harwood Union High School", `${num(hu[9] + hu[10] + hu[11] + hu[12])} students in grades 9-12, including early college`],
           ["Under Path B", `Becomes the district's only 7th and 8th grade school. Crossett Brook's ${num(ATTENDING[2026].CBMS[7] + ATTENDING[2026].CBMS[8])} 7th and 8th graders this year would have moved here.`],
           ["Wastewater", "1,000 students and staff, per the state permit and the district's October 14 table"],
-          ["Middle school classroom capacity", "166 students in grades 7-8, by the district's planning consultant (March 2025). Under Path B, this year's grade 7-8 students from both middle schools would number about 257."],
+          ["Middle school classroom capacity", "166 students in grades 7-8, by the district's planning consultant (March 2025). Under Path B, this year's grade 7-8 students from both middle schools would number about 257. The building held 766 students in grades 7-12 in 2010-11 (board Q&A); with the merger it would hold about 738."],
           ["Address", LOCATIONS.schools.HU.address],
         ].map(([k, v]) => [h("dt", {}, k), h("dd", {}, v)])
       ),

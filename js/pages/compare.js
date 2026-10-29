@@ -89,7 +89,16 @@ export default {
           : `By the student counts in the district's own tables, ${fitCount} of the 12 versions keep every open school within its limit; they are listed under the choice above.${
               slidesFit === fitCount ? "" : ` The slide headlines say ${slidesFit}${under ? "; the note under the table explains why" : ""}.`
             }`;
-      readingSaid.textContent = `${READING_NAME[reading]}: ${fitCount} of the 12 Path B versions keep every open school within its limit.${fitList}`;
+      // the permits reading counts only students at Waitsfield; these also fit with its staff counted
+      const withWesStaff = pathB.filter((v) => v.r.capacity.schools.every((s) => (s.id === "WES" ? s.total + s.staff <= s.limit : !s.overPeople)));
+      readingSaid.textContent =
+        `${READING_NAME[reading]}: ${fitCount} of the 12 Path B versions keep every open school within its limit.${fitList}` +
+        (reading === "slides" && slidesFit !== fitCount
+          ? ` The slide headlines say ${slidesFit}: this count adds up the Fayston + Warren tables' grade rows instead of their printed totals (see the note under the table).`
+          : "") +
+        (reading === "permits" && withWesStaff.length !== fitCount
+          ? ` This reading counts only students against Waitsfield's 300; if its staff count too, ${withWesStaff.length} fit${withWesStaff.length ? `: ${listJoin(withWesStaff.map(nameWithSetup))}` : ""}.`
+          : "");
 
       const table = comparisonTable(versions, {
         sort,
@@ -119,7 +128,7 @@ export default {
             cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
           ),
           h("p", { class: "section-intro" }, fitText),
-          h("p", { class: "section-intro" }, "By the district consultant's classroom capacities, every version needs more classroom space somewhere."),
+          h("p", { class: "section-intro" }, "Measured against the classroom capacities the district's consultant counted in 2025, which count only rooms now used as classrooms, every version puts more students than that in at least one school. The consultant did not study Path B."),
           table,
           middleNote(versions),
           under,
@@ -256,8 +265,10 @@ function middleNote(versions) {
   return note(
     "info",
     h("strong", {}, "Harwood Middle, in every Path B version. "),
-    `Moving Crossett Brook's 7th and 8th graders to Harwood would put about ${num(m.total)} students in grades 7-8 there, against the ${num(m.capacity)} the district's consultant counted for the rooms the middle school uses now. It shares a building with the high school, whose capacity the consultant left “TBD.” `,
-    cite(ref("truexCap", "Capacities"), "Consultant capacities")
+    `Moving Crossett Brook's 7th and 8th graders to Harwood would put about ${num(m.total)} students in grades 7-8 there, against the ${num(m.capacity)} the district's consultant counted for the rooms the middle school uses now. It shares a building with the high school, whose capacity the consultant left “TBD.” That building held 766 students in grades 7-12 in 2010-11; it has 608 this year, and would have about 738 with Crossett Brook's 7th and 8th graders. `,
+    cite(ref("truexCap", "Capacities"), "Consultant capacities"),
+    " ",
+    cite(ref("qdoc", "enrollment by school"), "Board Q&A")
   );
 }
 

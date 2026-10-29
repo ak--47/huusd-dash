@@ -1,5 +1,5 @@
 import { h, moneyShort, num, dateLong } from "../ui/dom.js";
-import { cite, cites, fold, pageHead, section, tag, term } from "../ui/kit.js";
+import { cite, cites, fold, pageHead, section, tag, term, unsure } from "../ui/kit.js";
 import { childForm } from "../ui/child-form.js";
 import { BUDGET, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { PREK_2026 } from "../../data/enrollment.js";
@@ -37,9 +37,9 @@ export default {
         kicker: "Independent guide · HUUSD FY28 budget decision",
         title: "The school board has agreed to keep working on Path B. It has not decided which two valley schools would close.",
         lede: [
-          "District leaders say next year's budget has to stay flat to keep HUUSD under Vermont's ",
+          `District leaders say next year's budget needs about ${moneyShort(BUDGET.requiredCut)} in savings to stay under Vermont's `,
           term("threshold", "excess spending threshold"),
-          `, a state limit on education spending per pupil. Spending above it is counted twice when the state sets tax rates, so going over raises local property taxes. Staying under means finding about ${moneyShort(BUDGET.requiredCut)} in savings. This site shows what Path B, Path A, and other combinations mean for the budget, for each school, and for how many schools your child would attend.`,
+          ", a state limit on education spending per pupil; going over raises local property taxes. Path A keeps all 7 buildings and cuts programs. Path B closes 2 of the 4 valley elementary schools and moves Crossett Brook's 7th and 8th graders to Harwood. On November 4 the board is set to decide which buildings to consider and whether to start the public hearings required to close a school.",
         ],
       }),
 
@@ -58,7 +58,7 @@ export default {
             "a board member asked to see a version of Path B that keeps valley 5th and 6th graders in temporary classrooms in the valley, alongside the version that sends them to Crossett Brook, and the administration said it would bring it. ",
             cite(ref("meeting1028", "board discussion"))
           ),
-          h("li", {}, h("strong", {}, "Next: "), "a public meeting on the buildings on November 2; board members' scores of the six pairings due November 3, shown publicly with names; and the board meeting on November 4, where the decision is which buildings to consider and whether to start the three public hearings required before closing a school. ", cite(ref("meeting1028", "homework timeline")), " ", cite(ref("aoa", "Article 6(E)"))),
+          h("li", {}, h("strong", {}, "Next: "), "a public meeting on the buildings on November 2; board members' scores of the six possible pairs of valley schools to keep open, due November 3, shown publicly with names; and the board meeting on November 4, where the decision is which buildings to consider and whether to start the three public hearings required before closing a school. ", cite(ref("meeting1028", "homework timeline")), " ", cite(ref("aoa", "Article 6(E)"))),
           h("li", {}, h("strong", {}, "Not decided: "), "which two schools, where grades 5 and 6 go, and the later phases of the district's draft roadmap, including a new valley building in 2029. ", cite(ref("oct14", "Draft Proposal for School Reconfiguration & Consolidation Roadmap"))),
           h("li", {}, h("strong", {}, "What we checked: "), "several items in the district's numbers that could change which options work, including the wastewater limits and the size of the cut. ", h("a", { href: "#/findings" }, "See them, and questions to ask the board"))
         ),
@@ -178,40 +178,54 @@ export default {
           { class: "beyond-grid" },
           OPTIONS.filter((o) => ["B-FW-K6", "B-MW-K6", "MS-only", "MS+close-FES"].includes(o.id)).map((o) => {
             const r = evaluate(o.plan);
-            const { gap, upperBound, oneTime } = r.budget;
+            const { savings, gap, upperBound, oneTime } = r.budget;
             const valleyMax = Math.max(r.maxYoung.moretown, r.maxYoung.waitsfield, r.maxYoung.fayston, r.maxYoung.warren);
-            const lessNote = "; the district says keeping grades 5-6 in the valley saves less than its figure, with “an impact in terms of a penalty”";
+            const wdMax = Math.max(r.maxYoung.waterbury, r.maxYoung.duxbury);
             return h(
               "article",
               { class: "wonk-card beyond-card" },
               h("h3", {}, o.id === "MS+close-FES" ? "Merge the middle schools and close one valley school (Fayston, as an example)" : o.name),
+              // the option's first sentence says which schools stay open, e.g. "Fayston and Warren stay open as K-6 schools."
+              h("p", { class: "small muted" }, `${o.what.split(". ")[0].replace(/\.$/, "")}.`),
               h(
                 "p",
                 { class: "beyond-facts" },
-                gap <= 0
-                  ? upperBound
-                    ? `At most ${moneyShort(-gap)} to spare against the target${lessNote}`
-                    : `Meets the target with ${moneyShort(-gap)} to spare`
-                  : `${moneyShort(gap)} short of the target${upperBound ? `, or more${lessNote}` : ""}`,
-                r.budget.hasEstimate ? [" ", tag("estimate")] : null,
-                upperBound ? [" ", fiveSixCite()] : null,
+                `Saves ${upperBound ? "up to " : ""}${moneyShort(savings)} a year `,
+                r.budget.hasEstimate ? tag("estimate") : null,
+                h("br"),
+                upperBound && gap <= 0
+                  ? [unsure("May fall short of the target"), ` (${moneyShort(-gap)} to spare only if the district's full figure holds)`]
+                  : gap <= 0
+                    ? `Meets the target with ${moneyShort(-gap)} to spare`
+                    : `${moneyShort(gap)}${upperBound ? " or more" : ""} short of the target`,
                 oneTime.portables
-                  ? [
-                      h("br"),
-                      `Plus about ${moneyShort(oneTime.portables.low)} to ${moneyShort(oneTime.portables.high)} for portable classrooms over about two years (the district's preliminary quote), not counted above`,
-                    ]
+                  ? [h("br"), `Plus about ${moneyShort(oneTime.portables.low)} to ${moneyShort(oneTime.portables.high)} for portable classrooms over about two years (the district's preliminary quote), not counted above`]
                   : null,
                 h("br"),
-                `Highest number of K-12 schools for a valley child now in Pre-K to grade 2: ${valleyMax} (today: 3)`
-              )
+                `Highest number of K-12 schools for a child now in Pre-K to grade 2: ${valleyMax} in the valley, ${wdMax} in Waterbury and Duxbury (today: 3)`
+              ),
+              // the wastewater condition each "grades 5-6 stay in the valley" variant depends on
+              o.group === "b-variant" ? h("p", { class: "small muted" }, o.notes[0]) : null
             );
           })
+        ),
+        h(
+          "p",
+          { class: "small muted" },
+          "“Up to,” “or more,” and “May fall short”: the district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would save less, with “an impact in terms of a penalty.” ",
+          fiveSixCite(),
+          " For closing one school we use half the district's figure for closing two; the board's question-and-answer document says closing one “does not look like it would save enough money to make it worthwhile.” ",
+          cite(ref("qdoc", "closing one school"))
         ),
         h("div", { class: "btn-row" }, h("a", { class: "wonk-btn", href: "#/options" }, "Compare all the options"), h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build" }, "Build your own"))
       ),
 
       section(
-        { id: "missing", title: "What we found when we checked the district's numbers" },
+        {
+          id: "missing",
+          title: "What we found when we checked the district's numbers",
+          intro: "Most of the district's arithmetic checks out, including the Path A cuts, the Path B savings, the October 1 enrollment report, and ten of the twelve capacity tables. These are the items that do not add up, or that are missing:",
+        },
         h(
           "ul",
           { class: "prose findings-teaser" },
@@ -253,8 +267,19 @@ export default {
             "li",
             {},
             h("strong", {}, "The Fayston + Warren tables do not add up, and bus times are missing. "),
-            "Both Fayston + Warren tables print a Brookside total of 513, which the slides use to rule the pairing out; the grade rows add to 439 students, under Brookside's occupancy of 480 if staff are not counted. Building occupancy usually counts staff, and with staff Brookside would still be over. Ride times, which the board asked for on October 14, were not presented. ",
-            cite(ref("deck", "slides 29 and 32"))
+            "Both Fayston + Warren tables print a Brookside total of 513, which the slides use to rule the pairing out; the grade rows add to 439 students, under Brookside's occupancy of 480 if staff are not counted. Building occupancy usually counts staff, and with staff Brookside would still be over. Ride times, which the board asked for on October 14, were not presented; an administrator said routes would be modeled with the bus contractor once the board narrows the options. ",
+            cite(ref("deck", "slides 29 and 32")),
+            " ",
+            cite(ref("meeting1028", "transportation"))
+          ),
+          h(
+            "li",
+            {},
+            h("strong", {}, "Path A's details are missing too. "),
+            "The deck does not say which bus routes would end. The superintendent said private Pre-K programs lack room for the children now in district Pre-K classes, and the finance director said Path A would mean more cuts each year as the threshold keeps stepping down. ",
+            cite(ref("deck", "slide 13")),
+            " ",
+            cite(ref("meeting1028", "Path A"))
           )
         ),
         h(

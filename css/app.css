@@ -167,6 +167,8 @@ a.wonk-btn { text-decoration: none; }
 .field-row { display: flex; flex-wrap: wrap; gap: var(--ak-s4); align-items: flex-start; margin-bottom: var(--ak-s4); }
 .field-row .wonk-field { min-width: min(100%, 12rem); flex: 1 1 12rem; }
 .wonk-select, .wonk-input { font-size: 1rem; }
+/* WebKit (Safari and every iPhone browser) lets a select's long option text spill past the control and widen the page */
+.wonk-select { overflow: hidden; text-overflow: ellipsis; }
 fieldset.group { border: 0; padding: 0; margin: 0; }
 fieldset.group > legend { font-weight: 700; font-size: var(--ak-text-md); color: var(--ak-ink); margin-bottom: var(--ak-s2); padding: 0; }
 .hint { font-size: var(--ak-text-sm); color: var(--ak-ink-3); margin: var(--ak-s1) 0 0; }

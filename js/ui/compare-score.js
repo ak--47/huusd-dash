@@ -125,9 +125,12 @@ function capacityBody(d) {
     rowHead(placeName(id), limitLine(d.res[4], id)),
     ...SETUPS.map((top) => {
       const s = schoolOf(d.res[top], id);
+      // the Fayston + Warren tables print totals that do not match their grade rows
+      const mm = d.res[top].capacity.mismatches.find((m) => m.school === id);
       return [
         h("span", { class: "cmp-num-inline" }, num(s.total)),
         " students",
+        mm ? sub(`The slide prints ${num(mm.printed)}; this is the sum of its grade rows `, tag("derived")) : null,
         staffText(s) ? sub(staffText(s)) : null,
         s.overPeople ? h("span", { class: "cmp-sub cmp-over" }, `✕ ${num(Math.round(s.counted - s.limit))} over the limit${s.countsStaff ? ", counting staff" : ""}`) : null,
         sub(`Classroom space for ${num(s.consultantCapacity)}, by the district's consultant`, s.overConsultant ? mark("short") : null),
@@ -358,7 +361,9 @@ function wastewaterBody(d) {
             "p",
             { class: "small" },
             h("strong", {}, "If Waitsfield's limit were 300. "),
-            "Its 1991 state permit says 300 students; the slides use 230 and call the school “amenable to 300,” and a 1996 letter in the state's file says 230. The district has not said whether using 300 would need any work or cost. ",
+            "Its 1991 state permit says 300 students; the slides use 230 and call the school “amenable to 300,” and a 1996 letter in the state's file says 230. The district has not said whether using 300 would need any work or cost. At the October 28 meeting the school's connection to the town's new wastewater system was described as more than a year out, probably fall 2028. ",
+            cite(ref("meeting1028", "Waitsfield wastewater")),
+            " ",
             cite(ref("deck", "slide 23")),
             " ",
             // short labels: this box is about Waitsfield, and inside its padding the full "Waitsfield permit 1991"

@@ -1,5 +1,5 @@
 import { h, moneyShort, num, store } from "../ui/dom.js";
-import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag } from "../ui/kit.js";
+import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag, unsure } from "../ui/kit.js";
 import { OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, evaluate } from "../model/index.js";
 import { ref } from "../../data/sources.js";
 import { MODULAR } from "../../data/budget.js";
@@ -139,15 +139,17 @@ export default {
               "li",
               {},
               h("strong", {}, "Against the target"),
-              ": what would still have to come from cuts on the Path A list, or be paid as an excess spending penalty of roughly the same amount each year. \"At most\" and \"or more\" mark plans whose savings are an upper limit."
+              ": what would still have to come from cuts on the Path A list, or be paid as an excess spending penalty of roughly the same amount each year. \"May fall short\" and \"or more\" mark plans whose savings are an upper limit."
             ),
             h("li", {}, h("strong", {}, "Grades 5-6"), ": whether valley 5th and 6th graders stay in a valley school or go to Crossett Brook Middle School in Duxbury."),
             h(
               "li",
               {},
               h("strong", {}, "Students fit"),
-              ": the wastewater limits, read the way you choose above, and Brookside's occupancy of 480. Classrooms are checked against the capacities the district's consultant, TruexCullins, calculated in March 2025, plus 40 students for each portable unit of two classrooms. For the middle schools: Crossett Brook 359, and Harwood Middle 166, which counts only the rooms the middle school uses now in the building it shares with the high school. ",
-              cite(ref("truexCap", "Capacities"))
+              ": the wastewater limits, read the way you choose above, and Brookside's occupancy of 480. Classrooms are checked against the capacities the district's consultant, TruexCullins, calculated in March 2025, plus 40 students for each portable unit of two classrooms. For the middle schools: Crossett Brook 359, and Harwood Middle 166, which counts only the rooms the middle school uses now in the building it shares with the high school. That building held 766 students in grades 7-12 in 2010-11; with the merger it would hold about 738. ",
+              cite(ref("truexCap", "Capacities")),
+              " ",
+              cite(ref("qdoc", "enrollment by school"), "Board Q&A")
             ),
             h(
               "li",
@@ -240,14 +242,14 @@ export default {
             "dl",
             { class: "opt-metrics" },
             metric("Saves a year", moneyShort(toCB.savings), muted(`the district's figure with grades 5-6 at Crossett Brook; an upper limit in the ${inValley} versions that keep them in the valley`)),
-            metric("Against the target", gapCell(toCB.gap), muted(toCB.gap <= 0 ? "at most that if grades 5-6 stay in the valley" : "more if grades 5-6 stay in the valley")),
+            metric("Against the target", gapCell(toCB.gap), muted(toCB.gap <= 0 ? `with grades 5-6 at Crossett Brook; the ${inValley} versions that keep them in the valley may fall short` : "more if grades 5-6 stay in the valley")),
             metric("Buildings in use", "5"),
             metric("Grades 5-6", `Crossett Brook in ${family.length - inValley} versions, valley in ${inValley}`),
             metric(
               "Students fit",
               `${fits} of ${family.length} versions pass the wastewater test${reading === "slides" && fitsPrinted !== fits ? ` once the Fayston + Warren totals are corrected (${fitsPrinted} as printed)` : ""}`,
               muted(
-                `${roomsOk} of ${family.length} within the consultant's elementary classroom capacity${humsOver === family.length ? `; Harwood Middle is over in all ${family.length}` : humsOver ? `; Harwood Middle is over in ${humsOver}` : ""}`
+                `${roomsOk} of ${family.length} within the consultant's elementary classroom capacity${humsOver === family.length ? `; Harwood Middle is over the consultant's count for its current rooms in all ${family.length}` : humsOver ? `; Harwood Middle is over in ${humsOver}` : ""}`
               ),
               { wide: true }
             ),
@@ -268,7 +270,7 @@ export default {
         h(
           "dl",
           { class: "opt-metrics" },
-          metric("Saves a year", moneyShort(s.savings), s.estimate ? [" ", tag("estimate")] : null),
+          metric("Saves a year", `${s.upperBound ? "Up to " : ""}${moneyShort(s.savings)}`, s.estimate ? [" ", tag("estimate")] : null),
           metric("Against the target", gapCell(s.gap, s.upperBound)),
           metric("Buildings in use", String(s.buildings)),
           metric("Grades 5-6", s.r.plan.valleyTop === 6 ? "Stay in the valley" : "Go to Crossett Brook"),
@@ -287,7 +289,7 @@ export default {
     function gapCell(gap, upperBound = false) {
       if (upperBound) {
         return gap <= 0
-          ? h("span", {}, `At most ${moneyShort(-gap)} to spare`, muted("the district says keeping grades 5-6 in the valley saves less"))
+          ? h("span", {}, unsure("May fall short"), muted(`${moneyShort(-gap)} to spare only if the district's full figure holds; the district says keeping grades 5-6 in the valley saves less`))
           : h("span", {}, `${moneyShort(gap)} short, or more`, muted("from cuts or a penalty"));
       }
       if (gap === 0) return h("span", { class: "status status--ok" }, "✓ Meets it exactly");
@@ -319,10 +321,12 @@ export default {
       return h(
         "p",
         { class: "opt-note" },
-        `Portable classrooms: ${p.units} units of two classrooms, about ${moneyShort(p.low)} to ${moneyShort(p.high)} at the district's preliminary quote, which covers two years. Not counted in the yearly savings. `,
+        `Portable classrooms: ${p.units} units of two classrooms, about ${moneyShort(p.low)} to ${moneyShort(p.high)}, scaled from the district's best preliminary quote, which was for one unit at each of two schools over two years; other quotes ran higher. Not counted in the yearly savings. The district says all four valley sites have limited land and infrastructure for portables, and it has not said whether this many units would fit. `,
         tag("estimate"),
         " ",
-        cite(MODULAR.src)
+        cite(MODULAR.src),
+        " ",
+        cite(ref("meeting1028", "portable classrooms"))
       );
     }
 

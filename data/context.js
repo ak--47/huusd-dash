@@ -45,8 +45,9 @@ export const IDEAS = [
   {
     title: "Spend over the threshold and pay a smaller penalty",
     text: "Make some cuts but not all. The amount left over the limit is paid as an excess spending penalty on local tax rates.",
-    record: "The district priced one version: a budget that grows with inflation (+2.7%) would be $172 per pupil over the limit, with a penalty of about $445,000.",
+    record: "The district priced one version, a budget that grows with inflation (+2.7%). Its card shows $172 per pupil over the limit and a penalty of about $445,000. By the per-pupil rule the district's level-funded and Path B cards follow, which this site uses for every plan, the same budget would be about $520 per pupil over, with a penalty of about $1.3 million; at the October 28 meeting the finance director said it would need a cut of \"almost $1.3 million\" to get under the limit. The presentation does not explain the difference.",
     ref: ref("deck", "slide 10"),
+    ref2: ref("meeting1028", "finance director"),
   },
   {
     title: "Change attendance boundaries",

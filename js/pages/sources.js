@@ -61,7 +61,7 @@ export default {
         methodItem("Which school a child attends", [
           "Plans take effect in fall 2027 (FY28) and stay in place through grade 12. Where the draft roadmap is shown, valley students move into one new building in fall 2029. At the October 28 meeting its author said she would keep 5th and 6th graders at Crossett Brook, though in her example a Waitsfield 2nd grader moves to the new building after grade 4. We default to Pre-K to 4, which matches the roadmap's Phase 3; Pre-K to 5 (its Phase 2 text) and Pre-K to 6 (the feasibility study) are options.",
           "A child stays at this year's school while it is open and still teaches their grade. This covers families using intradistrict choice.",
-          "When a town's school closes, its children go to the nearest open school, the rule the district used in its capacity tables. Our town-by-town order reproduces where every district table sends each town. Families can pick a different receiving school on the Your child's path page, since the district places students by home address.",
+          "When a town's school closes, its children go to the nearest open school, the rule the district used in its capacity tables. Our town-by-town order reproduces where every district table sends each town. Families can pick a different receiving school on the Your child's path page, since the district's tables place students by home address; the board has not decided how it would assign them.",
           "Under the Pre-K to 4 setup, valley 5th and 6th graders attend Crossett Brook. Under the middle school merger, Crossett Brook keeps grades 5 and 6, and all 7th and 8th graders attend Harwood Union Middle School.",
         ]),
         methodItem("Number of schools", [

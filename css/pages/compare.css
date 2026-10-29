@@ -360,6 +360,16 @@
   .cmp-chip {
     flex: none;
   }
+  /* more measures sit off to the right: fade the edge so the row reads as one that scrolls sideways */
+  .cmp-show::after {
+    content: "";
+    flex: 0 0 2.5rem;
+    align-self: stretch;
+    position: sticky;
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--ak-ground) 85%);
+    pointer-events: none;
+  }
   /* what keyboard focus scrolls to stops below the sticky buttons, not under them */
   .cmp-tools :is(a, button, select),
   .cmp-scroll :is(a, button, [tabindex]) {

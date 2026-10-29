@@ -437,7 +437,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   // the district's draft roadmap: one new valley building in fall 2029
   const roadmapBox = h("input", { type: "checkbox", id: "bp-roadmap", "aria-describedby": "bp-roadmap-d" });
-  const roadmapTop = h("select", { class: "wonk-select", id: "bp-roadmap-top" }, [4, 5, 6].map((n) => h("option", { value: n }, `Pre-K to ${n}${n === 4 ? " (Phase 3; author's stated preference)" : n === 5 ? " (Phase 2 text)" : " (feasibility study)"}`)));
+  const roadmapTop = h("select", { class: "wonk-select", id: "bp-roadmap-top" }, [4, 5, 6].map((n) => h("option", { value: n }, `Pre-K to ${n}${n === 4 ? " (author's preference)" : n === 5 ? " (the draft's Phase 2)" : " (feasibility study)"}`)));
   roadmapBox.addEventListener("change", () => onPlan((p) => ({ ...p, roadmap: roadmapBox.checked ? { fall: 2029, top: Number(roadmapTop.value) } : null })));
   roadmapTop.addEventListener("change", () => onPlan((p) => ({ ...p, roadmap: p.roadmap ? { ...p.roadmap, top: Number(roadmapTop.value) } : null })));
 

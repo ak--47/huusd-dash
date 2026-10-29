@@ -6,7 +6,7 @@ import { ATTENDING, DISTRICT_TREND } from "../../data/enrollment.js";
 import { ref } from "../../data/sources.js";
 import { LAW } from "../../data/law.js";
 import { loadCharts, quietPlotAria } from "../ui/charts.js";
-import { PLAN_TODAY, PUPILS, budget as budgetFor } from "../model/index.js";
+import { PLAN_TODAY, PUPILS, budget as budgetFor, perPupil } from "../model/index.js";
 
 export default {
   title: "The budget",
@@ -14,6 +14,9 @@ export default {
     const ls = BUDGET.scenarios.find((s) => s.id === "level-service");
     const lf = BUDGET.scenarios.find((s) => s.id === "level-funded");
     const corrected = budgetFor(PLAN_TODAY);
+    // the projected-inflation budget by the per-pupil rule the other cards follow
+    const inf = BUDGET.scenarios.find((s) => s.id === "inflation");
+    const infOver = perPupil(ls.budget - inf.budget) - BUDGET.threshold;
     const charts = [];
     // For the district's case for consolidation: small valley grades this year, and the long-run enrollment trend.
     const valleyGrades = VALLEY.flatMap((id) => Object.values(ATTENDING[2026][id]));
@@ -99,7 +102,14 @@ export default {
             `The level-funded card says its per-pupil figure "was corrected to remove the debt exclusion," moving it from $220.67 under the limit to $25.67 under. The level-service card's $1,081 over matches the old basis: $1,081 + $220.67 = ${money(1081 + 220.67, 2)}, which matches the ${money(BUDGET.requiredCut)} cut spread over about ${num(PUPILS)} pupils (about ${money(BUDGET.requiredCut / PUPILS)}). On the corrected basis, level service would be about ${money(corrected.vsThreshold)} over the limit per pupil, and the penalty about ${moneyShort(corrected.penalty)} instead of ${moneyShort(ls.penalty)}. `,
             tag("derived")
           ),
-          h("p", {}, `The projected-inflation card ($172 over, ${money(445340)} penalty) does not follow the same per-pupil rule as the other three cards. It may use different assumptions; the presentation does not say. Neither point changes the size of the cut the district is asking for, ${money(BUDGET.requiredCut)}.`),
+          h(
+            "p",
+            {},
+            `The projected-inflation card ($172 over, ${money(445340)} penalty) does not follow the same per-pupil rule as the other three cards. By the rule the level-funded and Path B cards follow (the corrected basis), it would be about ${money(infOver)} per pupil over the limit, with a penalty of about ${moneyShort(infOver * PUPILS)}; at the October 28 meeting the finance director said this budget would need a cut of "almost $1.3 million" to get under the limit. The presentation does not explain the difference. Neither point changes the size of the cut the district is asking for, ${money(BUDGET.requiredCut)}. `,
+            tag("derived"),
+            " ",
+            cite(ref("meeting1028", "finance director"))
+          ),
           h("p", {}, h("a", { href: "#/findings?at=finding-debt-basis" }, "More on what we checked"))
         )
       ),
@@ -172,6 +182,12 @@ export default {
           statCard("Merge the middle schools", moneyShort(PATH_B_SAVINGS.middle.amount), `${num(PATH_B_SAVINGS.middle.fte, 1)} fewer staff positions`, "district", PATH_B_SAVINGS.middle.src),
           statCard("Total", moneyShort(PATH_B_SAVINGS.total), `${moneyShort(PATH_B_SAVINGS.total - BUDGET.requiredCut)} more than needed`, "district", ref("deck", "slide 19"))
         ),
+        h(
+          "p",
+          { class: "small" },
+          "These figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would save less and could mean a penalty; the district has not costed that version. ",
+          cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
+        ),
         fold(
           "What the district says consolidation would do",
           h(
@@ -200,6 +216,12 @@ export default {
               cite(ref("deck", "slide 18"))
             ),
             h("li", {}, "Dedicated music spaces instead of shared multi-purpose rooms, and \"consistent weekly music, band, and choral scheduling.\" ", cite(ref("deck", "slide 40"))),
+            h(
+              "li",
+              {},
+              "Valley 5th and 6th graders at Crossett Brook: the move \"consolidates middle-grade peers into dedicated learning environments with better access to specialized instruction\" and avoids temporary classrooms, which the district calls \"substantial unbudgeted capital outlay\" and says the valley sites have limited land for. ",
+              cite(ref("deck", "slide 26"))
+            ),
             h("li", {}, `Falling enrollment: ${num(trend("2009-10"))} students in 2009-10, ${num(trend("2026-27"))} this year, and ${num(trend("2031-32"))} projected for 2031-32. `, cite(DISTRICT_TREND.src))
           )
         ),

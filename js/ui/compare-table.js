@@ -7,7 +7,7 @@
 
 import { ref } from "../../data/sources.js";
 import { h, listJoin, moneyShort, num } from "./dom.js";
-import { cite, schoolShort, status, tag } from "./kit.js";
+import { cite, schoolShort, status, tag, unsure } from "./kit.js";
 import {
   BUILD_TEXT,
   CHILD_TEXT,
@@ -61,7 +61,12 @@ export function savingsCell(v) {
   const b = v.r.budget;
   const vs = b.gap > 0 ? `${moneyShort(b.gap)} short of target` : b.gap < 0 ? `${moneyShort(-b.gap)} above target` : "Meets the target";
   // keeping grades 5-6 in the valley: the district said these versions save less than its figure
-  if (b.upperBound) return [numLine(`Up to ${moneyShort(b.savings)}`), sub(`At most ${vs}`), sub("The district said it saves less and could mean a penalty")];
+  if (b.upperBound)
+    return [
+      numLine(`Up to ${moneyShort(b.savings)}`),
+      b.gap <= 0 ? sub(unsure("May fall short"), ` (${moneyShort(-b.gap)} above target only if the district's figure holds)`) : sub(`${vs}, or more`),
+      sub("The district said it saves less and could mean a penalty"),
+    ];
   return [numLine(moneyShort(b.savings)), sub(vs)];
 }
 

@@ -137,6 +137,11 @@ export default {
       const list = h("div", { class: "plan-rows" });
       for (const r of results) {
         const recvOpts = r.isB ? receivingOptions(r.plan, kid.town) : [];
+        // only where the choice changes this child's path: not for a child past the valley grades by fall 2027,
+        // or one who stays at an open school they attend by choice
+        const recvMatters =
+          recvOpts.length > 1 &&
+          new Set(recvOpts.map((sid) => compareJourney(makePlan({ ...r.plan, receiving: { ...r.plan.receiving, [kid.town]: sid } }), kid, opts).years.map((y) => y.school).join())).size > 1;
         list.append(
           h(
             "div",
@@ -148,7 +153,7 @@ export default {
               strip(r.cmp.years, { base: r.plan === PLAN_TODAY ? null : results[0].cmp.years, showPreK, label: r.label ?? `${r.title} for this child` }),
               showPreK && !state.pk ? h("p", { class: "small muted" }, "Pre-K is shown but not counted.") : null,
               countLine(r.cmp.counts, r.plan === PLAN_TODAY ? null : r.cmp.extraSchools),
-              recvOpts.length > 1 ? receivingPicker(kid, i, r.plan, recvOpts) : null
+              recvMatters ? receivingPicker(kid, i, r.plan, recvOpts) : null
             )
           )
         );
@@ -249,7 +254,7 @@ export default {
         { class: "wonk-field recv" },
         h("label", { class: "wonk-label", for: id }, `If ${schoolShort(townSchool(kid.town))} closes, my child would go to`),
         sel,
-        h("span", { class: "wonk-help" }, "The district places students at the school closest to home, so families in the same town can land in different schools. Parents can also ask for another school.")
+        h("span", { class: "wonk-help" }, "The district's capacity tables send each child to the nearest open school by home address, so families in the same town could land in different schools. The board has not decided how students would be placed; today the district assigns by town, and parents can ask for another school.")
       );
     }
 
@@ -308,20 +313,22 @@ export default {
     // ---- everyone: town by grade ----
     const gridPlanSel = h("select", { class: "wonk-select", id: "grid-plan" });
     const gridPlans = [
-      ["A", "Path A", PLAN_A],
-      ...PAIRS.flatMap((pair) => [4, 6].map((top) => [`B:${pairId(pair)}:${top}`, `Path B: ${pairLabel(pair)}, ${top === 4 ? "grades 5-6 at Crossett Brook" : "grades 5-6 in the valley"}`, pathB(pair, top)])),
+      ["A", "Path A", () => PLAN_A],
+      ...PAIRS.flatMap((pair) => [4, 6].map((top) => [`B:${pairId(pair)}:${top}`, `Path B: ${pairLabel(pair)}, ${top === 4 ? "grades 5-6 at Crossett Brook" : "grades 5-6 in the valley"}`, () => pathB(pair, top)])),
     ];
-    gridPlans.push(...PAIRS.flatMap((pair) => [4, 6].map((top) => [`R:${pairId(pair)}:${top}`, `Path B: ${pairLabel(pair)}, ${top === 4 ? "grades 5-6 at Crossett Brook" : "grades 5-6 in the valley"}, then the draft roadmap`, withRoadmap(pathB(pair, top), state.rtop)])));
-    if (custom) gridPlans.push(["custom", "Your plan", custom]);
+    gridPlans.push(...PAIRS.flatMap((pair) => [4, 6].map((top) => [`R:${pairId(pair)}:${top}`, `Path B: ${pairLabel(pair)}, ${top === 4 ? "grades 5-6 at Crossett Brook" : "grades 5-6 in the valley"}, then the draft roadmap`, () => withRoadmap(pathB(pair, top), state.rtop)])));
+    if (custom) gridPlans.push(["custom", "Your plan", () => custom]);
     gridPlanSel.append(...gridPlans.map(([v, label]) => h("option", { value: v }, label)));
     gridPlanSel.value = `B:${pairId(state.pair)}:${state.top}`;
     gridPlanSel.addEventListener("change", drawGrid);
 
     function drawGrid() {
       const entry = gridPlans.find(([v]) => v === gridPlanSel.value) ?? gridPlans[1];
-      const r = evaluate(entry[2]);
+      // built now, so the roadmap rows follow the "Draft roadmap's new valley school teaches" setting
+      const plan = entry[2]();
+      const r = evaluate(plan);
       gridHost.replaceChildren(
-        heatGrid(entry[2], { includePreK: false }),
+        heatGrid(plan, { includePreK: false }),
         h(
           "p",
           { class: "small" },
@@ -343,7 +350,7 @@ export default {
     const roadmapSel = h(
       "select",
       { class: "wonk-select", id: "roadmap-top" },
-      [4, 5, 6].map((n) => h("option", { value: n, selected: n === state.rtop }, `Pre-K to ${n}${n === 4 ? " (Phase 3; author's stated preference)" : n === 5 ? " (Phase 2 text)" : " (feasibility study)"}`))
+      [4, 5, 6].map((n) => h("option", { value: n, selected: n === state.rtop }, `Pre-K to ${n}${n === 4 ? " (author's preference)" : n === 5 ? " (the draft's Phase 2)" : " (feasibility study)"}`))
     );
     roadmapSel.addEventListener("change", () => {
       state.rtop = Number(roadmapSel.value);
@@ -380,7 +387,11 @@ export default {
       pageHead({
         kicker: "Schools per child: a measure the slides do not include",
         title: "How many schools would your child attend?",
-        lede: "Every plan changes where some children go to school. Below is an example child; select Change to describe your own. You'll see every school they would attend from kindergarten through grade 12, year by year, under each path.",
+        // the default example child, unless the reader came with their own (from Start here, a link, or an earlier visit)
+        lede:
+          state.kids.map(encodeChild).join("~") === "waitsfield.0.WES"
+            ? "Every plan changes where some children go to school. Below is an example child; select Change to describe your own. You'll see every school they would attend from kindergarten through grade 12, year by year, under each path."
+            : "Every plan changes where some children go to school. Below is every school your child would attend from kindergarten through grade 12, year by year, under each path. Select Change to edit, or add another child.",
       }),
       h(
         "div",
@@ -407,8 +418,9 @@ export default {
             "ul",
             {},
             h("li", {}, "Studies in New York City, Florida, and British Columbia find that students who move into a separate middle school score lower in the year they move, and the drop lasts for years. They also miss more school."),
-            h("li", {}, "Other studies find smaller differences once student and school differences are accounted for. Studies of school closures mostly find small, short-lived effects, though some find short-term harm, especially for students from small schools."),
-            h("li", {}, "At the October 28 meeting, speakers noted that children make these moves with their classmates, and that every child in the district already changes schools at least twice. ", cite(ref("meeting1028", "board discussion")))
+            h("li", {}, "Other studies find smaller differences once student and school differences are accounted for, and one finds 6th graders have fewer discipline problems when kept apart from older students, as Crossett Brook's 5th and 6th graders would be under Path B. Studies of school closures mostly find small, short-lived effects, though some find short-term harm, especially for students from small schools."),
+            h("li", {}, "At the October 28 meeting, speakers noted that children make these moves with their classmates, and that every child in the district already changes schools at least twice. ", cite(ref("meeting1028", "board discussion"))),
+            h("li", {}, "The district's case for Path B rests on other benefits: larger groups of classmates, full-time staff on site, and more middle-school offerings. ", h("a", { href: "#/budget?at=path-b" }, "What the district says consolidation would do"), ".")
           ),
           h("p", {}, h("a", { href: "#/findings?at=research" }, "Read the research summary"), " on the What we checked page.")
         )
