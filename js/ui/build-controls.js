@@ -6,7 +6,7 @@ import { PAIRS } from "../../data/district-scenarios.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { CLASS_SIZE_DEFAULT, TARGET, TARGET_WITH_EXCLUSION, encodePlan, makePlan, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
+import { CLASS_SIZE_DEFAULT, OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, makePlan, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
 import { h, listJoin, money, num } from "./dom.js";
 import { cite, note, schoolShort, term } from "./kit.js";
 
@@ -35,13 +35,24 @@ export const HYBRID_CUTS = ["special", "prek", "athletics"];
 export const onePlan = (closed) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: 6, msMerge: true });
 export const hybridPlan = () => makePlan({ open: VALLEY, valleyTop: 6, msMerge: true, cuts: HYBRID_CUTS });
 
-// Which starting point a plan is, if any: "today", "A", "B", "one", "hybrid", or null.
+// The resident's plan on the Options page: Fayston closes, Moretown becomes the district's Pre-K center.
+export const centerPlan = () => OPTIONS.find((o) => o.id === "B-center").plan;
+
+// Which starting point a plan is, if any: "today", "A", "B", "one", "hybrid", "center", or null.
 export function presetOf(plan) {
   const kind = presetKind(matchNamed(plan));
   if (kind) return kind;
   const same = (a) => encodePlan(a) === encodePlan({ ...plan, receiving: {} });
   if (plan.open.length === 3 && same(onePlan(VALLEY.find((id) => !plan.open.includes(id))))) return "one";
-  return same(hybridPlan()) ? "hybrid" : null;
+  if (same(hybridPlan())) return "hybrid";
+  return same(centerPlan()) ? "center" : null;
+}
+
+// The Options-page combination a plan matches, if any (a link from an Options card lands here).
+export function optionOf(plan) {
+  const code = encodePlan({ ...plan, receiving: {} });
+  const o = OPTIONS.find((x) => x.plan && encodePlan(x.plan) === code);
+  return o ? { ...o, name: o.closed ? `${o.name}: ${SCHOOLS[o.closed].short} closes` : o.name } : null;
 }
 
 // A named plan in words: "No change", "Path A", "Path B with Moretown + Warren open, grades 5 and 6 at Crossett Brook".
@@ -161,6 +172,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ["B", "Path B"],
     ["one", "Close one school"],
     ["hybrid", "Merger + smaller cuts"],
+    ["center", "Pre-K center plan"],
   ].map(([kind, label]) => h("button", { type: "button", class: "wonk-btn bp-preset", "aria-pressed": "false", "data-kind": kind }, label));
 
   // Each starts on an empty choice unless exactly two valley schools are open, so the box never disagrees
@@ -213,7 +225,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const g1 = group(
     1,
     "Start from",
-    "Load no change, one of the district's plans, or one of two other starting points, then change anything below.",
+    "Load no change, one of the district's plans, or one of three other starting points, then change anything below.",
     h("div", { class: "bp-presets" }, presetBtns),
     h(
       "div",
@@ -239,6 +251,12 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       { class: "bp-bversion-hint" },
       h("strong", {}, "Merger + smaller cuts: "),
       "every valley school stays open; the middle schools merge; and three of Path A's smaller cuts (special programming, the Pre-K tuition model, and 70% of athletics and activities) fill the rest. It meets the target on paper only if the merger saves nearly the district's full figure with grades 5-6 in the valley."
+    ),
+    h(
+      "p",
+      { class: "bp-bversion-hint" },
+      h("strong", {}, "Pre-K center plan: "),
+      "a resident's suggestion. Fayston closes; Moretown's building becomes the district's Pre-K center; Waitsfield and Warren stay K-6, taking Fayston's and two thirds of Moretown's children, with a third of Moretown's going to Brookside; the middle schools merge."
     ),
     matched,
     undoRow
@@ -703,7 +721,9 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
                 ? h("span", {}, "Path B's middle-school move with ", h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`), " instead of two schools. Not costed by the district.")
                 : preset === "hybrid"
                   ? h("span", {}, "The middle-school move with ", h("strong", {}, "every valley school open"), " and three of Path A's smaller cuts. Not one of the district's plans.")
-                  : h("span", {}, "Your own combination. It does not match one of the district's plans.")
+                  : optionOf(plan)
+                    ? h("span", {}, "Your plan matches ", h("strong", {}, optionOf(plan).name), ", from Options beyond A and B. Not one of the district's plans.")
+                    : h("span", {}, "Your own combination. It does not match one of the district's plans.")
     );
     undoRow.hidden = !state.undo;
     if (state.undo) {

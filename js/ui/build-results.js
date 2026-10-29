@@ -9,7 +9,7 @@ import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budge
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
 import { cite, note, schoolName, schoolShort, status, tag, term, unsure } from "./kit.js";
 import { heatGrid } from "./heat.js";
-import { namedLabel, pairLabel, relation, topWords, townName } from "./build-controls.js";
+import { namedLabel, optionOf, pairLabel, relation, topWords, townName } from "./build-controls.js";
 
 const pc = (x) => `${Math.max(0, Math.min(100, x * 100)).toFixed(2)}%`;
 const fte = (n) => (Number.isInteger(n) ? num(n) : num(n, 1));
@@ -155,7 +155,9 @@ export function resultsPanel({ onShowBasis } = {}) {
             ? h("span", {}, h("strong", {}, namedLabel(rel.base)), `, plus ${listJoin(rel.extras)}.`)
             : rel.nearB
               ? h("span", {}, "One step from ", h("strong", {}, namedLabel(rel.nearB)), ": add the middle-school move in step 4.")
-              : "Your own combination of choices."
+              : optionOf(plan)
+                ? h("span", {}, "Matches ", h("strong", {}, optionOf(plan).name), ", from Options beyond A and B.")
+                : "Your own combination of choices."
     );
     const saveText = b.upperBound ? `Up to ${moneyShort(b.savings)}` : moneyShort(b.savings);
     strip.replaceChildren(
