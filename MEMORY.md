@@ -54,6 +54,7 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 
 ## Open items
 
+- Before sharing widely (owner's call): the Pre-K center card says "suggested by a resident"; it came from the owner's household, and the plan keeps Waitsfield open and fills it, so consider "suggested by the author's family" for transparency. Consider a corrections channel residents will use (a form or a dedicated address, not the work email); GitHub issues is a barrier for most.
 - Owner decision: the `ak--47.github.io` host reads like "AK-47" in link previews. Moving to a GitHub organization or a custom domain means updating `og:url`, `og:image`, README links, and the GitHub links on the site.
 - Owner decision: whether to say the AI-assisted fact-check was "reviewed by the author" (only if true).
 - Ask the district: what the middle-school merger saves with only Crossett Brook's own 5th and 6th graders (decides whether the least-disruption plan works); what closing one valley school saves; bus routes and ride times by pairing.
