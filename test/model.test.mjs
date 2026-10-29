@@ -262,3 +262,36 @@ test("savings: keeping grades 5-6 in the valley makes the middle-school figure a
   }
   assert.equal(M.budget(M.PLAN_A).upperBound, false);
 });
+
+test("valley schools through grade 5: 6th graders go to Crossett Brook", () => {
+  const plan = M.makePlan({ open: ["MES", "WES", "WRN"], valleyTop: 5, msMerge: true });
+  assert.equal(plan.valleyTop, 5);
+  assert.equal(M.decodePlan(M.encodePlan(plan)).valleyTop, 5, "share links keep grade 5");
+  assert.equal(M.makePlan({ valleyTop: 9 }).valleyTop, 6, "anything else falls back to 6");
+  assert.equal(M.defaultSchool(plan, "moretown", 5), "MES");
+  assert.equal(M.defaultSchool(plan, "moretown", 6), "CBMS");
+  // no district table for this setup, so the counts are the model's own
+  assert.equal(M.capacity(M.makePlan({ open: ["MES", "WRN"], valleyTop: 5, msMerge: true })).source, "model");
+  // the district's savings assume every valley 5th and 6th grader moves, so this is an upper limit too
+  assert.equal(M.budget(plan).upperBound, true);
+  const cb = M.capacity(plan).middle.find((m) => m.id === "CBMS");
+  assert.ok(cb.total > 131 && cb.total < 256, `Crossett Brook holds its own 5th-6th graders plus valley 6th graders (${cb.total})`);
+});
+
+test("closing one school: savings are half the two-school figure, as an estimate", () => {
+  const one = M.budget(M.makePlan({ open: ["MES", "WES", "WRN"], msMerge: true }));
+  const valley = one.items.find((i) => i.id === "valley");
+  assert.equal(valley.amount, Math.round(PATH_B_SAVINGS.valley.amount / 2));
+  assert.equal(valley.kind, "estimate");
+});
+
+test("merger with three smaller cuts: meets the target on paper with no closure, as an upper limit", () => {
+  const o = M.OPTIONS.find((x) => x.id === "MS+cuts");
+  const b = M.budget(o.plan);
+  assert.equal(b.savings, 3516215);
+  assert.equal(b.gap, -176942);
+  assert.equal(b.upperBound, true, "the merger figure assumes valley 5th and 6th graders fill Crossett Brook");
+  // break-even for the merger alone
+  assert.equal(M.TARGET - (583516 + 517000 + 312757), 1926000);
+  assert.equal(M.evaluate(o.plan).moved.k12, 130);
+});

@@ -1,0 +1,961 @@
+
+==================== SLIDE 1 (slide1.xml) imgs=['image31.png']
+  [TEXT] Aligning Facilities, Enrollment, & Educational Opportunities
+         Dr. Mike Leichliter, Superintendent of Schools
+         Lisa Estler, Chief Financial Officer 
+
+==================== SLIDE 2 (slide2.xml) imgs=['image12.png', 'image17.png', 'image4.png', 'image14.png', 'image15.png', 'image16.png', 'image3.png']
+  [TEXT] PRESENTATION ROADMAP
+  [TEXT] Today's Agenda
+  [TEXT] Key topics for evaluating HUUSD's structural future and financial sustainability.
+  [TEXT] 01
+  [TEXT] 02
+  [TEXT] 03
+  [TEXT] 04
+  [TEXT] HUUSD Board Meeting
+  [TEXT] The Challenge & Demographic Reality
+  [TEXT] Birth rate trends and long-term enrollment projections across towns.
+  [TEXT] The Cost of Status Quo / Budget Cap: Not Exceeding Excess Spending Threshold 
+  [TEXT] Excess spending penalties and required $3.3M program reductions.
+  [TEXT] Proactive Consolidation Models
+  [TEXT] Evaluating Valley Elementary (4 to 2) and Middle School (2 to 1) mergers.
+  [TEXT] Roadmap & Transition Timeline
+  [TEXT] Implementation milestones, board decision points, and community engagement.
+
+==================== SLIDE 3 (slide3.xml) imgs=['image10.png']
+  [TEXT] Vermont is growing, but our student pipeline is shrinking.
+  [TEXT] 2009
+  [TEXT] Vermont Population Growth (2009–2025).
+         The state is gaining residents, creating the illusion of future school growth.
+  [TEXT] +3.2%
+  [TEXT] Vermont Live Births (2009–2024).
+         We are gaining adults, but experiencing a severe, sustained collapse in infant populations.
+  [TEXT] -17.8%
+
+==================== SLIDE 4 (slide4.xml) imgs=['image18.png', 'image2.png', 'image22.png']
+  [TEXT] Without structural intervention, the contraction will accelerate.
+  [TEXT] 2,000
+  [TEXT] 1,900
+  [TEXT] 1,800
+  [TEXT] 1,700
+  [TEXT] 1,600
+  [TEXT] 1,500
+  [TEXT] 1,940
+  [TEXT] 1,567
+  [TEXT] 1,451
+  [TEXT] 2009-10
+  [TEXT] 2010-11
+  [TEXT] 2011-12
+  [TEXT] 2012-13
+  [TEXT] 2013-14
+  [TEXT] 2014-15
+  [TEXT] 2015-16
+  [TEXT] 2016-17
+  [TEXT] 2017-18
+  [TEXT] 2018-19
+  [TEXT] 2019-20
+  [TEXT] 2020-21
+  [TEXT] 2021-22
+  [TEXT] 2022-23
+  [TEXT] 2023-24
+  [TEXT] 2024-25
+  [TEXT] 2025-26
+  [TEXT] 2026-27
+  [TEXT] 2027-28
+  [TEXT] 2028-29
+  [TEXT] 2029-30
+  [TEXT] 2030-31
+  [TEXT] 2031-32
+  [TEXT] -140 additionalstudents
+         (Projected decline from 2025 to 2032).
+  [TEXT] -489
+         total students lost
+         A 25.2% total district contraction from 2009 to 2032.
+  [TEXT] Because the incoming cohorts are already born, the enrollment pipeline is projected to decline
+
+==================== SLIDE 5 (slide5.xml) imgs=[]
+  [TEXT] DEMOGRAPHIC ANALYSIS & PLANNING
+         The Demographic Reality of HUUSD
+         Understanding the structural shifts driving enrollment decline and the need for strategic consolidation
+  [TEXT] STRUCTURAL SHIFTS
+         Enrollment Decline
+         Long-term demographic trends and birth rate shifts are directly reducing student cohorts across district campuses.
+         Shrinking incoming grade levels
+         Graduating classes outstripping entry numbers
+         Underutilized facility capacities
+  [TEXT] STRATEGIC IMPERATIVE
+         Strategic Consolidation
+         A mathematical necessity to realign operational footprints, ensure fiscal responsibility, and protect educational quality.
+         Optimizing district resource allocation
+         Avoiding unsustainable budget cuts
+         Sustaining rich academic programming
+
+==================== SLIDE 6 (slide6.xml) imgs=['image18.png', 'image8.png', 'image25.png', 'image13.png']
+  [TEXT] Structural Shifts Require Structural Solutions
+  [TEXT] “Student Pipeline”
+         -17.8%
+  [TEXT] Structural Deficit
+         (Graduates > Incoming Students)
+  [TEXT] Projected Enrollment
+         -25% Decline
+  [TEXT] STATE PRESSURE
+         Legislature pressure to realign district operating scale closer to state formula funding model
+  [TEXT] warningKEY TAKEAWAY
+         Sustaining educational quality requires thoughtful alignment of our facilities with enrollment trends and the financial framework established by state policy.
+
+==================== SLIDE 7 (slide7.xml) imgs=['image30.png']
+  [TEXT] Converging Challenges & Sustaining Strong Student Programs
+  [TEXT] Spending above the threshold triggers an additional property tax penalty for our communities.
+  [TEXT] Act 169 of 2026
+  [TEXT] Excess Spending
+         Threshold
+  [TEXT] FY27
+  [TEXT] 118%
+  [TEXT] FY28
+  [TEXT] 115.5%
+  [TEXT] FY29
+  [TEXT] 114.5%
+  [TEXT] FY30
+  [TEXT] 113.5%
+  [TEXT] FY31
+  [TEXT] 113%
+  [TEXT] FY32+
+  [TEXT] 112.5%
+  [TEXT] Percent of the excess spending base
+  [TEXT] FY25 statewide per-pupil spending,
+         adjusted for inflation
+  [TEXT] FY30 onward: schedule applies if the foundation formula does not replace the excess spending threshold.
+  [NOTES] Source: Vermont Act 169 of 2026, sections 6–7 and 15. https://legislature.vermont.gov/Documents/2026/Docs/ACTS/ACT169/ACT169%20As%20Enacted.pdf
+          Section 7 sets FY28 at 115.5%, FY29 at 114.5%, FY30 at 113.5%, FY31 at 113%, FY32 at 112.5%. Section 6 establishes the inflation-adjusted FY25 spending base and ongoing 112.5% threshold. FY26 and FY27 remain at 118%. Agency of Education corroboration and foundation formula contingency: https://education.vermont.gov/schools/school-governance/education-transformation
+          FY27 is 118%, rather than the 115.5% initially supplied. FY28 is the first reduction. Original user-supplied PDF artwork retained. Updated act label, schedule and explanatory text are editable.
+
+==================== SLIDE 8 (slide8.xml) imgs=['image18.png', 'image44.png']
+  [TEXT] Defining Choice
+         Tonight, we face a critical question regarding the future of our school district.
+  [TEXT] OPTION 1: INCREMENTAL CUTS
+         Continue making incremental reductions year after year, further limiting student opportunities, placing greater demands on staff, and shifting burdens onto families.
+  [TEXT] OPTION 2: PROACTIVE EXAMINATION
+         Take a hard look at a new district structure to concentrate resources where they matter most: in our classrooms, supporting students, and protecting quality.
+  [TEXT] THE QUESTION BEFORE US
+         What decisions will best support strong educational opportunities for our students while ensuring our district’s long-term financial sustainability?
+
+==================== SLIDE 9 (slide9.xml) imgs=['image18.png']
+  [TEXT] We cannot keep cutting our way forward without changing how we operate.
+  [TEXT] THE CHALLENGE
+         Beyond Preserving Structures
+         Our responsibility is to ensure that our facilities support strong educational opportunities for students and a financially sustainable future for our district.
+  [TEXT] OUR RESPONSIBILITY
+         Sustainable Education
+         Together, our collective community can plan for changing enrollment while making thoughtful use of our building footprint and human resources to meet students’ needs.
+
+==================== SLIDE 10 (slide10.xml) imgs=[]
+  [TEXT] FINANCIAL OVERVIEW & THRESHOLDS
+         Review Of FY28 Proposed Budget Impacts 
+         Level service budget, projected inflation rates, and Level funded (not to exceed excess spending threshold [EST])
+  [TEXT] Level Service
+         $55,224,120
+         +6.436% Year over Yearnorth
+         Exceeds EST by $1,081 per pupil
+         EXCESS SPENDING PENALTY
+         $2,773,267
+         IMPACT ON TAXPAYERS
+  [TEXT] Projected Inflation
+         $53,285,738
+         +2.70% Year over Year north
+         Required Cut:   $1,2938,382
+         Exceeds EST by $172
+         EXCESS SPENDING  PENALTY
+         $445,340
+         IMPACT ON TAXPAYERS
+  [TEXT] Level Funded (Cap EST)
+         $51,884,847
+         0% Year over Year 
+         Required Cut:     $3,339,273south
+         Does Not Exceed EST
+         $(25.67)
+         UNDER THRESHOLD PER PUPIL
+  [TEXT] FY28 EST Threshold: $16,562•Proposed Per Pupil Exceeds Threshold by $1,081•Target Cut Needed: $3,339,273
+  [TEXT] ($220.67) was corrected to remove the debt exclusion 
+  [TEXT] Adjusted cost per pupil $18,724.39
+
+==================== SLIDE 11 (slide11.xml) imgs=['image18.png']
+  [TEXT] What consolidation means
+  [TEXT] THE CORE PURPOSE
+         Beyond Closing Buildings
+         Consolidation is not simply about closing school buildings or cutting costs.
+         It is about making difficult, long-term decisions to protect the quality of education we can provide.
+  [TEXT] THE STRATEGIC CHOICE
+         Two Possible Paths Forward
+         Proactive Restructuring
+         Restructure our district to sustain student opportunities and educational quality.
+         Reactive Status Quo
+         Continue decisions that risk diminishing the student experience across all schools.
+
+==================== SLIDE 12 (slide12.xml) imgs=['image18.png']
+  [TEXT] The Charge
+         Key financial and operational models under evaluation for budget development
+  [TEXT] payments
+  [TEXT] Budget Cap Threshold
+         Per Pupil Spending Limit
+  [TEXT] EVALUATION QUESTION
+         What reductions would be necessary to achieve a budget not to exceed the per pupil projected spending threshold?
+  [TEXT] KEY FOCUS
+         Targeted expenditure reductions
+  [TEXT] school
+  [TEXT] Elementary & Middle Schools Consolidation
+         4 Elem ➔ 2 Elem | 7th & 8th merge with HUMH
+  [TEXT] EVALUATION QUESTION
+         What are the cost efficiencies if we were to consolidate 4 valley elementary schools into 2 elementary schools and merge 2 middle schools into 1 middle school?
+  [TEXT] KEY FOCUS
+         Valley elementary & middle school consolidation
+
+==================== SLIDE 13 (slide13.xml) imgs=['image18.png']
+  [TEXT] Budget Cap Threshold Summary
+         Total High Impact Reductions
+  [TEXT] CUMULATIVE BUDGET REDUCTION TARGET
+         Combined cuts across transportation, academics, athletics, and student programs
+         $3,339,273
+  [TEXT] Transportation & Routes
+         $1,360,000 
+         Daily routes, field travel, tech school transportation 
+  [TEXT] Athletics & Co-Curriculars
+         $312,757 (70% cut) 
+         Sports coaches, officials, theater, music & student clubs
+  [TEXT] Special Programming
+         $583,516
+         Farm to School, outdoor ed & learning center supports
+  [TEXT] Pre-K Tuition-Only Model
+         $517,000
+         Eliminates in-district public Pre-K slots & limits capacity
+  [TEXT] Academic & Behavioral Staff
+         $456,000
+         Reduces interventionists, paras & tier 2/3 student support
+  [TEXT] Electives & Technology
+         $110,000
+         Reduces course offerings, software & hardware tools
+  [TEXT] DEVASTATING IMPACT ON STUDENTS & COMMUNITIES
+         Access & Equity: Severe transportation & Pre-K barriers disproportionately affect vulnerable families.
+         Student Development: Widespread loss of sports, arts, electives, hands-on learning, and intervention support.
+         School Community: Eroded support structures, strained classroom environments, and loss of shared traditions.
+
+==================== SLIDE 14 (slide14.xml) imgs=['image18.png']
+  [TEXT] PROGRAMMATIC BENEFITS OF CONSOLIDATION
+         Educational Benefits: 
+         How restructuring transforms operational efficiency into enhanced academic, social, and emotional learning environments.
+  [TEXT] groups
+  [TEXT] Expanded Student Cohorts
+  [TEXT] Grade levels spread across small schools restrict peer interactions and social-emotional growth.
+  [TEXT] Outcome: Larger peer groups, dynamic social learning, and balanced classrooms.
+  [TEXT] psychology
+  [TEXT] Dedicated Full-Time Staff
+  [TEXT] Our four valley schools require sharing of staff for integrated  arts and nurses each week.
+  [TEXT] Outcome: On-site, full-time staff in the valley elementary schools.
+  [TEXT] auto_graph
+  [TEXT] Resource Allocation (see example)
+  [TEXT] Specialized services and interventions can be provided in group settings, optimizing student support services.
+  [TEXT] Outcome: Optimization of student support 
+  [TEXT] diversity_3
+  [TEXT] Staff Collaboration 
+  [TEXT] Grade level alignment…..Isolated grade levels within each valley elementary leave teachers working without direct peer colleagues on-site.
+  [TEXT] Outcome: Grade-level team teaching, shared lesson planning, and professional growth.
+
+==================== SLIDE 15 (slide15.xml) imgs=['image47.png']
+  [TEXT] Rethinking Our School Structure to Strengthen Student Opportunities 
+
+==================== SLIDE 16 (slide16.xml) imgs=[]
+  [TEXT] PROGRAMMATIC BENEFITS OF CONSOLIDATION
+  [TEXT] What Scale Can Mean for Students
+  [TEXT] A practical example: specialized reading instruction for students with IEPs
+  [TEXT] IN SEPARATE SCHOOLS
+  [TEXT] 1 student + 3 students
+  [TEXT] School A: One student works one-on-one with a teacher because no appropriate peers are available.
+         School B: Three students with similar reading needs work with a second teacher.
+  [TEXT] IN A CONSOLIDATED SCHOOL
+  [TEXT] 4 students, both teachers retained
+  [TEXT] If reading levels and IEPs support grouping, one teacher teaches the four students together.
+         The other teacher extends support to different students who cannot currently access that additional help in either building.
+  [TEXT] WHY LEARNING WITH PEERS IS IMPORTANT
+  [TEXT] One-on-one instruction is sometimes necessary, but it is not always the best setting. An appropriate small group lets students practice together, learn from one another, and build confidence and belonging.
+  [TEXT] Each student’s IEP and instructional needs guide grouping and services.
+
+==================== SLIDE 17 (slide17.xml) imgs=['image18.png']
+  [TEXT] Valley Elementary Consolidation
+         Financial evaluation and outcomes of restructuring elementary school facilities
+  [TEXT] PROPOSAL SCOPE: 4 SCHOOLS ➜ 2 SCHOOLS
+         Educational Efficiencies
+         EVALUATION QUESTION
+         What educational and financial efficiencies could result from consolidating 4 valley elementary schools into 2?
+         KEY EDUCATIONAL OUTCOMES
+         More flexible staff and scheduling across grade levels
+         Greater opportunities for peer interaction and collaborative learning
+         More consistent access to specialized instruction, interventions, and support
+         Elimination of shared staff and travel time across buildings
+         Full time nurse at each location
+         More robust educational experiences
+  [TEXT] FINANCIAL IMPACT & EFFICIENCIES
+         We would achieve consolidation cost efficiencies of:
+         ~$1,826,527   
+         ESTIMATED ANNUAL OPERATING SAVINGS
+         A REDUCTION OF -16 FTE*
+         KEY OUTCOME
+         Significant annual operating savings redirected to educational quality and staff retention.
+         *FTE = Full-Time Equivalent (i.e. one person)
+
+==================== SLIDE 18 (slide18.xml) imgs=['image18.png']
+  [TEXT] Middle Schools Merger  
+  [TEXT] Middle Schools Merger 
+         7th & 8th graders merge with HUMH 5th & 6th remain at CB
+         EVALUATION QUESTION
+         What are the cost efficiencies if we were to consolidate 2 middle schools into 1 middle school?
+         KEY EDUCATIONAL OUTCOMES
+         Expanded academic electives, athletics, and extracurricular offerings
+         Dedicated grade-level teacher teams and enhanced peer collaboration
+         Consolidated special education, counseling, and intervention support
+         More equitable access to advanced coursework and specialized facilities
+  [TEXT] FINANCIAL IMPACT & EFFICIENCIES
+         We would achieve consolidation cost efficiencies of:
+         ~$2,102,942
+         ESTIMATED ANNUAL OPERATING SAVINGS
+         -16.5 FTEs
+         KEY OUTCOME
+         Significant annual operating savings redirected to educational quality and staff retention.
+
+==================== SLIDE 19 (slide19.xml) imgs=[]
+  [TEXT] Combined School Consolidation Impact
+         Comprehensive educational outcomes and combined financial efficiencies from facility restructuring
+  [TEXT] Elementary Consolidation
+         4 Schools ➜ 2 Schools
+         EVALUATION QUESTION
+         What efficiencies result from consolidating 4 valley elementary schools into 2?
+         KEY EDUCATIONAL OUTCOMES
+         More flexible staff & scheduling across grades
+         Greater peer interaction & collaborative learning
+         Consistent access to specialized instruction
+         Elimination of shared staff travel time
+         Increased nursing staff & support
+         SUBTOTAL SAVINGS
+         ~$1,826,527
+         -16 FTEs 
+  [TEXT] Middle Schools Merger 
+         7th & 8th graders merge with HUMH 5th & 6th remain at CB
+         EVALUATION QUESTION
+         What cost efficiencies exist by consolidating 2 middle schools into 1?
+         KEY EDUCATIONAL OUTCOMES
+         Expanded electives, athletics & extracurriculars
+         Dedicated grade-level teacher teams
+         Consolidated special education & counseling
+         Equitable access to advanced coursework
+         SUBTOTAL SAVINGS
+         ~$2,102,942
+         -16.5 FTEs
+  [TEXT] TOTAL POTENTIAL IMPACT
+         Combined Annual Operating Savings
+         ~$3,929,469
+         ESTIMATED ANNUAL OPERATING SAVINGS
+         A REDUCTION OF -32.5 FTEs
+         KEY STRATEGIC OUTCOME
+         Substantial long-term budget sustainability with savings directly redirected to educational quality, student support, and staff retention.
+
+==================== SLIDE 20 (slide20.xml) imgs=['image18.png']
+  [TEXT] FINANCIAL OVERVIEW & THRESHOLDS
+         Review Of FY28 Proposed Budget Impact
+         Elementary & Middle Schools Consolidation
+  [TEXT] PROJECTED BUDGET
+         $51,294,651
+         -1.138%  arrow_downward Budget Change
+  [TEXT] PER PUPIL VARIANCE
+         ($255.76)
+         Below the excess spending threshold
+  [TEXT] FY28 EST THRESHOLD
+         $16,562
+  [TEXT] PROJECTED PER PUPIL
+         $16,306.24
+  [TEXT] THRESHOLD STATUS
+         Below Threshold Limit
+
+==================== SLIDE 21 (slide21.xml) imgs=['image34.png', 'image29.png']
+  [TABLE]
+   | Property Metric | Specification
+   | Wastewater Permitting Capacity | 250
+   | Heat/Solar | Propane/No solar
+   | Land Ownership | 7.0 Acres with two easements through property
+   | Number of Classrooms | 9
+  [TEXT] HUUSD Facility Profile
+  [TEXT] FY27 Fayston Elementary School Profile
+  [TEXT] Facility profile, student enrollment, and capital investment priorities
+  [TEXT] TOTAL STUDENT ENROLLMENT
+  [TEXT] 84
+  [TEXT] Grades K – 6
+  [TEXT] DEFERRED MAINTENANCE (P1-3)
+  [TEXT] $7,352,902
+  [TEXT] Priority 1: $985,516
+  [TEXT] IMPENDING INVESTMENT
+  [TEXT] $756,375
+  [TEXT] Near-term critical repairs
+  [TEXT] BUILDING FOOTPRINT
+  [TEXT] 20,528 sq ft
+  [TEXT] 9 Classrooms •Playgrounds and 
+         Trails but no fields 
+  [TEXT] STAFFING & HEADCOUNT
+  [TEXT]  25.63 FTE
+  [TEXT] Student Enrollment Distribution (FY27)
+  [TEXT] PK3
+  [TEXT] PK4
+  [TEXT] Kindergarten
+  [TEXT] 12
+  [TEXT] Grade 1
+  [TEXT] 13
+  [TEXT] Grade 2
+  [TEXT] 11
+  [TEXT] Grade 3
+  [TEXT] 11
+  [TEXT] Grade 4
+  [TEXT] 18
+  [TEXT] Grade 5
+  [TEXT] 9
+  [TEXT] Grade 6
+  [TEXT] 13
+  [TEXT] Grade 7
+  [TEXT] -
+  [TEXT] Grade 8
+  [TEXT] -
+  [TEXT] TOTAL
+  [TEXT] 84
+  [TEXT] Facility & Environmental Specs
+  [TEXT] Impending Capital Investment & Facilities
+  [TEXT] Priority Maintenance
+         Roof Replacement 
+         Fire Panel Replacement
+         Water System Controls Replacement
+  [TEXT] Kitchen & Meal Production
+         Fully operational Kitchen
+          Cafeteria Seating
+         Gym is used as cafeteria 
+  [TEXT] Annual Operating Costs
+         $174,783 not including custodial salary and benefits
+
+==================== SLIDE 22 (slide22.xml) imgs=['image34.png', 'image29.png']
+  [TABLE]
+   | Property Metric | Specification
+   | Wastewater Permitting # | 235
+   | Heat/Solar | Propane/No Solar
+   | Land Ownership | ~2.0 Acres
+   | Number of classrooms | 11
+  [TEXT] 18
+  [TEXT] HUUSD Facility Profile
+  [TEXT] FY27 Moretown Elementary School Profile
+  [TEXT] Facility profile, student enrollment, and capital investment priorities
+  [TEXT] TOTAL STUDENT ENROLLMENT
+  [TEXT] 137
+  [TEXT] Grades K – 6
+  [TEXT] DEFERRED MAINTENANCE (P1-3)
+  [TEXT] $4,875,697
+  [TEXT] Priority 1: $366,584
+  [TEXT] IMPENDING INVESTMENT
+  [TEXT] $200,000 ****
+  [TEXT] Near-term critical repairs
+  [TEXT] BUILDING FOOTPRINT
+  [TEXT] 22,100 sq ft
+  [TEXT] 11 Classrooms • Playgrounds, 
+         access to town fields and trails
+  [TEXT] STAFFING & HEADCOUNT
+  [TEXT]  28.05 FTE
+  [TEXT] Student Enrollment Distribution (FY27)
+  [TEXT] PK3
+  [TEXT] 14
+  [TEXT] PK4
+  [TEXT] Kindergarten
+  [TEXT] 16
+  [TEXT] Grade 1
+  [TEXT] 25
+  [TEXT] Grade 2
+  [TEXT] 19
+  [TEXT] Grade 3
+  [TEXT] 20
+  [TEXT] Grade 4
+  [TEXT] 14
+  [TEXT] Grade 5
+  [TEXT] 23
+  [TEXT] Grade 6
+  [TEXT] 20
+  [TEXT] Grade 7
+  [TEXT] -
+  [TEXT] Grade 8
+  [TEXT] -
+  [TEXT] TOTAL
+  [TEXT] 169
+  [TEXT] Facility & Environmental Specs
+  [TEXT] Impending Capital Investment & Facilities
+  [TEXT] Priority Maintenance
+         Exterior siding repairs needed
+         Heat Controls need replacement
+         Annual Operating Costs
+         $185,868 not including custodial salary and benefits
+  [TEXT] Kitchen needs & Meal Production
+         Prep kitchen only, food has to be transported from Harwood to serve.  Dishwasher is problematic and needs to be replaced to meet the demands. Estimated replacement cost of $92K included. Additional refrigeration will also be required ****
+          Cafeteria Seating
+         Limited
+
+==================== SLIDE 23 (slide23.xml) imgs=['image34.png', 'image29.png']
+  [TABLE]
+   | Property Metric | Specification
+   | Wastewater Permitting capacity | 230* (admenable to 300)
+   | Heat/Solar | Oil/Yes, net metering agreement with Town of Waitsfield
+   | Land Ownership | 7.7 Acres
+   | Number of Classrooms | 11
+  [TEXT] HUUSD Facility Profile
+  [TEXT] FY27 Waitsfield Elementary School Profile
+  [TEXT] Facility profile, student enrollment, and capital investment priorities
+  [TEXT] TOTAL STUDENT ENROLLMENT
+  [TEXT] 103
+  [TEXT] Grades K – 6
+  [TEXT] DEFERRED MAINTENANCE (P1-3)
+  [TEXT] $4,840,026
+  [TEXT] Priority 1: $622,673
+  [TEXT] IMPENDING INVESTMENT
+  [TEXT] $150,000
+  [TEXT] Near-term critical repairs
+  [TEXT] BUILDING FOOTPRINT
+  [TEXT] 23,680 sq ft
+  [TEXT] 11 Classrooms • Playgrounds, 
+         fields and access to Mad River Path Trail 
+  [TEXT] STAFFING & HEADCOUNT
+  [TEXT]  23.25 FTE
+  [TEXT] Student Enrollment Distribution (FY27)
+  [TEXT] PK3
+  [TEXT] PK4
+  [TEXT] Kindergarten
+  [TEXT] 11
+  [TEXT] Grade 1
+  [TEXT] 12
+  [TEXT] Grade 2
+  [TEXT] 14
+  [TEXT] Grade 3
+  [TEXT] 15
+  [TEXT] Grade 4
+  [TEXT] 17
+  [TEXT] Grade 5
+  [TEXT] 14
+  [TEXT] Grade 6
+  [TEXT] 20
+  [TEXT] Grade 7
+  [TEXT] -
+  [TEXT] Grade 8
+  [TEXT] -
+  [TEXT] TOTAL
+  [TEXT] 103
+  [TEXT] Facility & Environmental Specs
+  [TEXT] Impending Capital Investment & Facilities
+  [TEXT] Priority Maintenance
+         Boiler replacement
+         Partial roof replacement
+  [TEXT] Kitchen & Meal Production
+         Fully operational Kitchen. No incoming meal transport; outgoing to Fayston.
+         Cafeteria Seating
+         Gym is used as the cafeteria 
+  [TEXT] Annual Operating Costs
+         $196,038 not including custodial salary and benefits 
+
+==================== SLIDE 24 (slide24.xml) imgs=['image34.png', 'image29.png']
+  [TABLE]
+   | Property Metric | Specification
+   | Wastewater Permitting Capacity | 237
+   | Heat/Solar | Oil/Yes, net metering agreement with Town of Warren
+   | Land Ownership | 0 Acres School has easement for school building on Town Land
+   | Number of Classrooms | 14
+  [TEXT] 13
+  [TEXT]     Annual Operating Costs
+             $183,521 not including custodial salary and benefits
+  [TEXT] HUUSD Facility Profile
+  [TEXT] FY27 Warren Elementary School Profile 
+  [TEXT] Facility profile, student enrollment, and capital investment priorities
+  [TEXT] TOTAL STUDENT ENROLLMENT
+  [TEXT] 87
+  [TEXT] Grades K – 6
+  [TEXT] DEFERRED MAINTENANCE (P1-3)
+  [TEXT] $4,055,711
+  [TEXT] Priority 1: $1,451,300
+  [TEXT] IMPENDING INVESTMENT
+  [TEXT] $0
+  [TEXT] Near-term critical repairs
+  [TEXT] BUILDING FOOTPRINT
+  [TEXT] 29,738 sq ft
+  [TEXT] 14 Classrooms • Access to
+          playground, fields and trails  
+  [TEXT] STAFFING & HEADCOUNT
+  [TEXT]  25.63 FTE
+  [TEXT] Student Enrollment Distribution (FY27)
+  [TEXT] PK3
+  [TEXT]      19	
+  [TEXT] PK4
+  [TEXT] Kindergarten
+  [TEXT] 8
+  [TEXT] Grade 1
+  [TEXT] 8
+  [TEXT] Grade 2
+  [TEXT] 16
+  [TEXT] Grade 3
+  [TEXT] 17
+  [TEXT] Grade 4
+  [TEXT] 12
+  [TEXT] Grade 5
+  [TEXT] 16
+  [TEXT] Grade 6
+  [TEXT] 10
+  [TEXT] Grade 7
+  [TEXT] -
+  [TEXT] Grade 8
+  [TEXT] -
+  [TEXT] TOTAL
+  [TEXT] 119
+  [TEXT] Facility & Environmental Specs
+  [TEXT] Impending Capital Investment & Facilities
+  [TEXT] Priority Maintenance
+  [TEXT] Kitchen & Meal Production
+         Fully operational Kitchen. No incoming meal transport.
+         Cafeteria Seating
+         Limited  
+
+==================== SLIDE 25 (slide25.xml) imgs=['image34.png', 'image29.png']
+  [TABLE]
+   | Property Metric | Specification
+   | Occupancy | 480
+   | Heat/Solar | Oil /Yes
+   | Land Ownership | 10 Acres
+   | Town sewer/town water    Number of classrooms | 8,200 GPD allotted by town  24
+  [TEXT] 29
+  [TEXT] HUUSD Facility Profile
+  [TEXT] FY27 Brookside Primary School Profile 
+  [TEXT] Facility profile, student enrollment, and capital investment priorities
+  [TEXT] TOTAL STUDENT ENROLLMENT
+  [TEXT] 284
+  [TEXT] Grades K – 6
+  [TEXT] DEFERRED MAINTENANCE (P1-3)
+  [TEXT] $16,735,501
+  [TEXT] Priority 1: $2,686,994
+  [TEXT] IMPENDING INVESTMENT
+  [TEXT] $50,000
+  [TEXT] Near-term critical repairs
+  [TEXT] BUILDING FOOTPRINT
+  [TEXT] 60,000 sq ft
+  [TEXT] 24 Classrooms • Playgrouds
+         Access to town fields & trails 
+  [TEXT] STAFFING & HEADCOUNT
+  [TEXT]  67.44 FTE
+  [TEXT] Student Enrollment Distribution (FY27)
+  [TEXT] PK3
+  [TEXT]      25	
+  [TEXT] PK4
+  [TEXT] Kindergarten
+  [TEXT] 51
+  [TEXT] Grade 1
+  [TEXT] 53
+  [TEXT] Grade 2
+  [TEXT] 59
+  [TEXT] Grade 3
+  [TEXT] 49
+  [TEXT] Grade 4
+  [TEXT] 72
+  [TEXT] Grade 5
+  [TEXT] Grade 6
+  [TEXT] Grade 7
+  [TEXT] -
+  [TEXT] Grade 8
+  [TEXT] -
+  [TEXT] TOTAL
+  [TEXT] 338
+  [TEXT] Facility & Environmental Specs
+  [TEXT] Impending Capital Investment & Facilities
+  [TEXT] Priority Maintenance
+         Entry door replacement (safety concern)
+         Basement egress repair
+  [TEXT] Kitchen & Meal Production
+         Full/partially operational kitchen
+         Cafeteria Seating
+         Limited 
+  [TEXT] Annual Operating Costs
+         $393,969 not including custodial salaries and benefits 
+
+==================== SLIDE 26 (slide26.xml) imgs=['image18.png']
+  [TEXT] FACILITY & GRADE STRUCTURE ASSESSMENT
+         Temporary Classrooms vs. Grade Relocation
+         Evaluating site feasibility, modular costs, and educational benefits for 5th & 6th graders
+  [TEXT] Temporary Classroom Feasibility
+         High financial cost and physical site limitations complicate modular options.
+  [TEXT] LIMITED SITE CAPACITY
+         All four schools have limitations of physical infrastructure & land space:
+         ~$600K–$700K for two units / two locations
+         (2 classrooms per unit)
+  [TEXT] Key Constraints & Costs:
+  [TEXT] Capital Outlay: Substantial unbudgeted capital outlay for short-term modular leasing.
+  [TEXT] Complex Permitting: Site preparation, electrical, plumbing, and wastewater permitting.
+  [TEXT] Rationale for Moving 5th & 6th Graders
+         Reallocating grade levels provides immediate structural and financial advantages.
+  [TEXT] 1. Educational & Social Quality
+         Consolidates middle-grade peers into dedicated learning environments with better access to specialized instruction. Quality and alignment of grades.
+  [TEXT] 2. Financial Stewardship
+         Avoids significant temporary construction expenditures, preserving taxpayers' capital for long-term investments.
+  [TEXT] 3. Operational Stability
+         Solves district-wide capacity imbalances without multi-year construction disruptions, avoids capital outlay of a construction bond, or ongoing lease overhead for temporary classrooms.
+
+==================== SLIDE 27 (slide27.xml) imgs=['image18.png', 'image35.png', 'image32.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of not moving valley 5th & 6th graders 
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] WAITSFIELD WOULD EXCEED WASTEWATER CAPACITY 
+  [TEXT] WARREN WOULD EXCEED WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Exceeds
+  [TEXT] Exceeds
+
+==================== SLIDE 28 (slide28.xml) imgs=['image18.png', 'image41.png', 'image42.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of not moving valley 5th & 6th graders
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] WAITSFIELD WOULD EXCEED WASTEWATER CAPACITY 
+  [TEXT] WAITSFIELD EXCEEDS WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Exceeds
+  [TEXT] Exceeds
+
+==================== SLIDE 29 (slide29.xml) imgs=['image18.png', 'image39.png', 'image37.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of not moving valley 5th & 6th graders
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] BROOKSIDE EXCEEDS WASTEWATER CAPACITY
+  [TEXT] FAYSTON EXCEEDS WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Exceeds
+  [TEXT] Max Occupancy is 480 
+
+==================== SLIDE 30 (slide30.xml) imgs=['image18.png', 'image45.png', 'image40.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of PK-4 grade
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] WAITSFIELD WOULD EXCEED WASTEWATER CAPACITY 
+  [TEXT] NO SCHOOL WOULD EXCEED WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Exceeds
+
+==================== SLIDE 31 (slide31.xml) imgs=['image18.png', 'image46.png', 'image49.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of PK-4 grade
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] NO SCHOOL WOULD NOT EXCEED WASTEWATER CAPACITY 
+  [TEXT] WAITSFIELD EXCEEDS WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Exceeds
+
+==================== SLIDE 32 (slide32.xml) imgs=['image18.png', 'image50.png', 'image43.png']
+  [TEXT] FACILITY & CAPACITY CONSTRAINTS
+         Impact of PK-4 grade
+  [TEXT] Comparative evaluation of student enrollment distributions and facility capacity limits across schools. Based on home location to nearest school. 
+  [TEXT] BROOKSIDE EXCEEDS WASTEWATER CAPACITY
+  [TEXT] NO SCHOOL EXCEEDS WASTEWATER CAPACITY
+  [TEXT] CRITICAL INFRASTRUCTURE FINDING
+         Wastewater capacity constraints mandate grade realignment to ensure sustainable facility operations across all sites.
+  [TEXT] Max Occupancy is 480 
+
+==================== SLIDE 33 (slide33.xml) imgs=['image51.png']
+  [TEXT] HUUSD SCHOOL LOCATIONS
+  [TEXT] HARWOOD UNION HIGH SCHOOL  →  CROSSETT BROOK MIDDLE SCHOOL
+  [TEXT] Approx. 5 miles
+  [TEXT] Approx. 7–10 minutes by car
+  [TEXT] SEVEN HUUSD SCHOOL LOCATIONS
+  [TEXT] Harwood Union High School
+  [TEXT] Crossett Brook Middle School
+  [TEXT] Brookside Primary School
+  [TEXT] Moretown Elementary School
+  [TEXT] Waitsfield Elementary School
+  [TEXT] Fayston Elementary School
+  [TEXT] Warren Elementary School
+  [TEXT] DISCUSSION POINT
+  [TEXT] We currently have students on Intradistrict Choice (IDC) attending CBMS from the Valley.
+  [TEXT] Brookside Primary
+  [TEXT] Harwood HS
+  [TEXT] Crossett Brook MS
+  [TEXT] Moretown Elementary
+  [TEXT] Waitsfield Elementary
+  [TEXT] Fayston Elementary
+  [TEXT] Warren Elementary
+  [TEXT] Map reference supplied by HUUSD • labels are editable
+
+==================== SLIDE 34 (slide34.xml) imgs=[]
+  [TABLE]
+   | SCENARIO Schools staying open | Enrollment & receiving capacity | Building condition & capital needs | Kitchen & meal operations | Wastewater feasibility | Ranking of school combination | Total score
+   | 1  Moretown + Fayston | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+   | 2  Moretown + Waitsfield | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+   | 3  Moretown + Warren | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+   | 4  Fayston + Waitsfield | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+   | 5  Fayston + Warren | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+   | 6  Waitsfield + Warren | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Score: ___ | Total: ___
+  [TEXT] ELEMENTARY CONSOLIDATION: SIX POSSIBLE SCENARIOS
+  [TEXT] Compare the six combinations, which schools are best equipped to serve students in a sustainable future configuration?
+  [TEXT] SCORING:  5 = Strong fit   •   4 = Good fit   •   3 = Adequate   •   2 = Challenging   •   1 = Poor fit   
+  [TEXT] BOARD QUESTIONS: Which two-school configuration can safely accommodate more students, support strong programs, and deliver sustainable net savings?
+  [TEXT] HOMEWORK FOR BOARD
+
+==================== SLIDE 35 (slide35.xml) imgs=[]
+  [TEXT] HUUSD CONSOLIDATION GANTT CHART
+  [TEXT] October 2026 – August 2027 | Decision milestones, planning, and implementation
+  [TEXT] MILESTONE / WORKSTREAM
+  [TEXT] Oct
+  [TEXT] Nov
+  [TEXT] Dec
+  [TEXT] Jan
+  [TEXT] Feb
+  [TEXT] Mar
+  [TEXT] Apr
+  [TEXT] May
+  [TEXT] Jun
+  [TEXT] Jul
+  [TEXT] Aug
+  [TEXT] Board direction: Path A or Path B
+  [TEXT] Feasibility proposals due
+  [TEXT] Board reviews data / identifies options
+  [TEXT] Select RFP firm(s), if applicable
+  [TEXT] December 1 tax letter / projected yield
+  [TEXT] Budget Overviews 2 & 3
+  [TEXT] Community engagement meetings on school closings
+  [TEXT] RFP / statutory notice process (confirm)
+  [TEXT] Board vote on school closures (listed date)
+  [TEXT] Announced tuition due (confirm date)
+  [TEXT] Common Level of Appraisal published (confirm)
+  [TEXT] Final budget, warning & articles
+  [TEXT] Administrator contract notifications
+  [TEXT] Interdistrict choice deadline (confirm)
+  [TEXT] HUUSD annual report
+  [TEXT] Budget informational hearing
+  [TEXT] Town Meeting Day
+  [TEXT] Preliminary school assignments
+  [TEXT] Teacher contracts / LOIs / RIF planning
+  [TEXT] Union staff contracts
+  [TEXT] Teacher contracts due back (confirm)
+  [TEXT] Non-union contracts
+  [TEXT] Union staff contracts due back (confirm)
+  [TEXT] Financial year-end close
+  [TEXT] Prepare for possible school closings
+  [TEXT] Plan receiving-school readiness / reopening
+  [TEXT] School openings
+  [TEXT] WORKING DRAFT
+  [TEXT] Note: A Gantt chart is a visual bar chart that illustrates a project schedule, showing tasks, start and end dates, durations, and how activities depend on one another across a timeline.
+
+==================== SLIDE 36 (slide36.xml) imgs=['image53.png']
+  [TEXT] HUUSD FY28 Budget Development Timeline Process & Milestones
+  [TEXT] Key board decisions and budget-development milestones from October through Town Meeting Day
+  [TEXT] 01
+  [TEXT] Oct. 14, 2026
+  [TEXT] BOARD MEETING
+         Budget Impact Presentation #1 Level Service
+         Consolidation of Middle Schools & Valley Elementary
+  [TEXT] 02
+  [TEXT] Oct. 28, 2026
+  [TEXT] BOARD MEETING
+         Budget Impact Presentation #2
+         Review Enrollment Projections
+  [TEXT] 03
+  [TEXT] Nov. 4, 2026
+  [TEXT] BOARD MEETING
+         Building Analysis Chart
+         FY28 Finalize Board Budget Priorities
+  [TEXT] 04
+  [TEXT] Nov. 18, 2026
+  [TEXT] BOARD MEETING
+         Budget Overview #1
+         Enrollment & Staffing
+  [TEXT] 05
+  [TEXT] Dec. 2 & 16 2026
+  [TEXT] BOARD MEETING
+         December 2:
+         Budget Overview #2
+         December 16:
+         Budget Overview #3
+  [TEXT] 06
+  [TEXT] Jan 6 & 13, 2027
+  [TEXT] BOARD MEETING
+         January 6:
+         Budget Recap Receive CLA from VT Dept of Taxes
+         January 13:
+         Final Budget Approve Warning & Articles
+  [TEXT] 07
+  [TEXT] Mar 1, 2027
+  [TEXT] BOARD MEETING
+         Budget Informational Hearing
+  [TEXT] 08
+  [TEXT] Mar. 2, 2027
+  [TEXT] VOTE
+         Town Meeting Day
+  [TEXT] ***Addition meeting January 20, 2027 if necessary for budget adoption
+
+==================== SLIDE 37 (slide37.xml) imgs=[]
+  [TEXT] GOVERNANCE & RESTRUCTURING DIRECTIVES
+  [TEXT] Question for Board Direction
+  [TEXT] Path A or Path B?
+  [TEXT] A
+  [TEXT] Maintain 7 buildings and make high impact reductions
+  [TEXT] B
+  [TEXT] Valley Consolidation and Middle School Merger
+  [TEXT] UPCOMING MILESTONE
+  [TEXT] November 4th Meeting
+  [TEXT] School Board Decision Point
+  [TEXT] Action Needed:
+         If Path A, determine services and programs to be eliminated and reduced
+         If Path B, use data provided to identify buildings for consolidation and subsequent meetings per the Articles of Agreement.
+  [TEXT] Next Step Requirement: A: Identify programs and services to curtail. B: Identify buildings to accommodate additional students, then hold the three community meetings required by the Articles of Agreement before any official board action on school closure.
+  [NOTES] Talk about what happens in Path A if a budget fails
+
+==================== SLIDE 38 (slide38.xml) imgs=['image48.png']
+  [TEXT] A REQUEST TO OUR LEGISLATORS
+  [TEXT] An Excess Spending Designation
+         Is Not a Diagnosis
+  [TEXT] Even with consolidation, HUUSD faces limited room for annual budget growth after FY28.
+  [TEXT] THE THRESHOLD PERCENTAGE KEEPS FALLING
+  [TEXT] Percent of the inflation-adjusted excess spending base
+  [TEXT] 115.5%
+  [TEXT] 114.5%
+  [TEXT] 113.5%
+  [TEXT] 113.0%
+  [TEXT] 112.5%
+  [TEXT] These are threshold percentages, not annual growth allowances.
+         The dollar base adjusts for inflation. FY30+ assumes this system continues.
+  [TEXT] THE DESIGNATION DOES NOT TELL US WHY
+  [TEXT] The designation alone does not explain district geography, IEP service costs, regional teacher salary differences, or programs communities have added to enrich education.
+  [TEXT] This policy pushes spending toward an average. Our schools, students and performance cannot be reduced to an average.
+  [TEXT] FY28: WE WILL PLAN UNDER CURRENT RULES. THE REVIEW MUST BEGIN NOW.
+  [TEXT] For future budgets, examine these differences before treating higher spending as inefficiency. Protect affordability and the educational opportunities our communities value.
+  [NOTES] Closing message for legislators: We are pursuing structural changes and affordability, but consolidation does not remove ongoing cost pressures or guarantee enough annual budget growth to sustain services after FY28. No district-specific growth percentage is asserted or calculated here. The threshold is a per-pupil tax mechanism, not a fixed annual district budget cap. Declining weighted enrollment can constrain total budget growth even as costs rise. Inflation adjusts the base while statute reduces the multiplier. The chart shows the multiplier, not the nominal dollar threshold, allowed annual growth, or projected HUUSD spending.
+          Current schedule: FY28 115.5%, FY29 114.5%, FY30 113.5%, FY31 113%, FY32 and thereafter 112.5%. FY30 onward applies if the current excess spending system remains in effect rather than being superseded by the contemplated foundation formula.
+          Sources: Vermont Agency of Education, Education Transformation, Excess Spending Timeline: https://education.vermont.gov/schools/school-governance/education-transformation ; Vermont Agency of Education, State Aid for School Construction, Excess Spending Threshold: https://education.vermont.gov/schools/construction/state-aid ; 32 V.S.A. §5401: https://legislature.vermont.gov/statutes/section/32/135/05401 . Accessed October 28, 2026.
+          Conceptual framing comes from the supplied October 2026 email exchange, including Mike Leichliter's feedback to Rebecca Holcombe. This slide paraphrases the concerns and uses the user's requested phrase, designation, not a diagnosis. It does not attribute that exact phrase to Holcombe. We will prepare FY28 under current rules and ask legislators to investigate future changes now. The designation alone is not a causal analysis of geographic size, actual IEP costs, regional teacher labor markets, or community-supported enrichment programs. Student weighting and other funding mechanisms may account for some differences. This slide does not claim that no part of the funding system recognizes student needs. The reference to performance is a statement that aggregate averages cannot describe a district, not a quantified comparison or a claim that HUUSD exceeds a particular performance benchmark.
+
+==================== SLIDE 39 (slide39.xml) imgs=['image18.png', 'image52.png', 'image55.png']
+  [TEXT] ?
+  [TEXT] ?
+  [TEXT] Questions 
+  [TEXT] We welcome your feedback, thoughts, and community questions regarding the district plans.
+  [TEXT] HUUSD Board
+         huusd.org/board
+  [TEXT] Public Input
+         Comments & Inquiries
+  [TEXT] HARWOOD UNIFIED UNION SCHOOL DISTRICT
+
+==================== SLIDE 40 (slide40.xml) imgs=['image18.png', 'image54.png']
+  [TEXT] PROGRAMMATIC ANALYSIS & CURRICULUM
+         Education Benefits of Consolidation
+         Benefits of consolidation and economy of scale preserve quality programming across all district schools.
+  [TEXT] music_note
+  [TEXT] Programming
+         Economy of Scale
+         CORE OBJECTIVE
+         We will not continue to diminish programming across district facilities.
+         KEY ADVANTAGES
+         Consolidated staffing maximizes specialized FTE instruction.
+         Dedicated music spaces replace shared multi-purpose rooms.
+         Consistent weekly music, band, and choral scheduling.
+  [TEXT] DISTRICT ALLOCATION MATRIX
+         Music & Arts Program Distribution Comparison

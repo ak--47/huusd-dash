@@ -1,0 +1,563 @@
+HARWOOD UNIFIED UNION SCHOOL DISTRICT
+DISTRICT RECONFIGURATION OPTIONS
+                           March 2025
+                                                                        TABLE OF CONTENTS
+                                   1 - Introduction ............................................................ x
+                                   2 - Planning Guidelines .......................................... xx
+                                   3 - Planning Options… ............................................. xx
+                                   4 - Appendices ............................................................ xx
+
+
+
+
+2 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+1 - INTRODUCTION
+
+
+
+
+Introduction
+Harwood Unified Union School District (HUUSD) provides PreK to 12 grade education for the
+students of Duxbury, Fayston, Moretown, Waitsfield, Warren and Waterbury Vermont. Due to
+rising costs, the District is investigating long-term strategies to improve both educational
+effectiveness and operational efficiency.
+As a result, they have commissioned TruexCullins (TXC) to explore district reconfiguration
+options that could include closing and repurposing schools to meet these goals.
+For planning purposes, enrollment numbers were used from October 2024. Although the
+district has not recently completed enrollment projections, the long-term trend is one of flat
+to declining enrollment.
+Thirteen planning options (other than status quo) were originally developed and presented to
+the Building Use and Facilities Committee. Of these Thirteen, 6 were selected for cost
+modeling. The next step is for the board to select up to 3 options for future study.
+Future study includes 2 phases: Facility Evaluations and Concept Design. In the facility
+evaluation phase, an architect-led team of engineers evaluates each building and site system
+
+
+
+
+3 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+1 - INTRODUCTION
+
+
+
+
+and makes recommendations for modernization. In Concept Design, site and building plans are
+developed for each planning options. For both phases, a cost estimator is included to provide
+cost estimates for each recommended improvement and planning option.
+PROCESS
+When exploring master planning options, it is essential to develop criteria by which to evaluate
+each option. To do this, TXC created detailed questionnaires for educational leaders of each
+school division: elementary, middle and high school. Their responses formed the basis for the
+planning guidelines found in this report (see “Planning Guidelines” section of this report). Their
+input provides the basis for understanding the educational effectiveness of each option.
+As we stated earlier, however, educational effectiveness must be balanced with operational
+efficiency. The good news is that these ideas are not always in tension. Some changes, such as
+larger schools for example, can yield both results.
+To evaluate the operational effectiveness of each option, TXC developed a cost model that
+includes Deferred Maintenance/Capital Renewal, Ongoing Maintenance, New Construction and
+Salary/Benefits for each option and extrapolates those costs over 30 years. This time frame was
+used for cost savings analysis as it is the length of a bond, which is often a necessary
+investment to achieve significant long term savings. A model was also developed for the
+current configuration (Option 0), which provides a basis for evaluating potential cost savings or
+additions for each option.
+As you will see below, the cost models are very high-level and contain many assumptions. By
+keeping the assumptions consistent across all options, it is the relative differences between the
+options and the status quo that have significance.
+
+
+
+
+4 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+1 - INTRODUCTION
+
+
+                           COST MODEL
+                           The components of the cost model are described below:
+                           Net Replacement Value
+                           Several of the components of the cost model are based on
+                           APPA (Association of Physical Plant Administrators)
+                           recommended guidelines which include Net Replacement
+                           Value. For this study, this is calculated by multiplying the
+                           total square footage of the facilities in each option by a unit
+                           cost per sf (total project cost of $850/sf)
+
+                           Deferred Maintenance/Capital Renewal
+                           This term refers to the backlog of work required at each
+                           facility to bring it up to a modern standard. Because
+                           detailed facility evaluations have not been completed
+                           (except for Harwood MSHS), this study uses the APPA
+                           (Association of Physical Plant Administrators)
+                           recommendation of 4% of net replacement value of the
+                           HUUSD facilities. For this study (with the exception of
+                           Option 0 - no bond), it is assumed that this work is funded
+                           by a public bond vote.
+                           Ongoing Maintenance
+                           This is work required to keep facilities in good working
+                           order. APPA recommends allotting 3% of net replacement
+                           value for this purpose. As a side note, this level of budgeting
+                           is rarely achieved by VT school districts. Because the 3%
+                           includes maintenance salaries and these costs are included
+                           in the Salaries/Benefits category, these costs are escalated at
+                           a rate of 2% per year.
+                           New Construction
+                           Many of the planning options require additional space at
+                           each school. This is calculated using a unit cost (cost per SF)
+                           provided by a professional cost consultant. These costs are
+                           escalated at a rate of 4.1% per year.
+                           Salaries/Benefits
+                           The cost of operating the district is the largest component
+                           of the cost model. These figures are computed by the
+                           HUUSD’s Director of Finance and Operations and are
+                           derived from developing the staffing required for each
+                           option and multiplying that number by an average cost per
+                           employee for salaries and benefits. These costs are escalated
+                           at a rate of 3.5% per year per HUUSD direction.
+
+
+
+
+5 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+1 - INTRODUCTION
+
+
+                          DETERMINING THE SCOPE OF NEW CONSTRUCTION
+                          Other than Brookside Primary School, which is 4 sections per
+                          grade, all of the Valley Schools are 1 section per grade. To
+                          understand the extent of new construction needed for each
+                          school in the Valley to grow, it was essential to establish the
+                          minimum space requirements for a 2 section per grade school
+                          or larger. The requirements for this calculation were gathered
+                          from the response to the detailed questionnaires from the
+                          building principals. By comparing the existing square footage
+                          in the building to the minimum space requirements for a
+                          larger building.
+                          It is worth noting that as school size grows, there is a need for
+                          certain types of space that are not critical for smaller schools.
+                          A good example is a cafeteria, a space that becomes essential
+                          when gymnasium or multi-purpose room utilization is high.
+                          Another factor driving the minimum space requirements is
+                          the stated goal of equitable access to learning, support and
+                          co-curricular activities across the district. Applying these
+                          standards to each school in each option ensures this goal
+                          (from a facility standpoint).
+                          BUILDING CAPACITY
+                          For the purposes of this study, the capacity of each
+                          elementary and middle school was calculated utilizing the
+                          State Board of Education maximum of 20 students per
+                          classroom for grades K-4 and 25 students per classroom for
+                          grades 5 thru 8. The methodology was to divide the square
+                          footage of each classroom (being used as a classroom) and
+                          divide it by 50sf per student for Kindergarten and Middle
+                          School science labs and 35sf per student for all other
+                          classrooms. These amounts were compared with the state
+                          maximums listed above and the smaller of the two numbers
+                          was used.
+                          Please note that these numbers are higher than HUUSD’s
+                          optimal class size. There also may opportunities for more
+                          efficient use of space within a building than the current usage.
+                          Further study will required in the next phase of the master
+                          planning process.
+                          RECOMMENDED OPTIONS FOR FURTHER STUDY
+                          Including the status quo, TXC developed 15 options for review
+                          by the building committee. Due to the sheer number of
+                          options, the committee narrowed them to 5 options for cost
+                          modeling by HUUSD staff.
+
+
+
+
+6 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+1 - INTRODUCTION
+
+
+                           For the final recommendations, the planning options were
+                           evaluated on a combination of factors including how well
+                           they met the planning guidelines and projected cost savings
+                           (See Recommended Options)
+                           The next phase of the study will be to investigate the viability
+                           and cost of making the physical changes to the buildings and
+                           sites and evaluating the travel times associated with each
+                           option.
+                           ALIGNMENT WITH STATE GOALS
+                           Over the past several years, the State of Vermont (and others)
+                           have been exploring resurrecting a school construction aid
+                           program. In 2023, there was a Governor-appointed task force
+                           which issued a comprehensive report. In 2024, Act 149
+                           created a Legislative Working Group, whose task is to
+                           propose the framework of a new program. More recently the
+                           Governor has proposed a major overhaul of the educational
+                           system, including governance, consolidation, and funding.
+                           Act 149 included a (unfunded) grant program for school
+                           facility master planning. It is widely anticipated that having a
+                           district-wide facility master plan will be a prerequisite for
+                           participating in a future school construction program. This
+                           study, to the extent possible, is consistent with Act 149
+                           guidelines and should help position HUUSD for eligibility in a
+                           school construction program.
+                           Many of planning initiatives in this report align with the
+                           Governor’s educational transformation initiative currently
+                           being discussed in the legislature such as creating larger
+                           schools, larger class sizes and regional middle schools. In this
+                           way, the planning options appear to be consistent with state
+                           educational goals.
+
+
+
+
+7 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+                                            PLANNING GUIDLINES
+
+
+
+
+8 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+2 - PLANNING GUIDELINES
+
+
+                           INTRODUCTION
+                           As stated earlier, TXC provided detailed questionnaires to ele-
+                           mentary, middle and high school educational leadership
+                           teams (principals). These questionnaires asked both general
+                           questions about school and class size, as well as specific
+                           space needs for a potentially larger scale school. We then met
+                           with each team to clarify and discuss their responses.
+                           Essentially, these themes have served as the planning guide-
+                           lines by which each planning options has been evaluated.
+                           THEMES
+                           The following themes emerged from their responses:
+                           Equity
+                           • Regardless of the number of schools, there should be eq-
+                              uitable access to similar types of program offerings at
+                              each school division (elementary, middle, high)
+
+                           Travel Time
+                           • Elementary School - 45 minute maximum bus ride
+                           • Middle and High School - 60 minute maximum bus ride
+
+                           Pre-School
+                           • Centralized Pre-School
+                           • 1 each for Waterbury-Duxbury and the Valley
+
+                           Discussion: Both training and space needs are specialized.
+                           Currently there is a pre-school in each elementary school. It is
+                           also likely that full day PreK-4 could become a future require-
+                           ment.
+                            Elementary Schools
+                           • K-4 or K-6
+                           • 2 sections per grade minimum
+
+                           Discussion: Currently all of the Valley elementary schools are 1
+                           section per grade. Brookside is 4 sections per grade. Creating
+                           larger schools has both operational and educational ad-
+                           vantages. It allows for the hiring of full-time specials and sup-
+                           port staff such as nurse, librarians, art and music. It also is
+                           more efficient for support service staff (SPED, counseling, etc)
+                           to serve a larger cohort of students.
+
+                           From an educational perspective, larger schools allow for more
+                           course and extracurricular offerings, as well an increase in col-
+                           laborative opportunities between staff. There is also a social
+                           benefit in having more peers to connect with.
+
+
+
+9 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+2 - PLANNING GUIDELINES
+
+
+                           Finally, small schools struggle with hiring qualified staff for
+                           part-time positions, who much prefer full-time opportunities.
+                           Middle Schools
+                           • 1 for the Valley, 1 for Waterbury/Duxbury
+                           • Consistent grade configuration between the 2 schools
+                              (Grades 5-8, 6-8 or 7-8)
+                           Discussion: The educators felt strongly that grade configura-
+                           tions should be aligned between the two middle schools so
+                           that students had equitable opportunities and were similarly
+                           prepared for high school. They were not openly against a sin-
+                           gle middle school for the District, but seemed to believe that
+                           was not politically viable option.
+                           High School
+                           • Harwood Union High School should remain grades 9-12.
+                           • There was some discussion of moving central office and
+                              an alternative program (HCLC) back into the building.
+                           • Adding a STEM lab and renovating the existing science
+                              labs remains a focus for future improvements.
+                           Alternative Programs
+                           • Elementary School: 1 for Valley, 1 for Waterbury/Duxbury
+                           • Middle School: 1 per District
+                           • High School: 1 per District
+
+                           Discussion: The alternative program would provide a thera-
+                           peutic setting for students who cannot function adequately in
+                           a classroom. Currently, there is a moratorium on new thera-
+                           peutic school charters. Furthermore, it would be considerably
+                           less expensive to the District to provide this support in-house.
+
+
+
+
+10 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+                                             PLANNING OPTIONS
+
+
+
+
+11 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+ INTRODUCTION
+ TruexCullins was asked to iterate as many options for district configuration as possible. After
+ meeting with the Building Use Committee, several additional options were requested for anal-
+ ysis. On each sheet, there is a map indicating graphically the changes to the District. In addi-
+ tion, there is data regarding the number of students in each school in the new configuration.
+  Please note:
+ • October 2024 enrollment data was used for the number of students.
+ • Because of the sheer number of options, it was not possible to develop cost models for
+     each option. Options noted with an asterisk (B, D1, G, G1, K and K2) were identified by the
+     Building Use Committee as candidates for cost modeling by HUUSD
+ • Options H and J were eliminated by the Building Use Committee early in the process be-
+     cause they kept all of the buildings open and therefore may not offered any savings over
+     the status quo.
+ • Construction Cost Ranking?
+
+ OPTION SUMMARY TABLE
+
+
+
+
+12 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+                           GENERAL FINDINGS
+                           Several themes have emerged from the cost modeling results:
+                           •   Less square footage, and fewer facilities of greater ca-
+                               pacity yields greater long-term savings.
+                           Discussion: Reducing the number and overall square footage
+                           results in fewer buildings of greater capacity, resulting in more
+                           efficient space use, less building to maintain/heat and more
+                           efficient staffing. Increasing school capacity is also consistent
+                           with the educational benefits of creating larger (2 section per
+                           grade per minimum) elementary schools
+                           •   Achieving significant savings requires up-front invest-
+                               ment in facilities.
+                           Discussion: In addition to deferred maintenance, all of the fa-
+                           cilities require additional classroom space to accommodate the
+                           students identified in the options.
+                           •   Achieving equity of space that supports programming
+                               requires investment in facilities.
+                           Discussion: In all options, additions or renovations were re-
+                           quired to provide equitable access to support spaces and uni-
+                           fied arts.
+                           •   Bonding for projects saves substantial amounts vs
+                               budgeting on a yearly basis for capital renewal/
+                               deferred maintenance.
+                           Discussion: In Option 0, costs for capital renewal/deferred
+                           maintenance were calculated two ways: bonded and no bond.
+                           The no-bond option costs $470m more over 30 years. This is
+                           because bonding pays for the work in today’s dollars with fixed
+                           or declining payment whereas budgeting for this work on a
+                           yearly basis results in the cost of the work escalating at 4.1%
+                           per year.
+
+
+
+
+13 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+14 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+15 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+16 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+17 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+18 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+19 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+20 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+21 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+22 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+23 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+24 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+25 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+26 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+3 - PLANNING OPTIONS
+
+
+
+
+27 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+                                             APPENDICES
+
+
+
+
+28 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option B – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+29 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option D1 – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+30 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option G – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+31 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option G1 – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+32 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option K – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+33 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+Option K2 – Data Summary
+
+
+Statistics before and after reconfiguration
+
+
+
+
+Summary of additions
+
+
+
+
+34 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+4 - APPENDICES
+
+
+
+
+35 | HARWOOD UNIFIED UNION SCHOOL DISTRICT
+209 BATTERY STREET BURLINGTON, VERMONT USA 05401
+              OFFICE: 802.658.2775 | TRUEXCULLINS.COM
+

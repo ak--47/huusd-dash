@@ -176,7 +176,7 @@ export default {
         h(
           "div",
           { class: "beyond-grid" },
-          OPTIONS.filter((o) => ["B-FW-K6", "B-MW-K6", "MS-only", "MS+close-FES"].includes(o.id)).map((o) => {
+          OPTIONS.filter((o) => ["B-FW-K6", "B-MW-K6", "MS+cuts", "MS+close-FES"].includes(o.id)).map((o) => {
             const r = evaluate(o.plan);
             const { savings, gap, upperBound, oneTime } = r.budget;
             const valleyMax = Math.max(r.maxYoung.moretown, r.maxYoung.waitsfield, r.maxYoung.fayston, r.maxYoung.warren);

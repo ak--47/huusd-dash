@@ -1,0 +1,2199 @@
+﻿2026-10-01 HUUSD Enrollment Data
+2024-2026 K-12 Enrollment by School on October 1
+
+
+October 2024
+	
+
+	October 2025
+	
+
+	Fay
+	Mor
+	Wait
+	War
+	BPS
+	CB
+	HU
+	Total
+	
+
+	
+
+	Fay
+	Mor
+	Wait
+	War
+	BPS
+	CB
+	HU
+	Total
+	K
+	13
+	18
+	19
+	16
+	57
+	
+
+	
+
+	123
+	
+
+	K
+	12
+	25
+	16
+	8
+	48
+	
+
+	
+
+	109
+	1
+	15
+	19
+	17
+	18
+	51
+	
+
+	
+
+	120
+	
+
+	1
+	10
+	19
+	16
+	15
+	55
+	
+
+	
+
+	115
+	2
+	17
+	13
+	19
+	12
+	64
+	
+
+	
+
+	125
+	
+
+	2
+	12
+	20
+	17
+	18
+	51
+	
+
+	
+
+	118
+	3
+	12
+	20
+	15
+	14
+	67
+	
+
+	
+
+	128
+	
+
+	3
+	18
+	14
+	17
+	11
+	66
+	
+
+	
+
+	126
+	4
+	16
+	18
+	21
+	11
+	64
+	
+
+	
+
+	130
+	
+
+	4
+	10
+	24
+	12
+	15
+	65
+	
+
+	
+
+	126
+	5
+	13
+	14
+	23
+	14
+	
+
+	69
+	
+
+	133
+	
+
+	5
+	15
+	20
+	18
+	10
+	
+
+	67
+	
+
+	130
+	6
+	12
+	19
+	16
+	23
+	
+
+	60
+	
+
+	130
+	
+
+	6
+	14
+	15
+	22
+	16
+	
+
+	61
+	
+
+	128
+	7
+	
+
+	
+
+	
+
+	
+
+	
+
+	67
+	65
+	132
+	
+
+	7
+	
+
+	
+
+	
+
+	
+
+	
+
+	68
+	68
+	136
+	8
+	
+
+	
+
+	
+
+	
+
+	
+
+	68
+	60
+	128
+	
+
+	8
+	
+
+	
+
+	
+
+	
+
+	
+
+	67
+	65
+	132
+	9
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	112
+	112
+	
+
+	9
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	129
+	129
+	10
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	118
+	118
+	
+
+	10
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	109
+	109
+	11
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	112
+	112
+	
+
+	11
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	123
+	123
+	12
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	122
+	122
+	
+
+	12
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	110
+	110
+	TOT
+	98
+	121
+	130
+	108
+	303
+	264
+	589
+	1613
+	
+
+	TOT
+	91
+	137
+	118
+	93
+	285
+	263
+	604
+	1591
+	
+
+	+9
+	0.
+	-4
+	0.
+	-6
+	-9
+	+18
+	+8
+	
+
+	
+
+	-7
+	+16
+	-12
+	-15
+	-18
+	-1
+	+15
+	-22
+	
+
+
+
+October 2026
+	
+
+	Fay
+	Mor
+	Wait
+	War
+	BPS
+	CB
+	HU
+	Total
+	K
+	12
+	16
+	11
+	8
+	51
+	
+
+	
+
+	98
+	1
+	13
+	25
+	12
+	8
+	53
+	
+
+	
+
+	111
+	2
+	11
+	19
+	14
+	16
+	59
+	
+
+	
+
+	119
+	3
+	11
+	20
+	15
+	17
+	49
+	
+
+	
+
+	112
+	4
+	18
+	14
+	17
+	12
+	72
+	
+
+	
+
+	133
+	5
+	9
+	23
+	14
+	16
+	
+
+	64
+	
+
+	126
+	6
+	13
+	20
+	20
+	10
+	
+
+	67
+	
+
+	130
+	7
+	
+
+	
+
+	
+
+	
+
+	
+
+	63
+	62
+	125
+	8
+	
+
+	
+
+	
+
+	
+
+	
+
+	67
+	65
+	132
+	9
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	134
+	134
+	10
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	123
+	123
+	11
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	108
+	108
+	12
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	116
+	116
+	TOT
+	87
+	137
+	103
+	87
+	284
+	261
+	608
+	1567
+	
+
+	-4
+	0
+	-15
+	-6
+	-1
+	-2
+	+4
+	-24
+	
+
+*Totals include Early College students.
+
+
+Graduated, K, and PK Data
+
+
+Graduated and K Data
+	2026 Graduated HS Students
+	2026 Entered K
+	94
+	98
+	
+
+
+
+
+
+PK Data 2025 and Now
+	10/1/25 PK Enrollment
+	10/1/26 PK Enrollment
+	196
+	193
+	
+
+
+
+
+
+PK Students Attending HUUSD Schools
+	School
+	Grade
+	# Students
+	BPS
+	PK3
+	25
+	
+
+	PK4
+	29
+	BPS Total
+	
+
+	54
+	Fayston
+	PK3
+	0
+	
+
+	PK4
+	0
+	Fayston Total
+	
+
+	0
+	Moretown
+	PK3
+	14
+	
+
+	PK4
+	18
+	Moretown Total
+	
+
+	32
+	Waitsfield
+	PK3
+	0
+	
+
+	PK4
+	0
+	Waitsfield Total
+	
+
+	0
+	Warren
+	PK3
+	19
+	
+
+	PK4
+	13
+	Warren Total
+	
+
+	32
+	Grand Total
+	
+
+	118
+	
+
+***Total # Students attending private PK (via Act 166) = 75
+
+
+* PK3: 33
+* PK4: 42
+
+
+
+
+* 118 PK attending HUUSD schools + 75 attending private PK = 193
+* Anticipated K 2027-28 = 100 
+   * Two PK4 students attending HUUSD schools are non-residents and 
+will likely attend K in their town of residence.
+
+
+
+
+
+
+
+
+New Student Data for 26-27 Grades K-12
+
+
+
+
+
+
+
+
+
+
+Reasons Students Moved into District
+	Registering first time
+	10
+	Heard positive things about the changes the HUUSD has implemented.
+	1
+	Moved into district
+	41
+	Not happy with previous school
+	1
+	Switch from homeschool
+	2
+	Transferred to a private school, now re-enrolling
+	1
+	Other
+	9
+	Grand Total
+	65
+	
+
+
+
+
+
+
+
+Where Did New Students Come From?
+	
+
+	Exchange
+Student
+	Not Reported
+	Other
+	Out of State
+	VT
+	Grand Total
+	BPS
+	
+
+	4
+	1
+	9
+	11
+	25
+	CBMS
+	
+
+	1
+	
+
+	2
+	4
+	7
+	Fayston
+	
+
+	
+
+	
+
+	3
+	
+
+	3
+	HUHS
+	4
+	1
+	
+
+	2
+	7
+	14
+	HUMS
+	
+
+	
+
+	
+
+	4
+	1
+	5
+	Moretown
+	
+
+	
+
+	
+
+	1
+	
+
+	1
+	Waitsfield
+	
+
+	1
+	
+
+	3
+	2
+	6
+	Warren
+	
+
+	
+
+	
+
+	3
+	1
+	4
+	Grand Total
+	4
+	7
+	1
+	27
+	26
+	65
+	
+
+
+
+
+
+*From parent-reported data. Other might include new students in special circumstances, homeschool 
+students adding electives at school during the school day, or other returning students who previously 
+exited the district for a variety of reasons. Any student who exits and then returns must complete 
+new student registration.
+
+
+
+
+
+
+
+
+________________
+
+
+
+
+
+
+Transfer Out Data by School Academic Year 25-26
+*as of June 30, 2026
+
+
+
+
+School
+	Absence/
+Status Unknown
+	Discontinued Schooling
+	Transfer to Home Study
+	Transfer to School Outside VT
+	Transfer to VT Independent School
+	Transfer to VT Public School
+	Grand Total
+	BPS
+	
+
+	
+
+	1
+	3
+	4
+	1
+	9
+	CBMS
+	
+
+	
+
+	
+
+	1
+	2
+	6
+	9
+	Fayston
+	
+
+	
+
+	1
+	3
+	1
+	3
+	8
+	HUMHS
+	1
+	4
+	1
+	2
+	
+
+	2
+	10
+	Moretown
+	
+
+	
+
+	2
+	
+
+	
+
+	
+
+	2
+	Waitsfield
+	
+
+	
+
+	
+
+	3
+	
+
+	4
+	7
+	Warren
+	
+
+	
+
+	1
+	1
+	
+
+	
+
+	2
+	Grand Total
+	1
+	4
+	6
+	13
+	7
+	16
+	47
+	
+
+
+
+
+
+Transfer Out Data by Grade Academic Year 25-26
+
+
+
+
+Grade
+	Absence/
+Status Unknown
+	Discontinued Schooling
+	Transfer to Home Study
+	Transfer to School Outside VT
+	Transfer to VT Independent School
+	Transfer to VT Public School
+	Grand Total
+	K
+	
+
+	
+
+	1
+	1
+	
+
+	1
+	3
+	1
+	
+
+	
+
+	
+
+	2
+	
+
+	3
+	5
+	2
+	
+
+	
+
+	3
+	2
+	1
+	
+
+	6
+	3
+	
+
+	
+
+	1
+	2
+	1
+	
+
+	4
+	4
+	
+
+	
+
+	
+
+	
+
+	2
+	1
+	3
+	5
+	
+
+	
+
+	
+
+	2
+	1
+	3
+	6
+	6
+	
+
+	
+
+	
+
+	2
+	
+
+	2
+	4
+	7
+	
+
+	
+
+	
+
+	1
+	
+
+	1
+	2
+	8
+	
+
+	
+
+	
+
+	
+
+	2
+	3
+	5
+	9
+	
+
+	1
+	
+
+	
+
+	
+
+	
+
+	1
+	10
+	1
+	
+
+	
+
+	
+
+	
+
+	1
+	2
+	11
+	
+
+	1
+	
+
+	1
+	
+
+	1
+	3
+	12
+	
+
+	2
+	1
+	
+
+	
+
+	
+
+	3
+	Grand Total
+	1
+	4
+	6
+	13
+	7
+	16
+	47
+	
+
+Absence/Status Unknown: Dropped out
+Discontinued Schooling: Exited to Adult Basic Education
+
+
+HUUSD Comprehensive Attending Student Data
+
+
+The tables on the following pages include attending student data by grade and by school at the elementary schools, the middle schools, and the high school. 
+
+Columns Explanation for All Schools
+
+
+   * Active Resident Students: Currently enrolled students who live in the school’s city/town
+   * IDC Out: Continuing: Residents of that school continuing IDC this year
+   * IDC Out: New: Residents of that school choosing IDC for 26-27
+   * IDC In: Continuing/New: Residents of other schools either continuing or new to IDC 26-27 at this school 
+   * Attending Resident Students: The # of Resident students choosing to attend the resident school (and not choosing IDC)
+   * Tuition In: Students who are tuitioning in to that school
+   * Total Attending Students: Students attending HUUSD schools
+
+Additional Columns Explanation for HUHS
+
+
+   * Early College Out: Attending all classes off-site and not included in HUHS attending numbers
+   * H.S. Public Choice In: Students who entered public high school choice lottery to attend HUHS
+   * Dual Enrollment: 11th and 12th grade students who attend 1 or 2 classes off site and the rest on site; they are included in attending numbers
+   * Total Attending Students: Includes Residents, High School Choice In, Tuition
+________________
+Attending Student Data by Grade / by School: Elementary Schools
+
+
+26-27
+Grade
+	Active Resident Students
+	IDC Out: Continuing
+	IDC Out:
+New 26-27
+	Attending Resident Student
+	IDC In: Continuing
+	IDC In:
+New 26-27
+	Tuition In
+	Total Students
+	Fayston Elementary School
+	
+
+	
+
+	
+
+	
+
+	
+
+	K
+	9
+	
+
+	
+
+	9
+	
+
+	3
+	
+
+	12
+	1
+	9
+	
+
+	
+
+	9
+	3
+	
+
+	1
+	13
+	2
+	12
+	4
+	
+
+	8
+	3
+	
+
+	
+
+	11
+	3
+	8
+	1
+	
+
+	7
+	4
+	
+
+	
+
+	11
+	4
+	16
+	1
+	
+
+	15
+	3
+	
+
+	
+
+	18
+	5
+	9
+	2
+	
+
+	7
+	2
+	
+
+	
+
+	9
+	6
+	9
+	1
+	
+
+	8
+	5
+	
+
+	
+
+	13
+	Total
+	72
+	9
+	0
+	63
+	20
+	3
+	1
+	87
+	
+
+	
+
+	IDC Out
+	9
+	
+
+	IDC In
+	23
+	
+
+	
+
+	Moretown Elementary School
+	
+
+	
+
+	
+
+	
+
+	
+
+	K
+	17
+	
+
+	1
+	16
+	
+
+	
+
+	
+
+	16
+	1
+	22
+	3
+	
+
+	19
+	6
+	
+
+	
+
+	25
+	2
+	17
+	1
+	
+
+	16
+	3
+	
+
+	
+
+	19
+	3
+	22
+	2
+	
+
+	20
+	
+
+	
+
+	
+
+	20
+	4
+	13
+	
+
+	1
+	12
+	2
+	
+
+	
+
+	14
+	5
+	23
+	
+
+	3
+	20
+	3
+	
+
+	
+
+	23
+	6
+	18
+	
+
+	
+
+	18
+	2
+	
+
+	
+
+	20
+	Total
+	132
+	6
+	5
+	121
+	16
+	0
+	0
+	137
+	
+
+	
+
+	IDC Out
+	11
+	
+
+	IDC In
+	16
+	
+
+	
+
+	Waitsfield Elementary School
+	
+
+	
+
+	
+
+	
+
+	
+
+	K
+	13
+	
+
+	2
+	11
+	
+
+	
+
+	
+
+	11
+	1
+	16
+	4
+	
+
+	12
+	
+
+	
+
+	
+
+	12
+	2
+	15
+	3
+	
+
+	12
+	2
+	
+
+	
+
+	14
+	3
+	18
+	4
+	
+
+	14
+	1
+	
+
+	
+
+	15
+	4
+	21
+	4
+	
+
+	17
+	
+
+	
+
+	
+
+	17
+	5
+	15
+	3
+	
+
+	12
+	2
+	
+
+	
+
+	14
+	6
+	20
+	2
+	
+
+	18
+	2
+	
+
+	
+
+	20
+	Total
+	118
+	20
+	2
+	96
+	7
+	0
+	0
+	103
+	
+
+	
+
+	IDC Out
+	22
+	
+
+	IDC In
+	7
+	
+
+	
+
+	Warren School
+	
+
+	
+
+	
+
+	
+
+	
+
+	K
+	9
+	
+
+	2
+	7
+	
+
+	1
+	
+
+	8
+	1
+	6
+	1
+	
+
+	5
+	1
+	
+
+	2
+	8
+	2
+	11
+	
+
+	
+
+	11
+	2
+	
+
+	3
+	16
+	3
+	15
+	3
+	
+
+	12
+	2
+	
+
+	3
+	17
+	4
+	8
+	
+
+	
+
+	8
+	2
+	
+
+	2
+	12
+	5
+	14
+	1
+	
+
+	13
+	3
+	
+
+	
+
+	16
+	6
+	13
+	4
+	
+
+	9
+	1
+	
+
+	
+
+	10
+	Total
+	76
+	9
+	2
+	65
+	11
+	1
+	10
+	87
+	
+
+	
+
+	IDC Out
+	11
+	
+
+	IDC In
+	12
+	
+
+	
+
+	Brookside Primary School
+	
+
+	
+
+	
+
+	
+
+	
+
+	K
+	50
+	
+
+	
+
+	50
+	
+
+	1
+	
+
+	51
+	1
+	55
+	5
+	
+
+	50
+	3
+	
+
+	
+
+	53
+	2
+	61
+	3
+	
+
+	58
+	1
+	
+
+	
+
+	59
+	3
+	46
+	
+
+	
+
+	46
+	3
+	
+
+	
+
+	49
+	4
+	73
+	2
+	
+
+	71
+	
+
+	1
+	
+
+	72
+	Total
+	285
+	10
+	0
+	275
+	7
+	2
+	0
+	284
+	
+
+	
+
+	IDC Out
+	10
+	
+
+	IDC In
+	9
+	
+
+	
+
+	
+
+
+
+Attending Student Data by Grade / by School: Middle Schools
+
+
+
+
+Crossett Brook Middle School
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+Grade
+	Active Resident Students
+	IDC Out: Continuing
+	IDC Out:
+New 26-27
+	Attending Resident Student
+	IDC In: Continuing
+	IDC In:
+New 26-27
+	Tuition In
+	Total Attending Students
+	5
+	65
+	4
+	
+
+	61
+	
+
+	3
+	
+
+	64
+	6
+	70
+	3
+	
+
+	67
+	
+
+	
+
+	
+
+	67
+	7
+	57
+	
+
+	3
+	54
+	7
+	2
+	
+
+	63
+	8
+	61
+	2
+	0
+	59
+	8
+	
+
+	
+
+	67
+	Total
+	253
+	9
+	3
+	241
+	15
+	5
+	0
+	261
+	
+
+	
+
+	IDC Out
+	12
+	
+
+	IDC In
+	20
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	Harwood Union Middle School
+	
+
+	
+
+	
+
+	
+
+	
+
+	7
+	66
+	7
+	2
+	57
+	
+
+	3
+	2
+	62
+	8
+	69
+	8
+	
+
+	61
+	2
+	
+
+	2
+	65
+	Total
+	135
+	15
+	2
+	118
+	2
+	3
+	4
+	127
+	
+
+	
+
+	IDC Out
+	17
+	
+
+	IDC In
+	5
+	
+
+	
+
+	
+
+
+Attending Student Data by Grade / by School: High School
+
+
+Harwood Union High School
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	Grade
+	Active Resident Students
+	Early College Out
+	HS Choice
+Out
+	Attending Resident Students
+	Dual Enrollment
+	Tech School Enrollment
+	Tuition In
+	HS Public Choice In
+	Total Attending Students
+	9
+	133
+	
+
+	
+
+	133
+	
+
+	3
+	1
+	
+
+	134
+	10
+	120
+	
+
+	
+
+	120
+	
+
+	8
+	3
+	
+
+	123
+	11
+	105
+	
+
+	
+
+	105
+	17
+	14
+	2
+	1
+	108
+	12
+	113
+	7
+	
+
+	106
+	49
+	11
+	1
+	2
+	109
+	Total
+	471
+	7
+	
+
+	464
+	
+
+	
+
+	7
+	3
+	474
+	
+
+
+
+HS Choice OUT students are not currently enrolled, so they are not included in Active Resident Students. Thus, they cannot be included in calculations.
+Dual Enrollment students attend some HUHS classes so are already included in Active Resident Students/Attending Students count.
+HUHS students attending tech schools are included in Active Resident Students/Attending Students count. 
+
+
+
+Attending Student Data Summary : HUUSD
+
+
+
+	
+
+	Resident Students
+	Tuition In
+	Public Choice In
+	Early College Out
+	Total Attending Students
+	HUUSD
+	K-12 Total
+	1542
+	22
+	3
+	7
+	1560
+	
+
+	
+
+	
+
+	+
+	+
+	-
+	
+
+	
+
+Intradistrict Choice Data (IDC)
+
+
+The table below indicates how many students have left their resident school to attend another HUUSD school. For example, 22 Waterbury/Duxbury resident students have elected to attend a different HUUSD school.
+
+
+
+
+
+
+Count of HUUSD IDC Continuing and New 26-27
+
+
+Resident School
+	IDC: Continuing
+	IDC: New 26-27
+	Total
+	BPS
+	10
+	0
+	10
+	CBMS
+	9
+	3
+	12
+	Fayston
+	9
+	0
+	9
+	HUHS
+	0
+	0
+	0
+	HUMS
+	15
+	2
+	17
+	Moretown
+	6
+	5
+	11
+	Waitsfield
+	20
+	2
+	22
+	Warren
+	9
+	2
+	11
+	Total
+	78
+	14
+	92
+	
+
+
+
+________________
+
+
+
+
+
+
+The table below indicates the reasons that parents cited when they completed a new IDC request for 26-27. 
+
+
+
+
+Reasons Parents Cite for Requesting IDC 26-27
+
+
+
+
+Continue Same School as PK
+	7
+	Curriculum/Building Differences
+	8
+	Individual Situation
+	2
+	Location/Proximity
+	2
+	Moved from Outside the District
+	2
+	Moved within District
+	5
+	Peer Group
+	2
+	Total
+	28
+	*Includes Denied Requests and Rejected Offers

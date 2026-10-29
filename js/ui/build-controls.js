@@ -6,7 +6,7 @@ import { PAIRS } from "../../data/district-scenarios.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { CLASS_SIZE_DEFAULT, TARGET, TARGET_WITH_EXCLUSION, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
+import { CLASS_SIZE_DEFAULT, TARGET, TARGET_WITH_EXCLUSION, encodePlan, makePlan, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
 import { h, listJoin, money, num } from "./dom.js";
 import { cite, note, schoolShort, term } from "./kit.js";
 
@@ -26,7 +26,23 @@ const PERMIT_WORDS = {
 const slidesLimit = (f) => `Wastewater limit ${f.wastewater} on the slides${f.wastewaterExpandable ? ` (“amenable to ${f.wastewaterExpandable}”)` : ""}`;
 
 // Where valley 5th and 6th graders go, in words (no hyphens, so a line never breaks inside "K-6").
-export const topWords = (top) => (top === 4 ? "grades 5 and 6 at Crossett Brook" : "grades 5 and 6 in the valley");
+export const topWords = (top) => (top === 4 ? "grades 5 and 6 at Crossett Brook" : top === 5 ? "grade 6 at Crossett Brook" : "grades 5 and 6 in the valley");
+
+// Two starting points beyond the district's plans. "one": Path B's middle-school move with one valley school
+// closing instead of two (the district has not costed it). "hybrid": the fewest closures that meets the target on
+// paper: the middle-school move, every valley school open, and three of the smaller Path A cuts.
+export const HYBRID_CUTS = ["special", "prek", "athletics"];
+export const onePlan = (closed) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: 6, msMerge: true });
+export const hybridPlan = () => makePlan({ open: VALLEY, valleyTop: 6, msMerge: true, cuts: HYBRID_CUTS });
+
+// Which starting point a plan is, if any: "today", "A", "B", "one", "hybrid", or null.
+export function presetOf(plan) {
+  const kind = presetKind(matchNamed(plan));
+  if (kind) return kind;
+  const same = (a) => encodePlan(a) === encodePlan({ ...plan, receiving: {} });
+  if (plan.open.length === 3 && same(onePlan(VALLEY.find((id) => !plan.open.includes(id))))) return "one";
+  return same(hybridPlan()) ? "hybrid" : null;
+}
 
 // A named plan in words: "No change", "Path A", "Path B with Moretown + Warren open, grades 5 and 6 at Crossett Brook".
 export function namedLabel(named) {
@@ -143,6 +159,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ["today", "No change"],
     ["A", "Path A"],
     ["B", "Path B"],
+    ["one", "Close one school"],
+    ["hybrid", "Merger + smaller cuts"],
   ].map(([kind, label]) => h("button", { type: "button", class: "wonk-btn bp-preset", "aria-pressed": "false", "data-kind": kind }, label));
 
   // Each starts on an empty choice unless exactly two valley schools are open, so the box never disagrees
@@ -164,10 +182,23 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const startPlan = state.plan;
   pairSel.value = startPlan.open.length === 2 ? pairId(startPlan.open) : "";
   topSel.value = startPlan.open.length === 2 ? String(startPlan.valleyTop) : "";
-  const chosenB = () => ({ pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2], top: Number(topSel.value) === 6 ? 6 : 4 });
-  for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosenB()));
-  pairSel.addEventListener("change", () => onPreset("B", chosenB()));
-  topSel.addEventListener("change", () => onPreset("B", chosenB()));
+  // the one school that closes in "Close one school"
+  const oneSel = h(
+    "select",
+    { class: "wonk-select", id: "bp-one", "aria-describedby": "bp-one-hint" },
+    h("option", { value: "", disabled: true }, "Pick one"),
+    VALLEY.map((id) => h("option", { value: id }, SCHOOLS[id].short))
+  );
+  oneSel.value = startPlan.open.length === 3 ? VALLEY.find((id) => !startPlan.open.includes(id)) : "";
+  const chosen = () => ({
+    pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2],
+    top: Number(topSel.value) === 6 ? 6 : 4,
+    closed: VALLEY.includes(oneSel.value) ? oneSel.value : "FES",
+  });
+  for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosen()));
+  pairSel.addEventListener("change", () => onPreset("B", chosen()));
+  topSel.addEventListener("change", () => onPreset("B", chosen()));
+  oneSel.addEventListener("change", () => onPreset("one", chosen()));
 
   const matched = h("p", { class: "bp-matched" });
   const undoText = h("span", {});
@@ -182,7 +213,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const g1 = group(
     1,
     "Start from",
-    "Load no change or one of the district's plans, then change anything below.",
+    "Load no change, one of the district's plans, or one of two other starting points, then change anything below.",
     h("div", { class: "bp-presets" }, presetBtns),
     h(
       "div",
@@ -191,6 +222,23 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h("p", { class: "bp-bversion-hint", id: "bp-bversion-hint" }, "Changing either one loads that version of Path B."),
       h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-pair" }, h("span", { class: "wonk-sr" }, "Path B: "), "Schools that stay open"), pairSel),
       h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-btop" }, h("span", { class: "wonk-sr" }, "Path B: "), "Where grades 5 and 6 go"), topSel)
+    ),
+    h(
+      "div",
+      { class: "bp-bversion" },
+      h("p", { class: "bp-sub" }, "Close one school"),
+      h(
+        "p",
+        { class: "bp-bversion-hint", id: "bp-one-hint" },
+        "Path B's middle-school move with one valley school closing instead of two. The district has not costed closing one; the savings are our estimate, half its figure for two."
+      ),
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, "School that closes"), oneSel)
+    ),
+    h(
+      "p",
+      { class: "bp-bversion-hint" },
+      h("strong", {}, "Merger + smaller cuts: "),
+      "every valley school stays open; the middle schools merge; and three of Path A's smaller cuts (special programming, the Pre-K tuition model, and 70% of athletics and activities) fill the rest. It meets the target on paper only if the merger saves nearly the district's full figure with grades 5-6 in the valley."
     ),
     matched,
     undoRow
@@ -241,7 +289,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "span",
         { class: "bp-hint-line" },
-        `Uncheck a school to close it; its children go to the nearest open school. The district puts the savings from closing two at ${money(PATH_B_SAVINGS.valley.amount)} a year. `,
+        `Uncheck one school to close one, or two to close two; their children go to the nearest open school. The district puts the savings from closing two at ${money(PATH_B_SAVINGS.valley.amount)} a year; for one, we use half, an estimate. `,
         cite(PATH_B_SAVINGS.valley.src)
       ),
       // the definition sits outside the school cards, so tapping it never opens or closes a school
@@ -259,21 +307,42 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   // ---- 3. grades 5 and 6 ----
   const topRadios = [
-    [6, "Stay in valley schools", "k6config"],
-    [4, "Move to Crossett Brook", "pk4config"],
+    [6, "Through grade 6, as today", "k6config"],
+    [5, "Through grade 5: 6th graders go to Crossett Brook", null],
+    [4, "Through grade 4: 5th and 6th graders go to Crossett Brook", "pk4config"],
   ].map(([v, text, key]) => {
     const input = h("input", { type: "radio", name: "bp-top", value: String(v) });
     input.addEventListener("change", () => {
       if (input.checked) onPlan((p) => ({ ...p, valleyTop: v }));
     });
-    return { v, input, label: h("label", { "data-term": key }, input, h("span", { class: "wonk-term" }, text)) };
+    return { v, input, label: h("label", key ? { "data-term": key } : {}, input, h("span", { class: key ? "wonk-term" : "" }, text)) };
+  });
+  // Pre-K classes in district schools: the same setting as the Pre-K tuition model in step 5
+  const preKBox = h("input", { type: "checkbox", id: "bp-prek", "aria-describedby": "bp-prek-d" });
+  preKBox.addEventListener("change", () => {
+    const keep = preKBox.checked;
+    onPlan((p) => ({ ...p, cuts: keep ? p.cuts.filter((c) => c !== "prek") : [...p.cuts, "prek"] }));
   });
   const topOff = h("p", { class: "bp-off", id: "bp-top-off", hidden: true }, "No valley school is open, so valley 5th and 6th graders go to Crossett Brook.");
+  const spanSaid = h("p", { class: "bp-sub", "aria-live": "polite" });
   const g3 = group(
     3,
-    "Grades 5 and 6",
-    "Where valley 5th and 6th graders go. The district's Path B savings assume they move to Crossett Brook; on October 28 an administrator said keeping them in the valley would save less.",
+    "Valley school grades",
+    "The highest grade the valley schools teach, and whether district schools keep Pre-K classes. The district's Path B savings assume every valley 5th and 6th grader moves to Crossett Brook; on October 28 an administrator said keeping them in the valley would save less.",
     h("div", { class: "choice bp-choice-stack" }, topRadios.map((r) => r.label)),
+    h(
+      "label",
+      { class: "wonk-check bp-prek" },
+      preKBox,
+      h("span", {}, "District schools keep Pre-K classes (uncheck for K-only schools)")
+    ),
+    h(
+      "p",
+      { class: "bp-fix-note", id: "bp-prek-d" },
+      "Unchecked is the district's Pre-K tuition model: district Pre-K classes end everywhere, including Brookside, and families get public tuition for private programs (step 5). The district costed it for the whole district only. ",
+      cite(PATH_A_CUTS.src)
+    ),
+    spanSaid,
     topOff
   );
 
@@ -552,7 +621,9 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     const rel = relation(plan);
     const named = rel.named ?? null;
     const kind = presetKind(named);
-    for (const b of presetBtns) b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
+    const preset = presetOf(plan);
+    for (const b of presetBtns) b.setAttribute("aria-pressed", String(b.dataset.kind === preset));
+    oneSel.value = preset === "one" ? VALLEY.find((id) => !plan.open.includes(id)) : "";
     if (plan.open.length === 2) {
       pairSel.value = pairId(plan.open);
       topSel.value = String(plan.valleyTop);
@@ -574,11 +645,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
                   "One step from ",
                   h("strong", {}, namedLabel(rel.nearB)),
                   `: Path B also moves Crossett Brook's 7th and 8th graders to Harwood (step 4), which the district says saves ${money(PATH_B_SAVINGS.middle.amount)} a year${
-                    plan.valleyTop === 6 ? ", though it said keeping grades 5 and 6 in the valley would save less" : ""
+                    plan.valleyTop > 4 ? ", though it said keeping valley 5th and 6th graders out of Crossett Brook would save less" : ""
                   }. `,
                   h("button", { type: "button", class: "bp-textbtn", onclick: addMove }, "Add that move")
                 )
-              : h("span", {}, "Your own combination. It does not match one of the district's plans.")
+              : preset === "one"
+                ? h("span", {}, "Path B's middle-school move with ", h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`), " instead of two schools. Not costed by the district.")
+                : preset === "hybrid"
+                  ? h("span", {}, "The middle-school move with ", h("strong", {}, "every valley school open"), " and three of Path A's smaller cuts. Not one of the district's plans.")
+                  : h("span", {}, "Your own combination. It does not match one of the district's plans.")
     );
     undoRow.hidden = !state.undo;
     if (state.undo) {
@@ -620,6 +695,9 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       t.input.checked = plan.valleyTop === t.v;
       t.input.disabled = noValley;
     }
+    preKBox.checked = !plan.cuts.includes("prek");
+    const span = `${plan.cuts.includes("prek") ? "Kindergarten" : "Pre-K"} through grade ${plan.valleyTop}`;
+    spanSaid.textContent = noValley ? "" : `Valley schools: ${span}.`;
     topOff.hidden = !noValley;
     g3.classList.toggle("is-off", noValley);
     describedBy(g3, noValley ? ["bp-hint-3", "bp-top-off"] : ["bp-hint-3"]);

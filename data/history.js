@@ -85,5 +85,6 @@ export const VOTES = {
 
 // Changes to this site, newest first.
 export const UPDATES = [
+  { date: "2026-10-29", text: "Build a plan adds two starting points (close one school; the middle-school merger with smaller cuts) and a choice of valley grades (through grade 4, 5, or 6, with or without Pre-K). Options adds the merger-with-smaller-cuts combination. A quote about keeping grades 5-6 in the valley is now attributed to a board member, not an administrator, after checking the speaker-labeled recording transcript." },
   { date: "2026-10-29", text: "First published. Built from the October 14 and 28 presentations, the October 1 enrollment report, the October 28 meeting recording, state permits and law, and published research." },
 ];

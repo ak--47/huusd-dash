@@ -1,0 +1,1633 @@
+FACILITY EVALUATION REPORT ELEMENTARY & MIDDLE SCHOOLS OF THE HARWOOD UNIFIED UNION SCHOOL DISTRICT OCTOBER 27, 2025
+
+BROOKSIDE PRIMARY SCHOOL CROSSETT BROOK MIDDLE SCHOOL FAYSTON ELEMENTARY SCHOOL MORETOWN ELEMENTARY SCHOOL WAITSFIELD ELEMENTARY SCHOOL WARREN ELEMENTARY SCHOOL
+
+CONSULTANT TEAM
+
+TruexCullins—Architects and Team Leaders 209 Battery Street Burlington, Vermont 05401 802-658-2775
+
+Engineering Ventures—Civil and Structural Engineers 208 Flynn Ave, Suite 2A Burlington, Vermont 05401 802-863-6225
+
+Engineering Services of Vermont, LLC—Electrical, Mechanical & Plumbing Engineers 9 Washington Street Rutland, VT 05701 802-855-8091
+
+PM\&C—Cost Consultant 20 Downer Avenue, Suite 5 Hingham, MA 02043 781-740-8007
+
+2
+
+TABLE OF CONTENTS
+
+OVERVIEW ................................................................................................................ PAGE 05
+
+BROOKSIDE PRIMARY SCHOOL ............................................................................ PAGE 10
+
+ARCHITECTURAL ....................................................................................................................................PAGE 11
+
+SITE / CIVIL ...............................................................................................................................................PAGE 17
+
+STRUCTURAL ...........................................................................................................................................PAGE 21
+
+MECHANICAL ..........................................................................................................................................PAGE 25
+
+PLUMBING ................................................................................................................................................PAGE 29
+
+FIRE PROTECTION .................................................................................................................................PAGE 31
+
+ELECTRICAL ..............................................................................................................................................PAGE 32
+
+COST OPINION .......................................................................................................................................PAGE 36
+
+CROSSETT BROOK MIDDLE SCHOOL..................................................................... PAGE 39
+
+ARCHITECTURAL ....................................................................................................................................PAGE 40
+
+SITE / CIVIL ...............................................................................................................................................PAGE 46
+
+STRUCTURAL ...........................................................................................................................................PAGE 50
+
+MECHANICAL ..........................................................................................................................................PAGE 54
+
+PLUMBING ................................................................................................................................................PAGE 57
+
+FIRE PROTECTION .................................................................................................................................PAGE 59
+
+ELECTRICAL ..............................................................................................................................................PAGE 60
+
+COST OPINION .......................................................................................................................................PAGE 65
+
+FAYSTON ELEMENTARY SCHOOL .......................................................................... PAGE 68
+
+ARCHITECTURAL ....................................................................................................................................PAGE 69
+
+SITE / CIVIL ...............................................................................................................................................PAGE 75
+
+STRUCTURAL ...........................................................................................................................................PAGE 79
+
+MECHANICAL ..........................................................................................................................................PAGE 83
+
+PLUMBING ................................................................................................................................................PAGE 87
+
+FIRE PROTECTION .................................................................................................................................PAGE 89
+
+ELECTRICAL ..............................................................................................................................................PAGE 90
+
+COST OPINION .......................................................................................................................................PAGE 95
+
+3
+
+TABLE OF CONTENTS (continued)
+
+MORETOWN ELEMENTARY SCHOOL .................................................................... PAGE 98
+
+ARCHITECTURAL ....................................................................................................................................PAGE 99
+
+SITE / CIVIL ...............................................................................................................................................PAGE 105
+
+STRUCTURAL ...........................................................................................................................................PAGE 109
+
+MECHANICAL ..........................................................................................................................................PAGE 113
+
+PLUMBING ................................................................................................................................................PAGE 116
+
+FIRE PROTECTION .................................................................................................................................PAGE 117
+
+ELECTRICAL ..............................................................................................................................................PAGE 118
+
+COST OPINION .......................................................................................................................................PAGE 123
+
+WAITSFIELD ELEMENTARY SCHOOL ..................................................................... PAGE 125
+
+ARCHITECTURAL ....................................................................................................................................PAGE 126
+
+SITE / CIVIL ...............................................................................................................................................PAGE 132
+
+STRUCTURAL ...........................................................................................................................................PAGE 136
+
+MECHANICAL ..........................................................................................................................................PAGE 140
+
+PLUMBING ................................................................................................................................................PAGE 143
+
+FIRE PROTECTION .................................................................................................................................PAGE 144
+
+ELECTRICAL ..............................................................................................................................................PAGE 145
+
+COST OPINION .......................................................................................................................................PAGE 150
+
+WARREN ELEMENTARY SCHOOL ........................................................................... PAGE 152
+
+ARCHITECTURAL ....................................................................................................................................PAGE 153
+
+SITE / CIVIL ...............................................................................................................................................PAGE 159
+
+STRUCTURAL ...........................................................................................................................................PAGE 162
+
+MECHANICAL ..........................................................................................................................................PAGE 166
+
+PLUMBING ................................................................................................................................................PAGE 169
+
+FIRE PROTECTION .................................................................................................................................PAGE 171
+
+ELECTRICAL ..............................................................................................................................................PAGE 172
+
+COST OPINION .......................................................................................................................................PAGE 177
+
+4
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT OVERVIEW
+
+INTRODUCTION
+
+The Harwood Unified Union School District serves six rural Vermont towns: Duxbury, Fayston, Moretown, Waitsfield, Warren, and Waterbury. The school district includes one PK-4th grade school (Brookside Primary School), three PK-6th grade schools (Fayston Elementary School, Waitsfield Elementary School, and Warren Elementary School), one K-6th grade school (Moretown Elementary School), one 5th-8th grade school (Crossett Brook Middle School), and one 7th-12th grade middle/high school (Harwood Union Middle & High School). Crossett Brook Middle School accepts 5th through 8th grade students from Duxbury and Waterbury. Harwood Union Middle School accepts 7th and 8th grade students from the Mad River Valley towns. Harwood Union Middle & High School was not included in the scope of this investigation.
+
+BUILDING SUMMARY TABLE
+
+Building Grades \# of stu-
+
+dents\*
+
+\*\# of students based on October 2024 enrollment data
+
+Building Size (sf)
+
+SF per student
+
+Site Size (acres)
+
+Build date
+
+Brookside Primary School PK-4th 345\* 76,350 sf 221 10 AC 1898, 1912,
+
+1937, 2007 Crossett Brook Middle School 5th-8th 264\* 69,930 sf 264 30.75 AC 1996
+
+Fayston Elementary School PK-6th 121\* 20,140 sf 166 7 AC 1962, 1972,
+
+1980,1984, 1992, 2005 Moretown Elementary School K-6th 163\* 24,200 sf 148 173 AC
+
+School +/ - 2
+
+1900, 1960, 1996
+
+Waitsfield Elementary School PK-6th 148\* 23,680 sf 160 7.7 AC 1963, 1975,
+
+1991 Warren Elementary School PK-6th 121\* 29,738 sf 246 40.6 AC 1971, 1980, 1997, 2004, 2017 Harwood Union Middle & High 7th-12th 577\* 169,000 sf 293 75.5 AC 1965, 1998
+
+5
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT OVERVIEW
+
+PURPOSE OF THE STUDY
+
+The purpose of this study is to evaluate the infrastructure of each building and site, make recommendations for its modernization, and estimate the costs for those upgrades. To do this, TruexCullins and a team of engineers inspected each building and reviewed previous drawings, reports and current permits. This document includes the building summaries and cost estimates.
+
+In this instance, “modernization” means upgrading the building and site systems to current codes, technologies, and efficiencies. Often the recommendation is not for “replacement-in-kind”, but for a new, improved approach that utilizes modern technology. In addition to infrastructure modernization, this report also looks at concerns related to accessibility, building code, and state site regulations.
+
+Please note that this report is a snapshot in time and the status and/or condition of any individual item may differ from the report findings.
+
+EXECUTIVE SUMMARY
+
+As you will see in the body of this report, there is a fair amount of work required to upgrade these schools. On average, the most recent major construction projects happened around 23 years ago, with a renovation at Warren Elementary School being the most recent (2017). This is significant because many building systems (HVAC, lighting, windows, flooring, etc.) have life spans in the range of 20-25 years or less. Continued use of systems beyond their design life often necessitates a crisis management approach to facility management, and at its worst, results in temporary school closings.
+
+In general, these schools are in need of significant upgrades to meet current accessibility codes and energy standards. Many systems are near or past end of their useful life and will need replacement immediately or in the near future. To help visualize the condition of the schools across the district, a facilities condition heat map is provided on the following page.
+
+Throughout the report, you will see reference to poor, fair, or good condition to describe current conditions of building systems and elements. These are defined as follows:
+
+Poor Condition: Broken, non-functioning, hazardous, or obviously worn beyond expected life.
+
+Fair Condition: Sufficiently functional, shows some signs of wear but still usable.
+
+Good Condition: No obvious signs of wear, fully functional, or “like new”.
+
+COST ESTIMATION
+
+This part of the study is the estimation of the approximate costs for the required upgrades identified in the facility evaluations. Please note these figures do not include maintenance costs. These costs are organized into 3 categories:
+
+Priority 1 – Items related to health, safety and welfare issues, which may include items like water intrusion, mold, code, accessibility or structural concerns. Items like this should get consideration in the short-term.
+
+Priority 2 – Items related to energy or water efficiency gains and replacement of systems that are at the end (or beyond) their recommended usable life. This is often the bulk of the items in an aging building.
+
+Priority 3 – Items that do not fit into either Priority 1 or 2 but would improve the overall
+
+functioning of the facility.
+
+6
+
+COST SUMMARY TABLE
+
+School Priority 1 Priority 2 Priority 3 Total Replacement Cost FCI
+
+Brookside $2,868,994 $13,813,738 $52,769 $16,735,501 $64,897,500 26%
+
+Crossett Brook $489,663 $9,662,660 $34,786 $10,187,109 $59,440,500 17%
+
+Fayston $985,516 $6,348,076 $19,309 $7,352,902 $15,105,000 49%
+
+Moretown $366,584 $4,447,795 $61,318 $4,875,697 $18,150,000 27%
+
+Waitsfield $633,673 $4,039,939 $166,415 $4,840,026 $20,128,000 24%
+
+Warren $1,451,300 $2,426,794 $177,617 $4,055,711 $22,303,500 18%
+
+TOTAL $6,795,730 $40,739,002 $512,214 $48,046,946 $200,024,500 24%
+
+School Priority 1 Priority 2 Priority 3 Total Replacement Cost FCI
+
+Harwood Union Middle & High School \*\*$67,225,600 \*\*$4,201,600 \*\*$1,575,600 \*\*$73,002,800 \*\*$143,650,000 51%
+
+\*\*Harwood Union MS & HS cost information was derived from a previous facilities report and PMC Concept Design Estimate, dated November 2024. Costs are escalated from a June 2026 construction date to a September 2027 construction date—estimated 4% per year in VT market.
+
+GRAND TOTAL $121,049,746 $343,674,500 35%
+
+FCI RANGES AND DESCRIPTIONS
+
+0-5%: In new or well-maintained condition, with little or no visual evidence of wear or deficiencies
+
+5-10%: Subjected to wear but still in a serviceable and functioning condition.
+
+10-30%: Subjected to hard or long-term wear. Nearing the end of its useful or serviceable life.
+
+30% or above: Has reached the end of its useful or serviceable life. Renewal is now necessary.
+
+CAPITAL PLANNING AND NEXT STEPS
+
+Together, the facility evaluation and cost estimation provide a solid basis for the management of the School’s physical assets. This information, along with the current master planning work happening parallel to this process, will allow the community to determine which facilities to invest further in, potentially as part of a multi-year capital plan, and/or which facilities should be let go as part of a district reorganization.
+
+The APPA (Association of Physical Plant Administrators) publishes guidelines for capital budgeting. See chart on the following page:
+
+7
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT OVERVIEW
+
+Spending Category Description Budget
+
+Type
+
+Funds Source Investment
+
+Standard
+
+Facility Operations The services required to keep a facility clean and sanitary, so that its occu-
+
+pants are comfortable, healthy, and productive. Operations include utili- ties, support services to assist occupants; security; and custodial services.
+
+M\&O District Budget 1% CRV\*
+
+Routine Maintenance
+
+Routine recurring work (preventive, predictive and emergency), including scheduled inspections, record keeping, equipment servicing, patching holes, and repairing furniture and fixtures.
+
+M\&O District Budget 2% CRV\*\*
+
+Capital Renewal Major repair, alteration, and replacement of building systems, equipment,
+
+and components that will sustain or extend the useful life of the entire facility campus (school). Work includes roadway and drainage improve- ments, playing field replacement, roofs, HVAC, windows, doors, structural repairs, building refurbishments, minor additions, modernization projects, and replacement or provision of long-life assets to a facility campus such as portable classrooms and furniture, fixtures, and equipment.
+
+Capital State Aid/Local
+
+Bond
+
+4% CRV\*\*
+
+Major Modernization
+
+Major alteration of the entire building(s). Projects typically involve design changes and/or educational suitability alterations of building(s).
+
+Capital State Aid/Local
+
+Bond
+
+Above and be- yond 4% CRV
+
+Building Replacement
+
+Complete or partial building replacement based on determination that it is more cost effective to fully replace building(s) rather than do major mod- ernization.
+
+Capital State Aid/Local
+
+Bond
+
+Above and be- yond 4% CRV
+
+New construction for growth
+
+Additional capacity needed to keep up with growth in enrollment. Capital State Aid/Local
+
+Bond
+
+Above and be- yond 4% CRV
+
+APPA RECOMMENDED ANNUAL FACILITY BUDGETS
+
+Size (sf) Students
+
+Replacement cost per sf (2024 dollars)
+
+Current Replace- ment Value 2027 dollars
+
+Maintenance Budget - annual
+
+Routine Mainte- nance - annual
+
+Annual recommended maintenance budget
+
+Capital Renewal - Bond or Annual Fund
+
+Annual maintenance + construction budget Percentage (%) 1% 2% 3% 4% 7% Brookside 76,350 345 $850 $ 64,897,500 $ 648,975 $ 1,297,950 $ 1,946,925 $ 2,595,900 $ 4,542,825 Crossett Brook 69,930 264 $850 $ 59,440,500 $ 594,405 $ 1,188,810 $ 1,783,215 $ 2,377,620 $ 4,160,835 Fayston 20,140 121 $750 $ 15,105,000 $ 151,050 $ 302,100 $ 453,150 $ 604,200 $ 1,057,350 Moretown 24,200 163 $750 $ 18,150,000 $ 181,500 $ 363,000 $ 544,500 $ 726,000 $ 1,270,500 Waitsfield 23,680 148 $850 $ 20,128,000 $ 201,280 $ 402,560 $ 603,840 $ 805,120 $ 1,408,960 Warren 29,738 121 $750 $ 22,303,500 $ 223,035 $ 446,070 $ 669,105 $ 892,140 $ 1,561,245 Harwood MS/HS 169,000 577 $850 $ 143,650,000 $ 1,436,500 $ 2,873,000 $ 4,309,500 $ 5,746,000 $ 10,055,500
+
+Totals 413,038 1739 n/a $ 343,674,500 $ 3,436,745 $ 6,873,490 $ 10,310,235 $ 13,746,980 $ 24,057,215
+
+\~Harwood Budget (FY25) $4,241,019 $ - $ 4,241,019
+
+Variance $ (6,069,216.00) $ (13,746,980) $ (19,816,196)
+
+8
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT OVERVIEW
+
+APPA INVESTMENT STANDARDS
+
+\*CRV = Current Replacement Value
+
+\*\*This chart is additive. As an example, to budget for Capital Renewal (without bonding) would require funding equal to 7% of CRV (1% for Operations + 2% for routine maintenance + 4% for capital renewal).
+
+Given the level of required investment, Harwood Unified Union School District could develop a strategy to prioritize these investments and determine whether these investments should be made from the capital budget or from bonding. This conversation should include a discussion of enrollment projections, maximizing student education and social development, and of course, long-term cost efficiency.
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT OVERVIEW
+
+9
+
+BROOKSIDE PRIMARY SCHOOL
+
+10
+
+BROOKSIDE PRIMARY SCHOOL
+
+A BRIEF BUILDING HISTORY AND OVERVIEW
+
+Brookside Primary School serves Pre-K through 4th grade students in Waterbury, Vermont. Currently, the school has approximately 303 students. The building is approximately 76,350sf. The original school building was constructed in 1898. In 1912 a second building was constructed to the North and in 1937 a third to the South. The last significant renovation to the building occurred in 2007, with renovations including but not limited to, the building connectors that combine the three larger building areas.
+
+The parcel is approximately 10 acres. The site is bordered by residential properties along High Street to the west, Woody Avenue to the south, Hillcrest Terrace to the east, Stowe Street to the north. The main entrance to the school is accessed off from Stowe Street, with the main bus drop off area in front of the main entrance, at the north side of the building. Staff park behind the building in the south parking lots, while parents and visitors park in the lots to the north of the main entrance.
+
+Brookside Primary School is a two-story masonry building with a basement level. The building consists of masonry bearing walls supporting wood floor and roof framing. The main building roofs are sloped, hip roofs with asphalt shingle roof covering and copper roof valleys. Roof areas over the gymnasium and entry/connectors are low-slope membrane roofs with internal roof drains and perimeter scuppers. Exterior walls consist of 12-14” of solid multi-whythe granite and brick masonry. Exterior openings consist of wood windows, which were restored during the last major renovation, hollow metal doors and frames, aluminum entry doors and frames, and a few original wood entry doors.
+
+Interior partitions consist of plaster and lath over 2x wood framed walls. Flooring is a combination of vinyl composition tile (VCT) and carpet tile flooring, as well as, original hardwood flooring at many of the original building corridors, classrooms and offices. Ceilings are a combination of plaster or gypsum ceilings and drop-in acoustic ceilings (ACT). Interior doors are wood veneer and original stile and rail paneled doors.
+
+The building is served by the municipal water and sewer systems. The building heating system is comprised of (3) oil-fired cast iron boilers serving the radiation and space heating components. Power is fed to the building via a 600-amp, 120/208V three-phase service. The school was renovated in 2007 and most mechanical and electrical systems were upgraded at that time. Interior lighting consists of linear fluorescent light fixtures that have been fitted with LED lamps. The building has an automatic fire alarm system and fire protection sprinkler system. The school is also provided with an emergency backup generator.
+
+11
+
+SUMMARY
+
+BROOKSIDE PRIMARY SCHOOL
+
+12
+
+CONSTRUCTION BY YEAR
+
+ARCHITECTURAL BROOKSIDE PRIMARY SCHOOL
+
+REVIEW
+
+FINDINGS
+
+Below is a summary of the major architectural facility issues requiring attention at Brookside Primary School. Please see the engineering reports for site, structural, and HVAC findings. See the attached facility evaluation spreadsheet for an itemized list of observations.
+
+Exterior Envelope Most of the exterior envelope assembly does not have a proper air barrier system and does not meet current energy code. Exterior masonry has areas of displaced mortar joints. Exterior entry columns have areas of rot at the bases. Roof soffits and fascia trim have areas of rot and peeling paint. Fiber cement panels at connectors have areas of deteriorated panel and peeling paint.
+
+Roofing All pitched roof areas with asphalt shingles were replaced within the last two years and appear to be in good condition. The standing seam metal roofing at the south gym storage area shows visible areas of rust and should be replaced.
+
+Windows Available construction documents from the 2007 renovation indicate that original wood -framed windows were restored to preserve the historic style of the windows. Some windows were observed with rotten bottom rails and stiles and should be replaced. Windows likely do not meet current energy codes. Upgrades would contribute to significant energy savings.
+
+Exterior Doors Original wood exterior doors are in poor condition, with peeling paint, areas of rot, and worn door hardware. Many exterior hollow metal doors and frames have visible rust at the base. Many exterior doors were observed with damaged or missing weatherstripping and gasketing.
+
+Interior Doors Original stile and rail paneled doors and hardware are in fair condition. Some doors were observed with door knob hardware which do not meet ADA standards.
+
+Deteriorating masonry mortar joints
+
+Rotted column base
+
+Rotted window bottom rail
+
+Rotted exterior wood door
+
+13
+
+ARCHITECTURAL BROOKSIDE PRIMARY SCHOOL
+
+REVIEW
+
+Casework Original classroom casework is in poor condition. Some casework was noted to have failing hinge hardware. Classroom casework with built-in sinks do not meet ADA standards for accessibility.
+
+Flooring A majority of the original buildings still have hardwood strip flooring that is worn and needs refinishing. Some stairs have hardwood treads that need refinishing. Most areas of VCT flooring is cracking and/ or separating at the joints. Areas of newer carpet tile flooring appeared to be in good condition. Stairs with carpet flooring is in poor condition and should be replaced.
+
+Ceilings Original plaster ceilings are overall in good condition. Select areas of ACT ceilings have displaced, stained, or damaged ceiling tiles. Overall ACT ceilings are in fair condition.
+
+Interior Finishes Select areas of interior gypsum wallboard and plaster finish are damaged and in need of repair.
+
+Bathrooms Most VCT flooring at restrooms is cracking and/or separating at the joints. Many vanities do not have code required P-trap protection.
+
+Furniture / Mens urinals are in poor condition and Fixtures / should be replaced. Basketball hoops do Equipment not have safety straps installed. Stainless
+
+steel kitchen storage tables are rusted.
+
+Code / Life Safety Extensive use of wired glass in doors and borrowed lights is a safety hazard and should be replaced with safety glazing. Some doors at the basement central office areas do not meet maneuvering clearances by code. The north wing egress stair railings do not meet code for egress requirements. Classroom and office doors off of corridors do not have door closers.
+
+Worn wood flooring
+
+Displaced ceiling tiles
+
+Non-compliant stair railings
+
+14
+
+CODE BROOKSIDE PRIMARY SCHOOL
+
+REVIEW
+
+BUILDING CODE REVIEW (Refer to 2015 Vermont Fire & Building Safety Code)
+
+Building description: Existing multi-story school building. Original build date: 1898. Additions: 1912, 1937, & 2007.
+
+Approx. area: 25,537 sf Elevator: yes Assumed Construction type: 3B & 2B Sprinkler system– Yes; fully sprinklered (NFPA 13) Occupancy Type: IBC Educational Group E (305.1)
+
+Associated Group E Occupancies- Assembly occupancies associated with Group E are not considered a separate occupancy-IBC 303.1.3
+
+Table 503 Height and Area: Construction Type 3B & 2B Building is within allowable maximum height and area by IBC 2015 tables 504.3 and 506.2 for type 3B & 2B, fully sprinklered, multi-story construction. Max Height = 75’-0” Actual Height = 55’-0”+/- (per available construction drawings) Max Area = 43,500 sf Actual Area = 25,537 sf
+
+NFPA 101 Chapter 15 Existing Educational Occupancies 15.1.3.3.1 Assembly spaces shall comply with Chapter 13 Existing Assembly occupancies. 15.2.5.2 Dead – end corridors: 50 ft max (Sprinklered) 15.2.5.3.1. Education: Common Path of Travel: 100 ft max (Sprinklered). 15.2.5.4 Rooms over 1000 sf or 50 occupants require two exit access doors, each providing access to two separate exits. Both doors can open in to the same corridor, provided the corridor leads in two opposite directions to two separate exits. 15.2.5.5 Classrooms doors must exit directly into a corridor- they are not permitted to exit through an intervening space. 15.2.6.3 Travel distance: 200 ft max (Sprinklered). 15.2.9.1 Emergency lighting – required. 15.2.11.1.2 Rescue windows—not required in buildings protected throughout by an approved automatic sprinkler system. 15.3.4.1.1 Fire alarm – required. 15.3.4.2 Initiation- Manual and upon sprinkler activation. 15.3.4.2.3.1 Manual pull stations may be eliminated under certain circumstances. 15.3.4.3.1.1 Occupant notification shall be automatic per 9.6.3 15.3.6 Corridors: Corridor walls are required to be separated from other spaces by smoke partitions (Sprinklered) Bathrooms are not required to be separated from corridors provided they are separated from other spaces by smoke partitions (Sprinklered) 15.3.7 Smoke Compartments 15.3.7.1 Schools shall be divided into 30,000 sf smoke compartments or divided every 300 ft using smoke partitions with one hour fire rating. 15
+
+CODE BROOKSIDE PRIMARY SCHOOL
+
+REVIEW
+
+ACCESSIBILIITY REVIEW (Refer to 2012 Vermont Access Rules)
+
+Accessible route: Site arrival, passenger loading zones, curb cuts, ramps, slopes etc. need to be confirmed by Civil.
+
+Accessible entrances: 60% of Public Entrances need to comply with door approach clearances – Only 3 out of 8 public entries appear to be accessible. (206.4.1)
+
+Parking Spaces: Approx. 2% of spaces are required to be accessible; to be confirmed by Civil.
+
+Toilets: (13) toilets appear to be accessible. Site investigations show that classroom restrooms are not ADA compliant.
+
+Sinks: Some sinks are missing P-trap protection.
+
+Plumbing fixture Distribution: Accessible restrooms appear to be evenly distributed throughout the school. Each main classroom corridor, gymnasium, central office, library, and cafeteria space appears to have an accessible restroom nearby.
+
+Drinking Fountains: (3) drinking fountains observed. A minimum of (2) drinking fountains are required, with one complying with the requirements for people who use a wheelchair and one for standing persons.
+
+Classroom sinks and sink counters: Casework in classrooms require modification or replacement for ADA compliance at sinks.
+
+Signage: Egress stairs, elevator, restroom, gym, cafeteria, and main office signage appears to be ADA compliant. Classroom signage and support spaces do not have ADA compliant signage.
+
+Counters, Serving / Service and work surfaces: Further investigation required to confirm accessibility compliance.
+
+Fire alarm: See electrical report.
+
+Elevator: Yes
+
+Ramp: A ramp from the main lobby to the basement level does not appear to meet code for allowed slope. The ramp is over the allowable 1:12 and requires intermediate landings given the overall change in height.
+
+END OF REVIEW
+
+16
+
+LEGEND EXISTING CONDITIONS SITE PLAN
+
+17
+
+BROOKSIDE PRIMARY SCHOOL
+
+Brookside Primary School – Facility Evaluation – Site / Civil
+
+Brookside Primary School is located at 47 Stowe Street, north of Waterbury Village. The school parcel is listed as 10 AC in size, and is surrounded to the north, west, and east by residential properties. The school building lies at the west end of the parcel, adjoining High Street. All of the school parcel lies outside of mapped flood zones.
+
+Play areas are on the east side of the lot and parking to the south. A drop-off area and guest parking area extend along the north. Shade trees are concentrated at the north and west corners of the site. Soil mapping indicates silt loam below most of the property, with better drained Figure 1: Overall Site
+
+soils along the eastern edge.
+
+From the Stowe St / High St intersection the parcel rises 50’ to the east corner (Woody Ave. / Hillcrest Terrace Intersection). The front entry and lawn area slopes up to the front of the school at approximately 5%. Behind the school is a grassed bank with a 15% slope to the upper parking areas.
+
+This location provides good access to the school from Main Street and convenient access to and from both Route 100 and Interstate 89. Primary access to the school is provided by a single curb cut on Stowe Street with secondary access to the rear of the school from Woody Avenue. High Street runs along the west side of the school building,
+
+From Stowe Street, the front access loop takes parent vehicles counterclockwise and back out through the same curb cut. Bus traffic also shares this access and uses a dedicated bus drop off area east of the parent drop off loop. During morning drop-off school traffic caused queuing along Stowe Street with 10-12 vehicles noted in each direction.
+
+The Waterbury Fire Chief noted several fire safety concerns at the school. During the afternoon pickup period, parents park along both sides of Stowe Street as well as High Street. This interferes with fire access for most apparatus. High Street becomes impassable for these vehicles. He also noted ongoing issues with parents parking in the fire lane in front of the school.
+
+At the rear of the school parents dropped off students by looping through a section of the upper parking lot. A single car parked in the wrong parking spot could prevent this circulation from working. Student drop off in both locations was actively managed by school staff. No significant safety issues were noted,
+
+Figure 3: Stowe Street Queuing
+
+18
+
+208 Flynn Avenue, Suite 2A, Burlington, VT 05401 ▪ Tel: 802-863-6225 85 Mechanic Street, Suite E2-3, Lebanon, NH 03766 ▪ Tel: 603-442-9333 368 Broadway, Suite 11, Saratoga Springs, NY 12866 ▪ 518-205-9141
+
+Figure 2: Stowe Street Entrance
+
+at least partly due to efforts by staff. The front loop appears to be undersized for the amount of use. It would be worth looking at improving the rear drop off area to reduce loading at the front of the school.
+
+For pedestrians there are sidewalks along the south side of Stowe Street and both sides of High Street. Sidewalks east of the school driveway on Stowe St do not connect through to the building. Sidewalks were generally in good condition along Stowe Street, but in fair to poor condition along High Street. Curbing along High Street was in poor condition. Thermoplastic crosswalk markings at the High Street crossing were worn and damaged.
+
+Condition of walkways in front of the school varied. An asphalt path leading from the High/Stowe intersection to the building was in good condition. Sidewalks by the main drop off loop were in good to fair condition, with some panels heaved and or settled leaving elevation changes that exceed ½” (maximum for ADA compliance). Many of the panels have settled below the adjacent curbing creating a tripping hazard. Similar issues with a flush curb section to the east make that access non-ADA compliant. Concrete stairs located at the NW corner of the building and along High Street were in poor condition and require repair.
+
+Pavement areas in front of the school were in fair condition, with multiple patches evident and alligator cracks evident in some areas. Pavement conditions in the bus loop and adjacent parking areas were in fair to poor condition. Pavement striping, including ADA markings was worn and ready for repainting. Wheel ruts on the grass island in the center of the bus loop suggests inadequate space for buses to pass parked buses.
+
+Pavement areas behind the school were found in fair to poor condition, except for the eastern end, which is used for basketball and was more recently paved. The rear parking lots are connected to the building by concrete walks and stairs. These appeared to be in good condition. The number of stairs and lack of an accessible route limit the ability of the rear access to reduce loading at the front of the school.
+
+Four ADA parking spaces are provided on the east side of the drop-off loop. Across the school property we count 64 non-ADA spaces, (excluding the basketball area) This number would require two standard ADA spaces and one van accessible space. These are normally required to be accounted for in each distinct parking area, but since the rear lots do not allow for an accessible route, this approach makes sense.
+
+Figure 5: Northwest Stairs
+
+19
+
+Figure 4: High St. Sidewalk & Curb
+
+Several drainage issues were noted, largely related to the sloping site, and poorly drained soils. Stone strips and drain structures in front of the school appeared to catch some but not all runoff from the building roof. A few drain inlets under the drip line were raised. This could contribute to sidewalk heaving and asphalt pavement deterioration below. Also noted were several windows with lower trim at ground level on the front side of the school.
+
+Roof runoff has contributed to deterioration of stairs along the High Street side of the building. These stairs are in poor condition and in need of repair. Redirection of roof runoff here would extend the life of repairs.
+
+The play area east of the bus loop is wet and has a muddy drainage swale running through it. This swale could be lined with larger (4”), rounded stone so that most flow would occur below the surface.
+
+Approximately 1.86 AC of impervious surface in front of the school drains to a treatment pond north of the parking lot. This system was approved under permit 4169-9050 and carries an annual inspection requirement and 5-year recertification process. Renewal of the permit is due in November of 2028. The pond was not reviewed on site.
+
+Both water and sanitary sewer services are provided by connection to the Waterbury municipal systems. The water connection also provides fire protection water (hydrant at the corner of High Street and Stowe Street). These connections were approved under Vermont permit WW- 5-0543.
+
+In addition to being wet, the north playground area is surfaced with mixed materials ranging from sand to woodchips to bare soil. Some of these may not provide sufficient cushioning and should be reviewed for safety.
+
+A 10,000-gallon underground fuel tank serves the heating needs of the building. Based on state records, this tank was installed in 1996 at the south corner of the building. Due to the age of the tank, this should be reviewed by a qualified environmental professional.
+
+The June 11, 2025 site visit by Paul Boisvert found the school site in generally good condition. Better water management in the front of the school and along High Street could extend the life of pavement surfaces there.
+
+This site has limited potential for expansion or added use due to circulation and vehicle access issues. Elevation changes across the site would also complicate proposed improvements.
+
+Figure 8: High St. Stair
+
+Figure 6: Drain Inlet by Building Figure 7:Window at
+
+Grade
+
+20
+
+Figure 9: Play Area Drainage Swale
+
+HUUSD Structural Assessment Report
+
+I | SCOPE AND BASIS OF REPORT
+
+The purpose of this report is to describe, in broad terms, the structure of the existing building, comment on the existing condition and structural integrity of the structure, and discuss any potential structural impacts related to future renovations and additions to the building.
+
+Engineering Ventures performed a preliminary structural assessment of the existing structures on June 30, and July 1, 2025. The investigation of the existing structures was limited to visual observation of the exterior façade from grade and of main structural elements, where readily exposed to view. No finishes were removed, nor was any non-destructive or destructive testing performed. Partial sets of original design drawings depicting the existing construction were made available for use and were reviewed as part of this investigation.
+
+As a part of the assessment, Engineering Ventures reviewed the building’s structure, took representative photos of the building’s construction types and conditions, and reviewed sizes and spans of structural members based on the information provided by the existing construction drawings.
+
+The general condition of the buildings is good. This report identifies items that are in fair or poor condition. Structural items observed, as part of this investigation, which are not specifically identified were generally seen to be in good condition, or better. Evaluation of framing capacity and code compliance is based on the 2015 Vermont Fire and Building Safety Code and 2015 International Building Code, as adopted by the state.
+
+II | CURRENT DESIGN LOADS
+
+Design loads per ASCE 7-10 “Minimum Design Loads for Buildings and Other Structures”:
+
+• Snow Loads:
+
+o Ground Snow Load = 60 psf (Waterbury, VT) o Flat Roof Snow Load = 42 psf (Waterbury, VT) o Ground Snow Load = 70 psf (Warren, Waitsfield, Fayston, VT) o Flat Roof Snow Load = 49 psf (Warren, Waitsfield, Fayston, VT)
+
+• Live Loads:
+
+o Classrooms = 40 psf o First Floor Corridors = 100 psf o Corridors above First Floor = 80 psf o Gymnasium = 100 psf o Cafeteria = 100 psf o Library = 60 psf o Offices = 50 psf
+
+21
+
+HUUSD Structural Assessment Report
+
+III | BROOKSIDE PRIMARY SCHOOL
+
+Date Visited: 6/30/2025
+
+The building was constructed in three sections. The original middle section was built in 1899. A second building was added in 1913, with a third being added in 1936. No original drawings from the original three buildings were available. Design drawings from the 2006 renovation were available for review.
+
+The buildings are mostly wood framed, with a combination of brick and CMU bearing walls. Some steel elements are incorporated into the framing. The renovation included a new connector from the 1899 building to the 1913 building, and a new in-fill building which connected the 1899 building to the 1936 building. The renovation also included attic and roof reinforcing for new MEP equipment.
+
+The lateral load resistance system consists of unreinforced masonry shear walls, which would not be specifically designed for seismic loading. Any renovations that would trigger lateral review of the existing structure would require reinforcing to bring the lateral system up to code.
+
+The foundation is a shallow foundation system consisting of unreinforced stone walls. These foundations would be difficult to modify or underpin for new additions or changes in the building.
+
+Design loads are available for the renovation work in 2006 and are listed below:
+
+• Snow Loads:
+
+o Flat Roof Snow Load = 46 psf
+
+• Live Loads:
+
+o Classrooms = 40 psf o Corridors/Connectors = 100 psf o New Attic Access Floors = 60 psf
+
+The building structure has been well maintained and is generally in good structural condition as many old structural members were replaced or reinforced during the 2006 renovation. A limited number of items are suggested to be monitored, maintained and/or repaired to preserve the longevity of the school’s structural integrity. Some items like deteriorated concrete piers, some exterior stair conditions, and exterior walkway bridge, require action in the near term. These items are noted in the attached spreadsheet. See photos below.
+
+22
+
+HUUSD Structural Assessment Report
+
+23
+
+HUUSD Structural Assessment Report
+
+IX | POTENTIAL STRUCTURAL IMPACTS OF FUTURE RENOVATIONS/ADDITIONS
+
+A core concept to keep in mind when planning future use of space is to generally maintain shear walls. Eliminating such walls in a localized area would trigger the requirement for a global analysis of the lateral force resisting system and/or significant reinforcing of the localized area. This would likely require reinforcing of the lateral load resisting system and affect the cost of any proposed floor plan alterations. If wall removals or relocations are nonetheless desirable, costs for structural evaluation and design of lateral reinforcement should be included in any estimates.
+
+Any changes to the roof, including the addition of new equipment or insulation would require further evaluation of the capacity of the existing roof framing, as well as possible reinforcing of the existing roof framing for the added loads.
+
+A potential addition, taller than the existing building, could impact the existing building by creating a snow drift on the existing roof framing. This would require an evaluation, and possible reinforcing, of the existing roof framing for additional drifting snow loads from the new roof.
+
+24
+
+HUUSD ELECTRICAL SUMMARY
+
+\- Brookside School Engineering Services of Vermont 2025-10-09 General
+
+1\. Our site visit was conducted on June 6, 2025. 2. We were accompanied by Ray Daigle, Director of Facili\#es and Opera\#ons
+
+Mechanical Execu$ve Summary
+
+1\. In general, the mechanical systems were installed in 2007 and are nearing the end of their useful
+
+life and will require replacement within the next 5 years. 2. The school consists of three, three story buildings which were constructed at various \#mes and are now interconnected. The Center Building is the original school, which was constructed in 1898, the North Building was constructed in 1912, and the South Building was constructed in 1937. The last major renova\#on of the school mechanical systems occurred in 2007. Systems installed are consistent with high efficiency systems designed and installed at that \#me. In general, the building is provided with heat recovery ven\#la\#on system with hot water space hea\#ng with the excep\#on of the Cafeteria and Gym which are provided with unit ven\#lators. There are no air condi\#oning systems installed in the building. We recommend installing cooling and dehumidifica\#on systems to improve comfort. 3. The exis\#ng oil-fired boilers should be removed and replaced with propane fired boilers. 4. The exis\#ng 10,000-gallon double wall oil tank, leak detec\#on panel and overfill alarm system
+
+should be removed and replaced with a propane system. 5. Space hea\#ng needs should be provided by new terminal units which provide both hea\#ng and
+
+cooling. 6. Hea\#ng distribu\#on piping consists of steel and copper piping with ball valves. There is a glycol hea\#ng loop for all HRU hea\#ng coils and for unit ven\#lators to protect these systems from freezing. The remainder of the hea\#ng systems are water based. We recommend replacing all hea\#ng system valves and piping accessories within the next 5 years. All glycol systems should be flushed and replenished with new glycol. 7. We recommend installing a new HVAC system with heat recovery, hea\#ng and cooling for the gym
+
+and cafeteria. 8. The exis\#ng control system is an Automated Logic digital control system and is adequate for the
+
+current use. This system can be renovated to serve new systems. 9. A heat pump system should be inves\#gated for this school to provide hea\#ng and cooling. The heat pump system could be either an air source heat pump system or geothermal system. A heat pump system would allow hea\#ng and cooling as well as dehumidifica\#on with back-up heat provided by the hot water hea\#ng system depending on the level of thermal envelope improvements that are implemented. 10. Exis\#ng kitchen exhaust hood is not code compliant and needs to be replaced with a listed grease hood with fire suppression system, opera\#onal cost saving could be achieved by installing a demand control system to control exhaust fan based on usage. 11. In general, the building systems are not well suited to an expansion, the systems could be modified
+
+to accommodate renova\#ons. Hea$ng Systems
+
+1\. The building is provided with three oil-fired cast-iron boilers, each rated for 1,210 MBH Net IBR when fired at 11.6 GPH of No. 2 fuel oil. There is a set of lead-lag base mounted primary hea\#ng pumps serving the radia\#on and space hea\#ng and set of lead-lag in-line pumps serving a glycol heat exchanger for all HRU hea\#ng coils and unit ven\#lators in the Gym and Cafeteria. The glycol system has two lead-lag pumps to serve the glycol side of the system. There is also a set of lead-
+
+25
+
+HUUSD ELECTRICAL SUMMARY
+
+\- Brookside School Engineering Services of Vermont 2025-10-09 lag in-line pumps which serve the central domes\#c hot water hea\#ng tank located in the boiler room. Hea\#ng distribu\#on piping consists of steel and copper piping with ball valves. We recommend replacing all hea\#ng system valves and piping special\#es within the next 5 years. The exis\#ng oil-fired boilers should be removed and replaced with new propane fired boilers.
+
+2\. The boilers are served by a 10,000-gallon double wall oil tank, with oil leak detec\#on panel and overfill alarm system. The tank is installed on the east side of the south building near the rear entrance of the building. The oil fill line is located on the east side of the gym. The leak detec\#on system and overfill alarm system are not opera\#onal. The oil tank system should be removed and replaced with a new propane tank system.
+
+3\. A heat pump system should be inves\#gated for this school to provide hea\#ng and cooling; this system could be either a geothermal or air source heat pump system. The exis\#ng hot water hea\#ng systems could be used as auxiliary heat. 4. The glycol hea\#ng system should be flushed and cleaned and the glycol systems replenished with
+
+new glycol. 5. All spaces should be provided with new terminal hea\#ng and cooling units to provide full air condi\#oning and hea\#ng; the exis\#ng hydronic distribu\#on system could be used and renovated to serve the new terminal units. The boilers could be used to supplement the heat pump system. A new chilled water distribu\#on system would be provided to provide cooling to all new terminal units and for cooling coils in the ven\#la\#on systems.
+
+26
+
+HUUSD - Brookside School Engineering Services of Vermont 2025-10-09 Ven$la$on Systems
+
+1\. The building is provided with three air-to-air heat recovery units located in the aCcs of each of the buildings. These units were designed to provide fresh air and exhaust for all spaces except for the gym and cafeterias. These systems are heat wheel units and are approximately 70-75% efficient. These systems are near the end of their useful life and need to be replaced within the next 5 years. Replacement equipment should be high efficiency (85%+) heat recovery units with hea\#ng, cooling and reheat to allow for dehumidifica\#on of the fresh air supplied to the spaces.
+
+2\. The gym and cafeteria are provided with unit ven\#lators which provide heat and ven\#la\#on, these systems should be removed and replaced. We recommend installing new HVAC systems, including new heat recovery systems with hea\#ng and cooling and new terminal hea\#ng and cooling units to provide space hea\#ng and cooling.
+
+3\. The exis\#ng duct systems could be re-used all systems should be professionally cleaned, leakage
+
+tested and rebalanced.
+
+ELECTRICAL SUMMARY
+
+27
+
+HUUSD ELECTRICAL SUMMARY
+
+\- Brookside School Engineering Services of Vermont 2025-10-09 4. All ductwork located in the aCcs should be re-insulated with a higher level of insula\#on to
+
+eliminate heat loss in the winter months and swea\#ng in the summer months. 5. The Kitchen has an exhaust hood and exhaust duct, this system is not listed for grease and does not meet current code, this system should be replaced with a UL listed hood and duct system including a fire suppression system.
+
+6\. The dishwasher Room is provided with an exhaust hood and exhaust fan that appears to be
+
+adequate.
+
+28
+
+HUUSD - Brookside School Engineering Services of Vermont 2025-10-09 Plumbing System Execu$ve Summary
+
+1\. Water distribu\#on piping is in good condi\#on, we recommend replacing all valves and pipe
+
+special\#es within the next five years. 2. All sanitary waste piping is in good condi\#on. 3. The original sanitary waste and roof drainage piping in the south building should be jet flushed and internally inspected by camera to determine the condi\#on of the piping and to maintain the system for the future. 4. The two grease traps in the Kitchen and Dishwasher room should be replaced. Domes$c Water System
+
+1\. The building is provided with a 6” municipal water service, which also serves the building sprinkler system. The main water service is a 4” copper line which is provided with a meter and three parallel 2” backflow preventers and pressure reducing valves.
+
+2\. Domes\#c water hea\#ng is provided by a \~250-gallon indirect water heater serviced by the boiler system. The water heater is from the 2007 project and close to the end of its useful life and should be replaced within the next 5 years.
+
+ELECTRICAL SUMMARY
+
+29
+
+HUUSD - Brookside School Engineering Services of Vermont 2025-10-09
+
+3\. The thermosta\#c mixing valve for the water heater system also dates from 2007 and should be
+
+inspected for proper opera\#on. 4. Piping systems were installed during the 2007 project, we recommend replacement of all valves
+
+and piping special\#es within the next 5 years. Sanitary Waste and Vent Systems and Roof Drainage Systems
+
+1\. The majority of the plumbing piping appears to have been installed in 2007 and appears to be cast iron no-hub and looks to be in good condi\#on. It appears that some of the original piping was used in the South Building, we would recommend flushing and camera inspec\#on of the original systems. 2. The connector roof for the Center Building and the Gym roof of the South Building are provided with roof drainage systems. The connector roof drainage system for the Center Building was installed as part of the 2007 project; this system appears to be in good condi\#on. The Gym roof drainage system is original, we would recommend flushing and camera inspec\#on of the original systems. 3. The Kitchen is provided with two grease traps installed in 2007, one is for the dishwasher room
+
+and the other for the kitchen, these units should be replaced.
+
+ELECTRICAL SUMMARY
+
+30
+
+HUUSD - Brookside School Engineering Services of Vermont 2025-10-09 Fire Protec$on Systems
+
+1\. The building is provided with a complete wet pipe system serving all heated spaces and a complete dry piping system serving all unheated aCcs, the system appears to be adequate with no major code issues. The wet pipe system appears to be in good repair. The dry pipe system has experienced piping leaks in the past; we would recommend complete replacement of the dry pipe systems. Dry pipe sprinkler heads should be replaced within the next two years. All other wet pipe system heads should be inspected.
+
+ELECTRICAL SUMMARY
+
+31
+
+ELECTRICAL SUMMARY HUUSD - Brookside Primary School Engineering Services of Vermont 2025-10-09
+
+Electrical Execu,ve Summary
+
+1\. In general, the electrical systems were installed in 2007 as part of the building addi on and
+
+renova ons. 2. The school consists of three, three story buildings which were constructed at different mes and are now interconnected. The Center Building is the original school, which was constructed in 1898, the North Building was constructed in 1912, and the South Building was constructed in 1937. The last major renova on of the school electrical systems occurred in 2007. 3. Electrical service is adequate for present building use with some capacity available or addi onal
+
+electrical loads, if necessary. 4. Electrical distribu on equipment is in decent shape and is s ll serviceable. There is storage in
+
+some loca ons which needs to be removed/relocated to maintain clear workspace. 5. The fact that the automa c transfer switch is not locked and is easily opened, exposing live
+
+electrical components is a large hazard that needs to be addressed, immediately. 6. Wiring methods are as expected for the type and age of the building. There are a few Code items to be corrected. The use of the plug strips is almost unavoidable given the quan ty of items needing to be powered up at a typical desk/computer loca on. 7. Ligh ng is generally good, except in the gymnasium where ligh ng levels require improvement. There are a few more loca ons where replacement of fluorescent lamps with LED is required. Recommend removal of all fabric coverings from luminaires as that reduces light levels on work surfaces. Comple on of adding automa c ligh ng controls would add some energy savings. 8. Recommend that Code required annual 90-minute tes ng of all emergency and exit ligh ng be performed and added to list of annual maintenance tasks if it is not already. 9. The fire alarm system is being replaced this summer,
+
+per discussions during field work. 10. If synchronized clocks throughout the building are desired, we would recommend a wireless system with ba9ery or 120VAC clocks. Electric Service
+
+1\. Overhead from pole top transformers (3 @ 50KVA), 600 Amp 120/208V 3 phase. Terminates in a
+
+fused service switch on the exterior of the building. 2. Wiring routes from the load side of the service switch to the u lity side of an automa c transfer
+
+switch to the right of the service switch, on the exterior of the building. 3. Output of ATS wires into main circuit breaker of panel MDP. 4. Building is current transformer metered at the weather heads with meter socket located with
+
+service switch on west exterior of the building. 5. Peak demand for the school is 108KW which equates to 300 Amp @ 208V 3 phase.
+
+ELECTRICAL SUMMARY
+
+Automafic Transfer Switch Door Not Secure
+
+32
+
+ELECTRICAL SUMMARY HUUSD - Brookside Primary School Engineering Services of Vermont 2025-10-09
+
+Distribu,on
+
+6\. 600 Amp main circuit breaker distribu on panelboard MDP. Feeder circuit breakers to panels
+
+located throughout the building. 7. Main panel MDP and panels PSB, RSB and LSB are located in the basement electric room, along with PV solar equipment, ligh ng controls, and fire alarm power supplies. There is adequate workspace and clear space above/below the electrical equipment.
+
+a. There is storage in the electric room which impedes into the working space in front of the panels. It is highly recommended that this storage be removed and a policy of no storage in the electric room be implemented. 8. There is a surge protec ve device ed into panel MDP protec ng the service and distribu on at
+
+the service loca on. 9. Distribu on equipment (circuit breaker panelboards) was installed new as part of the 2006 building renova ons/addi ons and are \~20 years old. Generally, GE equipment, the equipment is in good condi on, is serviceable and with excep on of panel MDP, generally has capacity to add circuit breakers. Generator
+
+10\. Generator is a 150KW/175KVA, diesel fired unit located south of the building. Appears to be approximately 10 years old. Generator is a Generac product with weather enclosure and base fuel tank. 11. Automa c transfer switch on the exterior of the building is rated 600 Amp, 120/208V, 3 phase, 4 wire with unswitched neutral. It is a product of Generac and was installed with the generator.
+
+a. The transfer switch is completely accessible on the exterior of the building, and the enclosure is unlocked, able to be accessed by easily turning a handle on the front enclosure door, exposing live electrical components. We recommend this be corrected IMMEDIATELY, securing the equipment so the interior is not accessible to unqualified people. Solar 12. There is a rooftop solar installa on with the inverter in the electric room and meter and disconnect on the exterior west side of the building. The inverter is 4KW-AC. Solar is ed into the panel PSB to directly offset building electrical energy use. Wiring Methods
+
+13\. Wiring methods are generally individual conductors in raceway (electrical metallic tubing, EMT), flexible metallic raceway (FMC), and metal clad cable (MC cable).
+
+a. In at least two of the aHcs, non-metallic (Type NM, Romex) cable was observed. 14. A few open boxes and boxes with NM cable routed into them with no fiHngs were observed in the aHc spaces. 15. Plug strips exist at most loca ons where computers are u lized. Although this is generally standard prac ce, and plug strips are approved for use by OSHA, they are not
+
+ELECTRICAL SUMMARY
+
+Box in A c with NM Cable Routed in with No Fi ng
+
+33
+
+ELECTRICAL ELECTRICAL SUMMARY SUMMARY
+
+HUUSD - Brookside Primary School Engineering Services of Vermont 2025-10-09
+
+differen ated from extension cords and are generally considered “temporary wiring” by Vermont DFS. Electrical Code, per Na onal Electrical Code, can only be in place and u lized for a maximum of 90 days. Devices & GFCI
+
+16\. There appears to be adequate receptacles throughout the building.
+
+a. Excep on being at the computer loca ons, where plug strips are u lized. Generally, a typical computer installa on will require more than a duplex receptacle to power the several components. 17. The coverage of GFCI protected receptacles appears to be Code compliant.
+
+a. Feed-through GFCI protected receptacles in the kitchen and dishwasher space are not
+
+labeled as “GFCI Protected,” as required by Code. 18. Receptacle devices are original to 2006 addi ons/renova ons.
+
+a. Present electrical Code requires tamper-resistant receptacles for school buildings as a
+
+measure of added safety to prevent shock hazards. Ligh,ng – Interior
+
+19\. Linear fluorescent luminaires and compact fluorescent wall and downlight luminaires, original to building construc on, are u lized in most interior spaces. All or most of these luminaires have been retrofi9ed to LED lamps opera ng 120VAC.
+
+a. There were only one or two loca ons where a fluorescent luminaire exists that was missed
+
+as part of the building-wide retrofit. 20. Ligh ng levels in classrooms, corridors, offices, and cafeteria were spot-checked and seemed adequate. It was noted that light levels in the gymnasium were a li9le low, measuring 17 to 20 foot-candles at the floor level. Ligh,ng – Interior Controls
+
+21\. Interior ligh ng controls are generally on/off toggle switches. Most classrooms have occupancy sensors that will turn luminaires on/off automa cally if the manual switches are left in on posi on. Ligh,ng – Exterior
+
+22\. Building wall-mounted, recessed into overhangs and pole lights have had HID and fluorescent
+
+lamping replaced with LED luminaires. Ligh,ng – Exterior Controls
+
+23\. The automa c ligh ng controls located in the electrical room control exterior ligh ng based on
+
+photocell and me. Exit Signage
+
+24\. Exit signs are internally lit with ba9eries for self-powering during loss of u lity power. Light source appears to be LED. Signs were randomly tested and were opera onal, although this is not a full 90-minute test. Emergency Ligh,ng
+
+25\. Emergency ligh ng is accomplished through use of emergency ba9ery inverters in the general use luminaires and emergency ba9ery units (EBU’s). The emergency ligh ng was randomly tested and was opera onal, although this is not a full 90-minute test.
+
+34
+
+ELECTRICAL ELECTRICAL SUMMARY SUMMARY
+
+HUUSD - Brookside Primary School Engineering Services of Vermont 2025-10-09
+
+Fire Alarm
+
+26\. The fire alarm system is a digital, addressable system operated through an FCI 7200 series control panel. Fire alarm pull sta on coverage appears adequate, smoke detectors exist in each classroom and corridor, and duct smoke detectors exist inside the large air handling units in the aHc. Sprinkler water entrance is monitored for tamper and flow. Fire alarm system controls elevator recall func ons. Fire alarm signals are audible/visual signals with audible component being voice evacua on; coverage appeared adequate. There did not appear to be any magne c door holders at egress/corridor doors or at classrooms.
+
+a. There is no kitchen hood fire protec on system, therefore fire alarm system does monitor
+
+or provide shutdown opera on for kitchen hood or equipment under the hood. b. The inspec on s cker on the fire alarm control panel reads December 2023, therefore the system should have had inspec on in December of 2024 and recer fied. System currently does not have proper State cer fica on. c. It was discussed during the field work at this school that this fire alarm system and control
+
+panel would be replaced, this summer. 27. There is a system digital communicator which alarms to an offsite sta on. Clocks 28. All the clocks in the building are stand alone, ba9ery powered. There is no central clock system in
+
+the building. PA System
+
+29\. The public address/paging system is speakers in the corridors and classrooms, accessible through
+
+the telephone system. Same system is u lized for bell/tone for buses. Telephone
+
+30\. A telephone is located in each classroom, library, office, and similar space. Phones are u lized for accessing the PA system as well as communica ons in/out of the school. System is voice over internet protocol (VOIP). A/V 31. Most classrooms have a projector suspended below the ceiling which is accessed via the Teachers
+
+computer. 32. There are no central A/V systems in the school. Where AV systems exist, they are localized. Ethernet
+
+33\. The building ethernet system, includes CAT6 cabling, wireless access points and head end equipment which is located in an IT room in the lower level of the central building. System appears to be adequate and opera onal. Security
+
+34\. School access control and security system was being upgraded at the me of our field work. 35. An intercom system with video camera exists which school personnel use to iden fy persons prior
+
+to releasing the door lock to allow the person into the school. 36. There is a central security camera system at this school. EV Charging
+
+37\. Through conversa ons with building management, there is no exis ng EV charging and no plans
+
+to add EV charging to the site.
+
+35
+
+BROOKSIDE PRIMARY SCHOOL
+
+36
+
+COST OPINION
+
+BROOKSIDE PRIMARY SCHOOL
+
+37
+
+COST OPINION
+
+BROOKSIDE PRIMARY SCHOOL
+
+38
+
+COST OPINION
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+39
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+A BRIEF BUILDING HISTORY AND OVERVIEW
+
+Crossett Brook Middle School serves 5th through 8th grade students in Duxbury, Vermont. Currently, the school has approximately 264 students. The building is approximately 69,930 gross SF between two levels and was originally built in 1996.
+
+The parcel is approximately 30.75 acres. The site is bordered on the north by VT Route 100, on the west, south, and east by Crossett Brook, and on the northeast by residential property. The main entrance to the school is accessed off from VT Route 100, with the main entry drive directing traffic around to the southeast corner of the building and the main entrance to the school. The school has combined faculty and visitor parking along the east side of the building separating the school from the lower sports fields.
+
+Crossett Brook Middle School is a two-story structure consisting of steel columns and beams and CMU bearing walls supporting steel floor and roof joists. The level 2 floor is a concrete slab on metal deck. Two main gable roof forms intersect over the main entry area and are covered with architectural asphalt shingles. Roof areas over the gymnasium, cafeteria, and exterior classrooms have a low-slope epdm membrane roofing system with internal roof drains. The main exterior façade is 4” brick and CMU masonry veneer over 6” metal stud framing with 1/2” gypsum exterior sheathing, R-19 fiberglass batt insulation, 6mil poly vapor barrier at the interior face of stud and 5/8” interior gypsum wallboard. Walls at larger spaces, such as the gymnasium, are 4” masonry veneer over 3” rigid polyisocyanurate insulation over 8” or 12” CMU block walls. Gable end walls are clad in pre-finished metal wall panels. High walls at double-height spaces use a translucent fiberglass panel glazing system. Exterior openings consist of aluminum-framed, dual-glazed windows, aluminum storefront windows at large main entry openings, and hollow metal exterior doors and door frames.
+
+Interior partitions consist of gypsum wallboard over metal framed walls and CMU block walls. Flooring consists of vinyl composition tile (VCT) and carpet tile for a majority of the flooring. Ceilings are a combination of gypsum ceilings and drop-in acoustic ceilings (ACT). Interior doors are wood veneer or hollow metal in hollow metal frames.
+
+The building is served by the municipal water and sewer systems. The building heating system is fed by (3) oil-fired, cast iron boilers. Power is fed to the building via a 1000-amp, three-phase, 277/480V service. Interior lighting consists of fluorescent light fixtures that have been fitted with LED lamps. The building has an automatic fire alarm system and fire protection sprinkler system. No emergency power generator was noted for the property.
+
+40
+
+SUMMARY
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+41
+
+CONSTRUCTION BY YEAR
+
+ARCHITECTURAL CROSSETT BROOK MIDDLE SCHOOL
+
+REVIEW
+
+FINDINGS
+
+Below is a summary of the major architectural facility issues requiring attention at Crossett Brook Middle School. Please see the engineering reports for site, structural, and HVAC findings. See the attached facility evaluation spreadsheet for an itemized list of observations.
+
+Exterior Envelope The exterior wall assemblies do not meet current energy code. The main entry columns were observed with rust at the bases. Exterior concrete steps have areas of rust jacking and spalling concrete. Some areas of exterior masonry have staining indicating a possible moisture issue stemming from an interior lab space. The translucent fiberglass panel glazing system is nearing end of life and faded from UV exposure—inspect for structural integrity.
+
+Roofing Roof drains visible from the level two lobby atrium were observed with debris build-up and should be cleaned. One portion of roof was observed with ponding water; this condition should be investigated and monitored for water intrusion. Asphalt roofing visible from the ground appeared to be in good shape (last replaced in 2018).
+
+Windows One window at the east elevation was observed with failed perimeter gasketing and needs to be replaced.
+
+Exterior Doors Exterior hollow metal doors and frames have some areas of rust at the bases. Some exterior doors have failed or missing weatherstripping / gasketing.
+
+Interior Doors Some interior door frames have areas of rust at the base. Some interior doors have delamination of the wood veneer.
+
+Casework Classroom casework was observed with areas of damaged finishes, hardware, and/ or displaced components. Some lab casework was observed with delamination of countertops and/or failing hinge hardware. Family and Consumer Science (FACS) casework is in poor condition. Benches in the corridor locker areas are wrapped in carpet and in poor condition.
+
+Rusted door frame and failed weatherstripping
+
+42
+
+Casework and appliances in poor condition
+
+Failed exterior window
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+Flooring Most areas of VCT flooring in corridors and classrooms is cracking and/or separating at the joints. Carpet flooring at the music room is in poor condition. Some newer carpet floor tiles at the first floor level have some staining. Epoxy flooring at the gym lobby restrooms is cracked at the floor to wall transition. Carpet flooring and wood transitions at the corridor kivas are in poor condition. Rubber flooring and treads at the egress stairs are worn and/or in poor condition.
+
+Ceilings Select areas of ACT ceilings have displaced, stained, or damaged ceiling tiles. Overall ACT ceilings are in fair condition.
+
+Interior Finishes The gypsum soffit at the library skylight has signs of water damage, with bubbling of the paint/wallcovering finish. Many folding classroom partitions are in poor condition. The wall finish at the gymnasium is in poor condition and should be patched and repainted. Stair railings were observed with peeling paint and should be repainted.
+
+Bathrooms Some vanities do not have code required P
+
+\-trap protection.
+
+Furniture / Family and Consumer Science (FACS) Fixtures / appliances (ranges, dishwasher, refrigerator, Equipment washer, and dryer) are at the end of their
+
+useful life.
+
+Code / Life Safety Extensive use of wired glass in doors and borrowed lights is a safety hazard and should be replaced with safety glazing. Some egress stair railings do not meet code for egress requirements. Classroom and office doors off of corridors do not have door closers.
+
+Wired glass used at egress door
+
+43
+
+ARCHITECTURAL REVIEW
+
+Rubber stair flooring in poor condition
+
+Cracked VCT flooring
+
+CODE CROSSETT BROOK MIDDLE SCHOOL
+
+REVIEW
+
+BUILDING CODE REVIEW (Refer to 2015 Vermont Fire & Building Safety Code)
+
+Building description: Existing multi-story school building. Original build date: 1996
+
+Approx. area: 43,100sf Elevator: yes Assumed Construction type: 2B non-combustible, unprotected Sprinkler system– Yes; fully sprinklered (NFPA 13) Occupancy Type: IBC Educational Group E (305.1)
+
+Associated Group E Occupancies- Assembly occupancies associated with Group E are not considered a separate occupancy-IBC 303.1.3
+
+Table 503 Height and Area: Construction Type 2B Building is within allowable maximum height and area by IBC 2015 tables 504.3 and 506.2 for type 2B, fully sprinklered, multi-story construction. Max Height = 75’-0” Actual Height = 39’-0”+/- Max Area = 43,500 sf Actual Area = 43,100 sf
+
+NFPA 101 Chapter 15 Existing Educational Occupancies 15.1.3.3.1 Assembly spaces shall comply with Chapter 13 Existing Assembly occupancies. 15.2.5.2 Dead – end corridors: 50 ft max (Sprinklered) 15.2.5.3.1. Education: Common Path of Travel: 100 ft max (Sprinklered). 15.2.5.4 Rooms over 1000 sf or 50 occupants require two exit access doors, each providing access to two separate exits. Both doors can open in to the same corridor, provided the corridor leads in two opposite directions to two separate exits. 15.2.5.5 Classrooms doors must exit directly into a corridor- they are not permitted to exit through an intervening space. 15.2.6.3 Travel distance: 200 ft max (Sprinklered). 15.2.9.1 Emergency lighting – required. 15.2.11.1.2 Rescue windows—not required in buildings protected throughout by an approved automatic sprinkler system. 15.3.4.1.1 Fire alarm – required. 15.3.4.2 Initiation- Manual and upon sprinkler activation. 15.3.4.2.3.1 Manual pull stations may be eliminated under certain circumstances. 15.3.4.3.1.1 Occupant notification shall be automatic per 9.6.3 15.3.6 Corridors: Corridor walls are required to be separated from other spaces by smoke partitions (Sprinklered) Bathrooms are not required to be separated from corridors provided they are separated from other spaces by smoke partitions (Sprinklered) 15.3.7 Smoke Compartments 15.3.7.1 Schools shall be divided into 30,000 sf smoke compartments or divided every 300 ft using smoke partitions with one hour fire rating. 44
+
+CODE CROSSETT BROOK MIDDLE SCHOOL
+
+REVIEW
+
+ACCESSIBILIITY REVIEW (Refer to 2012 Vermont Access Rules)
+
+Accessible route: Site arrival, passenger loading zones, curb cuts, ramps, slopes etc. need to be confirmed by Civil.
+
+Accessible entrances: 60% of Public Entrances need to comply with door approach clearances – which they appear to do. (206.4.1)
+
+Parking Spaces: Approx. 2% of spaces are required to be accessible; to be confirmed by Civil.
+
+Toilets: (10) toilets appears to be accessible.
+
+Sinks: Some sinks are missing P-trap protection.
+
+Plumbing fixture Distribution: (8) ADA restrooms are located off from main corridor distributed equally around the building. Gymnasium lobby restrooms are accessible.
+
+Drinking Fountains: (3) drinking fountains with integral bottle fillers observed. A minimum of (2) drinking fountains are required, with one complying with the requirements for people who use a wheelchair and one for standing persons.
+
+Classroom sinks and sink counters: Casework in classrooms require modification or replacement for ADA compliance at sinks.
+
+Signage: Signage appears to meet ADA standards, however, many signs are located on the face of doors, when they should be mounted alongside the door at the latch side.
+
+Counters, Serving / Service and work surfaces: Further investigation required to confirm accessibility compliance.
+
+Fire alarm: See electrical report.
+
+Elevator: Yes.
+
+END OF REVIEW
+
+45
+
+LEGEND EXISTING CONDITIONS SITE PLAN
+
+46
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+Crossett Brook Middle School – Facility Evaluation – Site / Civil
+
+Crossett Brook Middle School is located south of Vermont Route 100 in Duxbury Vermont and accessed from Route 100 via a single driveway. School zone signs are in place along Route 100 along with a speed limit of 40 MPH. No sidewalks are present, but pedestrian traffic is unlikely given the location.
+
+Recent flooding at the school was described by school staff as occurring through electrical conduit running between the building and a GMP transformer located near the brook. This was the second occurrence of flooding within an 8-month period. FEMA flood mapping indicates that the flood elevation of the brook in the transformer location would be approximately 1 to 2 feet above the building floor elevation, supporting the possibility of flooding via the conduit. We understand that the school and GMP are proactively moving the transformer to remove this risk.
+
+Figure 1: FEMA Mapping with Elevation Notes
+
+208 Flynn Avenue, Suite 2A, Burlington, VT 05401 ▪ Tel: 802-863-6225 85 Mechanic Street, Suite E2-3, Lebanon, NH 03766 ▪ Tel: 603-442-9333 368 Broadway, Suite 11, Saratoga Springs, NY 12866 ▪ 518-205-9141
+
+47
+
+The school parcel is bound to the south and east by Crossett Brook with a listed size of 30.75 AC. A long driveway runs along the east side of the site. This driveway follows the brook to the southeast with a 4% slope. The driveway connects to a parent drop-off loop followed by a bus drop off loop. Most parking extends east and north from the drop off area, with the school building in the center of the site. A gravel fire lane runs along the north side of the building, connecting the end of the parking area back to the entry drive.
+
+The northern portion of the site slopes up over 100’ in the middle to a small knoll before dropping back down to Route 100. Remaining portions of the site are gently sloped and largely open. Sports fields are located to the east, with a single soccer field at the west corner near the entry drive. A large wastewater disposal system occupies the area northeast of the main parking lot.
+
+Neither morning drop-off nor afternoon pick-up periods were witnessed, but no significant issues were reported by school staff. Circulation issues are not anticipated since this facility is operating below its original design capacity.
+
+Asphalt pavement surfaces serving the school are generally in fair condition, with some recent patching evident and other areas needing repair. Concrete sidewalks on the east side of the building were in good condition with some exceptions. The gravel fire lane and bus parking areas were in good condition.
+
+The loading dock and rear building stairs are in poor condition with deteriorating concrete and failing railing attachment points. Both should be repaired or fully replaced. This area also holds dumpsters for the facility.
+
+Eight ADA parking spaces were noted on site, meeting the requirements. A section of flush curbing at the main entrance was not fully ADA compliant. A curb ramp at the northern end of the parking lot was cracked and should be replaced. Concrete stairs leading from the parking lot to the middle of the building also need repair.
+
+Site grading and drainage patterns around the site appear to be working well. It is worth noting that approximately 1.3 AC of open field area north of Route 100 appears to drain across 100 through a culvert and discharge into a swale that runs along the entry drive. This could be re-routed if swale overloading is suspected of increasing flood risk to the facility. Some minor erosion areas and culvert cleaning is warranted.
+
+Figure 3: Off-Site Drainage Notes
+
+Figure 2: Loading Dock Area
+
+48
+
+Runoff from pavement and roof areas is collected via swales and catch basins and discharged to three locations south and east of the facility. Improvements approved under Vermont permit 3172-9050.1 would add a pretreatment forebay and infiltration basin at the southern corner of the school lot. This system has not yet been built.
+
+Water is provided to the school via a connection to the Waterbury Municipal system. Hydrants along the water service provide fire protection capability.
+
+Sanitary sewer is managed by an on-site system approved under Vermont Permit ID-9-0263. This system includes septic tanks, pump stations, valve pits, and leach fields. One valve pit was opened and found to be well maintained. Note that the indirect discharge permit requires regular monitoring and reporting. The school district should confirm that this reporting is up to date.
+
+Figure 4: WW System Permit Drawing Portion
+
+According to state records, the building is served by a 10,000-gallon underground fuel oil tank installed in 1997. No inspection reports were available. The school district should confirm that permit requirements have been met and plan for inspection and future replacement due to the age of the tank. If replacement is considered, a location outside of the truck loading area would be better protected from damage.
+
+It is worth noting that this site was approved under Land Use (Act 250) permit 5W1243 in 1996. No information was available online, but the district should review the permit and conditions to confirm that any specific requirements are being met.
+
+This report was based on June 11, 2025 site observations by Paul Boisvert, along with available permits and GIS information.
+
+In general, this site was found to be well maintained with minor issues. Given that the facility is operating below design capacity and the space available, this site would be well suited to expanded use.
+
+49
+
+HUUSD Structural Assessment Report
+
+I | SCOPE AND BASIS OF REPORT
+
+The purpose of this report is to describe, in broad terms, the structure of the existing building, comment on the existing condition and structural integrity of the structure, and discuss any potential structural impacts related to future renovations and additions to the building.
+
+Engineering Ventures performed a preliminary structural assessment of the existing structures on June 30, and July 1, 2025. The investigation of the existing structures was limited to visual observation of the exterior façade from grade and of main structural elements, where readily exposed to view. No finishes were removed, nor was any non-destructive or destructive testing performed. Partial sets of original design drawings depicting the existing construction were made available for use and were reviewed as part of this investigation.
+
+As a part of the assessment, Engineering Ventures reviewed the building’s structure, took representative photos of the building’s construction types and conditions, and reviewed sizes and spans of structural members based on the information provided by the existing construction drawings.
+
+The general condition of the buildings is good. This report identifies items that are in fair or poor condition. Structural items observed, as part of this investigation, which are not specifically identified were generally seen to be in good condition, or better. Evaluation of framing capacity and code compliance is based on the 2015 Vermont Fire and Building Safety Code and 2015 International Building Code, as adopted by the state.
+
+II | CURRENT DESIGN LOADS
+
+Design loads per ASCE 7-10 “Minimum Design Loads for Buildings and Other Structures”:
+
+• Snow Loads:
+
+o Ground Snow Load = 60 psf (Waterbury, VT) o Flat Roof Snow Load = 42 psf (Waterbury, VT) o Ground Snow Load = 70 psf (Warren, Waitsfield, Fayston, VT) o Flat Roof Snow Load = 49 psf (Warren, Waitsfield, Fayston, VT)
+
+• Live Loads:
+
+o Classrooms = 40 psf o First Floor Corridors = 100 psf o Corridors above First Floor = 80 psf o Gymnasium = 100 psf o Cafeteria = 100 psf o Library = 60 psf o Offices = 50 psf
+
+50
+
+HUUSD Structural Assessment Report
+
+IV | CROSSETT BROOK MIDDLE SCHOOL
+
+Date Visited: 7/1/2025
+
+The middle school was built in 1996 and is a two-story structure with no basement. The 2nd floor structure is primarily steel framed, both K-Joist and WF beams, with a slab on metal deck. The floor framing is supported by steel WF girders and CMU bearing walls. The roof structure consists of K-Joists with metal roof deck supported by CMU bearing walls. The cafeteria and gymnasium are deep steel trusses supported by CMU bearing walls. The foundation system is shallow frost wall foundations, with retaining walls at areas of high grade. The exterior façade is veneer masonry.
+
+Most framing could not be confirmed as most framing was concealed by finishes. There is no basement or attic spaces.
+
+Existing building drawings are available and were reviewed. The design loads are as follows:
+
+• Roof: o Live Load = 50 PSF
+
+o Dead Load Flat = 30 PSF o Dead Load Pitched = 25 PSF o In areas of snow drift, Max Live Load = 130 PSF
+
+• Floor: o Live Loads:
+
+▪ Fan Room = 150 PSF
+
+▪ Corridors = 80 PSF
+
+▪ Stairs = 100 PSF
+
+▪ Typical Floor = 50 PSF o Dead Load = 50 PSF
+
+• Wind Speed = 70 MPH
+
+• Earthquake Zone 2 (Designed in accordance with BOCA 1987)
+
+Live and roof loads are generally in accordance with today’s code. However, lateral codes have changed significantly since BOCA 1987. The lateral system is CMU shear walls, and any major structural upgrades that would trigger lateral review would most likely require lateral upgrades.
+
+The building structure has been well maintained and is generally in good structural condition. A limited number of items are suggested to be monitored, maintained and/or repaired to preserve the longevity of the school’s structural integrity. These items are noted in the attached spreadsheet. Exterior entrance columns show rust deterioration and should be cleaned and repainted. These items are noted in the attached spreadsheet. See photos below.
+
+51
+
+HUUSD Structural Assessment Report
+
+52
+
+HUUSD Structural Assessment Report
+
+IX | POTENTIAL STRUCTURAL IMPACTS OF FUTURE RENOVATIONS/ADDITIONS
+
+A core concept to keep in mind when planning future use of space is to generally maintain shear walls. Eliminating such walls in a localized area would trigger the requirement for a global analysis of the lateral force resisting system and/or significant reinforcing of the localized area. This would likely require reinforcing of the lateral load resisting system and affect the cost of any proposed floor plan alterations. If wall removals or relocations are nonetheless desirable, costs for structural evaluation and design of lateral reinforcement should be included in any estimates.
+
+Any changes to the roof, including the addition of new equipment or insulation would require further evaluation of the capacity of the existing roof framing, as well as possible reinforcing of the existing roof framing for the added loads.
+
+A potential addition, taller than the existing building, could impact the existing building by creating a snow drift on the existing roof framing. This would require an evaluation, and possible reinforcing, of the existing roof framing for additional drifting snow loads from the new roof.
+
+53
+
+HUUSD ELECTRICAL SUMMARY
+
+– Crosse Brook School Engineering Services of Vermont 2025-10-09 General
+
+1\. Our site visit was conducted on June 6, 2025. 2. We were accompanied by Ray Daigle, Director of Facili\#es and Opera\#ons
+
+Mechanical Execu\&ve Summary
+
+1\. In general, the mechanical systems were installed in 1996 when the building was constructed the
+
+mechanical systems are at the end of their useful life and will require replacement. 2. The school is a two-story structure constructed in 1996. Systems installed are consistent with high
+
+efficiency systems designed and installed at that \#me. 3. In general, the building is provided with two oil fired hot water boilers and a total of seven plate type heat recovery units with air distribu\#on systems with hot water space hea\#ng. We would recommend removal and replacement of the boilers with propane boilers. 4. There is one air handling unit serving the Office area which is provided with an air handling unit with 6-ton cooling coil and DX air condi\#oning system. There is also a 2.0-ton computer room cooling unit. 5. We recommend installing cooling and dehumidifica\#on systems through the building to improve
+
+comfort. 6. The exis\#ng 10,000-gallon double wall oil tank installed in the load dock area which should be relocated and replaced, the tank has a leak detec\#on panel and overfill alarm system which is no longer opera\#onal. We would recommend removal and replacement of the oil tank with a propane tank. 7. Hea\#ng distribu\#on piping consists of steel and copper piping with ball valves. There is a glycol hea\#ng loop for the Kitchen make-up air unit to protect this system from freezing. The remainder of the hea\#ng system is water based. We recommend replacing all hea\#ng system valves and piping accessories. All glycol systems should be flushed and replenished with new glycol. 8. We recommend installing a new HVAC system throughout the building with heat recovery
+
+ven\#la\#on and hea\#ng and cooling terminal units which provide both hea\#ng and cooling. 9. The exis\#ng control system is an Automated Logic digital control system and is adequate for the
+
+current use. These systems can be renovated to serve new systems. 10. A heat pump system should be inves\#gated for this school to provide hea\#ng and cooling. The heat pump system could be either an air source heat pump system or geothermal system. A heat pump system would allow hea\#ng and cooling as well as dehumidifica\#on with back-up heat provided by the fossil fuel hea\#ng system depending on the level of thermal envelope improvements that are implemented. 11. Exis\#ng kitchen exhaust hood is code compliant, opera\#onal cost savings could be achieved by installing a demand control system to control exhaust fan and make-up air up based on usage. 12. In general, the building systems could be modified to accommodate renova\#ons. The building would be capable of expansion with an increase to the boiler capacity or construc\#on of addi\#onal boiler room. The plumbing infrastructure is capable of expansion. Hea\&ng Systems
+
+1\. The building is provided with three oil-fired cast-iron boilers, each rated for 1,526 MBH Net IBR when fired at 17.4 GPH of No. 2 fuel oil. There is a set of lead-lag base mounted primary hea\#ng pumps serving the space hea\#ng and one in-line pump serving a glycol heat exchanger for the Kitchen make-up air unit. The glycol system has an in-line to serve the glycol side of the system. There is also an in-line pump which serves the central domes\#c hot water hea\#ng tanks located in the boiler room. Hea\#ng distribu\#on piping consists of steel and copper piping with ball valves.
+
+54
+
+HUUSD ELECTRICAL SUMMARY
+
+– Crosse Brook School Engineering Services of Vermont 2025-10-09 We recommend the boilers with new propane boilers and replacing all hea\#ng system valves and piping special\#es.
+
+2\. A heat pump system should be inves\#gated for this school to provide hea\#ng and cooling; this system could be either a geothermal or air source heat pump system. The exis\#ng fossil fuel hea\#ng systems could be used as auxiliary heat. 3. The glycol hea\#ng system should be flushed and cleaned and the glycol system replenished with
+
+new glycol. 4. All spaces should be provided with new terminal hea\#ng and cooling units to provide full air condi\#oning and hea\#ng; the exis\#ng hydronic distribu\#on system could be used and renovated to serve the new terminal units. The boilers could be used to supplement the heat pump system. A new chilled water distribu\#on system would be provided to provide cooling to all new terminal units and for cooling coils in the ven\#la\#on systems. 5. The boilers are served by a 10,000-gallon double wall oil tank, with oil leak detec\#on panel and overfill alarm system. The tank is installed under the Kitchen loading dock and oil is pumped from this loca\#on to the boiler room using an oil transfer pump. The leak detec\#on system and overfill alarm system are not opera\#onal and should be removed. The owner has reported numerous problems with the tank located in the loading dock caused by heavy trucks running over the manholes. This tank should be removed, and a new propane tank system should be installed to serve new propane boilers.
+
+55
+
+HUUSD – Crosse Brook School Engineering Services of Vermont 2025-10-09
+
+Ven\&la\&on Systems
+
+1\. The building is provided with seven air-to-air-heat recovery units located in the fan rooms. These units were designed to provide fresh air and exhaust for all spaces except for the gym and cafeterias. These systems are heat wheel units and are approximately 60-65% efficient. These systems are at the end of their useful life and need to be replaced. Replacement equipment should be high efficiency (85%+) heat recovery units with hea\#ng, cooling and reheat to allow for dehumidifica\#on of the fresh air supplied to the spaces. 2. We recommend installing new HVAC systems, including new heat recovery systems with hea\#ng and cooling and new terminal hea\#ng and cooling units to provide space hea\#ng and cooling.
+
+3\. The exis\#ng duct systems could be re-used. All systems should be professionally cleaned, leakage
+
+tested and rebalanced. 4. The Kitchen has an exhaust hood and exhaust duct which is listed for grease and complies with current codes, a demand controller should be used to allow the exhaust fan and associated make- up air unit to vary its capacity based on the use under the hood.
+
+5\. The dishwasher is provided with an exhaust hood and exhaust fan that appears to be adequate.
+
+ELECTRICAL SUMMARY
+
+56
+
+HUUSD – Crosse Brook School Engineering Services of Vermont 2025-10-09 Plumbing System Execu\&ve Summary
+
+1\. Water distribu\#on piping is in good condi\#on, we recommend replacing all valves and pipe
+
+special\#es. 2. All sanitary waste piping is in good condi\#on. 3. The sanitary waste and roof drainage piping should be jet flushed and internally inspected by
+
+camera to determine the condi\#on of the piping. 4. There is an exterior grease trap serving the kitchen as well as an interior grease interceptor for the
+
+pot sink, this interior grease interceptor should be replaced. 5. We recommend installing an electronic thermosta\#c mixing valve for the water heaters. Domes\&c Water System
+
+1\. The building is provided with a 6” municipal water service, which also serves the building sprinkler system. The main domes\#c water service is a 3” copper line which is provided with a meter and one 3” backflow preventer and pressure reducing valve.
+
+2\. Piping systems were installed during the 1996 project, we recommend replacement of all valves
+
+and piping special\#es. 3. Domes\#c water hea\#ng is provided by two 119-gallon indirect water heaters serviced by the boiler system. The water heaters are from the 1996 project and at the end of their useful life and should be replaced. 4. The water heaters are not provided with a thermosta\#c mixing valve.
+
+ELECTRICAL SUMMARY
+
+57
+
+HUUSD – Crosse Brook School Engineering Services of Vermont 2025-10-09 Sanitary Waste and Vent Systems and Roof Drainage Systems
+
+1\. The plumbing piping was installed under the 1996 construc\#on of the building, we would
+
+recommend flushing and camera inspec\#on of the systems. 2. The Kitchen is provided with an exterior grease trap, and the pot sink is provided with an interior
+
+grease interceptor, we recommend replacement of the interior grease interceptor.
+
+3\. The building is provided with roof drainage systems. The systems were installed when the building was constructed in 1996, the systems appear to be in good condi\#on. We would recommend flushing and camera inspec\#on of the systems.
+
+ELECTRICAL SUMMARY
+
+58
+
+HUUSD – Crosse Brook School Engineering Services of Vermont 2025-10-09 Fire Protec\&on Systems
+
+1\. The building is provided with a complete wet pipe system serving all spaces and the system appears to be adequate with no major code issues. The wet pipe system appears to be in good repair. All wet pipe system heads should be inspected, tested and replaced where required by code.
+
+ELECTRICAL SUMMARY
+
+59
+
+ELECTRICAL ELECTRICAL SUMMARY SUMMARY
+
+HUUSD – Crosse Brook Elementary School Engineering Services of Vermont 2025-10-09 Electrical Execu,ve Summary
+
+1\. The school is a two-story structure constructed in 1996. The electrical systems were installed in
+
+1996 when the building was constructed. 2. Electrical service is more than adequate for present building use with almost 80% of the service
+
+capacity not being u\#lized and available or addi\#onal electrical loads, if necessary. 3. The service circuit breaker requires cleaning/tes\#ng/adjustment to operate properly during a loss
+
+of u\#lity power. 4. Electrical distribu\#on equipment is in decent shape and is s\#ll serviceable. There is storage in
+
+some loca\#ons which needs to be removed/relocated to maintain clear workspace. 5. Wiring methods are as expected for the type and age of the building. There are a few Code items to be corrected. The use of the plug strips is almost unavoidable given the quan\#ty of items needing to be powered up at a typical desk/computer loca\#on. 6. Ligh\#ng has mostly been converted to LED and ligh\#ng levels are appropriate. There are a few more loca\#ons where replacement of fluorescent lamps with LED is required. Recommend removal of all fabric coverings from luminaires as that reduces light levels on work surfaces. 7. Recommend that Code required annual 90-minute tes\#ng of all emergency and exit ligh\#ng be
+
+performed and added to list of annual maintenance tasks if it is not already. 8. Fire alarm system is an aging zoned system. Recommend replacement with an addressable fire
+
+alarm Emergency Voice Communica\#ons System. 9. Clock system is fully opera\#onal and serviceable with the Wi-Fi based system that exists. Electric Service
+
+1\. Underground from u\#lity owned pad mount transformer (appears to be 750 KVA), 277/480V, 3-
+
+phase, 4-wire. Terminates in switchboard MDP. 1000 Amp fused bolt pressure switch.
+
+a. Facility management reported that the main switch trips open on loss of u\#lity power and requires personnel to go to the school, charge and close the bolt pressure switch. Engineer has contacted a GE/ABB representa\#ve and put them in contact with facility management. Likely is an undervoltage relay in the switch. 2. The facility was flooded in 2024 due to water filling the u\#lity (GMP) structures and running into the building through the service conduits. The conduits have been sealed water\#ght, and the u\#lity has made temporary repairs on their structures and is in the process of installing a replacement underground u\#lity line extension from the main road to the transformer to allow elimina\#on of the modular termina\#ng cabinets and associated concrete structures that are currently located on the riverbank. 3. Service is current transformer metered at the transformer with meter on the west exterior of the
+
+building. 4. Peak demand for the school is 128KW which equates to 154 Amp @ 480V 3 phase. Distribu,on
+
+5\. 1000 Amp main bolt pressure switch in switchboard MDP. Feeder circuit breakers to panels located
+
+throughout the building.
+
+a. The main bolt pressure switch trips open upon loss of u\#lity power and school personnel must manually reset (close) the switch when u\#lity power is restored. This is likely the phase loss protec\#on in the switch which needs to be reprogrammed to correct this. Connec\#on has been made between the school and the switch manufacturer.
+
+60
+
+ELECTRICAL SUMMARY HUUSD – Crosse Brook Elementary School Engineering Services of Vermont 2025-10-09 6. Switchboard MDP, panels DPW1 and RPW1 as well as dry transformer T1 are located in the basement electric room at the west end of the building, along with PV solar with combiner panel and exterior ligh\#ng controls.
+
+a. It appears that there is adequate workspace and clear space above/below the electrical equipment. Based on Voltage and Ampere ra\#ng of the equipment, two egress paths are required from the workspace. Only one exists, however this is acceptable as we have double workspace in front of the switchboard. b. Configura\#on of the electric room door met requirements of the Na\#onal Electrical Code
+
+when installed. Present Code would require door swing outwards with panic hardware. c. There is storage in the electric room which impedes into the working space in front of the panels. It is highly recommended that this storage be removed and a policy of no storage in the electric room be implemented.
+
+i. This same condi\#on exists with almost all distribu\#on equipment throughout the building and needs to be addressed (in small electric rooms, in gymnasium storage room, in mechanical equipment rooms). 7. There does not appear to be any surge protec\#on equipment at the electric service. 8. Switchboard and distribu\#on equipment (circuit breaker panelboards) was installed new as part of the original 1996 building construc\#on and are almost 30 years old. GE equipment: the equipment is in good condi\#on, is serviceable and generally has capacity to add circuit breakers.
+
+a. Given the age of the equipment, we would recommend having GE/ABB factory technicians inspect, clean, and test the switchboard and panelboards to beFer ensure proper, ongoing opera\#on. Generator
+
+9\. No generator exists at this school. Solar 10. There is a ground mount solar installa\#on to the west of the building with inverters located at the installa\#on, meter and disconnect on the exterior west side of the building. The PV system is 136KW-AC. Solar is \#ed directly into the u\#lity transformer. 11. There is a rooGop solar installa\#on with the inverter and combiner panel in the electric room and meter and disconnect on the exterior west side of the building. The inverter is 7KW-AC. Solar is \#ed into the 120/208V panel RPW1 to directly offset building electrical energy use. Wiring Methods
+
+12\. Wiring methods are generally individual conductors in raceway (electrical metallic tubing, EMT),
+
+flexible metallic raceway (FMC), and metal clad cable (MC cable). 13. Plug strips exist at most loca\#ons where computers are u\#lized. Although this is generally standard prac\#ce, and plug strips are approved for use by OSHA, they are not differen\#ated from extension cords and are generally considered “temporary wiring” by Vermont DFS. Temporary wiring, per Na\#onal Electrical Code, can only be in place and u\#lized for a maximum of 90 days.
+
+ELECTRICAL SUMMARY
+
+Main Electric Service Bolt Pressure Switch
+
+61
+
+ELECTRICAL ELECTRICAL SUMMARY SUMMARY
+
+HUUSD – Crosse Brook Elementary School Engineering Services of Vermont 2025-10-09 Devices & GFCI
+
+14\. There appears to be adequate receptacles throughout the building.
+
+a. Excep\#on being at the computer loca\#ons, where plug strips are u\#lized. Generally, a typical computer installa\#on will require more than a duplex receptacle to power the several components. 15. The coverage of GFCI protected receptacles appears to be Code compliant. 16. Receptacle devices are original to 1996 building construc\#on.
+
+a. Present electrical Code requires tamper-resistant receptacles for school buildings as a
+
+measure of added safety to prevent shock hazards. Ligh,ng – Interior
+
+17\. Linear fluorescent luminaires and compact fluorescent wall and downlight luminaires, original to building construc\#on, are u\#lized in most interior spaces. All or most of these luminaires have been retrofiFed to LED lamps opera\#ng 120VAC.
+
+a. There were only one or two loca\#ons where a fluorescent luminaire exists that was missed
+
+as part of the building-wide retrofit. 18. Ligh\#ng levels in classrooms, corridors, offices, and cafeteria were spot-checked and seemed
+
+adequate. Ligh,ng – Interior Controls
+
+19\. Interior ligh\#ng controls are generally on/off toggle switches. 20. The gymnasium has occupancy sensors at the walls/ceilings that will turn luminaires on/off
+
+automa\#cally if the manual switches are leG in the on posi\#on. Ligh,ng – Exterior
+
+21\. Building wall-mounted, recessed into overhangs and pole lights have had HID and fluorescent
+
+lamping replaced with LED luminaires. Ligh,ng – Exterior Controls
+
+22\. The automa\#c ligh\#ng controls located in the electrical room control exterior ligh\#ng based on
+
+photocell and \#me. Exit Signage
+
+23\. Exit signs are internally lit with baFeries for self-powering during loss of u\#lity power. Light source appears to be LED. Signs were randomly tested and were opera\#onal, although this is not a full 90-minute test. Emergency Ligh,ng
+
+24\. Emergency ligh\#ng is accomplished through use of emergency baFery inverters in the general use luminaires and emergency baFery units (EBU’s). The emergency ligh\#ng was randomly tested and were opera\#onal, although this is not a full 90-minute test. Fire Alarm
+
+25\. The fire alarm system is a zoned system operated through a No\#fier AFP-400 series control panel. Fire alarm pull sta\#on coverage appears adequate, smoke detectors exist in each classroom and corridor, and duct smoke detectors exist inside the large air handling units in the aNc. Sprinkler water entrance is monitored for tamper and flow. Fire alarm system controls elevator recall
+
+62
+
+ELECTRICAL SUMMARY HUUSD – Crosse Brook Elementary School Engineering Services of Vermont 2025-10-09 func\#ons. Fire alarm signals are audible/visual signals with audible component being voice evacua\#on; coverage appeared adequate. There did not appear to be any magne\#c door holders at egress/corridor doors or at classrooms. The inspec\#on s\#cker on the fire alarm control panel reads August 2024, therefore the system will require reinspec\#on August 2025.
+
+a. There is a kitchen hood fire protec\#on system, and the fire alarm system does monitor the fire protec\#on. However, we could not find evidence that the system is interlocked to provide shutdown opera\#on of electrically energized cooking equipment under the hood. 26. There is a system digital communicator which
+
+alarms to an offsite sta\#on. Clocks 27. There is a clock system that exists in the building that is Wi-Fi based, communica\#ng with baFery operated clocks throughout the building. PA System
+
+28\. The public address/paging system is speakers in the corridors and classrooms, accessible through
+
+the telephone system. Same system is u\#lized for bell/tone for buses. Telephone
+
+29\. A telephone is located in each classroom, library, office, and similar space. Phones are u\#lized for accessing the PA system as well as communica\#ons in/out of the school. System is voice over internet protocol (VOIP). A/V 30. Most classrooms have a projector suspended below the ceiling which is accessed via the Teachers
+
+computer. 31. There are no central A/V systems in the school. Where AV systems exist, they are localized. Ethernet
+
+32\. The building ethernet system includes CAT6 cabling, wireless access points and head end equipment which is located in a network closet in the administra\#on area of the building. System appears to be adequate and opera\#onal. Security
+
+33\. School access control and security systems exist and are opera\#onal. 34. An intercom system with video camera exists which school personnel use to iden\#fy persons prior
+
+to releasing the door lock to allow the person into the school. 35. There is a central security camera system at this school.
+
+ELECTRICAL SUMMARY
+
+Fire Alarm System Control Panel
+
+63
+
+ELECTRICAL ELECTRICAL SUMMARY SUMMARY
+
+HUUSD – Crosse Brook Elementary School Engineering Services of Vermont 2025-10-09 EV Charging
+
+36\. Through conversa\#ons with building management, there is no exis\#ng EV charging although there
+
+has been talk of adding EV charging sta\#ons to the site.
+
+64
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+65
+
+COST OPINION
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+66
+
+COST OPINION
+
+CROSSETT BROOK MIDDLE SCHOOL
+
+67
+
+COST OPINION
+
+FAYSTON ELEMENTARY SCHOOL
+
+68
+
+FAYSTON ELEMENTARY SCHOOL
+
+A BRIEF BUILDING HISTORY AND OVERVIEW
+
+Fayston Elementary School serves Pre-K through 6th grade students in Fayston, Vermont. Currently, the school has approximately 98 students. The building is approximately 20,140 SF and was originally built in 1962. The school has undergone five additions over the years. In 1972 and 1980, additional classroom spaces were added. In 1984, two small support spaces were added. In 1992, a new main entry, main office, gymnasium/cafeteria, kitchen and art room were added. The last significant addition/renovation to the building occurred in 2005, with the addition of more classroom spaces.
+
+The parcel is approximately 7 acres. The site is bordered on the south by German Flats Road, by forested residential properties to the west and north and residential homes on the east. The main entrance to the school is accessed from German Flats Road, with a short entry drive that directs traffic up to the main entrance along the west side of the school. The site slopes up from German Flats Road, with a plateau to the north where the sports fields are situated.
+
+Fayston Elementary School is a one-story, wood-framed structure with reinforced concrete foundation walls and concrete slab-on-grade. The gymnasium and kitchen walls consist of CMU block and reinforced concrete bearing walls. The main roof structure is large glulam beams and timber decking at the original 1962 building and long-span wood trusses and structural insulated panels at the 2005 addition. All other eras of construction have structure covered by interior finishes and no construction documents available to reference. All roof surfaces have standing seam metal roofing. Exterior walls consist of natural cedar wood siding and trim. Exterior wall construction is unknown. Exterior openings consist of aluminum-framed windows, a few wood-framed windows, and hollow metal doors and frames.
+
+Interior partitions consist of gypsum wallboard over 2x wood framed walls. Flooring consists of vinyl composition tile (VCT) flooring at classrooms, offices, gymnasium, and restrooms, and carpet tile flooring at some classrooms and corridors. Ceilings are a combination of gypsum ceilings, 2x4 drop-in acoustic ceilings (ACT), and exposed structural wood decking. Interior doors are wood veneer.
+
+The building is served by a private water supply well and an on-site septic system. The building is heated by (2) LP gas-fired cast iron boilers feeding perimeter radiant heating units. Power is fed to the building via a 400-amp, single-phase, 120/240V service. Some of the buildings electrical distribution systems are nearing or at end of useful life. Interior lighting consists of linear fluorescent light fixtures that have been fitted with LED lamps. The building has an automatic fire alarm system and fire protection sprinkler system limited to storage rooms and the boiler room. No emergency backup generator was observed at this school.
+
+69
+
+SUMMARY
+
+FAYSTON ELEMENTARY SCHOOL
+
+70
+
+CONSTRUCTION BY YEAR
+
+ARCHITECTURAL FAYSTON ELEMENTARY SCHOOL
+
+REVIEW
+
+FINDINGS
+
+Below is a summary of the major architectural facility issues requiring attention at Fayston Elementary School. Please see the engineering reports for site, structural, and HVAC findings. See the attached facility evaluation spreadsheet for an itemized list of observations.
+
+Exterior Envelope The exterior envelope assembly likely does not have a proper air barrier system and likely does not meet current energy code. Exterior cedar shingle siding is damaged, split, and scalloped in many locations and should be replaced. Areas of exterior wood trim is damaged and/or weathered and should be repaired and stained. The exterior insulation and finishing system (EIFS) at exterior foundation walls is damaged and should be repaired/replaced.
+
+Roofing Some areas of standing seam metal roofing are near end of life and should be replaced.
+
+Windows Exterior aluminum windows are nearing the end of their useful life. Exterior wood windows are in poor condition and should be replaced. Exterior window joint sealant is displaced at some locations. Some windows do not have proper window sill flashing.
+
+Exterior Doors Exterior wood door frames have areas of rot at the base. Many exterior hollow metal doors and frames have visible rust at the base. Many exterior doors were observed with damaged or missing weatherstripping and/or gasketing.
+
+Interior Doors Some interior hollow metal door frames have visible rust at the base. Some interior wood doors have delamination of the wood veneer. Some doors were observed with damaged door closers and should be replaced.
+
+Casework Some classroom casework is in poor condition and/or has failing hinge hardware. The kitchen casework is in poor condition. Classroom benches and coat racks are in poor condition.
+
+Displaced exterior window joint sealant
+
+71
+
+Damaged VCT flooring & rusted door frame
+
+Scalloped and split cedar wood siding
+
+No proper window sill flashing
+
+FAYSTON ELEMENTARY SCHOOL
+
+Flooring VCT flooring at classrooms, janitor closets, and gym/gym storage is cracking and separating at the joints. Vinyl floor transitions at classroom entries and transitions from VCT to carpet flooring are in poor condition. The maker space loft carpet flooring is separating from the floor substrate and should be replaced. The library carpet flooring is in poor condition.
+
+Ceilings The kitchen ACT ceiling has displaced, stained, or damaged ceiling tiles that should be replaced. ACT ceilings in some classrooms have stained tiles around mechanical diffusers that should be replaced. The sloped, ACT ceilings at the PreK classrooms are in poor condition and should be replaced. Some soffits at classrooms with cove lighting have cracks at the corners that should be repaired.
+
+Interior Finishes The corridor carpet wainscotting is stained and in poor condition. Interior wood window sills need to be refinished to protect the wood surface.
+
+Furniture / The main entry vestibule unit heater is Fixtures / rusted and should be replaced. Basketball Equipment hoops do not have safety straps installed. The kitchen coiling counter doors are in poor condition.
+
+Code / Life Safety Exterior double doors at the 2005 addition corridor have a temporary wood crossbar over the panic hardware to prevent opening of the door from the exterior. This hardware should be adjusted or replaced, and the temporary crossbar removed. No wall padding is present at the gymnasium walls and should be added for safety. Classroom and office doors off of corridors do not have door closers. Exterior egress doors at the 2005 addition back corridor do not meet ADA egress requirements; a compliant egress pad should be added at these exterior doors.
+
+Stained ACT ceiling tiles
+
+72
+
+ARCHITECTURAL REVIEW
+
+VCT and carpet flooring in poor condition
+
+Classroom casework in poor condition
+
+CODE FAYSTON ELEMENTARY SCHOOL
+
+REVIEW
+
+BUILDING CODE REVIEW (Refer to 2015 Vermont Fire & Building Safety Code)
+
+Building description: Existing single story school building. Original build date: 1962. Additions: 1972, 1980, 1984, 1992, 2005.
+
+Approx. area: Elevator: no Assumed Construction type: 5B Sprinkler system– Partial system serving storage and mechanical rooms. Occupancy Type: IBC Educational Group E (305.1)
+
+Associated Group E Occupancies- Assembly occupancies associated with Group E are not considered a separate occupancy-IBC 303.1.3
+
+Table 503 Height and Area: Construction Type 5B. Building is not within allowable maximum area by IBC 2015 table 506.2 for type 5B, non- sprinklered, single-story construction. It is unknown if building is within allowable maximum height per IBC 2015 table 504.3. Max Height = 40’-0” Actual Height = Unknown Max Area = 9,500 sf Actual Area = 20,140sf
+
+NFPA 101 Chapter 15 Existing Educational Occupancies 15.1.3.3.1 Assembly spaces shall comply with Chapter 13 Existing Assembly occupancies. 15.2.5.2 Dead – end corridors: 20 ft max (non-sprinklered) 15.2.5.3.1. Education: Common Path of Travel: 75 ft max (non-sprinklered). 15.2.5.4 Rooms over 1000 sf or 50 occupants require two exit access doors, each providing access to two separate exits. Both doors can open in to the same corridor, provided the corridor leads in two opposite directions to two separate exits. 15.2.5.5 Classrooms doors must exit directly into a corridor- they are not permitted to exit through an intervening space. 15.2.6.3 Travel distance: 150 ft max (non-sprinklered). 15.2.9.1 Emergency lighting – required. 15.3.4.1.1 Fire alarm – required. 15.3.4.2 Initiation- Manual 15.3.4.2.3.1 Manual pull stations may be eliminated under certain circumstances. 15.3.4.3.1.1 Occupant notification shall be automatic per 9.6.3 15.3.6 Corridors: Corridor walls are required to be separated from other spaces by having a minimum 1/2-hour fire resistance rating in accordance with section 8.3 unless the spaces normally subject to student occupancy have not less than one door opening directly to the outside (non- sprinklered) Bathrooms are not required to be separated from corridors provided they are separated from other spaces by walls having a minimum 1/2-hr fire resistance rating (non-sprinklered) 15.3.7 Smoke Compartments 15.3.7.1 Schools shall be divided into 30,000 sf smoke compartments or divided every 300 ft using smoke partitions with one hour fire rating. 73
+
+CODE FAYSTON ELEMENTARY SCHOOL
+
+REVIEW
+
+ACCESSIBILIITY REVIEW (Refer to 2012 Vermont Access Rules)
+
+Accessible route: Site arrival, passenger loading zones, curb cuts, ramps, slopes etc. need to be confirmed by Civil.
+
+Accessible entrances: 60% of Public Entrances need to comply with door approach clearances – which they appear to do. (206.4.1)
+
+Parking Spaces: Approx. 2% of spaces are required to be accessible; to be confirmed by Civil.
+
+Toilets: (5) toilets appears to be accessible. Site investigations show that most classroom restrooms are not ADA compliant excluding the (2) 2005 addition restrooms.
+
+Sinks: Some sinks are missing P-trap protection.
+
+Plumbing fixture Distribution: (2) ADA restrooms are located off from the main entry lobby corridor, (1) ADA restroom is located at the health office, and (2) ADA restrooms are located at the newest 2005 addition classrooms.
+
+Drinking Fountains: (2) drinking fountains with integral bottle fillers was observed. A minimum of (2) drinking fountains are required, with one complying with the requirements for people who use a wheelchair and one for standing persons.
+
+Classroom sinks and sink counters: Casework in classrooms require modification or replacement for ADA compliance at sinks.
+
+Signage: Most rooms were observed without room signage. The only ADA compliant signage that was observed was at the main lobby restrooms.
+
+Counters, Serving / Service and work surfaces: Further investigation required to confirm accessibility compliance.
+
+Fire alarm: See electrical report.
+
+Elevator: N/A.
+
+Ramp: N/A.
+
+END OF REVIEW
+
+74
+
+FAYSTON ELEMENTARY SCHOOL
+
+LEGEND EXISTING CONDITIONS SITE PLAN
+
+75
+
+Fayston Elementary School – Facility Evaluation – Site / Civil
+
+Figure 1: Overall School Parcel
+
+Fayston Elementary School is a single-story school building that serves around 120 students ranging from grades Pre-K through 6th. The building is located on the north side of German Flats Road on a 7 AC parcel. This parcel sits north of Chase Brook and south of a small creek. The property is surrounded by creeks and woods at different variations of slopes. Parking and driveways lie south and west of the building, with a fenced-in play area and playground on the uphill side of the property. Soils on the site are mapped as gravelly sandy loam and fine sandy loam,
+
+Vehicle access to the school is possible from either direction of German Flats Road via a single two-way driveway that is connected to a small parking lot, west of the school building. One side of the parking lot faces Chase Brook. The parking area also connects to a gravel bus turnaround loop that appears to lie on adjacent property. It is unclear whether a formal agreement is in place for this use.
+
+208 Flynn Avenue, Suite 2A, Burlington, VT 05401 ▪ Tel: 802-863-6225 85 Mechanic Street, Suite E2-3, Lebanon, NH 03766 ▪ Tel: 603-442-9333 368 Broadway, Suite 11, Saratoga Springs, NY 12866 ▪ 518-205-9141
+
+76
+
+Figure 2: Bus Loop
+
+Overall, the asphalt of the parking lot seems in fair condition. No striping is present, and correspondingly no defined number of parking spaces. There is one ADA sport marked with signage across the main front entrance of the building, but a formal parking layout should be considered. Drop-off and pick-up occur on the front side of the building by the main entrance. School staff expressed concern with traffic backups during the drop-off and pick-up hours due to the limited circulation as well as the limited visibility along German Flats Road in this area. This was not witnessed due to the timing of the site visit. A review of alternate drop-off configurations is warranted.
+
+A small area at the west end of the parking lot facing Chase Brook is bare dirt and gravel. This area should be stabilized by removing the gravel and applying top-soil and vegetation to the area. While there was a recent stabilization of Chase Brook with rip rap, this area should be reviewed periodically for stability.
+
+The main concrete entrance facing the parking lot appeared to be cracked and had cracked asphalt patched on top. Due to elevation changes this repair is not ADA compliant. The flush curb should be rebuilt to meet standards.
+
+The school relies on propane gas for heating, with structures appearing on the west side of the property adjacent to German Flats Road. A drilled well, located uphill from the building supplies
+
+domestic water for the building.
+
+No fire suppression tanks or ponds were noted. Water for fire suppression could be available from Chase Brook. The school’s on- site wastewater system is permitted under WW-5-0415 with the max capacity of 242 students. It should also be noted that the leach field mentioned in the permit is located on adjacent property with documentation provided by a recorded easement.
+
+Figure 3: Cracked Asphalt
+
+Figure 4: Propane Tank Covers
+
+77
+
+Recent drainage improvements were noted at the toe of the slope on the west side of the building, facing the parking lot. These include catch basins and drainage pipes, but seepage, soil movement and erosion are still present with debris collecting at the catch basin on the slope.
+
+These improvements did not address the crib wall on this slope. This wall is unstable and lacks tiebacks. It will need to be removed and reconstructed with fabric, drainage stone, and tiebacks at a minimum. A more permanent solution would involve the installation of a large block gravity wall. For eroded areas we recommend removal of loose stones, cleaning the area of debris, and applying topsoil, seed, and mulch to eroded areas. Sumps of drainage structures should also be cleaned.
+
+Along the north side of the building wet and spongy soil has been reported following rains. Consider installation of a drip strip with rounded stones to collect runoff here. Similarly, there is a swale around the building that show signs of displaced stone and erosion that needs to be cleaned, and the drip edge rebuilt. Additionally moss build-up and discoloration was noted along the foundation particularly below roof drip lines. Debris removal and stone drip strips with perforated drainage pipes could reduce water issues around the foundation.
+
+This evaluation was based on a June 11, 2025 site visit by Julia Ginorio and Joana Gjini, along with available GIS information, permit documents, and staff comments.
+
+Expansion or reconfiguration at this site would be limited by several factors. These include circulation and parking challenges, on-site water, and wastewater disposal capacity, and more generally by the location of the school relative to the rest of the district.
+
+Figure 5: Erosion at Catch Basin
+
+Figure 6: Displaced Crib Wall
+
+78
+
+HUUSD Structural Assessment Report
+
+I | SCOPE AND BASIS OF REPORT
+
+The purpose of this report is to describe, in broad terms, the structure of the existing building, comment on the existing condition and structural integrity of the structure, and discuss any potential structural impacts related to future renovations and additions to the building.
+
+Engineering Ventures performed a preliminary structural assessment of the existing structures on June 30, and July 1, 2025. The investigation of the existing structures was limited to visual observation of the exterior façade from grade and of main structural elements, where readily exposed to view. No finishes were removed, nor was any non-destructive or destructive testing performed. Partial sets of original design drawings depicting the existing construction were made available for use and were reviewed as part of this investigation.
+
+As a part of the assessment, Engineering Ventures reviewed the building’s structure, took representative photos of the building’s construction types and conditions, and reviewed sizes and spans of structural members based on the information provided by the existing construction drawings.
+
+The general condition of the buildings is good. This report identifies items that are in fair or poor condition. Structural items observed, as part of this investigation, which are not specifically identified were generally seen to be in good condition, or better. Evaluation of framing capacity and code compliance is based on the 2015 Vermont Fire and Building Safety Code and 2015 International Building Code, as adopted by the state.
+
+II | CURRENT DESIGN LOADS
+
+Design loads per ASCE 7-10 “Minimum Design Loads for Buildings and Other Structures”:
+
+• Snow Loads:
+
+o Ground Snow Load = 60 psf (Waterbury, VT) o Flat Roof Snow Load = 42 psf (Waterbury, VT) o Ground Snow Load = 70 psf (Warren, Waitsfield, Fayston, VT) o Flat Roof Snow Load = 49 psf (Warren, Waitsfield, Fayston, VT)
+
+• Live Loads:
+
+o Classrooms = 40 psf o First Floor Corridors = 100 psf o Corridors above First Floor = 80 psf o Gymnasium = 100 psf o Cafeteria = 100 psf o Library = 60 psf o Offices = 50 psf
+
+79
+
+HUUSD Structural Assessment Report
+
+V | FAYSTON ELEMENTARY SCHOOL
+
+Date Visited: 7/1/2025
+
+The original building was constructed in 1962 and is a single-story wood-framed structure with no basement or crawl space. Framing for the original building consists of large glulam beams and timber decking. Additions were built in 1972, 1980, 1984, 1992, and 2005.
+
+No existing drawings are available that indicate structural framing for any building other than the 2005 addition. The 2005 addition is a single-story wood framed addition with a MEP mezzanine space. The corridor structure is 2x framing supported by wood bearing walls. The roof structure is SIP panels supported by long span wood trusses, bearing on 2x6 wood bearing walls. The mezzanine level is constructed of SIP panels and 2x6 wood bearing walls. The gymnasium most likely consists of long span trusses, supported by CMU walls.
+
+Finishes prohibited view of most of the structure of the other additions. However, they are generally wood framed with wood bearing walls.
+
+The lateral load resisting system likely consists of wood shear walls, and CMU shear walls in the gymnasium. These walls were most likely not specifically designed for seismic resistance. Any renovations that would trigger lateral review of the existing structure would require reinforcing to bring the lateral system up to code.
+
+The foundation is a shallow foundation system consisting of reinforced concrete frost walls and slab-on-grade, with concrete retaining walls at areas of high grade.
+
+Only the 2005 renovation structural drawings were provided for the building. These drawings did not indicate any design loads.
+
+The building structure has been well maintained and is generally in good structural condition. A limited number of items are suggested to be monitored, maintained and/or repaired to preserve the longevity of the school’s structural integrity. These items are noted in the attached spreadsheet. Exterior entrance columns show rust deterioration at metal post bases. These post bases should be evaluated to determine if replacement is required. These items are noted in the attached spreadsheet. See photos below. 80
