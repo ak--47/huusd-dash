@@ -720,7 +720,13 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       c.cb.checked = open;
       c.label.classList.toggle("is-closed", !open);
       const town = SCHOOLS[c.id].town;
-      c.status.textContent = open ? "Stays open" : `Closes. ${townName(town)} children go to ${schoolShort(receivingSchool(plan, town))}.`;
+      const sp = plan.split?.[town];
+      const center = plan.prekCenter?.school === c.id;
+      c.status.textContent = open
+        ? "Stays open"
+        : `${center ? "Becomes the Pre-K center" : "Closes"}. ${townName(town)} children go to ${schoolShort(receivingSchool(plan, town))}${
+            sp ? `, about ${Math.round(sp.share * 100)}% to ${schoolShort(sp.school)}` : ""
+          }.`;
       c.limitEl.textContent = permitsOn ? PERMIT_WORDS[c.id] : slidesLimit(FACILITIES[c.id]);
     }
     // the warning sits in a polite live region: touch it only when its words change
@@ -812,7 +818,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       const value = cur ? `${cur.school}~${Math.round(cur.share * 100)}` : "";
       const sig = `${main}|${alts.join(",")}`;
       if (sig !== row.splitSig) {
-        const shares = [[25, "About a quarter"], [50, "About half"], [75, "About three quarters"]];
+        const shares = [[25, "About a quarter"], [33, "About a third"], [50, "About half"], [67, "About two thirds"], [75, "About three quarters"]];
         row.splitSel.replaceChildren(
           h("option", { value: "" }, `No, all go to ${schoolShort(main)}`),
           ...alts.flatMap((sid) => shares.map(([pct, words]) => h("option", { value: `${sid}~${pct}` }, `${words} go to ${schoolShort(sid)}`)))

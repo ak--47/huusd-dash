@@ -59,7 +59,7 @@ export function makePlan(p = {}) {
     split: Object.fromEntries(
       Object.entries(p.split ?? {})
         .filter(([town, v]) => TOWN_OF[town] && !open.includes(TOWN_OF[town]) && v && Number(v.share) > 0 && (v.school === "BPS" || open.includes(v.school)))
-        .map(([town, v]) => [town, { school: v.school, share: Math.min(1, Math.max(0.05, Math.round(Number(v.share) * 20) / 20 || 0.5)) }])
+        .map(([town, v]) => [town, { school: v.school, share: Math.min(1, Math.max(0.05, Math.round(Number(v.share) * 100) / 100 || 0.5)) }])
     ),
   };
 }
