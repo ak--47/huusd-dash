@@ -40,8 +40,19 @@ export function budget(plan, { basis = "district" } = {}) {
   const adj = basis === "exclusion" ? EXCLUSION_PER_PUPIL : 0;
   const target = basis === "exclusion" ? TARGET_WITH_EXCLUSION : TARGET;
   const items = [];
+  // The district's savings assume valley 5th and 6th graders move into Crossett Brook. On October 28 an
+  // administrator said that keeping them in the valley would leave about 126 students there and would not
+  // reach the full $3.9 million. For those plans the middle-school figure is an upper limit, not a costing.
+  const upperBound = Boolean(plan.msMerge && plan.valleyTop === 6);
   if (plan.msMerge) {
-    items.push({ id: "middle", label: "Merge the middle schools", amount: PATH_B_SAVINGS.middle.amount, fte: PATH_B_SAVINGS.middle.fte, kind: "district" });
+    items.push({
+      id: "middle",
+      label: "Merge the middle schools",
+      amount: PATH_B_SAVINGS.middle.amount,
+      fte: PATH_B_SAVINGS.middle.fte,
+      kind: upperBound ? "estimate" : "district",
+      upperBound,
+    });
   }
   const closed = closedSchools(plan);
   const valley = valleySavings(closed.length);
@@ -76,6 +87,7 @@ export function budget(plan, { basis = "district" } = {}) {
     penalty: over > 0 ? over * PUPILS : 0,
     fte: items.reduce((a, b) => a + (b.fte ?? 0), 0),
     hasEstimate: items.some((i) => i.kind === "estimate"),
+    upperBound, // true: the district says this plan saves less than the figures used here
     oneTime: {
       portables: units ? { units, low: (MODULAR.low / MODULAR.units) * units, high: (MODULAR.high / MODULAR.units) * units } : null,
       septic: plan.septicWES && plan.open.includes("WES") ? { known: false } : null,

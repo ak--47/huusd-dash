@@ -21,7 +21,7 @@ export const BUILDINGS = {
   WES: "Waitsfield building",
   WRN: "Warren building",
   HU: "Harwood Union campus (Route 100)",
-  NEW: "Proposed central valley building (193 Home Farm Way, Waitsfield)",
+  NEW: "Possible central valley building (the draft roadmap names no site; the feasibility study site is 193 Home Farm Way, Waitsfield)",
 };
 
 export const SCHOOLS = {
@@ -34,7 +34,7 @@ export const SCHOOLS = {
   HUMS: { id: "HUMS", name: "Harwood Union Middle School", short: "Harwood Middle", town: "duxbury", building: "HU", grades: "7-8" },
   HUHS: { id: "HUHS", name: "Harwood Union High School", short: "Harwood High", town: "duxbury", building: "HU", grades: "9-12" },
   // Only in the district's draft roadmap (Oct 14, 2026 deck): the two remaining valley schools move into
-  // a new building in FY30. The feasibility study site is the former Cabot office at 193 Home Farm Way.
+  // a new building in FY30. The feasibility study site is the Cabot Creamery building at 193 Home Farm Way.
   NEW: { id: "NEW", name: "New central valley school (proposed)", short: "New valley school", town: "waitsfield", building: "NEW", grades: "PK-4 (draft)", proposed: true },
 };
 
@@ -55,7 +55,7 @@ export const TODAY = {
 // wastewater: the deck's "Wastewater Permitting Capacity"; the deck compares it to student counts.
 export const FACILITIES = {
   FES: {
-    permit: { limit: 235, counts: "students and staff", wording: "a total enrollment of 235 students and staff", src: ref("permitFES", "condition 1") },
+    permit: { limit: 235, counts: "students and staff", wording: "a total enrollment of 235 students and staff", src: ref("permitFES", "PDF p. 8") },
     consultantCapacity: 139,
     slide: 21,
     enrollmentPrinted: 84, // grade rows on the same slide add to 87; the Oct 1 report says 87
@@ -90,14 +90,20 @@ export const FACILITIES = {
     fte: 28.05,
     wastewater: 235,
     heat: "Propane; no solar",
-    land: "About 2.0 acres",
+    land: "about 2.0 acres",
     kitchen: "Prep kitchen only; food is transported from Harwood. Dishwasher needs replacement; more refrigeration needed. Limited cafeteria seating",
     operatingCost: 185868,
     maintenance: ["Exterior siding repairs", "Heat controls replacement"],
     src: ref("deck", "slide 22"),
   },
   WES: {
-    permit: { limit: 300, counts: "students", wording: "an approved maximum student population of 300 (1991); the 1990 permit's 230 came from the size of the water tank, which was replaced", src: ref("permitWES", "condition 1.2") },
+    permit: {
+      limit: 300,
+      counts: "students",
+      wording:
+        "an approved maximum student population of 300 (1991 revised permit, after the school replaced the water tank behind the 1990 limit of 230). The design behind it was 300 students and staff, and a 1996 letter in a later permit file says 230",
+      src: ref("permitWES", "PDF p. 12, condition 1.2"),
+    },
     consultantCapacity: 174,
     slide: 23,
     enrollmentPrinted: 103,

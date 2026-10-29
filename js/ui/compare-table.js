@@ -27,7 +27,7 @@ import {
 
 const TIPS = {
   savings:
-    "Yearly savings in the district's presentation, against the $3,339,273 it says the FY28 budget needs. Every Path B version saves the same $3,929,469.",
+    "Yearly savings in the district's presentation, against the $3,339,273 it says the FY28 budget needs. The district gives every Path B version the same $3,929,469; it said on October 28 that the versions keeping grades 5-6 in the valley would save less.",
   buildings: "School buildings in use, out of 7. For Path B: where children from the towns whose schools close would go, the nearest open school.",
   fits: "Whether every open school stays within its wastewater limit (Brookside: its occupancy of 480), counting Pre-K, as in the district's tables or as the state permits read, whichever you choose above. The last line compares students with the classroom capacity the district's consultant calculated.",
   moved: "This year's K-12 students who would start fall 2027 in a different school than they would with no change.",
@@ -58,10 +58,10 @@ const subAs = (cls, ...children) => h("span", { class: `cmp-sub ${cls}` }, ...ch
 
 export function savingsCell(v) {
   const b = v.r.budget;
-  return [
-    numLine(moneyShort(b.savings)),
-    sub(b.gap > 0 ? `${moneyShort(b.gap)} short of target` : b.gap < 0 ? `${moneyShort(-b.gap)} above target` : "Meets the target"),
-  ];
+  const vs = b.gap > 0 ? `${moneyShort(b.gap)} short of target` : b.gap < 0 ? `${moneyShort(-b.gap)} above target` : "Meets the target";
+  // keeping grades 5-6 in the valley: the district said these versions save less than its figure
+  if (b.upperBound) return [numLine(`Up to ${moneyShort(b.savings)}`), sub(`At most ${vs}`), sub("Less, the district said, with grades 5-6 in the valley")];
+  return [numLine(moneyShort(b.savings)), sub(vs)];
 }
 
 // "Waitsfield and Warren close; their children go to Fayston."
@@ -115,7 +115,7 @@ export function fitsCell(v, { rooms = true } = {}) {
 
 export function movedCell(v) {
   const m = v.r.moved;
-  const pk = m.preK ? (v.plan.cuts.includes("prek") ? `plus ${num(m.preK)} Pre-K to private programs` : `plus ${num(m.preK)} in Pre-K`) : null;
+  const pk = m.preK ? (v.plan.cuts.includes("prek") ? `plus ${num(m.preK)} in Pre-K who would need another program` : `plus ${num(m.preK)} in Pre-K`) : null;
   return [numLine(num(m.k12)), pk ? sub(pk) : null];
 }
 

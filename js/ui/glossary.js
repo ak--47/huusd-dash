@@ -20,6 +20,7 @@ export const GLOSSARY = {
     "How many different schools a child attends from kindergarten through grade 12. Harwood Union Middle School and Harwood Union High School count as two schools in one building.",
   move: "A year in which a child starts at a different school than the year before.",
   pk4config:
-    "Pre-K to 4: valley schools keep Pre-K through grade 4. All valley 5th and 6th graders go to Crossett Brook Middle School in Duxbury.",
-  k6config: "K to 6: valley schools keep grades K through 6, as today.",
+    "Valley schools keep Pre-K through grade 4, and all valley 5th and 6th graders go to Crossett Brook Middle School in Duxbury. The district's tables call this Pre-K to 4.",
+  k6config:
+    "Valley schools keep kindergarten through grade 6, as today, so valley 5th and 6th graders stay in the valley. The district's tables call this K-6.",
 };

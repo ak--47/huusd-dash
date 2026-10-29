@@ -5,21 +5,16 @@ import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, matchNamed, modelLoads, pathB, receivingSchool, townSchool } from "../model/index.js";
+import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, matchNamed, pathB, receivingSchool, townSchool } from "../model/index.js";
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
 import { cite, note, schoolName, schoolShort, status, tag, term } from "./kit.js";
 import { heatGrid } from "./heat.js";
 import { namedLabel, pairLabel, topWords, townName } from "./build-controls.js";
 
-const sum = (o) => Object.values(o ?? {}).reduce((a, b) => a + b, 0);
 const pc = (x) => `${Math.max(0, Math.min(100, x * 100)).toFixed(2)}%`;
 const fte = (n) => (Number.isInteger(n) ? num(n) : num(n, 1));
 const sr = (text) => h("span", { class: "wonk-sr" }, text);
 const TODAY_SCHOOLS = 3; // every child attends three K-12 schools today
-const ATT = ATTENDING[2026];
-const CBMS78 = ATT.CBMS[7] + ATT.CBMS[8];
-const CBMS_NOW = sum(ATT.CBMS);
-const HU_NOW = sum(ATT.HU);
 // "No change" is the district's level-service budget (slide 10)
 const LEVEL_SERVICE = BUDGET.scenarios.find((x) => x.id === "level-service");
 const STATE_LAW = () => cite(ref("vsa4001", "§ 4001(6)(B)"), "State law");
@@ -32,14 +27,20 @@ const targetWord = (b) => (lowerTarget(b) ? "the lower target" : "the target");
 // The sentence the screen-reader live region reads after a change: the budget verdict only.
 export function verdictSentence(r) {
   const b = r.budget;
-  const head = `This plan saves ${money(b.savings)} a year.`;
+  const head = b.upperBound
+    ? `This plan saves at most ${money(b.savings)} a year; the district said keeping grades 5-6 in the valley saves less.`
+    : `This plan saves ${money(b.savings)} a year.`;
   if (b.gap < 0) return `${head} It meets ${targetWord(b)} with ${money(-b.gap)} to spare.`;
   if (b.gap === 0) return `${head} It meets ${targetWord(b)} exactly.`;
   return `${head} It is ${money(b.gap)} short of ${targetWord(b)}.`;
 }
 
 const verdictWords = (b) =>
-  b.gap < 0 ? `Meets ${targetWord(b)} with ${money(-b.gap)} to spare` : b.gap === 0 ? `Meets ${targetWord(b)} exactly` : `Short of ${targetWord(b)} by ${money(b.gap)}`;
+  b.gap < 0
+    ? `Meets ${targetWord(b)} with ${b.upperBound ? "at most " : ""}${money(-b.gap)} to spare`
+    : b.gap === 0
+      ? `Meets ${targetWord(b)} exactly`
+      : `Short of ${targetWord(b)} by ${b.upperBound ? "at least " : ""}${money(b.gap)}`;
 
 function kpi(label, value, sub) {
   return h("div", { class: "bp-kpi" }, h("span", { class: "wonk-label" }, label), h("span", { class: "wonk-num bp-kpi-val" }, value), sub ? h("span", { class: "bp-kpi-sub" }, sub) : null);
@@ -95,16 +96,18 @@ export function resultsPanel({ onShowBasis } = {}) {
           ? h("span", {}, "Matches ", h("strong", {}, namedLabel(named)), ".")
           : "Your own combination of choices."
     );
+    const saveText = b.upperBound ? `Up to ${moneyShort(b.savings)}` : moneyShort(b.savings);
+    const meetsText = b.upperBound ? "Meets target, if the full figure holds" : "Meets target";
     strip.replaceChildren(
-      kpi("Yearly savings", moneyShort(b.savings), status(meets, "Meets target", `Short ${moneyShort(b.gap)}`)),
+      kpi("Yearly savings", saveText, status(meets, meetsText, `Short ${moneyShort(b.gap)}${b.upperBound ? " or more" : ""}`)),
       kpi("Buildings in use", `${r.buildingsOpen} of 7`),
       kpi("Most schools per child", String(r.maxYoung.all), moreThanToday(r.maxYoung.all)),
       kpi("Changing schools", num(r.moved.k12), "K-12 students, fall 2027")
     );
 
     barFill.style.width = pc(b.savings / b.target);
-    barSave.textContent = moneyShort(b.savings);
-    barSaveSub.replaceChildren(status(meets, "Meets target", `Short ${moneyShort(b.gap)}`));
+    barSave.textContent = saveText;
+    barSaveSub.replaceChildren(status(meets, b.upperBound ? "Meets target, if it holds" : "Meets target", `Short ${moneyShort(b.gap)}${b.upperBound ? " or more" : ""}`));
     barSchools.textContent = String(r.maxYoung.all);
 
     body.replaceChildren(
@@ -160,7 +163,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
     ? h(
         "p",
         {},
-        "Saves ",
+        b.upperBound ? "Saves at most " : "Saves ",
         h("strong", { class: "wonk-num" }, money(b.savings)),
         ` a year. Using the lower target, ${money(b.target)}: the cut needed if payments on bonds voters approved before July 1, 2026 are left out of the FY28 test, as state law provides. The district's own target is ${money(TARGET)}. `,
         STATE_LAW(),
@@ -170,7 +173,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
     : h(
         "p",
         {},
-        "Saves ",
+        b.upperBound ? "Saves at most " : "Saves ",
         h("strong", { class: "wonk-num" }, money(b.savings)),
         ` a year. The district's target is ${money(b.target)}, the amount that keeps next year's budget level with this year's. `,
         cite(BUDGET.src)
@@ -229,9 +232,16 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
               tag(it.kind),
               cite(itemSource(it)),
               it.fte ? h("span", {}, `${fte(it.fte)} staff positions`) : null,
-              it.kind === "estimate"
-                ? h("span", { class: "bp-item-note" }, `The district costed closing exactly two schools (${money(PATH_B_SAVINGS.valley.amount)}). We use half of that, ${money(PATH_B_SAVINGS.valley.amount / 2)}, for each school closed.`)
-                : null
+              it.upperBound
+                ? h(
+                    "span",
+                    { class: "bp-item-note" },
+                    "An upper limit. The district's figure assumes valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students there and would not achieve as many staff cuts, so this would save less. ",
+                    cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
+                  )
+                : it.kind === "estimate"
+                  ? h("span", { class: "bp-item-note" }, `The district costed closing exactly two schools (${money(PATH_B_SAVINGS.valley.amount)}). We use half of that, ${money(PATH_B_SAVINGS.valley.amount / 2)}, for each school closed.`)
+                  : null
             )
           )
         ),
@@ -442,10 +452,6 @@ function buildingsSection(plan, r, cs, keptFold) {
   const overP = cap.schools.filter((s) => s.overPeople);
   const overR = cap.schools.filter((s) => s.overConsultant);
 
-  // Crossett Brook and the Harwood campus: counts with this year's students; no published limits
-  const cbms = sum(modelLoads(plan).CBMS) + (plan.msMerge ? 0 : CBMS78);
-  const hu = HU_NOW + (plan.msMerge ? CBMS78 : 0);
-  const middleChanges = cbms !== CBMS_NOW || hu !== HU_NOW;
 
   const summary = [];
   const readingWords = cap.reading === "permits" ? "as the state permits read" : "as the slides apply them";
@@ -454,11 +460,13 @@ function buildingsSection(plan, r, cs, keptFold) {
       ? `${listJoin(overP.map((s) => schoolShort(s.id)))} would be over ${overP.length === 1 ? "its" : "their"} wastewater or occupancy limit, ${readingWords}.`
       : `Every school in use would be under its wastewater or occupancy limit, ${readingWords}.`
   );
+  const overM = cap.middle.filter((m) => m.over);
   summary.push(
     overR.length
       ? `${listJoin(overR.map((s) => schoolShort(s.id)))} would hold more students than the district's consultant counted classroom space for.`
-      : "Every school would be within the classroom space the district's consultant counted."
+      : "Every elementary school would be within the classroom space the district's consultant counted."
   );
+  if (overM.length) summary.push(`${listJoin(overM.map((m) => schoolName(m.id)))} would hold more students than the consultant counted classroom space for (see the middle schools below).`);
 
   let source;
   if (cap.source === "district") {
@@ -519,14 +527,7 @@ function buildingsSection(plan, r, cs, keptFold) {
       "Bar: students, or classrooms needed. Line: the limit, or the classrooms the building has."
     ),
     h("div", { class: "bp-caps" }, cap.schools.map((s) => schoolCap(s, receivers[s.id] ?? []))),
-    middleChanges
-      ? h(
-          "p",
-          { class: "bp-muted" },
-          `With this year's students, Crossett Brook would have ${num(cbms)} students (${num(CBMS_NOW)} now) and the Harwood campus ${num(hu)} (${num(HU_NOW)} now). The district did not publish capacity limits for these two buildings, so they are not checked here. `,
-          tag("estimate")
-        )
-      : null,
+    middleCaps(cap.middle),
     keptFold(
       "buildings",
       "How capacity is checked",
@@ -542,8 +543,8 @@ function buildingsSection(plan, r, cs, keptFold) {
         h(
           "li",
           {},
-          "Wastewater, as the state permits read: Waitsfield 300 students (its 1991 permit); Fayston 235 and Warren 237 students and staff; Moretown 2,820 gallons a day, counted as 235 people; Brookside 480 counting everyone. Staff numbers are our estimate. Choose the reading under Advanced. ",
-          cite(ref("permitWES", "condition 1.2"), "Waitsfield permit")
+          "Wastewater, as the state permits read: Waitsfield 300 students, as its 1991 permit words it (the design behind it counted students and staff, and a 1996 letter in the state's file says 230); Fayston 235 and Warren 237 students and staff; Moretown 2,820 gallons a day, counted as 235 people; Brookside 480 counting everyone. Staff numbers are our estimate. Choose the reading under Advanced. ",
+          cite(ref("permitWES", "condition 1.2"), "Waitsfield permit 1991")
         ),
         h(
           "li",
@@ -562,8 +563,35 @@ function buildingsSection(plan, r, cs, keptFold) {
           `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. `,
           cite(ref("deck", "slides 27-32"))
         ),
-        h("li", {}, "A portable unit adds 2 classrooms but does not change the wastewater limit. Using Waitsfield's permitted 300 changes only its limit.")
+        h("li", {}, "A portable unit adds 2 classrooms but does not change the wastewater limit. Using 300 for Waitsfield changes only its limit.")
       )
+    )
+  );
+}
+
+// Crossett Brook and Harwood Middle against the consultant's classroom capacities, with this year's students.
+function middleCaps(middle) {
+  const row = (m) =>
+    h(
+      "div",
+      { class: "cap-row" },
+      h("span", { class: "name" }, `${schoolName(m.id)}, grades ${m.grades}`, sr(":")),
+      capBar(m.total, m.capacity, m.over),
+      h("span", { class: "nums" }, `${num(m.total)}, room for ${num(m.capacity)}`),
+      h("span", { class: "bp-cap-status" }, sr(". "), status(!m.over, "Enough", `${num(m.total - m.capacity)} over`))
+    );
+  return h(
+    "div",
+    { class: "bp-cap-school" },
+    h("h4", {}, "Middle schools: classroom space"),
+    h("div", { class: "cap" }, middle.map(row)),
+    h(
+      "p",
+      { class: "bp-muted" },
+      "This year's students in each building's grades under this plan. The consultant's 166 for Harwood Middle counts the rooms it uses now; it shares a building with the high school, whose capacity the consultant left “TBD.” ",
+      tag("derived"),
+      " ",
+      cite(ref("truexCap", "Capacities"), "Consultant capacities")
     )
   );
 }
@@ -600,7 +628,7 @@ function studentsSection(plan, r, keptFold) {
           listJoin(
             [
               preKClosure ? `${num(preKClosure)} because their school closes` : null,
-              m.byReason.prek ? `${num(m.byReason.prek)} because district Pre-K classes end and families use private programs` : null,
+              m.byReason.prek ? `${num(m.byReason.prek)} because district Pre-K classes end (families would get public tuition for private programs, which the superintendent said lack the room)` : null,
             ].filter(Boolean)
           ),
           ". ",

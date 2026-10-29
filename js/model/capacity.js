@@ -117,6 +117,8 @@ export const READINGS = ["slides", "permits"];
 export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slides" } = {}) {
   const table = districtTableFor(plan);
   const loads = table ? tableLoads(table) : modelLoads(plan);
+  // The Pre-K cut (Path A) ends Pre-K classes in district buildings.
+  if (plan.cuts.includes("prek")) for (const id of Object.keys(loads)) delete loads[id].PK;
   const totals = Object.fromEntries(["BPS", ...plan.open].map((id) => [id, Object.values(loads[id] ?? {}).reduce((a, b) => a + b, 0)]));
   const valleyTotal = plan.open.reduce((a, id) => a + totals[id], 0);
   const schools = [];
@@ -150,6 +152,7 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
     });
   }
   const cbms = loads.CBMS ? Object.values(loads.CBMS).reduce((a, b) => a + b, 0) : null; // null: the district's table leaves Crossett Brook out
+  const middle = middleSchools(plan, cbms);
   return {
     source: table ? "district" : "model",
     reading,
@@ -160,5 +163,23 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
     overPeople: schools.filter((s) => s.overPeople).map((s) => s.id),
     overRooms: schools.filter((s) => s.overRooms).map((s) => s.id),
     overConsultant: schools.filter((s) => s.overConsultant).map((s) => s.id),
+    middle,
+    overMiddle: middle.filter((m) => m.over).map((m) => m.id),
   };
+}
+
+// Crossett Brook and Harwood Middle against the consultant's classroom capacities. Crossett Brook holds
+// the plan's grades 5-6 (the district's count where its table has one) plus its own 7th and 8th graders
+// unless the middle schools merge; Harwood Middle holds its own 7-8, plus Crossett Brook's if they merge.
+// The consultant's 166 for Harwood Middle counts the rooms it uses now in a building it shares with the
+// high school, whose capacity the consultant left "TBD".
+const ATT = ATTENDING[2026];
+const CB_78 = ATT.CBMS[7] + ATT.CBMS[8];
+const HU_78 = ATT.HU[7] + ATT.HU[8];
+function middleSchools(plan, cbmsFromTable) {
+  const cb56 = cbmsFromTable ?? Object.values(modelLoads(plan).CBMS ?? {}).reduce((a, b) => a + b, 0);
+  return [
+    { id: "CBMS", grades: plan.msMerge ? "5-6" : "5-8", total: cb56 + (plan.msMerge ? 0 : CB_78), capacity: CONSULTANT_CAPACITY.schools.CBMS },
+    { id: "HUMS", grades: "7-8", total: HU_78 + (plan.msMerge ? CB_78 : 0), capacity: CONSULTANT_CAPACITY.schools.HUMS },
+  ].map((m) => ({ ...m, over: m.total > m.capacity }));
 }

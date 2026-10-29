@@ -33,3 +33,11 @@
 .finding { grid-template-columns: minmax(0, 1fr); }
 .finding > * { min-width: 0; }
 tr.is-muted th, tr.is-muted td { color: var(--ak-ink-3); }
+.questions-jump { margin-bottom: var(--ak-s6); }
+.questions-print-note { display: none; }
+#questions-title:focus { outline: none; }
+@media print {
+  .questions-print-note { display: block; color: var(--ak-ink-2); }
+  /* "Print the questions": only the questions section, with the source line */
+  body.print-questions #view > :not(#questions) { display: none !important; }
+}

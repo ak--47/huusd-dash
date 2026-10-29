@@ -10,6 +10,22 @@ import { ref } from "../../data/sources.js";
 
 const WEIGHT = { major: "Could change the decision", moderate: "Worth an answer", minor: "Minor" };
 
+// Scroll a section into view and move focus to its heading, so keyboard and screen reader users land there too.
+function jumpTo(id) {
+  const target = document.getElementById(id);
+  const heading = target?.matches("h2, h3") ? target : target?.querySelector("h2, h3");
+  target?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  heading?.setAttribute("tabindex", "-1");
+  heading?.focus({ preventScroll: true });
+}
+
+// Where copied or printed questions came from, so a reader can find the evidence behind them.
+function sourceLine(verb) {
+  const url = `${location.href.split("#")[0]}#/findings`;
+  const date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return `From the Harwood School Plans Explorer, an independent site: ${url} (${verb} ${date}). The evidence behind each question is on that page.`;
+}
+
 export default {
   title: "What we checked",
   render(el) {
@@ -17,7 +33,7 @@ export default {
     const questions = QUESTIONS.filter((q) => shown.some((f) => f.id === q.id));
     const copyBtn = h("button", { type: "button", class: "wonk-btn no-print" }, "Copy the questions");
     copyBtn.addEventListener("click", async () => {
-      const text = questions.map((q, i) => `${i + 1}. ${q.text}`).join("\n");
+      const text = `Questions about the HUUSD FY28 plans\n${sourceLine("copied")}\n\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join("\n")}`;
       try {
         await navigator.clipboard.writeText(text);
         window.wonk?.toast("Questions copied", "ok");
@@ -26,12 +42,33 @@ export default {
       }
     });
 
+    // "Print the questions" prints only the questions section (see css/pages/findings.css).
+    const printNote = h("p", { class: "small questions-print-note" }, sourceLine("printed"));
+    const endPrint = () => document.body.classList.remove("print-questions");
+    const printBtn = h("button", { type: "button", class: "wonk-btn wonk-btn--quiet no-print" }, "Print the questions");
+    printBtn.addEventListener("click", () => {
+      printNote.textContent = sourceLine("printed");
+      document.body.classList.add("print-questions");
+      window.addEventListener("afterprint", endPrint, { once: true });
+      window.print();
+    });
+
+    // A real link, so it can be copied or opened in a new tab; a plain click jumps without reloading the page.
+    const toQuestions = h("a", { class: "wonk-btn wonk-btn--primary", href: "#/findings?at=questions" }, `Questions to ask the board (${questions.length})`);
+    toQuestions.addEventListener("click", (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      jumpTo("questions");
+    });
+
     el.append(
       pageHead({
         kicker: "What we checked",
         title: "We re-did the district's arithmetic. Most of it adds up. Here is what does not, and what is missing.",
         lede: "We checked the October 14 and October 28 presentations against each other and against the district's own reports. Each item shows what the slides say, what we found, and a question you can ask.",
       }),
+
+      h("div", { class: "btn-row no-print questions-jump" }, toQuestions),
 
       h(
         "nav",
@@ -62,7 +99,7 @@ export default {
             )
           )
         ),
-        h("p", { class: "small" }, h("button", { type: "button", class: "glance-link", onclick: () => document.getElementById("questions")?.scrollIntoView({ block: "start" }) }, "Jump to the questions to ask"))
+        h("p", { class: "small" }, h("button", { type: "button", class: "glance-link", onclick: () => jumpTo("questions") }, "Jump to the questions to ask"))
       ),
 
       section(
@@ -78,7 +115,8 @@ export default {
       section(
         { id: "questions", title: "Questions to bring to the board" },
         h("ol", { class: "prose question-list" }, questions.map((q) => h("li", {}, q.text))),
-        h("div", { class: "btn-row" }, copyBtn, h("button", { type: "button", class: "wonk-btn wonk-btn--quiet no-print", onclick: () => window.print() }, "Print this page"))
+        printNote,
+        h("div", { class: "btn-row" }, copyBtn, printBtn)
       ),
 
       section(
@@ -129,10 +167,12 @@ export default {
           "div",
           { class: "prose" },
           h("p", {}, "We copied every table and number from the district's presentations and reports into the data files behind this site, then had the computer re-add every row and column. Where two documents disagree, we show both. Where a number is ours rather than the district's, it is marked ", tag("derived"), " or ", tag("estimate"), "."),
-          h("p", {}, "Facts from news reports, state law, and research were each checked against the original source by a second reviewer. The code and data are public, so anyone can check our work. ", h("a", { href: "#/sources" }, "Sources and method"))
+          h("p", {}, "Facts from news reports, state law, permits, and research were each checked against the original source in a second, separate pass, done with AI research tools. The code and data are public, so anyone can check our work. ", h("a", { href: "#/sources" }, "Sources and method"))
         )
       )
     );
+    // leaving the page mid-print must not leave the rest of the site hidden in print
+    return endPrint;
   },
 };
 
@@ -169,6 +209,17 @@ function k6Table() {
     for (const s of slides.schools) if (s.overConsultant) units[s.id] = Math.ceil((s.total - s.consultantCapacity) / 40);
     return { pair, slides, permits, units };
   });
+  // Harwood Middle under the middle school merger, from the model (the same in every K-6 version)
+  const hums = rows.map((r) => r.slides.middle.find((m) => m.id === "HUMS")).filter(Boolean);
+  const humsLo = Math.min(...hums.map((m) => m.total));
+  const humsHi = Math.max(...hums.map((m) => m.total));
+  const humsNote = hums.length
+    ? [
+        ` In ${hums.every((m) => m.over) ? "every version" : "these versions"} Harwood Middle would also hold ${humsLo === humsHi ? `about ${num(humsLo)}` : `${num(humsLo)} to ${num(humsHi)}`} students in grades 7-8, against the ${num(hums[0].capacity)} the consultant counted for its current rooms `,
+        tag("derived"),
+        ".",
+      ]
+    : null;
   return h(
     "div",
     { class: "table-scroll" },
@@ -192,18 +243,42 @@ function k6Table() {
         )
       )
     ),
-    h("p", { class: "small" }, "Student counts from the district's tables with corrected totals ", tag("district"), ". The permit reading counts staff where the permit does, using our staff estimate ", tag("estimate"), ". Portable units hold two classrooms of 20 ", tag("estimate"), ".")
+    h(
+      "p",
+      { class: "small" },
+      "Student counts from the district's tables with corrected totals ",
+      tag("district"),
+      ". The permit reading counts staff where the permit does, using our staff estimate ",
+      tag("estimate"),
+      ". Portable units hold two classrooms of 20 ",
+      tag("estimate"),
+      ".",
+      humsNote
+    )
   );
 }
 
 function permitsTable() {
   const rows = [
-    ["WES", "230", "300 students (revised permit, 1991)"],
+    [
+      "WES",
+      "230",
+      [
+        "300 students (revised permit, 1991); a 1996 letter in the file says 230 ",
+        cite(ref("permitWES1996", "engineer's letter of July 18, 1996, PDF p. 10"), "1996 letter"),
+      ],
+    ],
     ["FES", "250 (240 on October 14)", "235 students and staff (1992)"],
     ["MES", "235", "2,820 gallons a day (2015); about 235 to 282 people, staff included"],
     ["WRN", "237", "237 students and staff, full-time equivalent (2000)"],
   ];
-  const refs = { WES: ref("permitWES", "condition 1.2"), FES: ref("permitFES", "project description"), MES: ref("permitMES", "condition 3.3"), WRN: ref("permitWRN", "project description") };
+  // The permit files are long scans that download; the page numbers say where each quote is.
+  const refs = {
+    WES: ref("permitWES", "PDF p. 12, condition 1.2"),
+    FES: ref("permitFES", "PDF p. 8, project description"),
+    MES: ref("permitMES", "condition 3.3"),
+    WRN: ref("permitWRN", "PDF p. 341 of 346, project description"),
+  };
   return h(
     "div",
     { class: "table-scroll" },
@@ -212,7 +287,7 @@ function permitsTable() {
       { class: "wonk-table" },
       h("caption", {}, "Wastewater limits: what the slides use and what the state permits say"),
       h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "School"), h("th", { scope: "col" }, "On the slides (students)"), h("th", { scope: "col" }, "In the state permit"), h("th", { scope: "col" }, "Permit"))),
-      h("tbody", {}, rows.map(([id, slide, permit]) => h("tr", {}, h("th", { scope: "row" }, SCHOOLS[id].short), h("td", {}, slide), h("td", {}, permit), h("td", {}, cite(refs[id], "Read it")))))
+      h("tbody", {}, rows.map(([id, slide, permit]) => h("tr", {}, h("th", { scope: "row" }, SCHOOLS[id].short), h("td", {}, slide), h("td", {}, permit), h("td", {}, cite(refs[id], "Read it (large PDF)")))))
     )
   );
 }

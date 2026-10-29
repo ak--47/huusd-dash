@@ -75,17 +75,17 @@ export const PATH_A_CUTS = {
       id: "prek",
       name: "Pre-K tuition-only model",
       amount: 517000,
-      detail: "Ends Pre-K classes in district schools; families use private Pre-K programs with public tuition",
+      detail: "Ends Pre-K classes in district schools; families get public tuition for private programs, and the district says the change \"limits capacity\"",
     },
     {
       id: "staff",
       name: "Academic and behavioral support staff",
       amount: 456000,
-      detail: "Fewer interventionists and paraeducators, less tier 2 and 3 student support",
+      detail: "Fewer intervention teachers and classroom aides, and less extra help for students who are behind or need behavior support",
     },
     {
       id: "athletics",
-      name: "Athletics and co-curriculars (70% cut)",
+      name: "Athletics and activities like theater, music, and clubs (70% cut)",
       amount: 312757,
       detail: "Coaches, officials, theater, music, and student clubs",
     },
@@ -96,10 +96,11 @@ export const PATH_A_CUTS = {
       detail: "Fewer course offerings, software, and hardware",
     },
   ],
+  // The deck's own words (slide 13, under "DEVASTATING IMPACT ON STUDENTS & COMMUNITIES").
   impact: [
-    "Access and equity: transportation and Pre-K barriers fall hardest on vulnerable families.",
-    "Student development: loss of sports, arts, electives, hands-on learning, and intervention support.",
-    "School community: weaker support structures, strained classrooms, and loss of shared traditions.",
+    "Access and equity: \"severe transportation & Pre-K barriers\" that \"disproportionately affect vulnerable families.\"",
+    "Student development: \"widespread loss of sports, arts, electives, hands-on learning, and intervention support.\"",
+    "School community: \"eroded support structures, strained classroom environments, and loss of shared traditions.\"",
   ],
 };
 
@@ -125,7 +126,7 @@ export const THRESHOLD_SCHEDULE = {
     { fy: "FY31", pct: 1.13 },
     { fy: "FY32+", pct: 1.125 },
   ],
-  note: "FY30 onward applies if the planned foundation formula does not replace the excess spending threshold.",
+  note: "The steps from FY30 on apply only if the planned new funding formula has not replaced the threshold by then.",
 };
 
 // Portable classrooms, as costed by the district (deck slide 26).

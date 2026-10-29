@@ -90,12 +90,12 @@ export default {
       ),
 
       section(
-        { id: "map", title: "Where the buildings are", intro: "Car times between buildings, from OpenStreetMap road data. Bus rides take longer because buses stop along the way." },
+        { id: "map", title: "Where the buildings are", intro: "Driving times from each town's center to each building, from OpenStreetMap road data. Bus rides take longer because buses stop along the way." },
         h("div", { class: "map-split" }, mapFigure(), driveTable())
       ),
 
       section(
-        { id: "profiles", title: "Building by building", intro: "Open a building for its full profile. Dollar figures are the district's; the classroom and capacity figures are what the district printed for each building." },
+        { id: "profiles", title: "Building by building", intro: "Open a building for its full profile. Figures are the district's, except classroom capacity (from the district's planning consultant) and permit wording (from the state permits)." },
         h(
           "div",
           { class: "fold-all-row" },
@@ -149,9 +149,27 @@ function profileCard(id) {
     ["Students, K-12", `${num(kids)}${pk ? ` plus ${num(pk)} in Pre-K` : ""}`],
     ["Grades", SCHOOLS[id].grades],
     ["Students by grade", gradeBar(ATTENDING[2026][id])],
-    ["From other towns", res ? `${num(idcIn)} by intradistrict choice${tuition ? `, ${num(tuition)} tuition students` : ""}; ${num(idcOut)} local students attend another district school` : "—"],
+    [
+      "Choice and tuition students",
+      res
+        ? `${num(idcIn)} by intradistrict choice${tuition ? `, ${plural(tuition, "tuition student")}` : ""}; ${num(idcOut)} local students attend another district school`
+        : "—",
+    ],
     ["Classrooms", num(f.classrooms)],
-    [h("span", {}, "Wastewater limit ", term("wastewater", "(?)")), h("span", {}, `On the slides: ${limit}. In the state permit: ${f.permit.wording}. `, cite(f.permit.src))],
+    id === "BPS"
+      ? [
+          "Occupancy limit",
+          h(
+            "span",
+            {},
+            `On the slides: maximum occupancy ${num(f.occupancy)}. Brookside is on town sewer and water (the town allots it 8,200 gallons a day), so the district lists no wastewater permit limit for it. Building occupancy normally counts everyone in the building. `,
+            cite(f.permit.src)
+          ),
+        ]
+      : [
+          h("span", {}, "Wastewater limit ", term("wastewater", "(?)")),
+          h("span", {}, `On the slides: ${limit}. In the state permit: ${f.permit.wording}. `, cite(f.permit.src)),
+        ],
     ["Classroom capacity", h("span", {}, `${num(f.consultantCapacity)} students including Pre-K, by the district's planning consultant `, cite(ref("truexCap", "Capacities")))],
     ["Staff", `${num(f.fte, 2)} FTE`],
     ["Building", `${num(f.sqft)} sq ft · ${f.land}`],
@@ -191,7 +209,7 @@ function cbCard() {
         [
           ["Students, grades 5-8", `${num(kids)}`],
           ["Students by grade", gradeBar(ATTENDING[2026].CBMS)],
-          ["Under Path B", "Keeps grades 5-6 (the district calls it Crossett Brook Upper Elementary). Its 7th and 8th graders move to Harwood. In the Pre-K to 4 versions, every valley 5th and 6th grader comes here too."],
+          ["Under Path B", "Keeps grades 5-6 (the district calls it Crossett Brook Upper Elementary). Its 7th and 8th graders move to Harwood. In the versions that send grades 5-6 to Crossett Brook, every valley 5th and 6th grader comes here too."],
           ["Wastewater", "621 occupants (9,325 gallons a day at 15 per person), per the district's October 14 table"],
           ["Classroom capacity", "359 students, by the district's planning consultant (March 2025)"],
           ["Address", LOCATIONS.schools.CBMS.address],
@@ -250,7 +268,7 @@ function mapFigure() {
   const X = (lon) => 20 + (lon - lon0) * cos * k;
   const Y = (lat) => 20 + (lat0 - lat) * k;
   const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, class: "school-map", role: "img", "aria-labelledby": "map-title map-desc" });
-  svg.append(s("title", { id: "map-title" }, "Map of HUUSD school buildings"), s("desc", { id: "map-desc" }, "Brookside and Crossett Brook are in the north near Waterbury. Harwood Union and Moretown Elementary are in the middle. Waitsfield, Fayston, and Warren elementary schools are in the south. The proposed central valley site is in northern Waitsfield."));
+  svg.append(s("title", { id: "map-title" }, "Map of HUUSD school buildings"), s("desc", { id: "map-desc" }, "Brookside and Crossett Brook are in the north near Waterbury. Harwood Union and Moretown Elementary are in the middle. Waitsfield, Fayston, and Warren elementary schools are in the south. The site under study for one central valley school is in northern Waitsfield."));
   // town labels
   for (const t of Object.values(LOCATIONS.towns)) {
     if (t.label.startsWith("Fayston")) continue;
@@ -261,7 +279,7 @@ function mapFigure() {
   svg.append(s("line", { x1: 24, x2: 24 + 5 * mile, y1: H - 14, y2: H - 14, class: "map-scale" }), s("text", { x: 24, y: H - 20, class: "map-small" }, "5 miles"));
   // north arrow
   svg.append(s("text", { x: W - 26, y: 30, class: "map-small", "text-anchor": "middle" }, "N"), s("line", { x1: W - 26, x2: W - 26, y1: 36, y2: 60, class: "map-scale" }));
-  const label = { BPS: "Brookside", CBMS: "Crossett Brook", HU: "Harwood Union", MES: "Moretown", WES: "Waitsfield", FES: "Fayston", WRN: "Warren", NEW: "Proposed site" };
+  const label = { BPS: "Brookside", CBMS: "Crossett Brook", HU: "Harwood Union", MES: "Moretown", WES: "Waitsfield", FES: "Fayston", WRN: "Warren", NEW: "Site under study" };
   const dx = { BPS: 10, CBMS: 10, HU: -10, MES: 10, WES: 10, FES: 10, WRN: 10, NEW: 10 };
   for (const [id, p] of Object.entries(pts)) {
     const x = X(p.lon), y = Y(p.lat);
@@ -271,7 +289,19 @@ function mapFigure() {
       s("text", { x: x + dx[id], y: y + 4, class: proposed ? "map-label map-label--site" : "map-label", "text-anchor": dx[id] < 0 ? "end" : "start" }, label[id])
     );
   }
-  return h("figure", { class: "map-fig" }, svg, h("figcaption", { class: "small muted" }, "School locations from NCES. The square is the proposed central valley site in the district's draft roadmap. ", cite(LOCATIONS.src, "NCES")));
+  return h(
+    "figure",
+    { class: "map-fig" },
+    svg,
+    h(
+      "figcaption",
+      { class: "small muted" },
+      "School locations from NCES. The square is 193 Home Farm Way in Waitsfield (the Cabot Creamery building), the site in the district's feasibility study for one valley school; the draft roadmap does not name a site. ",
+      cite(LOCATIONS.src, "NCES"),
+      " ",
+      cite(ref("rfp", "scope"))
+    )
+  );
 }
 
 function driveTable() {
@@ -297,7 +327,7 @@ function driveTable() {
             h(
               "tr",
               {},
-              h("th", { scope: "row" }, TOWNS.find((x) => x.id === t).name),
+              h("th", { scope: "row" }, LOCATIONS.towns[t]?.label ?? TOWNS.find((x) => x.id === t).name),
               ids.map((id) => {
                 const v = DRIVE.townToSchool[t][id];
                 return h("td", { class: "num", "data-tip-focus": "off" }, v ? String(v[1]) : "—");

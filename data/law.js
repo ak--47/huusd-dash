@@ -14,7 +14,7 @@ export const LAW = [
   },
   {
     title: "Older bond payments are left out of the test",
-    text: "For FY28 and later, payments on bonds that voters approved before July 1, 2026 are not counted when testing spending against the threshold. Payments on any new bond would count. In FY27 the state recorded $563,816 of such excluded payments for HUUSD.",
+    text: "For FY28 and later, payments on bonds that voters approved before July 1, 2026 are not counted when testing spending against the threshold. Payments on any new bond would count. A May 2026 Joint Fiscal Office draft analysis lists $563,816 of such payments for HUUSD in FY27.",
     ref: ref("vsa4001", "§ 4001(6)(B)"),
     ref2: ref("jfo", "Harwood UUSD row"),
   },
@@ -26,14 +26,14 @@ export const LAW = [
   },
   {
     title: "Minimum class sizes",
-    text: "Since July 1, 2026, state standards set minimum average class sizes: 10 in grade 1, 12 in grades 2-5, 15 in grades 6-8, and 18 in high school, with mixed-grade classes limited to two grades. A school below them for three years in a row can face State Board action, but the count does not start before July 1, 2027, and waivers exist.",
+    text: "Since July 1, 2026, state standards set minimum average class sizes: 10 in grade 1, 12 in grades 2-5, 15 in grades 6-8, and 18 in high school, with mixed-grade classes limited to two grades. A school below them for three years in a row can face State Board action. Years start counting when the State Board updates its rules or on July 1, 2027, whichever comes first, and waivers exist.",
     ref: ref("vsa165", "§ 165(a)(9)"),
     ref2: ref("act170", "Sec. 29a"),
   },
   {
-    title: "What the Legislature found about closing small schools",
-    text: "Act 170 includes this finding: \"closing small elementary schools often yields limited or inconsistent cost savings once transportation, capital adjustments, and community impacts are considered, and may negatively affect student outcomes and family engagement, particularly in rural areas.\"",
-    ref: ref("act170", "Sec. 1(a)(3)"),
+    title: "What the Legislature said about school size",
+    text: "Act 170's findings say \"closing small elementary schools often yields limited or inconsistent cost savings once transportation, capital adjustments, and community impacts are considered, and may negatively affect student outcomes and family engagement, particularly in rural areas.\" The same section states the Legislature's intent to create a statewide system that \"encourages and supports local elementary schools, central middle schools, and comprehensive, regional high schools.\"",
+    ref: ref("act170", "Sec. 1(a)(3), (b)(3)"),
   },
   {
     title: "District mergers are being studied too",

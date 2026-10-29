@@ -11,7 +11,7 @@ export const LOCATIONS = {
     WES: { lat: 44.19438, lon: -72.819349, address: "3951 Main Street, Waitsfield" },
     FES: { lat: 44.179191, lon: -72.884179, address: "782 German Flats Road, Fayston" },
     WRN: { lat: 44.116433, lon: -72.852699, address: "293 School Road, Warren" },
-    NEW: { lat: 44.2271003, lon: -72.7903531, address: "193 Home Farm Way, Waitsfield (former Cabot office; feasibility study site)" },
+    NEW: { lat: 44.2271003, lon: -72.7903531, address: "193 Home Farm Way, Waitsfield (Cabot Creamery building; feasibility study site)" },
   },
   // Village centers (USGS GNIS); Fayston has no village center, so its town office is used.
   towns: {
@@ -45,7 +45,7 @@ export const DRIVE = {
     fayston: { BPS: [10.1, 20], CBMS: [8.5, 17], FES: [7.8, 17], HU: [3.1, 8], MES: [3.0, 8], WES: [3.9, 8], WRN: [10.8, 22], NEW: [1.5, 5] },
     warren: { BPS: [18.9, 34], CBMS: [17.3, 31], FES: [7.8, 15], HU: [12.0, 22], MES: [11.8, 22], WES: [6.7, 13], WRN: [0.7, 3], NEW: [9.6, 19] },
   },
-  note: "Fayston has no village center; distances use the town office at the northeast edge of town, near Route 100, so they understate drives from Fayston's western roads.",
+  note: "Fayston has no village center; times start at the town office near Route 100 in the northeast of town, so they understate drives from western Fayston to the other schools and overstate the drive to Fayston Elementary.",
 };
 
 // The district's bus routes this fall (First Student, effective 09/28/2026): the scheduled time from

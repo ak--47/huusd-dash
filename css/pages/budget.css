@@ -1,5 +1,8 @@
 /* budget page */
-.chart { margin: var(--ak-s4) 0; }
+/* Charts load after the page draws. Reserving each one's height (the plot plus its "Show table" button)
+   keeps the target of a ?at= link from moving down when they arrive. */
+.chart { margin: var(--ak-s4) 0; min-height: calc(200px + 2.375rem); }
+.chart--tall { min-height: calc(240px + 2.375rem); }
 .stat-meta { display: flex; flex-wrap: wrap; gap: var(--ak-s2); align-items: center; margin-top: var(--ak-s1); }
 .cut-list { max-width: 52rem; }
 .cut-list > dt { font-family: var(--ak-font-sans); text-transform: none; letter-spacing: 0; font-size: var(--ak-text-md); color: var(--ak-ink); font-weight: 600; }

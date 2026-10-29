@@ -1,7 +1,7 @@
 // Compare the plans: Path A and all twelve Path B versions on the same measures, and the district's
 // scoring sheet with the data behind it. Other combinations live on the Options page.
 
-import { h, money } from "../ui/dom.js";
+import { h, money, num } from "../ui/dom.js";
 import { cite, cites, note, pageHead, section, tag, term } from "../ui/kit.js";
 import { comparisonTable } from "../ui/compare-table.js";
 import { scoreSection } from "../ui/compare-score.js";
@@ -82,15 +82,18 @@ export default {
           h(
             "p",
             { class: "section-intro" },
-            `All twelve Path B versions save the same ${money(PATH_B_SAVINGS.total)} a year, ${money(surplus)} more than the ${money(target)} target; Path A saves the target exactly. `,
+            `The district gives one savings figure for Path B, ${money(PATH_B_SAVINGS.total)} a year, ${money(surplus)} more than the ${money(target)} target; Path A saves the target exactly. `,
             tag("district"),
             " ",
             cite(ref("deck", "slide 13")),
             " ",
             cite(ref("deck", "slide 19")),
-            ` The versions differ in whether the schools that stay open fit within their limits, how many students change schools, and how many schools a child would attend. ${fitText} By the district consultant's classroom capacities, every version needs more classroom space somewhere. Sort by any measure to line the versions up your way.`
+            " On October 28 an administrator said the versions that keep grades 5-6 in the valley would save less, because Crossett Brook would keep only about 126 students; the district has not costed them, so the table shows its figure as an upper limit for those six. ",
+            cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
+            ` The versions also differ in whether the schools that stay open fit within their limits, how many students change schools, and how many schools a child would attend. ${fitText} By the district consultant's classroom capacities, every version needs more classroom space somewhere. Sort by any measure to line the versions up your way.`
           ),
           table,
+          middleNote(versions),
           reading === "slides"
             ? note(
                 "warn",
@@ -152,8 +155,8 @@ export default {
         h(
           "div",
           { class: "choice cmp-reading-choices" },
-          readingRadio("slides", "As on the slides", "Students only, against 230, 250, 235, and 237, as the district compared them."),
-          readingRadio("permits", "As the state permits read", "Waitsfield 300 students and Fayston 235; staff count toward every limit except Waitsfield's. Staff numbers are our estimate.")
+          readingRadio("slides", "As on the slides", "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), and 237 (Warren), as the district compared them."),
+          readingRadio("permits", "As the state permits read", "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate.")
         ),
         h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/findings" }, "What we checked"), ". ", cite(ref("permitWES", "condition 1.2"), "Waitsfield permit"))
       ),
@@ -164,6 +167,18 @@ export default {
     return () => cleanup?.();
   },
 };
+
+// Harwood Middle is the same in every Path B version: the merger puts both middle schools' 7th and 8th graders there.
+function middleNote(versions) {
+  const m = versions.find((v) => v.kind === "B")?.r.capacity.middle.find((x) => x.id === "HUMS");
+  if (!m?.over) return null;
+  return note(
+    "info",
+    h("strong", {}, "Harwood Middle, in every Path B version. "),
+    `Moving Crossett Brook's 7th and 8th graders to Harwood would put about ${num(m.total)} students in grades 7-8 there, against the ${num(m.capacity)} the district's consultant counted for the rooms the middle school uses now. It shares a building with the high school, whose capacity the consultant left “TBD.” `,
+    cite(ref("truexCap", "Capacities"), "Consultant capacities")
+  );
+}
 
 function howToRead() {
   const item = (title, ...text) => [h("dt", {}, title), h("dd", {}, ...text)];
@@ -191,7 +206,11 @@ function howToRead() {
           `The district's figures: Path A's cuts add up to the target exactly; Path B saves ${money(PATH_B_SAVINGS.valley.amount)} by closing two valley schools and ${money(PATH_B_SAVINGS.middle.amount)} by merging the middle schools. The district gave one savings figure for closing any two schools, so every pairing shows the same savings. `,
           cite(ref("deck", "slide 13")),
           " ",
-          cite(ref("deck", "slides 17-19"))
+          cite(ref("deck", "slides 17-19")),
+          " Those figures assume valley 5th and 6th graders move to Crossett Brook. For the six versions that keep them in the valley, an administrator said on October 28 the savings would be lower, so the table marks the figure “Up to.” ",
+          tag("estimate"),
+          " ",
+          cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
         ),
         item(
           "Buildings in use",
@@ -206,7 +225,7 @@ function howToRead() {
           cite(ref("deck", "slides 21-32")),
           " Choose “As the state permits read” to use the limits written in the permits instead: Waitsfield 300 students, Fayston 235, and staff counted toward every limit except Waitsfield's. Staff numbers are our estimate. ",
           tag("estimate"),
-          " The classroom line compares the same students with the classroom capacity the district's planning consultant, TruexCullins, calculated for each building in March 2025. ",
+          " The classroom line compares the same students with the classroom capacity the district's planning consultant, TruexCullins, calculated for each building in March 2025. Harwood Middle, the same in every version, is in the note under the table. ",
           cite(ref("truexCap", "Capacities"))
         ),
         item(

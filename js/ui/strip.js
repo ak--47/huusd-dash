@@ -5,12 +5,16 @@ import { h, plural } from "./dom.js";
 import { schoolName, schoolShort } from "./kit.js";
 
 const gLabel = (g) => (g === -2 ? "PK3" : g === -1 ? "PK4" : g === 0 ? "K" : String(g));
+// "Pre-K (age 3)", "Pre-K", "Pre-K to grade 4", "K-4", "Grade 5", "Grades 5-6". Never "Pre-K 3–4",
+// which reads as Pre-K for 3- and 4-year-olds.
 const rangeLabel = (a, b) => {
-  const word = (g) => (g === -2 ? "Pre-K 3" : g === -1 ? "Pre-K 4" : g === 0 ? "K" : String(g));
+  const word = (g) => (g === -2 ? "Pre-K (age 3)" : g === -1 ? "Pre-K (age 4)" : g === 0 ? "K" : `grade ${g}`);
   if (a === b) return a <= 0 ? word(a) : `Grade ${a}`;
-  if (b <= 0) return `${word(a)}–${word(b)}`;
-  return `${a <= 0 ? word(a) : `Grades ${a}`}–${b}`;
+  if (b < 0) return "Pre-K";
+  if (a < 0) return `Pre-K to ${b === 0 ? "K" : `grade ${b}`}`;
+  return a === 0 ? `K-${b}` : `Grades ${a}-${b}`;
 };
+const SEG_CODE = { PRIVATE: "Priv", OTHER: "Other", NEW: "New" };
 
 // years: from journey(); base: the no-change journey for the same child (to mark changes)
 export function strip(years, { base = null, showPreK = false, label = "" } = {}) {
@@ -32,7 +36,7 @@ export function strip(years, { base = null, showPreK = false, label = "" } = {})
   const cols = 12 - first + 1;
   const now = years.find((y) => y.current);
 
-  const summary = segs.map((s) => `${schoolName(s.school)}, ${rangeLabel(s.from, s.to).toLowerCase()}`).join("; ");
+  const summary = segs.map((s) => `${schoolName(s.school)}, ${rangeLabel(s.from, s.to).replace(/^Grade/, "grade")}`).join("; ");
   const wrap = h("div", { class: "strip", style: `--cols:${cols}` });
   wrap.append(
     h(
@@ -63,7 +67,7 @@ export function strip(years, { base = null, showPreK = false, label = "" } = {})
           "data-tip-focus": "off",
         },
         h("span", { class: "seg-name" }, schoolShort(s.school)),
-        h("span", { class: "seg-code", "aria-hidden": "true" }, s.school === "PRIVATE" ? "PVT" : s.school === "OTHER" ? "OTH" : s.school),
+        h("span", { class: "seg-code", "aria-hidden": "true" }, SEG_CODE[s.school] ?? s.school),
         h("span", { class: "seg-grades" }, rangeLabel(s.from, s.to))
       )
     );

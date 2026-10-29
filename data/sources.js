@@ -81,7 +81,7 @@ export const SOURCES = {
     by: "HUUSD",
     date: "2026-10-28",
     kind: "district",
-    url: "https://tinyurl.com/huwebapp-youtube-live",
+    url: "https://www.youtube.com/watch?v=nIYZIJAZqPk",
     note: "Quotes come from an automatic transcript of the public recording. It has no speaker labels, so we name a speaker only where the recording makes it clear.",
   },
   oct14: {
@@ -150,12 +150,12 @@ export const SOURCES = {
     url: "https://tax.vermont.gov/property/education-property-tax-rates/faqs",
   },
   jfo: {
-    title: "Excess spending threshold analysis for the H.949 committee of conference",
+    title: "Draft analysis of adjusting the excess spending threshold (H.949 committee of conference), budget data as of 5/18/26",
     by: "Vermont Joint Fiscal Office",
     date: "2026-05",
     kind: "state",
-    url: "https://legislature.vermont.gov/assets/All-House-Documents/FLOOR-AMENDMENTS/H.949-Excess-Spending-Threshold-Analysis-for-Committee-of-Conference.pdf",
-    note: "Includes each district's FY27 education spending, excluded bond payments, and pupil count.",
+    url: "https://legislature.vermont.gov/assets/All-House-Documents/FLOOR-AMENDMENTS/H.949-Excess-Spending-Threshold-Analysis-for-Committee-of-Conference-as-of-5.18.26.pdf",
+    note: "Includes each district's estimated FY27 education spending, excluded bond payments, and pupil count. Marked \"preliminary\" and \"should not be considered final.\"",
   },
   qdoc: {
     title: "Questions about the School Budget and Consolidation (live board Q&A document)",
@@ -170,7 +170,7 @@ export const SOURCES = {
     date: "1991-08-29",
     kind: "state",
     url: "https://anrweb.vt.gov/DEC/WWDocs/DownloadFile.aspx?UP=||vtanr|PubDocs|DEC|WWDocs|Regional-Imaging|WW|WW-5|WW-5-0201_thru_WW-5-0400|WW-5-0204-1|WW-5-0204-1.PDF",
-    note: "\"The approved maximum student population at the school is 300.\" The 1990 permit (WW-5-0204) set 230 because of the size of the water storage tank, and said the school could be approved for 300 with a larger tank.",
+    note: "\"The approved maximum student population at the school is 300.\" The 1990 permit (WW-5-0204) set 230 because of the size of the water storage tank, and said the school could be approved for 300 with a larger tank. The engineer's design behind both numbers counted students and staff.",
   },
   permitWES1990: {
     title: "Wastewater permit WW-5-0204, Waitsfield School District",
@@ -178,6 +178,15 @@ export const SOURCES = {
     date: "1990-05-24",
     kind: "state",
     url: "https://anrweb.vt.gov/DEC/WWDocs/DownloadFile.aspx?UP=||vtanr|PubDocs|DEC|WWDocs|Regional-Imaging|WW|WW-5|WW-5-0201_thru_WW-5-0400|WW-5-0204|WW-5-0204.PDF",
+    note: "The engineer's 1990 letter in this file: \"The septic system design is for a total of 300 students and staff.\"",
+  },
+  permitWES1996: {
+    title: "Wastewater permit file WW-5-0204-2, Waitsfield School District (engineer's letter of July 18, 1996)",
+    by: "Vermont Agency of Natural Resources",
+    date: "1996-09-06",
+    kind: "state",
+    url: "https://anrweb.vt.gov/DEC/WWDocs/DownloadFile.aspx?UP=||vtanr|PubDocs|DEC|WWDocs|Regional-Imaging|WW|WW-5|WW-5-0201_thru_WW-5-0400|WW-5-0204-2|WW-5-0204-2.PDF",
+    note: "\"The School at the present time is permited for 230 students.\" The same letter says that with water-saving fixtures the school could grow to 326 students, and that its septic system could serve 333.",
   },
   permitFES: {
     title: "Wastewater permit WW-5-0415 (revised), Fayston School District",
@@ -209,7 +218,7 @@ export const SOURCES = {
     date: "2025-03-19",
     kind: "district",
     url: "https://docs.google.com/presentation/d/1hXI0AuKU_JWCkBEkrD-LnbjjsvOYSGChuuhUXodZvoQ/edit",
-    note: "Classroom capacities including Pre-K: Brookside 399, Fayston 139, Moretown 165, Waitsfield 174, Warren 155, Crossett Brook 359, Harwood Middle 166.",
+    note: "Classroom capacities including Pre-K, counting the rooms now used as classrooms: Brookside 399, Fayston 139, Moretown 165, Waitsfield 174, Warren 155, Crossett Brook 359, Harwood Middle 166, Harwood High \"TBD.\" Also lists planning guidelines, such as a 45-minute longest bus ride for elementary students.",
   },
   truexReport: {
     title: "HUUSD District Reconfiguration Options (draft report)",
@@ -217,7 +226,7 @@ export const SOURCES = {
     date: "2025-03",
     kind: "district",
     url: "https://drive.google.com/file/d/18hZ4T-r5LPiTkvlm4YCXHOtcWd8QmJ-X/view",
-    note: "Capacity method: State Board maximums of 20 students per classroom in K-4 and 25 in grades 5-8. \"All of the facilities require additional classroom space to accommodate the students identified in the options.\"",
+    note: "Capacity method: State Board maximums of 20 students per classroom in K-4 and 25 in grades 5-8; the report notes these \"are higher than HUUSD's optimal class size.\" On the options it cost-modeled: \"all of the facilities require additional classroom space to accommodate the students identified in the options.\"",
   },
   truexUpdate: {
     title: "HUUSD Master Planning Update",

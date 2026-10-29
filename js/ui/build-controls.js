@@ -303,9 +303,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "label",
       { class: "wonk-check bp-fix-check", for: "bp-septic" },
       septic,
-      h("span", { class: "bp-fix-name" }, "Use Waitsfield's permitted 300 instead of 230")
+      h("span", { class: "bp-fix-name" }, "Use 300 for Waitsfield (its 1991 permit) instead of 230")
     ),
-    h("p", { class: "bp-fix-note", id: "bp-septic-d" }, "Waitsfield's 1991 state permit sets an approved maximum student population of 300. The slides use 230 and list the school as “amenable to 300.” ", cite(ref("permitWES", "condition 1.2"), "Permit")),
+    h(
+      "p",
+      { class: "bp-fix-note", id: "bp-septic-d" },
+      "Waitsfield's 1991 state permit sets an approved maximum student population of 300, but the design behind it counted students and staff, and a 1996 letter in the state's file says 230. The slides use 230 and list the school as “amenable to 300.” ",
+      cite(ref("permitWES", "condition 1.2"), "Waitsfield permit 1991")
+    ),
     septicOff
   );
 
@@ -367,8 +372,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   // the wastewater limits: as the slides apply them, or as each state permit is written
   const readingRadios = [
-    ["slides", "As on the slides", "Students only, against 230, 250, 235, and 237, as the district compared them."],
-    ["permits", "As the state permits read", "Waitsfield 300 students and Fayston 235; staff count toward every limit except Waitsfield's. Staff numbers are our estimate."],
+    ["slides", "As on the slides", "Students only, against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), and 237 (Warren), as the district compared them."],
+    ["permits", "As the state permits read", "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate."],
   ].map(([v, title, sub]) => {
     const input = h("input", { type: "radio", name: "bp-reading", value: v });
     input.addEventListener("change", () => {
@@ -379,7 +384,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
   // the district's draft roadmap: one new valley building in fall 2029
   const roadmapBox = h("input", { type: "checkbox", id: "bp-roadmap", "aria-describedby": "bp-roadmap-d" });
-  const roadmapTop = h("select", { class: "wonk-select", id: "bp-roadmap-top" }, [4, 5, 6].map((n) => h("option", { value: n }, `Pre-K to ${n}${n === 4 ? " (author's intent)" : n === 5 ? " (Phase 2 text)" : " (feasibility study)"}`)));
+  const roadmapTop = h("select", { class: "wonk-select", id: "bp-roadmap-top" }, [4, 5, 6].map((n) => h("option", { value: n }, `Pre-K to ${n}${n === 4 ? " (Phase 3; author's stated preference)" : n === 5 ? " (Phase 2 text)" : " (feasibility study)"}`)));
   roadmapBox.addEventListener("change", () => onPlan((p) => ({ ...p, roadmap: roadmapBox.checked ? { fall: 2029, top: Number(roadmapTop.value) } : null })));
   roadmapTop.addEventListener("change", () => onPlan((p) => ({ ...p, roadmap: p.roadmap ? { ...p.roadmap, top: Number(roadmapTop.value) } : null })));
 

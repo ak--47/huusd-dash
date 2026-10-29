@@ -234,3 +234,31 @@ test("capacity, consultant classrooms: every Path B version needs room at a rece
   const plan = M.makePlan({ ...M.pathB(["MES", "WES"], 4), portables: { WES: 2 } });
   assert.deepEqual(M.capacity(plan).overConsultant, [], "Waitsfield 220 fits 174 + 80");
 });
+
+test("capacity: the Pre-K cut takes Pre-K out of the buildings", () => {
+  // Path A ends district Pre-K classes, so Moretown's 32 Pre-K children no longer count: 137 fits 165
+  assert.deepEqual(M.capacity(M.PLAN_A).overConsultant, []);
+  assert.equal(M.capacity(M.PLAN_A).schools.find((s) => s.id === "MES").total, 137);
+});
+
+test("capacity, middle schools: the merger puts about 257 7th and 8th graders at Harwood", () => {
+  const harwood = (p) => M.capacity(p).middle.find((m) => m.id === "HUMS");
+  assert.equal(harwood(M.PLAN_TODAY).total, ATTENDING[2026].HU[7] + ATTENDING[2026].HU[8]);
+  for (const p of M.PATH_B_PLANS) assert.deepEqual(M.capacity(p).overMiddle, ["HUMS"], p.id);
+  assert.equal(harwood(M.pathB(["MES", "WES"], 4)).total, 257);
+  // closing two valley schools without the merger fills Crossett Brook instead: 261 + 125 against 359
+  const two = M.capacity(M.makePlan({ open: ["MES", "WRN"], valleyTop: 4 }));
+  assert.deepEqual(two.overMiddle, ["CBMS"]);
+  assert.equal(two.middle.find((m) => m.id === "CBMS").total, 386);
+});
+
+test("savings: keeping grades 5-6 in the valley makes the middle-school figure an upper limit", () => {
+  // On October 28 the administration said those versions would not reach the full $3.9 million.
+  for (const p of M.PATH_B_PLANS) {
+    const b = M.budget(p);
+    assert.equal(b.savings, PATH_B_SAVINGS.total, p.id);
+    assert.equal(b.upperBound, p.valleyTop === 6, p.id);
+    assert.equal(b.hasEstimate, p.valleyTop === 6, p.id);
+  }
+  assert.equal(M.budget(M.PLAN_A).upperBound, false);
+});

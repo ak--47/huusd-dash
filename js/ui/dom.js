@@ -32,6 +32,71 @@ export const frag = (...children) => {
 export const $ = (sel, root = document) => root.querySelector(sel);
 export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
+// ---- scroll regions ----
+// A .table-scroll box that scrolls sideways has to take keyboard focus, or keyboard and switch users
+// can't reach its hidden columns (WCAG 2.1.1). While a box scrolls and holds nothing focusable, it gets
+// tabindex="0", role="region", and its table's caption as a name; otherwise those come off again. A box
+// a page set up itself (it already had a role or tabindex) is left alone. Watching root covers tables a
+// page redraws in place, and size changes (rotation, zoom, a fold opening) are re-checked.
+const TABBABLE = [
+  "a[href]",
+  "button:not([disabled])",
+  'input:not([disabled]):not([type="hidden"])',
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "summary",
+  '[tabindex]:not([tabindex="-1"])',
+].join(", ");
+
+export function scrollRegions(root) {
+  const mine = new Set();
+  const theirs = new WeakSet();
+  const fit = (box) => {
+    const scrolls = box.scrollWidth > box.clientWidth + 1 || box.scrollHeight > box.clientHeight + 1;
+    if (scrolls && !box.querySelector(TABBABLE)) {
+      box.tabIndex = 0;
+      box.setAttribute("role", "region");
+      box.setAttribute("aria-label", box.querySelector("caption")?.textContent.trim() || "Table");
+    } else if (box.hasAttribute("tabindex") && document.activeElement !== box) {
+      box.removeAttribute("tabindex");
+      box.removeAttribute("role");
+      box.removeAttribute("aria-label");
+    }
+  };
+  const resized = typeof ResizeObserver === "function" ? new ResizeObserver((entries) => entries.forEach((e) => mine.has(e.target) && fit(e.target))) : null;
+  const scan = () => {
+    for (const box of mine) {
+      if (box.isConnected) continue;
+      mine.delete(box);
+      resized?.unobserve(box);
+    }
+    for (const box of root.querySelectorAll(".table-scroll")) {
+      if (theirs.has(box)) continue;
+      if (!mine.has(box)) {
+        if (box.hasAttribute("tabindex") || box.hasAttribute("role")) {
+          theirs.add(box);
+          continue;
+        }
+        mine.add(box);
+        resized?.observe(box);
+      }
+      fit(box);
+    }
+  };
+  // One pass per frame, after wonk.js has made tooltip targets focusable (its observer runs first).
+  let queued = false;
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      scan();
+    });
+  };
+  new MutationObserver(queue).observe(root, { childList: true, subtree: true });
+  scan();
+}
+
 // ---- numbers ----
 const MINUS = "−";
 const nf = new Intl.NumberFormat("en-US");

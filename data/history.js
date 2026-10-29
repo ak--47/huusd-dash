@@ -26,14 +26,14 @@ export const HISTORY = [
   {
     when: "June 2023",
     what: "The board drops the middle school merger from bond planning",
-    detail: "The vote to keep 7th and 8th graders at both Harwood and Crossett Brook passed unanimously, with four members absent.",
+    detail: "The vote to keep 7th and 8th graders at both Harwood and Crossett Brook passed unanimously, with four members absent. The merger under discussion, like those in 2020 and 2021, would have combined them at Crossett Brook; Path B would combine them at Harwood.",
     source: "Valley Reporter",
     url: "https://valleyreporter.com/index.php/news/local-news/18022-no-middle-school-merger-in-bond-talks",
   },
   {
     when: "March 2025",
     what: "A planning consultant presents building options",
-    detail: "TruexCullins modeled several district layouts. In a November 2025 update it wrote that the options' savings, including the status quo with a bond, were \"tightly grouped,\" and that \"there was not significant savings compared to the status quo.\"",
+    detail: "TruexCullins drew up several district layouts, and their costs were modeled over 30 years; each required building additions. In a November 2025 update it wrote that the options' savings, including the status quo with a bond, were \"tightly grouped\" because \"the existing schools are currently close to capacity and each option require additions,\" so \"there was not significant savings compared to the status quo.\" Path B, as presented in October 2026, includes no building additions.",
     source: "TruexCullins update, November 20, 2025",
     url: "https://drive.google.com/file/d/1GfZsknL0ChNGqI3oatn58oSRFoCnn9Do/view",
   },
@@ -61,9 +61,9 @@ export const HISTORY = [
   {
     when: "October 28, 2026",
     what: "A straw poll to keep developing Path B",
-    detail: "By a show of hands, not a formal vote, the board agreed to keep working on Path B. No schools were chosen. The board asked for a version that keeps valley 5th and 6th graders in temporary classrooms in the valley.",
+    detail: "By a show of hands, not a formal vote, the board agreed to keep working on Path B. No schools were chosen. A board member asked to see a version that keeps valley 5th and 6th graders in temporary classrooms in the valley, and the administration said it would bring one.",
     source: "Board meeting recording",
-    url: "https://tinyurl.com/huwebapp-youtube-live",
+    url: "https://www.youtube.com/watch?v=nIYZIJAZqPk",
   },
 ];
 

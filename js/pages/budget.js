@@ -2,6 +2,7 @@ import { h, money, moneyShort, num, pct } from "../ui/dom.js";
 import { cite, fold, note, pageHead, section, tag, term } from "../ui/kit.js";
 import { BUDGET, PATH_A_CUTS, PATH_B_SAVINGS, THRESHOLD_SCHEDULE } from "../../data/budget.js";
 import { FACILITIES, SCHOOLS, VALLEY } from "../../data/schools.js";
+import { ATTENDING, DISTRICT_TREND } from "../../data/enrollment.js";
 import { ref } from "../../data/sources.js";
 import { LAW } from "../../data/law.js";
 import { loadCharts, quietPlotAria } from "../ui/charts.js";
@@ -14,6 +15,10 @@ export default {
     const lf = BUDGET.scenarios.find((s) => s.id === "level-funded");
     const corrected = budgetFor(PLAN_TODAY);
     const charts = [];
+    // For the district's case for consolidation: small valley grades this year, and the long-run enrollment trend.
+    const valleyGrades = VALLEY.flatMap((id) => Object.values(ATTENDING[2026][id]));
+    const smallGrades = valleyGrades.filter((n) => n <= 13);
+    const trend = (year) => DISTRICT_TREND.points.find((p) => p.year === year).students;
 
     const optionRows = BUDGET.scenarios.map((s) => ({
       name: s.name,
@@ -27,7 +32,7 @@ export default {
 
     const budgetChart = h("div", { class: "chart" });
     const scheduleChart = h("div", { class: "chart" });
-    const cutsChart = h("div", { class: "chart" });
+    const cutsChart = h("div", { class: "chart chart--tall" });
 
     el.append(
       pageHead({
@@ -42,7 +47,7 @@ export default {
         statCard("This year's budget (FY27)", moneyShort(BUDGET.fy27), "2026-27", "district", ref("deck", "slide 10")),
         statCard("Same services next year", moneyShort(ls.budget), `+${pct(ls.growth, 1)} over this year`, "district", ref("deck", "slide 10")),
         statCard("Savings needed", moneyShort(BUDGET.requiredCut), "to stay under the limit", "district", ref("deck", "slides 10, 13")),
-        statCard("State limit per pupil (FY28)", money(BUDGET.threshold), "the excess spending threshold", "district", ref("deck", "slide 10"))
+        statCard("State limit per pupil (FY28)", money(BUDGET.threshold), term("threshold", "the excess spending threshold"), "district", ref("deck", "slide 10"))
       ),
 
       section(
@@ -91,11 +96,11 @@ export default {
           h(
             "p",
             {},
-            `The level-funded card says its per-pupil figure "was corrected to remove the debt exclusion," moving it from $220.67 under the limit to $25.67 under. The level-service card's $1,081 over matches the old basis: $1,081 + $220.67 = ${money(1081 + 220.67, 2)}, which is exactly the ${money(BUDGET.requiredCut)} cut spread over about ${num(PUPILS)} pupils. On the corrected basis, level service would be about ${money(corrected.vsThreshold)} over the limit per pupil, and the penalty about ${moneyShort(corrected.penalty)} instead of ${moneyShort(ls.penalty)}. `,
+            `The level-funded card says its per-pupil figure "was corrected to remove the debt exclusion," moving it from $220.67 under the limit to $25.67 under. The level-service card's $1,081 over matches the old basis: $1,081 + $220.67 = ${money(1081 + 220.67, 2)}, which matches the ${money(BUDGET.requiredCut)} cut spread over about ${num(PUPILS)} pupils (about ${money(BUDGET.requiredCut / PUPILS)}). On the corrected basis, level service would be about ${money(corrected.vsThreshold)} over the limit per pupil, and the penalty about ${moneyShort(corrected.penalty)} instead of ${moneyShort(ls.penalty)}. `,
             tag("derived")
           ),
-          h("p", {}, `The projected-inflation card ($172 over, ${money(445340)} penalty) does not fit the same line as the other three cards. It may use different assumptions; the presentation does not say. Neither point changes the size of the cut the district is asking for, ${money(BUDGET.requiredCut)}.`),
-          h("p", {}, h("a", { href: "#/findings" }, "More on what we checked"))
+          h("p", {}, `The projected-inflation card ($172 over, ${money(445340)} penalty) does not follow the same per-pupil rule as the other three cards. It may use different assumptions; the presentation does not say. Neither point changes the size of the cut the district is asking for, ${money(BUDGET.requiredCut)}.`),
+          h("p", {}, h("a", { href: "#/findings?at=finding-debt-basis" }, "More on what we checked"))
         )
       ),
 
@@ -106,10 +111,16 @@ export default {
           { class: "prose change-list" },
           h("li", {}, h("strong", {}, "Teacher health insurance. "), "A legislator told the board the increase will be held below 3%, after just over 7% last year. The administration called it \"very good news\" that would require remodeling the budget. ", cite(ref("meeting1028", "legislators"))),
           h("li", {}, h("strong", {}, "The official limit. "), "The Secretary of Education sets the FY28 threshold by November 15; $16,562 is a projection. ", cite(ref("vsa5401", "§ 5401(12)"), "State law")),
-          h("li", {}, h("strong", {}, "The tax yield. "), "The finance director said Path B's margin uses last December's starting yield of $8,849; last year it ended at $9,406. ", cite(ref("meeting1028", "finance director"))),
+          h("li", {}, h("strong", {}, "The tax yield. "), "The yield is a state number that turns spending per pupil into a tax rate. The finance director said Path B's figures use last December's first estimate, $8,849; last year's yield ended at $9,406. ", cite(ref("meeting1028", "finance director"))),
           h("li", {}, h("strong", {}, "Staff costs. "), "The consolidation savings use the current seniority list and could change as retirements become known. ", cite(ref("meeting1028", "finance director"))),
-          h("li", {}, h("strong", {}, "Bond payments. "), "If payments on older voter-approved bonds are left out of the test, as state law allows, the cut needed is about $500,000 smaller. ", h("a", { href: "#/findings" }, "Details")),
-          h("li", {}, h("strong", {}, "The Legislature. "), "Rep. Dara Torre told the board the threshold is \"too fast\" and that relief is more likely for FY29 than FY28. ", cite(ref("meeting1028", "legislators")))
+          h("li", {}, h("strong", {}, "Bond payments. "), "If payments on older voter-approved bonds are left out of the test, as state law allows, the cut needed is about $500,000 smaller. ", h("a", { href: "#/findings?at=finding-debt-basis" }, "Details")),
+          h(
+            "li",
+            {},
+            h("strong", {}, "The Legislature. "),
+            "Rep. Dara Torre told the board the threshold is \"too fast\" and that relief is more likely for FY29 than FY28. Both legislators also said the state has no more money for schools, and Rep. Candice White said the planned foundation formula would mean a decrease for this district. ",
+            cite(ref("meeting1028", "legislators"))
+          )
         )
       ),
 
@@ -126,7 +137,7 @@ export default {
         note(
           "info",
           h("strong", {}, "The district's own view. "),
-          "In its presentation, the district asks legislators to look again at the threshold: it says the designation does not explain geography, special education costs, regional salaries, or programs communities chose to add, and that even with consolidation HUUSD has \"limited room for annual budget growth after FY28.\" ",
+          "In its presentation, the district asks legislators to look again at the threshold: it says being labeled an excess spender does not explain why a district spends more, such as its geography, special education costs, regional salaries, or programs communities chose to add, and that even with consolidation HUUSD has \"limited room for annual budget growth after FY28.\" ",
           cite(ref("deck", "slide 38"))
         )
       ),
@@ -149,7 +160,7 @@ export default {
           PATH_A_CUTS.items.map((c) => [h("dt", {}, c.name), h("dd", {}, h("strong", { class: "wonk-num" }, money(c.amount)), " · ", c.detail)])
         ),
         h("p", { class: "small" }, tag("district"), " ", cite(PATH_A_CUTS.src)),
-        fold("What the district says these cuts would do", h("ul", {}, PATH_A_CUTS.impact.map((t) => h("li", {}, t))), h("p", { class: "small" }, cite(PATH_A_CUTS.src)))
+        fold("What the district says these cuts would do (it calls the impact \"devastating\")", h("ul", {}, PATH_A_CUTS.impact.map((t) => h("li", {}, t))), h("p", { class: "small" }, cite(PATH_A_CUTS.src)))
       ),
 
       section(
@@ -160,6 +171,37 @@ export default {
           statCard("Close 2 of 4 valley schools", moneyShort(PATH_B_SAVINGS.valley.amount), `${num(PATH_B_SAVINGS.valley.fte)} fewer staff positions`, "district", PATH_B_SAVINGS.valley.src),
           statCard("Merge the middle schools", moneyShort(PATH_B_SAVINGS.middle.amount), `${num(PATH_B_SAVINGS.middle.fte, 1)} fewer staff positions`, "district", PATH_B_SAVINGS.middle.src),
           statCard("Total", moneyShort(PATH_B_SAVINGS.total), `${moneyShort(PATH_B_SAVINGS.total - BUDGET.requiredCut)} more than needed`, "district", ref("deck", "slide 19"))
+        ),
+        fold(
+          "What the district says consolidation would do",
+          h(
+            "ul",
+            {},
+            h(
+              "li",
+              {},
+              "Larger groups of classmates: \"larger peer groups, dynamic social learning, and balanced classrooms.\" ",
+              cite(ref("deck", "slide 14")),
+              ` This year ${smallGrades.length} of the ${valleyGrades.length} grades in the four valley schools have ${Math.min(...smallGrades)} to 13 students. `,
+              cite(ATTENDING.src)
+            ),
+            h(
+              "li",
+              {},
+              "Full-time staff on site: the four valley schools now share arts staff and nurses each week; consolidation would mean \"on-site, full-time staff in the valley elementary schools,\" including a full-time nurse at each. ",
+              cite(ref("deck", "slides 14, 17"))
+            ),
+            h("li", {}, "Teachers with grade-level colleagues, for \"grade-level team teaching, shared lesson planning, and professional growth.\" ", cite(ref("deck", "slide 14"))),
+            h("li", {}, "Students with similar needs taught together where their IEPs allow, so a second teacher can help students who get no extra help now. ", cite(ref("deck", "slide 16"))),
+            h(
+              "li",
+              {},
+              "One middle school with \"expanded academic electives, athletics, and extracurricular offerings,\" grade-level teacher teams, and combined special education, counseling, and intervention support. ",
+              cite(ref("deck", "slide 18"))
+            ),
+            h("li", {}, "Dedicated music spaces instead of shared multi-purpose rooms, and \"consistent weekly music, band, and choral scheduling.\" ", cite(ref("deck", "slide 40"))),
+            h("li", {}, `Falling enrollment: ${num(trend("2009-10"))} students in 2009-10, ${num(trend("2026-27"))} this year, and ${num(trend("2031-32"))} projected for 2031-32. `, cite(DISTRICT_TREND.src))
+          )
         ),
         h(
           "div",
@@ -199,7 +241,8 @@ export default {
         T.plot(budgetChart, (t) => ({
           height: 200,
           marginLeft: 110,
-          marginRight: 80,
+          // room for the "+$3.34M · over limit" label on narrow screens
+          marginRight: budgetChart.clientWidth < 500 ? 125 : 80,
           x: { label: null, tickFormat: (v) => (v > 0 ? "+" : "") + moneyShort(v), grid: true, domain: [-1.2e6, 4e6] },
           y: { label: null, domain: deltas.map((r) => r.short) },
           marks: [

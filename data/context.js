@@ -7,7 +7,7 @@ export const CHECKS = [
   { text: "The level-service budget minus the required cut equals this year's budget, $51,884,847.", ref: ref("deck", "slide 10") },
   { text: "The level-funded and Path B per-pupil figures agree with each other: both imply about 2,565 weighted pupils.", ref: ref("deck", "slides 10, 20") },
   { text: "In the October 1 enrollment report, every school's grade rows add up to its printed total, for 2024, 2025, and 2026.", ref: ref("enroll", "p. 1") },
-  { text: "Eleven of the twelve capacity tables add up row by row, and every table's grand total is right.", ref: ref("deck", "slides 27-32") },
+  { text: "In ten of the twelve capacity tables, each school's printed total matches its grade rows, and every table's grand total is right. The two exceptions are the Fayston + Warren tables, covered below.", ref: ref("deck", "slides 27-32") },
   { text: "In the capacity tables, students from a closed school go to the nearest open school, as the district says. For example, Moretown children go to Brookside when Moretown and Waitsfield both close.", ref: ref("deck", "slide 29") },
   { text: "The threshold schedule on the slides (115.5% in FY28 down to 112.5% in FY32) matches Act 169 of 2026.", ref: ref("act169", "Sec. 7") },
 ];
@@ -25,7 +25,7 @@ export const IDEAS = [
   {
     title: "Keep grades 5 and 6 in the valley",
     text: "Use portable classrooms at the receiving schools, move Pre-K out to make room, or find other room in the district, so valley 5th and 6th graders do not go to Crossett Brook.",
-    record: "Raised as community input in the board's question-and-answer document. On October 28 the board asked to see this version at its next meeting. The district priced portable classrooms at about $600,000 to $700,000 for two units with two classrooms each.",
+    record: "Raised as community input in the board's question-and-answer document. On October 28 a board member asked to see this version at the next meeting, and the administration said it would bring it. The district priced portable classrooms at about $600,000 to $700,000 for two units with two classrooms each.",
     ref: ref("deck", "slide 26"),
     build: "#/build?o=MR&t=6&m=1&p=WRN1",
   },
@@ -85,20 +85,22 @@ export const EVIDENCE = [
   },
   {
     topic: "Whether consolidation saves money",
-    summary: "Evidence on savings comes mostly from district mergers, not school closures. Large savings show up mainly for very small districts. Several studies find transportation and staffing costs rise enough to cancel much of the savings. In six large city districts, closing a school saved well under $1 million a year per building.",
+    summary: "Evidence on savings comes mostly from district mergers, not school closures. Large savings show up mainly for very small districts; studies in Iowa and Arkansas found little or no net savings, and one Arkansas study found higher transportation costs offset about half of the small administrative savings. In six large city districts, closing a school saved well under $1 million a year per building. A 2019 study for the Vermont Legislature estimated that schools under 100 students cost about 24% more per pupil, and schools of 101 to 250 about 12% more, to reach the same results.",
     studies: [
       { cite: "Duncombe & Yinger, 2007", where: "Rural New York", finding: "Large per-pupil savings only for very small districts, reduced by capital costs.", url: "https://eric.ed.gov/?id=EJ896695" },
       { cite: "Gordon & Knight, 2008", where: "Iowa", finding: "District consolidations showed no efficiency gains.", url: "https://doi.org/10.1177/1091142107305219" },
       { cite: "McGee, Mills & Goldstein, 2021", where: "Arkansas", finding: "Mandatory consolidation of small districts produced no evidence of economies of scale.", url: "https://www.edworkingpapers.com/sites/default/files/ai21-347.pdf" },
+      { cite: "Collins, 2019", where: "Arkansas", finding: "Consolidation had little effect on spending; higher transportation spending offset about half of the small administrative savings. Graduation rates fell.", url: "https://repository.upenn.edu/edissertations/3235" },
       { cite: "Pew Charitable Trusts, 2011", where: "Six large urban districts", finding: "Savings averaged well under $1 million per closed school per year, often below projections.", url: "https://www.pewtrusts.org/-/media/assets/2011/10/19/closing_public_schools_philadelphia_report.pdf" },
-      { cite: "Kolbe et al., 2019", where: "Vermont", finding: "Schools under 100 students cost about 24% more per pupil, and schools of 101-250 about 12% more.", url: "https://legislature.vermont.gov/assets/Legislative-Reports/edu-legislative-report-pupil-weighting-factors-2019" },
+      { cite: "Kolbe et al., 2019", where: "Vermont", finding: "Schools under 100 students cost about 24% more per pupil, and schools of 101-250 about 12% more.", url: "https://legislature.vermont.gov/assets/Legislative-Reports/edu-legislative-report-pupil-weighting-factors-2019.pdf" },
     ],
   },
   {
     topic: "Bus rides",
-    summary: "Rigorous evidence is thin. A large New York City study found long rides raised absences but did not lower test scores overall. Teenagers with longer commutes sleep less.",
+    summary: "Rigorous evidence is thin. A large New York City study found long rides raised absences but did not lower test scores overall. A national study found kindergartners who rode the bus missed fewer days than those who got to school other ways. Teenagers with longer commutes sleep less.",
     studies: [
       { cite: "Cordes et al., 2022", where: "New York City, grades 3-6", finding: "Longer rides increased absences and chronic absenteeism; no effect on test scores overall.", url: "https://edworkingpapers.com/sites/default/files/ai21-504_0.pdf" },
+      { cite: "Gottfried, 2017", where: "U.S. kindergartners", finding: "Children who rode the school bus missed fewer days than those who got to school other ways.", url: "https://doi.org/10.3102/0162373717699472" },
       { cite: "Howley et al., 2001", where: "Five-state principal survey", finding: "Rural schools were more likely to have longest rides of 30 minutes or more.", url: "https://journals.newprairiepress.org/jrre/article/id/20468/" },
       { cite: "Voulgaris et al., 2019", where: "U.S. time-use data", finding: "Teenagers with longer school commutes slept less.", url: "https://doi.org/10.1177/0739456X17725148" },
     ],

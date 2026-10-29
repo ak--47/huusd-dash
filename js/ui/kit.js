@@ -32,7 +32,8 @@ export function cite(ref, label) {
       target: external ? "_blank" : null,
       rel: external ? "noopener" : null,
       "data-tip": tip,
-      "aria-label": `Source: ${tip}`,
+      // Starts with the visible text, so voice control ("click Oct 28 meeting") finds the link (WCAG 2.5.3).
+      "aria-label": `${text}. Source: ${tip}`,
     },
     text
   );
@@ -74,14 +75,15 @@ const SHORT_LABEL = {
   osrm: "OSRM",
   census2020: "Census",
   derived: "Method",
-  permitWES: "Permit",
-  permitWES1990: "1990 permit",
-  permitFES: "Permit",
-  permitWRN: "Permit",
-  permitMES: "Permit",
-  truexCap: "Consultant",
-  truexReport: "Consultant",
-  truexUpdate: "Consultant",
+  permitWES: "Waitsfield permit 1991",
+  permitWES1990: "Waitsfield permit 1990",
+  permitWES1996: "Waitsfield 1996 letter",
+  permitFES: "Fayston permit",
+  permitWRN: "Warren permit",
+  permitMES: "Moretown permit",
+  truexCap: "Consultant capacities",
+  truexReport: "Consultant report",
+  truexUpdate: "Consultant update",
   wwRules: "State rules",
 };
 

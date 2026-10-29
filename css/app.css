@@ -12,7 +12,9 @@
   --heat-4: var(--ak-a2);
 }
 
-html { scroll-behavior: smooth; }
+/* Scrolling to a section (?at= links, "At a glance") stops below the sticky top bar on phones.
+   app.js keeps --topbar-h equal to the bar's height, which grows when its text wraps. */
+html { scroll-behavior: smooth; scroll-padding-top: var(--ak-s4); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: var(--ak-ground); }
 
@@ -36,13 +38,22 @@ body { margin: 0; background: var(--ak-ground); }
 .side-note { margin-top: auto; padding-top: var(--ak-s6); font-size: var(--ak-text-sm); color: var(--ak-ink-3); }
 
 .wonk-topbar { background: var(--ak-ground); }
-.topbar-title { color: var(--ak-ink); font-weight: 700; display: none; }
+.topbar-id { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.topbar-title { color: var(--ak-ink); font-weight: 700; line-height: 1.25; display: none; }
+/* On phones the nav's independence note sits in the closed drawer, so the top bar says it too. */
+.topbar-indep { display: none; font-size: var(--ak-text-xs); line-height: 1.3; color: var(--ak-ink-3); }
 .topbar-meta { color: var(--ak-ink-3); }
 @media (max-width: 800px) {
-  .wonk-side { position: fixed; height: auto; }
-  .topbar-title { display: inline; }
+  html { scroll-padding-top: calc(var(--topbar-h, 4.5rem) + var(--ak-s3)); }
+  /* The open drawer starts below the top bar, which stays on top (50 > the drawer's 45), so the Menu
+     button that closes it stays visible and Tab moves from the last link to it. */
+  .wonk-side { position: fixed; height: auto; top: var(--topbar-h, 4rem); }
+  /* 8px, not 12: the note then fits on one line from about 356px wide */
+  .wonk-topbar .wonk-row { column-gap: var(--ak-s2); }
+  .topbar-title { display: inline; text-wrap: balance; }
+  .topbar-indep { display: block; text-wrap: balance; }
   .topbar-meta { display: none; }
-  .wonk-topbar { position: sticky; top: 0; z-index: 30; }
+  .wonk-topbar { position: sticky; top: 0; z-index: 50; }
 }
 
 .wonk-main { padding-top: var(--ak-s8); }
@@ -128,6 +139,10 @@ strong { color: var(--ak-ink); }
 /* ---- buttons and controls ---- */
 .btn-row { display: flex; flex-wrap: wrap; gap: var(--ak-s3); align-items: center; }
 a.wonk-btn { text-decoration: none; }
+/* a quiet button has no border, so an underline marks it as something to press */
+.wonk-btn.wonk-btn--quiet { text-decoration: underline; text-underline-offset: 0.2em; }
+/* fold summaries are a full-size tap target */
+.wonk-fold > summary { min-height: 44px; align-items: center; }
 .choice { display: flex; flex-wrap: wrap; gap: var(--ak-s2); }
 .choice label {
   display: inline-flex; align-items: center; gap: var(--ak-s2); cursor: pointer;
@@ -152,7 +167,7 @@ fieldset.group > legend { font-weight: 700; font-size: var(--ak-text-md); color:
 .strip-tick.is-now { color: var(--ak-a1-text); font-weight: 700; }
 .strip-segs { list-style: none; margin: 0; padding: 0; }
 .seg {
-  grid-column: var(--start) / span var(--span);
+  grid-column: var(--start) / span var(--span); position: relative;
   display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 3.25rem;
   padding: var(--ak-s1) var(--ak-s2); border-radius: var(--ak-radius);
   background: var(--seg-a); border: 1px solid var(--ak-hairline); overflow: hidden;
@@ -171,10 +186,16 @@ fieldset.group > legend { font-weight: 700; font-size: var(--ak-text-md); color:
   .seg-grades { font-size: var(--ak-text-xs); }
 }
 .seg-code { display: none; font-weight: 700; font-size: var(--ak-text-xs); font-family: var(--ak-font-mono); color: var(--ak-ink); }
-.seg--narrow .seg-name, .seg--narrow .seg-grades { display: none; }
+/* A one-year segment is too narrow for its name: it shows a short code (aria-hidden), and the name and
+   grades stay in the accessibility tree, visually hidden. */
+.seg--narrow .seg-name, .seg--narrow .seg-grades { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .seg--two .seg-name { white-space: normal; line-height: 1.1; font-size: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .seg--narrow .seg-code { display: block; }
-@media (max-width: 640px) { .seg--narrow .seg-name, .seg--narrow .seg-grades { display: block; } .seg--narrow .seg-code { display: none; } .seg--two .seg-name { display: block; font-size: var(--ak-text-sm); } }
+@media (max-width: 640px) {
+  .seg--narrow .seg-name, .seg--narrow .seg-grades { display: block; position: static; width: auto; height: auto; clip-path: none; }
+  .seg--narrow .seg-code { display: none; }
+  .seg--two .seg-name { display: block; font-size: var(--ak-text-sm); }
+}
 .count-line { margin: var(--ak-s2) 0 0; color: var(--ak-ink-2); }
 .count-line strong { font-size: var(--ak-text-lg); }
 .legend-row { display: flex; flex-wrap: wrap; gap: var(--ak-s4); font-size: var(--ak-text-sm); color: var(--ak-ink-2); align-items: center; }
@@ -286,10 +307,17 @@ tr.is-wrong td { background: color-mix(in srgb, var(--ak-err) 9%, transparent); 
 .recv { margin-top: var(--ak-s3); max-width: 32rem; }
 .versions td.is-on { background: var(--ak-wash); }
 .versions td button { font-size: var(--ak-text-md); }
+/* the whole cell is the tap target, at least 44px tall */
+.versions td { padding: 0; }
+.versions td .wonk-value-link { display: block; width: 100%; min-height: 44px; padding: 0 var(--ak-s3); text-align: right; }
+.versions td .wonk-value-link:focus-visible { outline-offset: -2px; }
 .grid-pick { max-width: 34rem; }
 @media (max-width: 640px) { .child-card { padding: var(--ak-s4); } }
 /* grid children never widen their track past the viewport */
-.wonk-grid > *, .paths > *, .stat-row > *, .split > * { min-width: 0; }
+.wonk-grid > *, .paths > *, .stat-row > *, .split > *, .kids > *, .controls-bar > * { min-width: 0; }
+/* a select is as wide as its longest option unless told otherwise; that widened the Change and Add forms on phones */
+.child-form .wonk-select, .recv .wonk-select { width: 100%; min-width: 0; }
+.detail .cite { white-space: normal; }
 
 /* links inside running text are underlined, not just colored */
 :where(.wonk) :is(p, li, dd, figcaption) > a:not([class]),

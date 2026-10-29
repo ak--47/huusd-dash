@@ -1,6 +1,6 @@
 import { h, dateLong, money, num } from "../ui/dom.js";
-import { fold, pageHead, section, tag } from "../ui/kit.js";
-import { SOURCES } from "../../data/sources.js";
+import { cite, fold, pageHead, section, tag } from "../ui/kit.js";
+import { SOURCES, ref } from "../../data/sources.js";
 import { GLOSSARY } from "../ui/glossary.js";
 import { HISTORY, UPDATES, VOTES } from "../../data/history.js";
 import { PUPILS, TARGET, CLASS_SIZE_DEFAULT } from "../model/index.js";
@@ -21,8 +21,8 @@ const TERM_LABEL = {
   deferred: "Deferred maintenance",
   schools: "Number of schools",
   move: "Move",
-  pk4config: "Pre-K to 4 setup",
-  k6config: "K to 6 setup",
+  pk4config: "Pre-K to 4 setup (grades 5-6 at Crossett Brook)",
+  k6config: "K-6 setup (grades 5-6 stay in the valley)",
 };
 
 export default {
@@ -59,7 +59,7 @@ export default {
       section(
         { id: "method", title: "How we calculate" },
         methodItem("Which school a child attends", [
-          "Plans take effect in fall 2027 (FY28) and stay in place through grade 12. Where the draft roadmap is shown, valley students move into one new building in fall 2029. By default it teaches Pre-K to 4, which its author described as her intent at the October 28 meeting; Pre-K to 5 and Pre-K to 6 are options.",
+          "Plans take effect in fall 2027 (FY28) and stay in place through grade 12. Where the draft roadmap is shown, valley students move into one new building in fall 2029. At the October 28 meeting its author said she would keep 5th and 6th graders at Crossett Brook, though in her example a Waitsfield 2nd grader moves to the new building after grade 4. We default to Pre-K to 4, which matches the roadmap's Phase 3; Pre-K to 5 (its Phase 2 text) and Pre-K to 6 (the feasibility study) are options.",
           "A child stays at this year's school while it is open and still teaches their grade. This covers families using intradistrict choice.",
           "When a town's school closes, its children go to the nearest open school, the rule the district used in its capacity tables. Our town-by-town order reproduces where every district table sends each town. Families can pick a different receiving school on the Your child's path page, since the district places students by home address.",
           "Under the Pre-K to 4 setup, valley 5th and 6th graders attend Crossett Brook. Under the middle school merger, Crossett Brook keeps grades 5 and 6, and all 7th and 8th graders attend Harwood Union Middle School.",
@@ -77,9 +77,13 @@ export default {
           `So for any plan: spending per pupil = $16,536.33 + (${money(TARGET)} − savings) ÷ ${num(PUPILS)}. If that is over the ${money(BUDGET.threshold)} threshold, the penalty is roughly the amount over times ${num(PUPILS)}, since Vermont counts the excess twice when it sets tax rates.`,
           "This reproduces the district's level-funded and Path B figures to the cent. It is a simplification: the state's official calculation also depends on next year's pupil count and excluded debt.",
         ]),
-        methodItem("Savings from closing schools", [
-          `For closing two valley schools we use the district's figure, ${money(PATH_B_SAVINGS.valley.amount)} and 16 positions, for every pairing, as the district does.`,
-          `For closing one or three schools, which the district has not costed, we scale that figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
+        methodItem("Savings from closing schools and merging the middle schools", [
+          `For closing two valley schools we use the district's figure, ${money(PATH_B_SAVINGS.valley.amount)} and 16 positions, for every pairing, as the district does. For merging the middle schools we use its ${money(PATH_B_SAVINGS.middle.amount)}.`,
+          `For closing one or three schools, which the district has not costed, we scale the two-school figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
+          [
+            "The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so those versions would save less. The district has not costed them. For plans that keep grades 5-6 in the valley we still show the district's figures, but as an upper limit, with the middle school saving labeled an estimate. ",
+            cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
+          ],
         ]),
         methodItem("Capacity", [
           "For the six pairings the district tabled, student counts come from its tables, with totals recomputed from the grade rows. For other combinations, this year's students move with their school to the receiving school, and Pre-K follows the district's planning numbers (30 per valley school, 42 at Warren, 60 at Brookside).",
@@ -90,7 +94,9 @@ export default {
         ]),
         methodItem("Driving times", ["Car times from OpenStreetMap road data (OSRM), with no traffic or stops. Bus rides are longer. Current bus schedules come from the district's route document."]),
         methodItem("The October 28 meeting", ["Quotes come from an automatic transcript of the public recording. It has no speaker labels, so we name a speaker only where the recording makes it clear, and bracketed words fix obvious transcription errors. Every quote was checked against the transcript."]),
-        methodItem("How facts were checked", ["Every number from the district's documents was transcribed into the site's data files, which tests re-add on every change. Facts from state law, permits, news, and research were each opened and checked by a second reviewer against the original source."])
+        methodItem("How facts were checked", [
+          "Every number from the district's documents was transcribed into the site's data files, which tests re-add on every change. Facts from state law, permits, news, and research were each opened and checked against the original source in a second, separate pass, done with AI research tools; for some studies that meant the published abstract.",
+        ])
       ),
 
       section(

@@ -44,8 +44,9 @@ export function makePlan(p = {}) {
 // advancing 4th graders remain -> Valley Elementary reconfigures to preK-5" (Oct 14, 2026 deck).
 export const ROADMAP_FALL = 2029;
 
-// The roadmap's author said at the October 28 meeting that she kept grades 5-6 at Crossett Brook so 6th
-// graders would not move twice, so the new building teaches Pre-K to 4 unless chosen otherwise.
+// At the October 28 meeting the roadmap's author said she would keep 5th and 6th graders at Crossett Brook,
+// though her example moved a Waitsfield 2nd grader to the new building after grade 4. Pre-K to 4 matches
+// Phase 3 and is the default; readers can choose 5 or 6.
 export const ROADMAP_TOP_DEFAULT = 4;
 export const withRoadmap = (plan, top = ROADMAP_TOP_DEFAULT) =>
   makePlan({ ...plan, id: `${plan.id}+roadmap`, name: `${plan.name}, then the draft roadmap`, short: `${plan.short} + roadmap`, roadmap: { fall: ROADMAP_FALL, top } });
