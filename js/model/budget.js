@@ -43,7 +43,7 @@ export function budget(plan, { basis = "district" } = {}) {
   // The district's savings assume valley 5th and 6th graders move into Crossett Brook. On October 28 an
   // administrator said that keeping them in the valley would leave about 126 students there and would not
   // reach the full $3.9 million. For those plans the middle-school figure is an upper limit, not a costing.
-  const upperBound = Boolean(plan.msMerge && plan.valleyTop === 6);
+  const upperBound = Boolean(plan.msMerge && plan.valleyTop > 4); // some valley 5th or 6th graders stay in the valley
   if (plan.msMerge) {
     items.push({
       id: "middle",

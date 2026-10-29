@@ -27,7 +27,8 @@ export function peopleLimit(plan, id) {
 }
 
 export function districtTableFor(plan) {
-  if (plan.open.length !== 2) return null;
+  // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop)) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
 }

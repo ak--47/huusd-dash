@@ -7,7 +7,7 @@
 
 import { h, store } from "../ui/dom.js";
 import { note, pageHead } from "../ui/kit.js";
-import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString } from "../ui/build-controls.js";
+import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, hybridPlan, onePlan } from "../ui/build-controls.js";
 import { resultsPanel, verdictSentence } from "../ui/build-results.js";
 import { PLAN_A, PLAN_TODAY, decodePlan, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
 import { PATH_A_CUTS } from "../../data/budget.js";
@@ -121,7 +121,11 @@ export default {
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top }) => setPlan(kind === "today" ? PLAN_TODAY : kind === "A" ? PLAN_A : pathB(pair, top), { kind }),
+      onPreset: (kind, { pair, top, closed }) =>
+        setPlan(
+          kind === "today" ? PLAN_TODAY : kind === "A" ? PLAN_A : kind === "one" ? onePlan(closed) : kind === "hybrid" ? hybridPlan() : pathB(pair, top),
+          { kind }
+        ),
       onUndo: () => {
         if (!state.undo) return;
         state.plan = tidy(state.undo.plan);

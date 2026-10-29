@@ -359,7 +359,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                 ? h(
                     "span",
                     { class: "bp-item-note" },
-                    "An upper limit. The district's figure assumes valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students there and would not achieve as many staff cuts, so this would save less. ",
+                    `An upper limit. The district's figure assumes every valley 5th and 6th grader moves to Crossett Brook; this plan keeps ${plan.valleyTop === 5 ? "valley 5th graders" : "them"} in the valley. On October 28 an administrator said keeping them there would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so this would save less. `,
                     cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
                   )
                 : it.kind === "estimate"
@@ -663,7 +663,7 @@ function buildingsSection(plan, r, cs, keptFold) {
     source = h(
       "p",
       { class: "bp-source" },
-      `Student counts are our estimate: this year's students, ${preKWords}, with valley 5th and 6th graders counted at Crossett Brook. `,
+      `Student counts are our estimate: this year's students, ${preKWords}, with valley ${plan.valleyTop === 5 ? "6th graders" : "5th and 6th graders"} counted at Crossett Brook. `,
       tag("estimate"),
       cite(ATTENDING.src, "Oct 1 report")
     );
@@ -834,7 +834,7 @@ function studentsSection(plan, r, keptFold) {
   const q = new URLSearchParams();
   if (plan.open.length === 2) {
     q.set("pair", [...plan.open].sort().join("+"));
-    q.set("top", String(plan.valleyTop));
+    if (plan.valleyTop !== 5) q.set("top", String(plan.valleyTop)); // that page's Path B versions are grade 4 or 6
   }
   const childLink = h("a", { class: "wonk-btn", href: `#/your-child${q.toString() ? `?${q}` : ""}` }, "See your child's path under this plan");
   childLink.addEventListener("click", () => store.set("plan", encodePlan(plan)));
@@ -908,7 +908,7 @@ function compareSection(plan, r, classSize) {
   const basis = r.budget.basis;
   const lower = lowerTarget(r.budget);
   const pairB = plan.open.length === 2;
-  const planB = pairB ? pathB(plan.open, plan.valleyTop) : pathB(["MES", "WRN"], 4);
+  const planB = pairB ? pathB(plan.open, plan.valleyTop === 4 ? 4 : 6) : pathB(["MES", "WRN"], 4);
   const reading = r.capacity.reading;
   const a = evaluate(PLAN_A, { classSize, basis, reading });
   const bb = evaluate(planB, { classSize, basis, reading });

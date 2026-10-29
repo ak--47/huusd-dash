@@ -50,14 +50,15 @@ URL settings shared across pages: `w=permits` (wastewater reading), `x=1` (lower
 
 ## The model in one page
 
-- **Plan:** `makePlan({ open, valleyTop, msMerge, cuts, septicWES, portables, receiving, roadmap })`. `open` lists the valley schools that stay open (FES, MES, WES, WRN); `valleyTop` 4 sends valley 5th-6th graders to Crossett Brook, 6 keeps them in the valley; `msMerge` moves Crossett Brook's 7th-8th graders to Harwood; `cuts` are Path A cut ids (`transport`, `special`, `prek`, `staff`, `athletics`, `electives`).
+- **Plan:** `makePlan({ open, valleyTop, msMerge, cuts, septicWES, portables, receiving, roadmap })`. `open` lists the valley schools that stay open (FES, MES, WES, WRN); `valleyTop` is the highest grade valley schools teach: 6 keeps grades 5-6 in the valley, 5 sends 6th graders to Crossett Brook, 4 sends 5th and 6th graders (the district tabled only 4 and 6, so 5 always uses the model's own counts); `msMerge` moves Crossett Brook's 7th-8th graders to Harwood; `cuts` are Path A cut ids (`transport`, `special`, `prek`, `staff`, `athletics`, `electives`).
 - **Named plans:** `PLAN_TODAY`, `PLAN_A`, `pathB(pair, top)`, `PATH_B_PLANS` (12), `withRoadmap(plan, top)` for the district's draft roadmap (new valley school in fall 2029).
 - **Where children go:** `assign.js`. Closed towns go to the nearest open school (`NEAREST`), the rule the district's tables use; families can override in the UI.
 - **Schools per child:** `journey.js`. Harwood Middle and Harwood High are two schools in one building. Pre-K is optional in the count.
 - **Capacity:** `capacity.js`. Two readings of the wastewater limits: `slides` (the district's comparison, students only) and `permits` (each permit's wording; staff counted everywhere except Waitsfield, whose 1991 permit says "student population"; staff numbers are an estimate). Classroom space uses the consultant's March 2025 capacities plus 40 per portable unit. `capacity.middle` checks Crossett Brook and Harwood Middle. The Pre-K cut removes Pre-K from building loads.
 - **Budget:** `budget.js`. The district's cards fit a straight line: about 2,565 pupils, so each $2,565 saved lowers spending per pupil by $1. Target $3,339,273, or about $2,839,085 with the bond exclusion (`basis: "exclusion"`). Closing one school is our estimate (half the two-school figure). `upperBound` is true when the middle schools merge but grades 5-6 stay in the valley: an administrator said on Oct 28 those versions save less than the district's figure.
 - **Impact:** `impact.js`. Students changing schools next fall, school-count grids, students attending 5+ schools.
-- **Options:** `js/model/options.js` lists the combinations on the Options page. To add one: add an entry (`id`, `group`, `name`, `what`, `plan`, `notes`, optional `refs`), add a test, and check the Options and Start here pages.
+- **Options:** `js/model/options.js` lists the combinations on the Options page (the four on Start here are chosen in `js/pages/overview.js`). To add one: add an entry (`id`, `group`, `name`, `what`, `plan`, `notes`, optional `refs`), add a test, and check the Options and Start here pages.
+- **Build starting points:** No change, Path A, Path B (pick the pair and grade setup), Close one school (pick the school; Path B's merger plus one closure), and Merger + smaller cuts. Defined in `js/ui/build-controls.js` (`onePlan`, `hybridPlan`, `presetOf`) and applied in `js/pages/build.js`. Step 3 sets `valleyTop` and a Pre-K switch that is the same setting as the Pre-K tuition cut.
 
 ## Editorial decisions already made (do not silently reverse)
 
@@ -94,7 +95,7 @@ Push to `main` (normally by merging a pull request from a feature branch). `.git
 ## Sources and verification
 
 - `sources/` holds copies of the primary documents (meeting transcript, both district presentations, enrollment report, Q&A, permits, consultant documents). Use them to verify, then cite the online original via `data/sources.js`.
-- In the October 28 transcript, SPEAKER 01 is the superintendent, SPEAKER 02 the director of finance and operations, and SPEAKER 03 the board chair, judging from context. Other numbers vary, and automatic speaker labels can merge or split people: confirm from context before naming a role.
+- In the October 28 transcript, SPEAKER 01 is the superintendent, SPEAKER 02 the director of finance and operations, and SPEAKER 03 the board chair, judging from context. SPEAKER 12 is a board member. Other labels are reused for different people (SPEAKER 04 is both a board member and a state representative; SPEAKER 07 a board member and a student), and labels can break mid-turn: confirm from context before naming a role.
 
 ## Open items
 

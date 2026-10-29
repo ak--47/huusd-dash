@@ -28,7 +28,8 @@ export function makePlan(p = {}) {
     short: p.short ?? p.name ?? "Your plan",
     kind: p.kind ?? "custom",
     open,
-    valleyTop: p.valleyTop === 4 ? 4 : 6,
+    // the highest grade valley schools teach: 6 as today, 5 (6th graders to Crossett Brook), or 4 (5th and 6th)
+    valleyTop: [4, 5, 6].includes(Number(p.valleyTop)) ? Number(p.valleyTop) : 6,
     msMerge: Boolean(p.msMerge),
     cuts: CUT_IDS.filter((id) => (p.cuts ?? []).includes(id)),
     septicWES: Boolean(p.septicWES),
@@ -144,7 +145,7 @@ export function decodePlan(str) {
   return makePlan({
     roadmap: rf ? { fall: ROADMAP_FALL, top: rt } : null,
     open: o === "-" ? [] : [...o].map((c) => FROM_LETTER[c]).filter(Boolean),
-    valleyTop: Number(q.get("t")) === 4 ? 4 : 6,
+    valleyTop: Number(q.get("t")),
     msMerge: q.get("m") === "1",
     cuts: (q.get("c") ?? "").split(".").filter(Boolean),
     septicWES: q.get("s") === "1",

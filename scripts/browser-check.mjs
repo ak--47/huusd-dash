@@ -31,6 +31,9 @@ const ROUTES = [
   ["options-permits", "#/options?w=permits&x=1"],
   ["build-permits", "#/build?w=permits&x=1"],
   ["build-k6-portables", "#/build?o=FR&t=6&m=1&p=FES2.BPS1"],
+  ["build-close-one", "#/build?o=MWR&t=6&m=1"],
+  ["build-hybrid", "#/build?o=FMWR&t=6&m=1&c=special.prek.athletics"],
+  ["build-grade5", "#/build?o=MWR&t=5&m=1&c=prek"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 
