@@ -36,6 +36,11 @@ export function receivingOptions(plan, town) {
 // Pre-K today is at Brookside, Moretown, and Warren. The district's consolidation tables plan
 // Pre-K in every valley school that stays open.
 export function offersPreK(plan, school) {
+  // a Pre-K center: the only valley Pre-K site, and Brookside's too when it serves the whole district
+  if (plan.prekCenter) {
+    if (school === plan.prekCenter.school) return true;
+    return school === "BPS" && plan.prekCenter.scope !== "all";
+  }
   if (school === "BPS") return true;
   if (school === "NEW") return plan.open.includes("NEW");
   if (!VALLEY.includes(school) || !plan.open.includes(school)) return false;
@@ -72,6 +77,7 @@ function preKSite(plan, child, fall) {
   if (fall <= CURRENT_YEAR) return known || TODAY[child.town]?.pk || null;
   if (known === "PRIVATE" || known === "OTHER") return known;
   if (known && serves(plan, known, -1)) return known;
+  if (plan.prekCenter && (plan.prekCenter.scope === "all" || !onWaterburyTrack(child.town))) return plan.prekCenter.school;
   const elem = receivingSchool(plan, child.town);
   return serves(plan, elem, -1) ? elem : null;
 }

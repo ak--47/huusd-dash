@@ -295,3 +295,40 @@ test("merger with three smaller cuts: meets the target on paper with no closure,
   assert.equal(M.TARGET - (583516 + 517000 + 312757), 1926000);
   assert.equal(M.evaluate(o.plan).moved.k12, 130);
 });
+
+test("Pre-K center: a closed valley building kept for Pre-K, with its operating costs given back", () => {
+  const plan = M.makePlan({ open: ["WES", "WRN"], msMerge: true, prekCenter: { school: "MES", scope: "all" }, split: { fayston: { school: "WRN", share: 0.5 } } });
+  assert.deepEqual(plan.prekCenter, { school: "MES", scope: "all" });
+  assert.equal(M.decodePlan(M.encodePlan(plan)).prekCenter.school, "MES", "share links keep the center");
+  const r = M.evaluate(plan);
+  assert.equal(r.buildingsOpen, 6, "Moretown's building stays in use");
+  assert.equal(r.budget.savings, 2102942 + 1826527 - 185868);
+  const mes = r.capacity.schools.find((s) => s.id === "MES");
+  assert.equal(mes.total, PREK_2026.bySchool.BPS.PK3 + PREK_2026.bySchool.BPS.PK4 + 64, "all of this year's district Pre-K children");
+  assert.equal(r.capacity.schools.find((s) => s.id === "WES").byGrade.PK, undefined, "no Pre-K classes in the K-6 schools");
+  // a Waterbury 3-year-old goes to the center for Pre-K, then back to Brookside
+  const years = M.journey(plan, { town: "waterbury", grade: -2, school: "BPS" }).map((y) => y.school);
+  assert.ok(years.includes("MES") && years.includes("BPS"));
+  // not with the Pre-K tuition cut, and not for a school that stays open
+  assert.equal(M.makePlan({ open: ["WES", "WRN"], cuts: ["prek"], prekCenter: { school: "MES" } }).prekCenter, null);
+  assert.equal(M.makePlan({ prekCenter: { school: "MES" } }).prekCenter, null);
+});
+
+test("split: part of a closed town's children go to a second school", () => {
+  const all = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true }));
+  const half = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true, split: { fayston: { school: "WRN", share: 0.5 } } }));
+  assert.equal(all.source, "district");
+  assert.equal(half.source, "model", "a split uses the model's own counts");
+  const wrnGain = half.schools.find((s) => s.id === "WRN").total - M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true, split: { fayston: { school: "WES", share: 0.5 } } })).schools.find((s) => s.id === "WRN").total;
+  assert.ok(wrnGain > 0, "Warren takes some Fayston children");
+  assert.deepEqual(M.makePlan({ split: { fayston: { school: "WRN", share: 0.5 } } }).split, {}, "no split while Fayston is open");
+});
+
+test("option: close Fayston, Moretown as a Pre-K center, Waitsfield and Warren K-6, merge the middle schools", () => {
+  const o = M.OPTIONS.find((x) => x.id === "B-center");
+  const r = M.evaluate(o.plan);
+  assert.equal(r.budget.savings, 3743601);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 281);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 133);
+  assert.equal(r.buildingsOpen, 6);
+});
