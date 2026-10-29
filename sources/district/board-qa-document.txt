@@ -1,0 +1,546 @@
+﻿Questions about the School Budget and Consolidation
+
+
+This is a live working document where school board members and members of the public can ask questions for our superintendent Dr. Mike, our Director of Finance and Operations, Lisa Estler, and our School Board chair and vice chair (Ashley Woods and Cindy Sening) about next year’s school budget and the possible consolidation of HUUSD schools.  We expect that many of these questions can only be partially answered at this point, so answers will be updated periodically.
+
+
+There’s also a section for questions for other school administrators.
+
+
+School board members: You can add/comment to this document, but please don’t delete or modify other questions. Please identify which questions are yours
+
+
+Members of the public: Please send your questions to your local school board reps, so they can upload them.  The list of school board reps is here.
+
+
+A note on colors:
+* Green: means answered
+* Orange: means partially answered
+* Red: means still needs answering
+* No color/headline: means a new question that hasn’t been reviewed/categorized yet!
+
+
+Budget Questions
+1. FTE Snapshots:
+From our annual reports, I can find FTE snapshots for FY18-FY23, and FY24 and FY26, but I cannot find them for FY24. Can you please: (1) provide these numbers, and (2) explain why the 53 FTE positions we have cut over the past 3 years are not visible in this view?
+
+
+ 
+	2017-18
+	2018-19
+	2019-20
+	2020-21
+	2021-22
+	2022-23
+	2023-24
+	2024-25
+	2025-26
+	Teachers – All Categories
+	212.3
+	217.45
+	219.2
+	215.5
+	215.8
+	220.13
+	
+
+	221.2
+	213.1
+	Instructional Support
+	76.73
+	66.61
+	70.96
+	66.46
+	64.4
+	66.85
+	
+
+	61.13
+	63.7
+	Athletic Support
+	2
+	2
+	2
+	2
+	2
+	2
+	
+
+	1
+	1.63
+	Administrative Support
+	21
+	21.4
+	21.4
+	21.4
+	20.4
+	21.4
+	
+
+	25.4
+	26
+	Food
+Service
+	15.79
+	15.79
+	15.79
+	15.79
+	15.86
+	15.86
+	
+
+	11
+	15.5
+	Maintenance Support
+	22
+	22
+	22
+	22
+	22
+	22
+	
+
+	23
+	21
+	Technology Support
+	8
+	8
+	8
+	7
+	8
+	8
+	
+
+	4
+	4
+	School and SD Administration
+	17
+	16
+	15
+	16
+	16
+	18
+	
+
+	16
+	15
+	Total
+	374.82
+	369.25
+	374.35
+	366.15
+	364.46
+	374.24
+	
+
+	362.73
+	359.93
+	
+
+2. Special Ed Efficiencies:
+Is it really possible to get efficiencies within Special Ed? One board member mentioned getting efficiencies with special ed at the first meeting of the year, but my understanding of that is that it really is extremely difficult to do that - the whole point of an IEP is the “I” part - “individual.” (from community member, via Caitlin L.)
+
+
+
+
+3. Special Ed Costs: 
+What are the costs for special ed and IEP programs and how do they affect the school budget? (from community member, via Caitlin L.)
+   * The cost breakdown for this gets tricky, because it's rolled into both salaried positions, and additional below-the-line buckets. You can see on slide 32 of the presentation from 9/23, that for last year, Special Education (outside of salaried positions) was about 9.2% of the total budget. This cost is, like many others, going up year over year.
+
+
+4. Revenue Sources:
+There is a list of Revenue sources for FY26 on the website. Could we have similar sheets for prior years?
+* A 3-year view can be found on slide 13 of the FY26 Annual Meeting Budget Presentation
+Note: Overall revenue (gleaned from Annual reports), looks like this:
+
+
+Fiscal year
+	Revenue figure
+	Status in report
+	Change from prior year
+	FY2021
+	$7,389,157
+	Actual budget
+	—
+	FY2022
+	$7,360,789
+	Actual budget
+	−0.4%
+	FY2023
+	$7,477,794
+	Actual budget
+	+1.6%
+	FY2024
+	$6,910,579
+	Actual budget
+	−7.6%
+	FY2025
+	$7,516,591
+	Actual budget
+	+8.8%
+	FY2026
+	$8,021,812
+	Proposed budget
+	+6.7%
+	
+
+
+
+5. Central Office Staffing: 
+Can you clarify what positions are part of central office, and how these might be affected as we close schools? How would that ratio look compared to other potential staffing cuts? (From Community member, via Caitlin L.)  Similar question: if we consolidate to two Valley elementary schools for 27-28, what staff positions would be eliminated? (Community member, via Steve)  Has our central admin staff grown over time due to unfunded reporting mandates? (Steve) 
+
+
+6. Growth due to reporting requirements:
+Can Lisa or Mike give a ballpark figure on how many FTEs are dedicated to reporting requirements, and how this has grown over the years? (Steve)
+
+
+7. Assistant Principals and Administration Staffing:
+I graduated from Harwood in 2009. Our class had 180 kids. From what I understand the classes now are around 125? From what I remember there was a principal and an assistant principal. Now there is a principal and two assistant principals. Is that correct? For a school with far fewer students? Are there other areas where there are currently more administrators than there were in the past even though there are fewer students? (community member, via Theo) 
+
+
+* From Lisa: We only have 1 principal and 1 assistant principal at the high school. We do not have two assistant principals at the high school. We also have fewer administrators than we have had in the past.  
+
+
+8. Overall administration Staffing: 
+related to the above (from community member, via Caitlin L.): Since 2013-2014 HUUSD population has decreased by 18%ish percent. Central office staffing has increased by 19% or 2.72 positions. If instead of adding positions, we decreased at same rate as student population, we would need roughly 11.5 central office positions (a decrease of 5.5 position from the current 17)
+Can you help explain why administrative positions haven’t kept pace with enrollment trends?
+
+
+9. Bond Costs:
+Since principal and interest paid on bonds issued after 7/1/26 now count towards our educational spend, will bonds issued to either move grades 5/6 back to the Valley or to reconfigure the Cabot site push us over the Excess Spending Threshold? (Steve)
+
+
+10. Working with the Legislature:
+What work if any is being done with the legislature to develop a comprehensive state tax and school funding policy to support education in our public schools? (from community member, via Caitlin L.)
+   * Members of the board are in touch with our state legislators. In fact, we have invited both Candice White and Dara Torre to be at our board meeting on 10/28, and have half an hour on the agenda to ask them questions. We will link to their conversation here once it it is posted.
+
+
+Board members add questions here. Public submit questions to your board rep here.
+
+
+
+
+Consolidation Questions
+1. Bond: 
+Will the School Board consider a bond for both consolidation costs and deferred maintenance costs? (Steve Rosenberg)
+
+
+2. Keeping Moretown: 
+Why did no options for consolidation look at keeping Moretown open? (Caitlin Lovegrove)
+
+
+   * Current modeling recommends keeping two valley elementary schools open for FY28. Which two schools would make the most sense is still under assessment, but more should be understood at the board meeting on 10/28.
+
+
+3. Enrollment: 
+Can we get a break-down of enrollment per school for the past 5 years? (Caitlin Lovegrove)
+   * Answer, from digging through annual reports:
+   * You can see the 2026 Enrollment Report here.
+
+
+
+	Brookside / Thatcher Brook Primary
+	Crossett Brook Middle
+	Fayston Elem.
+	Harwood Union Middle/ High (7–12)
+	Harwood Union Middle (7-8)
+	Harwood High (9-12)
+	Moretown Elem.
+	Waitsfield Elem.
+	Warren Elem.
+	K–12 total
+	2010-11
+	344
+	273
+	107
+	766
+	
+
+	
+
+	114
+	138
+	154
+	1,896
+	2011-12
+	346
+	291
+	97
+	734
+	
+
+	
+
+	106
+	134
+	154
+	1,862
+	2012-13
+	357
+	282
+	94
+	735
+	
+
+	
+
+	97
+	129
+	158
+	1,852
+	2013-14
+	357
+	264
+	101
+	687
+	
+
+	
+
+	93
+	142
+	155
+	1,799
+	2014-15
+	359
+	266
+	91
+	659
+	
+
+	
+
+	102
+	128
+	156
+	1,761
+	2015-16
+	357
+	254
+	94
+	674
+	
+
+	
+
+	105
+	112
+	150
+	1,746
+	2016-17
+	381
+	278
+	86
+	670
+	
+
+	
+
+	103
+	111
+	140
+	1,769
+	2017-18
+	369
+	274
+	81
+	644
+	
+
+	
+
+	106
+	112
+	135
+	1,721
+	2018-19
+	342
+	285
+	82
+	614
+	
+
+	
+
+	114
+	117
+	128
+	1,682
+	2019-20
+	339
+	304
+	60
+	599
+	
+
+	
+
+	121
+	117
+	128
+	1,668
+	2020-21
+	320
+	288
+	59
+	568
+	
+
+	
+
+	106
+	130
+	115
+	1,586
+	2021-22
+	311
+	295
+	72
+	579
+	
+
+	
+
+	117
+	128
+	117
+	1,619
+	2022-23
+	311
+	289
+	74
+	572
+	
+
+	
+
+	121
+	137
+	115
+	1,619
+	2023-24
+	309
+	273
+	89
+	
+
+	109
+	462
+	121
+	134
+	108
+	1,605
+	2024-25
+	303
+	264
+	98
+	
+
+	125
+	464
+	121
+	130
+	108
+	1,613
+	
+
+
+
+
+
+   4. Benefits of Consolidation: 
+Can we start to list some of the tangible benefits of consolidation? Has any of the work/studies we’ve done started to look at how consolidation would benefit the students/communities? Not just theoretical, but based in $$ and education benefits for our children. (Caitlin Lovegrove)
+
+
+   * A great place to start is to review this policy paper posted by the Vermont Superintendents Association. It cites numerous studies that looked into optimal class sizing and finds that the research suggests that:
+
+
+   * very small schools and classes can limit instructional flexibility, restrict opportunities for varied student groupings, and require unstable multi-age classroom configurations. 
+
+
+   * Maintaining unusually small classes can also divert resources from interventions, professional development, and other programs that may have a greater effect on student achievement. 
+
+
+   * ~400-student schools can better balance educational quality with the efficient use of staffing and facilities, while recognizing that transportation, infrastructure, and local student needs must be considered when evaluating consolidation.
+
+
+
+
+   5. Consolidation Options: 
+When Lisa has the time, it would be great to see what projected budgets would look like if we do the full consolidation plan (one Valley elementary school at the Cabot site, one middle school at Harwood, Brookside kids moved to Crossett Brook), so we can compare it to Lisa’s current budget projections. This could be updated if we go for a different plan. (Steve Rosenberg, stolen from Theo Hanna)
+
+
+   * We are starting to review this in the three scenarios laid out in the last board meeting: https://docs.google.com/presentation/d/1GvBGcQxUQCyUuwvg9K4GuHM12dPkeAoU69UG-piKAAE/edit?usp=sharing 
+
+
+   6. TruEx Work Timeline: 
+The Truex Collins work laid out some options for consolidation in March 2025, then did a school repair audit in October 2025. Did they ever revisit the options from March with the updated costs determined after the October work?
+
+
+   7. Full Capacity Enrollment: 
+What does full capacity enrollment look like for each school? (from community member, via Caitlin L.) Can you expand on this to help us better understand moving 5-6 out of the valley?
+
+
+   * Answer from TruexCullins report from December 2024: 
+  
+
+
+
+
+
+   8. Where Students Enroll: 
+As a general question, can we change the policy that students go to the school in their town unless granted an exemption to a policy that students go to the closest school?  Would this save transportation costs? (communicated by Steve)
+
+
+   * Dr. Mike addressed this in the 10/14 board meeting, where he says: "The board can change attendance boundaries." He then explains that in his previous district, administrators assigned new students to schools based partly on which school had the smallest class size. He concludes, "We just have traditionally, based on our organization, done it by towns, but the board has the authority to look at doing that in different ways. And it's worth considering." See youtube link here.
+
+
+
+
+   9. K-6 configuration changes: 
+Could we have Moretown and Warren K-3, Waitsfield as 4-6, and close Fayston? (communicated by Ashley)
+
+
+   10. Closing one Valley School instead of two: 
+What would closing just one Valley School look like for next year? If imperfect, would it at least give us more time to have a broader community discussion about these decisions? (Caitlin L, via community member)
+
+
+   * From the models we have seen so far, this does not look like it would save enough money to make it worthwhile. The money spent on each school would not be a 1-1 match with the money saved if it were closed, given that some staff would be moved to a new location. We saw this the TruEx models (see slide 23 in the attached, based on this doc.) We also saw, on slide 21 of the Oct 14 meeting deck, that closing 2 schools in the Valley only saves $2.1M, so we could assume that closing one would save less than that.
+
+
+   11. Options for keeping 5-6 in the Valley: 
+What are some options that allow 5-6 grades to remain in the valley next year? For example, temporary classrooms at the two remaining schools, or potentially removing PreK to allow more space? Or, is there room at HUUSD for 5-6? (Caitlin L, via community input)
+
+
+   12. 5-6 length of shift to CBMU: 
+How long will Valley 5-6 graders be at Crossett Brook?  Does this depend on whether the Cabot site is feasible?  Since there is no bond in the FY28 budget, the bond for construction at the two (or one) remaining Valley schools appears first on the FY29 budget. So construction would begin at the easiest in Spring 2029.  So the 5-6 graders would move back to the Valley at the earliest in Fall 2029, after spending 2 years at Crossett Brook. Is that right? (Steve)
+
+
+   13. Staff Cuts: 
+How many staff, and in which areas, would be RIFed if we close two Valley schools?  Same question if we use the Cabot site.  (Steve, from a community member)
+
+
+   14. Tax Implications: 
+When do we get to see the property tax implications of (two Valley schools) + (moving  CB middle school to Harwood)?  Same question if we use the Cabot site.  (Steve, from a community member)
+
+
+   * This is part of the modeling that Mike and Lisa are working on for the 10/28 meeting. We can follow up after this is posted to add more detail.
+
+
+   15. Transportation times and costs: 
+When will we see what transportation times and costs look like under the (two Valley schools) + (moving  CB middle school to Harwood) plan? (Steve)
+
+
+   * This is part of the modeling that Mike and Lisa are working on for the 10/28 meeting. We can follow up after this is posted to add more detail.
+
+
+Board members add questions here. Public submit question to your board rep here.
+Questions for other administrators
+
+
+
+
+1) To be edited.
+
+
+Board members add questions here. Public submit question to your board rep here.
