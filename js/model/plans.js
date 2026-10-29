@@ -20,8 +20,12 @@ export const schoolYear = (fall) => `${fall}-${String((fall + 1) % 100).padStart
 
 const CUT_IDS = PATH_A_CUTS.items.map((c) => c.id);
 
+const TOWN_OF = Object.fromEntries(VALLEY.map((id) => [SCHOOLS[id].town, id]));
+
 export function makePlan(p = {}) {
   const open = VALLEY.filter((id) => (p.open ?? VALLEY).includes(id));
+  const cuts = CUT_IDS.filter((id) => (p.cuts ?? []).includes(id));
+  const center = p.prekCenter?.school;
   return {
     id: p.id ?? "custom",
     name: p.name ?? "Your plan",
@@ -31,7 +35,7 @@ export function makePlan(p = {}) {
     // the highest grade valley schools teach: 6 as today, 5 (6th graders to Crossett Brook), or 4 (5th and 6th)
     valleyTop: [4, 5, 6].includes(Number(p.valleyTop)) ? Number(p.valleyTop) : 6,
     msMerge: Boolean(p.msMerge),
-    cuts: CUT_IDS.filter((id) => (p.cuts ?? []).includes(id)),
+    cuts,
     septicWES: Boolean(p.septicWES),
     portables: Object.fromEntries(
       Object.entries(p.portables ?? {}).filter(([id, n]) => SCHOOLS[id] && n > 0).map(([id, n]) => [id, Math.min(6, Math.round(n))])
@@ -44,6 +48,19 @@ export function makePlan(p = {}) {
       )
     ),
     roadmap: p.roadmap ? { fall: Number(p.roadmap.fall) || ROADMAP_FALL, top: [4, 5, 6].includes(Number(p.roadmap.top)) ? Number(p.roadmap.top) : 4 } : null,
+    // A closed valley building kept open for Pre-K only, for valley families or for the whole district.
+    // Not with the Pre-K tuition cut, which ends district Pre-K classes.
+    prekCenter:
+      center && VALLEY.includes(center) && !open.includes(center) && !cuts.includes("prek")
+        ? { school: center, scope: p.prekCenter.scope === "all" ? "all" : "valley" }
+        : null,
+    // Part of a closed town's K-6 children going to a second school (families closer to it):
+    // { town: { school, share } }, share between 0 and 1. Only for towns whose school closes.
+    split: Object.fromEntries(
+      Object.entries(p.split ?? {})
+        .filter(([town, v]) => TOWN_OF[town] && !open.includes(TOWN_OF[town]) && v && Number(v.share) > 0 && (v.school === "BPS" || open.includes(v.school)))
+        .map(([town, v]) => [town, { school: v.school, share: Math.min(1, Math.max(0.05, Math.round(Number(v.share) * 20) / 20 || 0.5)) }])
+    ),
   };
 }
 
@@ -63,7 +80,7 @@ export const withRoadmap = (plan, top = ROADMAP_TOP_DEFAULT) =>
 export function planAt(plan, fall) {
   if (fall < START_YEAR) return PLAN_TODAY;
   if (plan.roadmap && fall >= plan.roadmap.fall) {
-    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, roadmap: null, phase: 2 };
+    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, roadmap: null, prekCenter: null, split: {}, phase: 2 };
   }
   return plan;
 }
@@ -122,6 +139,9 @@ export function encodePlan(plan) {
   const recv = Object.entries(plan.receiving).map(([town, id]) => `${town}~${id}`).join(".");
   if (recv) q.set("r", recv);
   if (plan.roadmap) q.set("n", `${plan.roadmap.fall}.${plan.roadmap.top}`);
+  if (plan.prekCenter) q.set("k", `${plan.prekCenter.school}.${plan.prekCenter.scope}`);
+  const split = Object.entries(plan.split ?? {}).map(([town, v]) => `${town}~${v.school}~${Math.round(v.share * 100)}`).join(".");
+  if (split) q.set("sp", split);
   return q.toString();
 }
 
@@ -142,7 +162,15 @@ export function decodePlan(str) {
   }
   // n=<fall>.<top>: the roadmap always starts in ROADMAP_FALL, which the controls show, whatever year a link carries
   const [rf, rt] = (q.get("n") ?? "").split(".").map(Number);
+  const [kSchool, kScope] = (q.get("k") ?? "").split(".");
+  const split = {};
+  for (const part of (q.get("sp") ?? "").split(".").filter(Boolean)) {
+    const [town, school, pct] = part.split("~");
+    if (town && school) split[town] = { school, share: Number(pct) / 100 };
+  }
   return makePlan({
+    prekCenter: kSchool ? { school: kSchool, scope: kScope } : null,
+    split,
     roadmap: rf ? { fall: ROADMAP_FALL, top: rt } : null,
     open: o === "-" ? [] : [...o].map((c) => FROM_LETTER[c]).filter(Boolean),
     valleyTop: Number(q.get("t")),

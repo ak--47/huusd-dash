@@ -34,6 +34,7 @@ const ROUTES = [
   ["build-close-one", "#/build?o=MWR&t=6&m=1"],
   ["build-hybrid", "#/build?o=FMWR&t=6&m=1&c=special.prek.athletics"],
   ["build-grade5", "#/build?o=MWR&t=5&m=1&c=prek"],
+  ["build-prek-center", "#/build?o=WR&t=6&m=1&k=MES.all&sp=fayston~WRN~50"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 

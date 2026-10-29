@@ -47,6 +47,26 @@ export const OPTIONS = [
     refs: [ref("permitWES", "PDF p. 12, condition 1.2"), ref("permitWES1996", "PDF pp. 9-10"), ref("deck", "slide 23")],
   },
   {
+    id: "B-center",
+    group: "b-variant",
+    name: "Close Fayston, make Moretown a Pre-K center, keep Waitsfield and Warren K-6, and merge the middle schools",
+    what: "Fayston closes. Moretown's building becomes a Pre-K center for the whole district, Brookside's Pre-K included, and its K-6 children go to Waitsfield. Waitsfield and Warren teach K-6 with no Pre-K classes. Fayston's children split about evenly between Waitsfield and Warren. Crossett Brook's 7th and 8th graders move to Harwood.",
+    plan: makePlan({
+      id: "B-center",
+      open: ["WES", "WRN"],
+      valleyTop: 6,
+      msMerge: true,
+      prekCenter: { school: "MES", scope: "all" },
+      split: { fayston: { school: "WRN", share: 0.5 } },
+    }),
+    notes: [
+      "Savings: the district's figures for closing two K-6 schools and merging the middle schools, minus Moretown's building operating costs ($185,868, not counting custodial staff). The merger figure is an upper limit because valley 5th and 6th graders stay in the valley.",
+      "Waitsfield would hold about 281 students: under 300 if its 1991 permit counts students only, over the 230 the slides use, and well over the consultant's classroom capacity of 174. With every Fayston child at Waitsfield it would be about 327. Warren would hold about 133.",
+      "Waterbury and Duxbury 3- and 4-year-olds would go to Moretown for Pre-K. In Build a plan, the Pre-K center can serve valley families only, keeping Brookside's Pre-K at Brookside.",
+    ],
+    refs: [ref("deck", "slide 22"), ref("deck", "slides 17-18")],
+  },
+  {
     id: "MS-only",
     group: "other",
     name: "Merge the middle schools, keep all four valley schools",

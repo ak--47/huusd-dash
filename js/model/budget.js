@@ -7,6 +7,7 @@
 
 import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { closedSchools } from "./plans.js";
+import { FACILITIES, SCHOOLS } from "../../data/schools.js";
 
 // 590,196 / 230.09: the pupil count that makes the district's level-funded and Path B cards agree.
 export const PUPILS = 590196 / 230.09;
@@ -64,6 +65,12 @@ export function budget(plan, { basis = "district" } = {}) {
       fte: valley.fte,
       kind: valley.kind,
     });
+  }
+  // Keeping a closed school's building open as a Pre-K center gives back part of the closure savings: at least
+  // the building's annual operating costs on the district's facility slide (which leave out custodial staff).
+  if (plan.prekCenter) {
+    const id = plan.prekCenter.school;
+    items.push({ id: "prekCenter", label: `Keep ${SCHOOLS[id].short} open as a Pre-K center`, amount: -FACILITIES[id].operatingCost, fte: null, kind: "estimate" });
   }
   for (const id of plan.cuts) {
     const c = PATH_A_CUTS.items.find((x) => x.id === id);

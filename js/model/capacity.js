@@ -28,7 +28,8 @@ export function peopleLimit(plan, id) {
 
 export function districtTableFor(plan) {
   // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
-  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop)) return null;
+  // a Pre-K center or a split town changes who goes where, so those use the model's own counts
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || Object.keys(plan.split ?? {}).length) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
 }
@@ -67,7 +68,13 @@ export function modelLoads(plan) {
   const allOpen = plan.open.length === VALLEY.length;
   const att = ATTENDING[2026];
   // Pre-K
-  if (allOpen) {
+  if (plan.prekCenter) {
+    // today's district Pre-K children move to the center (Brookside's too when it serves the whole district)
+    for (const [id, pk] of Object.entries(PREK_2026.bySchool)) {
+      const here = id === "BPS" && plan.prekCenter.scope !== "all" ? "BPS" : plan.prekCenter.school;
+      add(loads, here, "PK", pk.PK3 + pk.PK4);
+    }
+  } else if (allOpen) {
     for (const [id, pk] of Object.entries(PREK_2026.bySchool)) add(loads, id, "PK", pk.PK3 + pk.PK4);
   } else {
     add(loads, "BPS", "PK", PK_PLAN.BPS);
@@ -77,13 +84,18 @@ export function modelLoads(plan) {
   for (const g of ["K", "1", "2", "3", "4"]) add(loads, "BPS", g, att.BPS[g]);
   for (const g of ["5", "6"]) add(loads, "CBMS", g, att.CBMS[g]);
   // valley schools
+  const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? 4 : plan.valleyTop) ? dest : "CBMS", g, n);
   for (const id of VALLEY) {
     const town = SCHOOLS[id].town;
     const dest = plan.open.includes(id) ? id : receivingSchool(plan, town);
+    // a share of a closed town's children going to a second school
+    const sp = plan.open.includes(id) ? null : plan.split?.[town];
+    const alt = sp && sp.school !== dest ? sp.school : null;
     for (const g of ["K", "1", "2", "3", "4", "5", "6"]) {
       const n = att[id][g];
-      const top = dest === "BPS" ? 4 : plan.valleyTop;
-      add(loads, gradeNum(g) <= top ? dest : "CBMS", g, n);
+      const moved = alt ? Math.round(n * sp.share) : 0;
+      place(dest, g, n - moved);
+      if (moved) place(alt, g, moved);
     }
   }
   return loads;
@@ -120,10 +132,12 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
   const loads = table ? tableLoads(table) : modelLoads(plan);
   // The Pre-K cut (Path A) ends Pre-K classes in district buildings.
   if (plan.cuts.includes("prek")) for (const id of Object.keys(loads)) delete loads[id].PK;
-  const totals = Object.fromEntries(["BPS", ...plan.open].map((id) => [id, Object.values(loads[id] ?? {}).reduce((a, b) => a + b, 0)]));
-  const valleyTotal = plan.open.reduce((a, id) => a + totals[id], 0);
+  // the buildings in use for elementary grades, plus a Pre-K center if the plan keeps one
+  const ids = ["BPS", ...plan.open, ...(plan.prekCenter ? [plan.prekCenter.school] : [])];
+  const totals = Object.fromEntries(ids.map((id) => [id, Object.values(loads[id] ?? {}).reduce((a, b) => a + b, 0)]));
+  const valleyTotal = ids.filter((id) => id !== "BPS").reduce((a, id) => a + totals[id], 0);
   const schools = [];
-  for (const id of ["BPS", ...plan.open]) {
+  for (const id of ids) {
     const byGrade = loads[id] ?? {};
     const total = totals[id];
     const f = FACILITIES[id];
@@ -143,6 +157,7 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
       countsStaff,
       limit,
       limitKind: id === "BPS" ? "occupancy" : "wastewater",
+      center: plan.prekCenter?.school === id, // kept open for Pre-K only
       overPeople: limit != null && counted > limit,
       consultantCapacity: cap,
       overConsultant: total > cap,

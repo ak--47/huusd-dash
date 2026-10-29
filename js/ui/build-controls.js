@@ -281,6 +281,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     return { id, cb, status, label, limitEl };
   });
   const allClosed = h("div", { class: "bp-allclosed", "aria-live": "polite" });
+  // "Where children go" sits under the school cards; its rows are built with the other controls below
+  const recvHost = h("fieldset", { class: "bp-subgroup bp-recv-host", hidden: true });
 
   const g2 = group(
     2,
@@ -301,7 +303,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       ),
     ],
     h("div", { class: "bp-schools" }, schoolCards.map((c) => c.label)),
+    h(
+      "p",
+      { class: "bp-brookside" },
+      h("strong", {}, "Brookside Primary School, Waterbury: "),
+      `stays open in every plan, Pre-K to grade 4 for Waterbury and Duxbury, with ${num(sum(ATTENDING[2026].BPS))} students in K-4 this year. Children from a closed valley town can be sent there below, and its Pre-K can move to a Pre-K center in step 3.`
+    ),
     allClosed,
+    recvHost,
     h("p", { class: "bp-src" }, "Students: ", cite(ATTENDING.src, "Oct 1 report"), " · Classrooms and limits: ", cite(ref("deck", "slides 21-24")))
   );
 
@@ -324,6 +333,32 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     onPlan((p) => ({ ...p, cuts: keep ? p.cuts.filter((c) => c !== "prek") : [...p.cuts, "prek"] }));
   });
   const topOff = h("p", { class: "bp-off", id: "bp-top-off", hidden: true }, "No valley school is open, so valley 5th and 6th graders go to Crossett Brook.");
+  // A Pre-K center: a closed valley school's building kept open for Pre-K only
+  const centerSel = h("select", { class: "wonk-select", id: "bp-center", "aria-describedby": "bp-center-d" });
+  const scopeSel = h(
+    "select",
+    { class: "wonk-select", id: "bp-center-scope" },
+    h("option", { value: "valley" }, "Valley families"),
+    h("option", { value: "all" }, "Every family in the district (Brookside's Pre-K moves too)")
+  );
+  const setCenter = () =>
+    onPlan((p) => ({ ...p, prekCenter: centerSel.value ? { school: centerSel.value, scope: scopeSel.value } : null }));
+  centerSel.addEventListener("change", setCenter);
+  scopeSel.addEventListener("change", setCenter);
+  const centerNote = h(
+    "p",
+    { class: "bp-fix-note", id: "bp-center-d" },
+    "Keeps one closed valley school's building open for Pre-K only, instead of Pre-K classes in each school. Saves less than closing it: the building's operating costs come back (our estimate). This year's district Pre-K children are counted there."
+  );
+  const centerOffNote = h("p", { class: "bp-off", hidden: true });
+  const centerField = h(
+    "div",
+    { class: "bp-center" },
+    centerOffNote,
+    h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-center" }, "Pre-K center"), centerSel),
+    h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-center-scope" }, "Pre-K center serves"), scopeSel),
+    centerNote
+  );
   const spanSaid = h("p", { class: "bp-sub", "aria-live": "polite" });
   const g3 = group(
     3,
@@ -342,6 +377,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "Unchecked is the district's Pre-K tuition model: district Pre-K classes end everywhere, including Brookside, and families get public tuition for private programs (step 5). The district costed it for the whole district only. ",
       cite(PATH_A_CUTS.src)
     ),
+    centerField,
     spanSaid,
     topOff
   );
@@ -528,8 +564,20 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     });
     const field = h("div", { class: "wonk-field bp-recv-field" }, h("label", { class: "wonk-label", for: id }, `${townName(town)} children go to`), sel);
     const only = h("p", { class: "bp-recv-only" });
-    const wrap = h("div", { class: "bp-recv", hidden: true }, field, only);
-    return { sid, town, sel, field, only, wrap, sig: "" };
+    // part of the town's children going to a second open school
+    const splitSel = h("select", { class: "wonk-select", id: `${id}-split` });
+    splitSel.addEventListener("change", () => {
+      const [school, pct] = splitSel.value.split("~");
+      onPlan((p) => {
+        const split = { ...p.split };
+        if (school) split[town] = { school, share: Number(pct) / 100 };
+        else delete split[town];
+        return { ...p, split };
+      });
+    });
+    const splitField = h("div", { class: "wonk-field bp-recv-field" }, h("label", { class: "wonk-label", for: `${id}-split` }, `Some ${townName(town)} children closer to another school?`), splitSel);
+    const wrap = h("div", { class: "bp-recv", hidden: true }, field, only, splitField);
+    return { sid, town, sel, field, only, splitSel, splitField, wrap, sig: "" };
   });
   const recvNone = h("p", { class: "bp-recv-none" }, "Every valley school is open, so every town keeps its own school.");
   const recvDistrict = h(
@@ -541,7 +589,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const advanced = h(
     "details",
     { class: "wonk-fold bp-advanced", id: "bp-advanced" },
-    h("summary", {}, "Advanced: savings target, wastewater limits, draft roadmap, class sizes, and where children go"),
+    h("summary", {}, "Advanced: savings target, wastewater limits, draft roadmap, and class sizes"),
     h(
       "div",
       { class: "body" },
@@ -582,16 +630,18 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         h("div", { class: "bp-cs" }, csSteppers.map((s) => s.field)),
         csReset
       ),
-      h(
-        "fieldset",
-        { class: "bp-subgroup" },
-        h("legend", {}, "Where children go when their school closes"),
-        h("p", { class: "hint" }, "The nearest open school is the default, the rule the district used. Families on a town's edge may live closer to another school."),
-        recvNone,
-        recvRows.map((r) => r.wrap),
-        recvDistrict
-      )
     )
+  );
+  recvHost.append(
+    h("legend", {}, "Where children go when their school closes"),
+    h(
+      "p",
+      { class: "hint" },
+      "The nearest open school is the default, the rule the district's tables use. Families on a town's edge may live closer to another school, so part of a town can go elsewhere. We do not know where each family lives: the shares are your choice."
+    ),
+    recvNone,
+    ...recvRows.map((r) => r.wrap),
+    recvDistrict
   );
   // a link that arrives with the lower target opens this section, so the reader sees which target is in use
   if (state.basis === "exclusion" || state.reading === "permits" || state.plan.roadmap) advanced.open = true;
@@ -751,8 +801,46 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       }
       row.sel.value = receivingSchool(plan, row.town);
     }
+    // splits: a share of the town's children to one of the other open schools
+    for (const row of recvRows) {
+      const opts = receivingOptions(plan, row.town);
+      const main = opts.length ? receivingSchool(plan, row.town) : null;
+      const alts = opts.filter((sid) => sid !== main);
+      row.splitField.hidden = !alts.length;
+      if (!alts.length) continue;
+      const cur = plan.split?.[row.town];
+      const value = cur ? `${cur.school}~${Math.round(cur.share * 100)}` : "";
+      const sig = `${main}|${alts.join(",")}`;
+      if (sig !== row.splitSig) {
+        const shares = [[25, "About a quarter"], [50, "About half"], [75, "About three quarters"]];
+        row.splitSel.replaceChildren(
+          h("option", { value: "" }, `No, all go to ${schoolShort(main)}`),
+          ...alts.flatMap((sid) => shares.map(([pct, words]) => h("option", { value: `${sid}~${pct}` }, `${words} go to ${schoolShort(sid)}`)))
+        );
+        row.splitSig = sig;
+      }
+      row.splitSel.value = value;
+    }
+    recvHost.hidden = !anyClosed;
     recvNone.hidden = anyClosed;
     recvDistrict.hidden = !(anyClosed && r.capacity.source === "district");
+
+    // Pre-K center: only a closed valley school can be one, and not with the Pre-K tuition cut
+    const closedValley = VALLEY.filter((id) => !plan.open.includes(id));
+    const centerSig = closedValley.join(",");
+    if (centerSig !== centerSel.dataset.sig) {
+      centerSel.replaceChildren(h("option", { value: "" }, "None: Pre-K stays in the schools"), ...closedValley.map((id) => h("option", { value: id }, `${SCHOOLS[id].short}'s building`)));
+      centerSel.dataset.sig = centerSig;
+    }
+    centerSel.value = plan.prekCenter?.school ?? "";
+    scopeSel.value = plan.prekCenter?.scope ?? "valley";
+    const centerOff = !closedValley.length || plan.cuts.includes("prek");
+    centerSel.disabled = centerOff;
+    scopeSel.disabled = centerOff || !plan.prekCenter;
+    centerOffNote.hidden = !centerOff;
+    centerOffNote.textContent = plan.cuts.includes("prek")
+      ? "Not with the Pre-K tuition model, which ends district Pre-K classes."
+      : "Close a valley school in step 2 to use its building as a Pre-K center.";
   }
 
   // Open Advanced and put focus on the savings target choice (the results' "Change the target" button).

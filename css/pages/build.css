@@ -359,3 +359,6 @@ html:has(.bp-bar) { scroll-padding-bottom: 8.5rem; }
   .bp-results, .bp-results-head { position: static; max-height: none; overflow: visible; }
   .bp-bar, .bp-share, .bp-back { display: none; }
 }
+.bp-brookside { font-size: var(--ak-text-sm); color: var(--ak-ink-2); margin: var(--ak-s3) 0 0; }
+.bp-recv-host { margin-top: var(--ak-s4); }
+.bp-center { display: grid; gap: var(--ak-s3); margin-top: var(--ak-s4); }

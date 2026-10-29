@@ -6,6 +6,14 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: Pre-K center, split towns, Brookside in Build (owner's family's feedback)
+
+- Feedback: "You don't have Brookside in here anywhere? Not all Fayston kids would go to Waitsfield. What if we close Fayston, turn Moretown into Pre-K for everyone, have Waitsfield and Warren as K-6, and merge the middle?"
+- Model: `plan.prekCenter = { school, scope: "valley" | "all" }` keeps a closed valley building open for Pre-K only (Pre-K children go there; with "all", Brookside's Pre-K too). Savings give back the building's operating cost from its facility slide (Moretown $185,868; custodial not included), an estimate. `plan.split = { town: { school, share } }` sends part of a closed town's K-6 children to a second open school (capacity only; each child's path still picks one school). Either one makes capacity use the model's own counts instead of the district's table. Link keys `k=MES.all`, `sp=fayston~WRN~50`.
+- Build a plan: Brookside shown in step 2; "Where children go when their school closes" moved out of Advanced into step 2, with "Some [town] children closer to another school?" (a quarter, half, or three quarters); step 3 has a Pre-K center choice and who it serves.
+- Options: added `B-center` (the scenario above, Fayston split half to Warren): about $3.74M on paper (merger figure an upper limit), 6 buildings, 339 K-12 students change schools, Waitsfield about 281 students (over the slides' 230 and the consultant's 174, under 300 students-only), Warren about 133.
+- Tests 33, browser checks 39.
+
 ## 2026-10-29: wrap-up, Build options, cached sources, docs
 
 - Added `sources/`: cached copies of the primary documents (speaker-labeled Oct 28 transcript, Oct 28 and Oct 14 presentations, Oct 1 enrollment report, board Q&A and FAQs, agenda, superintendent's report, Oct 14 minutes, Articles of Agreement, feasibility RFP, consultant documents, and the wastewater permit pages for all four valley schools). Index and original links in `sources/README.md`. Not deployed.
@@ -47,4 +55,5 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 - After Nov 4: update `data/timeline.js` and the "Where things stand" card on Start here (`js/pages/overview.js`) with what the board decided.
 - CI: the `ubuntu-22.04` runner retires in April 2027; upgrade Playwright (currently 1.44.1) and move the test job to `ubuntu-latest` before then. WebKit is not in CI; a WebKit overflow check on Your child's path would catch iPhone-only layout bugs.
 - No license file yet; the owner may want one (for example CC BY for text, MIT for code).
+- Pre-K center assumptions to revisit with the district: whether a Pre-K-only building needs its own principal, nurse, or office staff (not in the estimate); how many children a central Pre-K would draw (the model uses this year's 118 in district classes); bus service for 3- and 4-year-olds to Moretown.
 - Possible next improvements: show the four interchangeable smaller-cut sets for the merger-with-cuts plan side by side; let Build model a valley-only Pre-K change (the district costed ending Pre-K only district-wide); add bus-route effects once the district publishes them.

@@ -227,7 +227,8 @@ function savingsMeter(b) {
   );
 }
 
-function itemSource(it) {
+function itemSource(it, plan) {
+  if (it.id === "prekCenter") return FACILITIES[plan.prekCenter.school].src;
   if (it.id === "middle") return PATH_B_SAVINGS.middle.src;
   if (it.id === "valley") return PATH_B_SAVINGS.valley.src;
   return PATH_A_CUTS.src;
@@ -243,7 +244,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
 
   // where the total comes from: printed (a district plan), our sum of printed items, or with our estimate
   const totalKind = b.hasEstimate ? "estimate" : named?.kind === "district" || b.items.length <= 1 ? "district" : "derived";
-  const totalCite = named?.id === "A" ? PATH_A_CUTS.src : named?.kind === "district" ? ref("deck", "slide 19") : b.items.length === 1 ? itemSource(b.items[0]) : null;
+  const totalCite = named?.id === "A" ? PATH_A_CUTS.src : named?.kind === "district" ? ref("deck", "slide 19") : b.items.length === 1 ? itemSource(b.items[0], plan) : null;
 
   const targetLine = lower
     ? h(
@@ -353,9 +354,15 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
               "span",
               { class: "bp-item-meta" },
               tag(it.kind),
-              cite(itemSource(it)),
+              cite(itemSource(it, plan)),
               it.fte ? h("span", {}, `${fte(it.fte)} staff positions`) : null,
-              it.upperBound
+              it.id === "prekCenter"
+                ? h(
+                    "span",
+                    { class: "bp-item-note" },
+                    "The building's annual operating costs from the district's facility slide, which leave out custodial salaries and benefits, so keeping it open costs more than this. The district's figure for closing two schools assumes both buildings close. Pre-K staff move with the children."
+                  )
+                : it.upperBound
                 ? h(
                     "span",
                     { class: "bp-item-note" },
@@ -590,6 +597,7 @@ function schoolCap(s, receives) {
       "h4",
       {},
       schoolName(s.id),
+      s.center ? h("span", { class: "bp-receives" }, "Pre-K center: no K-12 grades") : null,
       receives.length ? h("span", { class: "bp-receives" }, `Also takes ${listJoin(receives)} children`) : null,
       s.portables ? h("span", { class: "bp-receives" }, `${plural(s.portables, "portable unit")} added`) : null
     ),
@@ -689,7 +697,10 @@ function buildingsSection(plan, r, cs, keptFold) {
       "p",
       { class: "bp-lead" },
       h("strong", {}, `${r.buildingsOpen} of 7 school buildings in use. `),
-      r.closed.length ? `${listJoin(r.closed.map(schoolShort))} ${r.closed.length === 1 ? "closes" : "close"}.` : "None close."
+      r.closed.length ? `${listJoin(r.closed.map(schoolShort))} ${r.closed.length === 1 ? "closes" : "close"}.` : "None close.",
+      plan.prekCenter
+        ? ` ${schoolShort(plan.prekCenter.school)} becomes a Pre-K center for ${plan.prekCenter.scope === "all" ? "the whole district, Brookside's Pre-K included" : "valley families"}, with this year's district Pre-K children (our estimate of who would attend).`
+        : ""
     ),
     h("p", {}, summary.join(" ")),
     source,

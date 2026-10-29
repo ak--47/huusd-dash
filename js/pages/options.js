@@ -213,7 +213,7 @@ export default {
           "p",
           { class: "opt-actions no-print" },
           h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${reading === "permits" ? "&w=permits" : ""}` }, "Open in Build a plan"),
-          plan.open.length === 2 && plan.msMerge
+          plan.open.length === 2 && plan.msMerge && !plan.prekCenter
             ? [
                 " · ",
                 h(

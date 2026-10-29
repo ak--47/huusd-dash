@@ -14,7 +14,7 @@ import { PATH_A_CUTS } from "../../data/budget.js";
 
 // every query key encodePlan can write; absent keys are cleared from the URL. "n" is the district's
 // draft roadmap (a new valley building in fall 2029).
-const PLAN_KEYS = ["o", "t", "m", "c", "s", "p", "r", "n"];
+const PLAN_KEYS = ["o", "t", "m", "c", "s", "p", "r", "n", "k", "sp"];
 
 // A link's list of open valley schools: "-" for none, or letters from F, M, W, R. Anything else
 // (a typo, or a link cut short) would decode as "every school closes", so it is not read.

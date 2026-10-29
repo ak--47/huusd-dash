@@ -19,8 +19,10 @@ const cache = new Map();
 export function evaluate(plan, { classSize, basis = "district", reading = "slides" } = {}) {
   const key = JSON.stringify([plan, classSize ?? null, basis, reading]);
   if (cache.has(key)) return cache.get(key);
-  const closed = closedSchools(plan);
-  const keptBuildings = ["BPS", ...plan.open];
+  // a Pre-K center's building stays in use, though no K-12 grade is taught there
+  const center = plan.prekCenter?.school;
+  const closed = closedSchools(plan).filter((id) => id !== center);
+  const keptBuildings = ["BPS", ...plan.open, ...(center ? [center] : [])];
   const result = {
     plan,
     closed,
