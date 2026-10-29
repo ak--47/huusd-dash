@@ -1,0 +1,10 @@
+/* budget page */
+.chart { margin: var(--ak-s4) 0; }
+.stat-meta { display: flex; flex-wrap: wrap; gap: var(--ak-s2); align-items: center; margin-top: var(--ak-s1); }
+.cut-list { max-width: 52rem; }
+.cut-list > dt { font-family: var(--ak-font-sans); text-transform: none; letter-spacing: 0; font-size: var(--ak-text-md); color: var(--ak-ink); font-weight: 600; }
+.cut-list > dd { color: var(--ak-ink-2); }
+.law-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--ak-s4) var(--ak-s8); max-width: 72rem; }
+.law h3 { font-size: var(--ak-text-md); margin: 0 0 var(--ak-s1); }
+.law p { margin: 0; font-size: var(--ak-text-sm); }
+.change-list li { margin-bottom: var(--ak-s2); }

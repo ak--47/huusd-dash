@@ -1,0 +1,12 @@
+/* sources page */
+.method-item { max-width: var(--col-read); margin-bottom: var(--ak-s6); }
+.method-item h3 { margin-bottom: var(--ak-s2); }
+.method-item p { color: var(--ak-ink-2); }
+.prov-key { max-width: 48rem; }
+.prov-key > dt { display: flex; align-items: flex-start; }
+.glossary { max-width: 56rem; }
+.glossary > dt { font-family: var(--ak-font-sans); text-transform: none; letter-spacing: 0; font-size: var(--ak-text-md); font-weight: 700; color: var(--ak-ink); }
+.source-group { margin-bottom: var(--ak-s6); }
+.source-list { padding-left: 1.1rem; max-width: 56rem; }
+.source-list li { margin-bottom: var(--ak-s3); }
+.source-note { display: block; font-size: var(--ak-text-sm); color: var(--ak-ink-3); }

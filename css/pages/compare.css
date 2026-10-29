@@ -1,0 +1,826 @@
+/* ---- Compare the plans (#/compare) ----
+   Colors only from WONK tokens. The main table answers to the width it actually has (container
+   queries: the side menu takes room on laptops): every column; then sideways scroll with the
+   version pinned; then, on a phone, the version plus one measure at a time. */
+
+/* ---- shared cell pieces ---- */
+.cmp-num {
+  display: block;
+  font-family: var(--ak-font-mono);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ak-ink);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.cmp-num-inline {
+  font-family: var(--ak-font-mono);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ak-ink);
+}
+.cmp-mono {
+  font-family: var(--ak-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.cmp-sub {
+  display: block;
+  font-size: var(--ak-text-xs);
+  line-height: 1.4;
+  color: var(--ak-ink-2);
+  margin-top: 2px;
+}
+.cmp-flag {
+  color: var(--ak-ink);
+}
+.cmp-flag-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.1rem;
+  vertical-align: -0.15rem;
+  font-family: var(--ak-font-mono);
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--ak-warn);
+  border: 1px solid var(--ak-warn);
+  border-radius: var(--ak-radius);
+}
+.cmp-rooms {
+  color: var(--ak-ink-3);
+}
+.cmp-short {
+  font-weight: 600;
+  color: var(--ak-err);
+  white-space: nowrap;
+}
+.cmp-sub.cmp-over {
+  font-weight: 600;
+  color: var(--ak-err);
+}
+.cmp-status .status {
+  white-space: normal;
+}
+.cmp-cell-label {
+  display: none;
+}
+.cmp-src {
+  font-size: var(--ak-text-xs);
+  color: var(--ak-ink-2);
+  line-height: 1.75;
+  margin: 0;
+}
+.cmp-src .prov {
+  margin-right: 0.15rem;
+}
+.cmp-src-line {
+  display: block;
+}
+.cmp-src-line + .cmp-src-line {
+  margin-top: var(--ak-s1);
+}
+
+/* ---- key, sort, and the phone's "Show" buttons ---- */
+.cmp-compare {
+  container: cmp / inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ak-s4);
+}
+.cmp-compare > * {
+  margin: 0;
+  min-width: 0;
+}
+.cmp-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ak-s2) var(--ak-s6);
+  align-items: baseline;
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+  padding: var(--ak-s3) 0;
+  border-top: var(--ak-hairline-w) solid var(--ak-hairline);
+  border-bottom: var(--ak-hairline-w) solid var(--ak-hairline);
+}
+.cmp-key > .wonk-label {
+  flex-basis: 100%;
+}
+.cmp-key .prov {
+  margin-right: 0.2rem;
+}
+.cmp-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ak-s3) var(--ak-s4);
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.cmp-tools .wonk-field {
+  margin: 0;
+  flex: 0 1 24rem;
+  min-width: min(100%, 16rem);
+}
+.cmp-show {
+  display: none;
+  flex-wrap: wrap;
+  gap: var(--ak-s2);
+  align-items: center;
+}
+.cmp-show > .wonk-label {
+  flex-basis: 100%;
+}
+.cmp-chip {
+  font: inherit;
+  font-size: var(--ak-text-sm);
+  font-weight: 500;
+  color: var(--ak-ink);
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--ak-hairline-strong);
+  border-radius: var(--ak-radius);
+  background: var(--ak-surface-2);
+}
+.cmp-chip:hover {
+  background: var(--ak-hover);
+}
+.cmp-chip[aria-pressed="true"] {
+  border-color: var(--ak-a1);
+  background: var(--ak-wash);
+  box-shadow: inset 0 0 0 1px var(--ak-a1);
+  font-weight: 700;
+}
+.cmp-swipe {
+  display: none;
+  font-size: var(--ak-text-xs);
+  color: var(--ak-ink-3);
+}
+
+/* ---- the main table: every column ---- */
+.cmp-scroll {
+  background: var(--ak-surface);
+}
+.cmp-main {
+  table-layout: fixed;
+  min-width: 58rem;
+  font-size: var(--ak-text-sm);
+}
+.cmp-main th,
+.cmp-main td {
+  vertical-align: top;
+}
+.cmp-main thead th {
+  vertical-align: bottom;
+  padding: var(--ak-s2) 0.4rem var(--ak-s2) 0.65rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+.cmp-main td {
+  padding: var(--ak-s3) 0.4rem var(--ak-s3) 0.65rem;
+  overflow-wrap: break-word;
+}
+.cmp-main .wonk-sort {
+  min-height: 0;
+  padding: 0;
+  text-align: left;
+  line-height: 1.35;
+}
+.cmp-main .wonk-sort:hover {
+  color: var(--ak-ink);
+}
+.cmp-main th[aria-sort] {
+  color: var(--ak-a1-text);
+}
+/* the version column is wide enough for "Moretown + Waitsfield open" and the closing schools on one
+   line each; the narrow number columns give up the room */
+.cmp-main .cmp-h--version {
+  width: 23%;
+}
+.cmp-main .cmp-h--savings {
+  width: 9%;
+}
+.cmp-main .cmp-h--buildings {
+  width: 13%;
+}
+.cmp-main .cmp-h--fits {
+  width: 15.5%;
+}
+.cmp-main .cmp-h--moved {
+  width: 8.5%;
+}
+.cmp-main .cmp-h--schools {
+  width: 10%;
+}
+.cmp-main .cmp-h--five {
+  width: 9%;
+}
+.cmp-main .cmp-h--repairs {
+  width: 12%;
+}
+
+/* row headers: the version's name, in sentence case (beats the app-wide row header style) */
+.wonk-table.cmp-stack tbody th[scope="row"] {
+  font-family: var(--ak-font-sans);
+  font-size: var(--ak-text-sm);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ak-ink);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--ak-hairline-w) solid var(--ak-hairline);
+}
+.wonk-table.cmp-main tbody th[scope="row"] {
+  padding: var(--ak-s3) var(--ak-s2) var(--ak-s3) var(--ak-s3);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--ak-surface);
+}
+.cmp-main thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--ak-surface);
+}
+.cmp-main tr:hover th[scope="row"] {
+  background: color-mix(in srgb, var(--ak-ink) 6%, var(--ak-surface));
+}
+/* letter and name on one line; the setup and the links run the full width under them */
+.cmp-v {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.4rem;
+  row-gap: 1px;
+  align-items: center;
+}
+.cmp-v .letter {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.72rem;
+}
+.cmp-v-ref {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px dashed var(--ak-hairline-strong);
+  border-radius: var(--ak-radius);
+}
+.cmp-v-name {
+  display: block;
+  font-weight: 700;
+  color: var(--ak-ink);
+  line-height: 1.3;
+}
+.cmp-v-sub {
+  display: block;
+  grid-column: 1 / -1;
+  font-size: var(--ak-text-xs);
+  color: var(--ak-ink-2);
+  line-height: 1.35;
+}
+/* which schools close: the counterpart of the name, so it reads as plainly */
+.cmp-v-closes {
+  color: var(--ak-ink);
+}
+.cmp-v-links {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 0 var(--ak-s3);
+  font-size: var(--ak-text-xs);
+}
+.cmp-v-links a {
+  display: inline-block;
+  padding: 0.2rem 0 0;
+  min-height: 1.5rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+/* the reference row, and the pairings grouped in the district's order */
+.wonk-table.cmp-main .cmp-row--today > *,
+.wonk-table.cmp-main tbody .cmp-row--today > th[scope="row"] {
+  background: var(--ak-surface-2);
+}
+.cmp-row--today .cmp-v-name {
+  color: var(--ak-ink-2);
+}
+/* (specific enough to beat the row-header rule above, so the line is one weight across the row) */
+.wonk-table.cmp-main tbody.cmp-ref tr > :is(th, td) {
+  border-bottom: 2px solid var(--ak-hairline-strong);
+}
+.cmp-main .cmp-rows.is-grouped .cmp-pair-start > * {
+  border-top: 2px solid var(--ak-hairline-strong);
+}
+
+/* every column fits: no scroll box, so the header row can stay in view while the page scrolls */
+@container cmp (min-width: 58rem) {
+  .cmp-scroll {
+    overflow: visible;
+  }
+  .cmp-main thead th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--ak-surface);
+    box-shadow: inset 0 -1px 0 var(--ak-hairline-strong);
+  }
+}
+
+/* ---- middle widths: the same table scrolls sideways, version pinned ---- */
+@container cmp (max-width: 57.95rem) {
+  .cmp-swipe {
+    display: block;
+  }
+}
+
+/* ---- phone: the version plus one measure ---- */
+@container cmp (max-width: 36rem) {
+  .cmp-swipe {
+    display: none;
+  }
+  .cmp-show {
+    display: flex;
+  }
+  .cmp-scroll {
+    overflow: visible;
+  }
+  .cmp-main {
+    table-layout: auto;
+    min-width: 0;
+  }
+  .cmp-main .cmp-h {
+    width: auto;
+  }
+  .cmp-main .cmp-h--version {
+    width: 54%;
+  }
+  .wonk-table.cmp-main tbody th[scope="row"],
+  .cmp-main thead th:first-child {
+    position: static;
+  }
+  .cmp-main:not([data-show="savings"]) :is(.cmp-h--savings, .cmp-cell--savings),
+  .cmp-main:not([data-show="buildings"]) :is(.cmp-h--buildings, .cmp-cell--buildings),
+  .cmp-main:not([data-show="fits"]) :is(.cmp-h--fits, .cmp-cell--fits),
+  .cmp-main:not([data-show="moved"]) :is(.cmp-h--moved, .cmp-cell--moved),
+  .cmp-main:not([data-show="schools"]) :is(.cmp-h--schools, .cmp-cell--schools),
+  .cmp-main:not([data-show="five"]) :is(.cmp-h--five, .cmp-cell--five),
+  .cmp-main:not([data-show="repairs"]) :is(.cmp-h--repairs, .cmp-cell--repairs) {
+    display: none;
+  }
+  .cmp-main thead th {
+    font-size: var(--ak-text-xs);
+  }
+  /* only one measure shows, so the lines under the numbers can be easier to read */
+  .cmp-sub,
+  .cmp-v-sub,
+  .cmp-v-links {
+    font-size: var(--ak-text-sm);
+  }
+}
+
+/* ---- small tables inside cards: stack into labeled rows when narrow ---- */
+.cmp-mini-wrap {
+  container-type: inline-size;
+}
+.cmp-mini {
+  font-size: var(--ak-text-sm);
+}
+.cmp-mini th,
+.cmp-mini td {
+  vertical-align: top;
+  padding: var(--ak-s2) var(--ak-s3) var(--ak-s2) 0;
+}
+.cmp-mini thead th {
+  vertical-align: bottom;
+  line-height: 1.35;
+}
+.wonk-table.cmp-mini tbody th[scope="row"] {
+  font-weight: 600;
+  padding-right: var(--ak-s4);
+}
+.cmp-row-name {
+  display: block;
+}
+.cmp-mini th[scope="row"] .cmp-sub {
+  font-weight: 400;
+}
+.cmp-mini td .status {
+  white-space: normal;
+}
+/* the scoring tables: the same width for each setup's (or each school's) column */
+.cmp-mini--even {
+  table-layout: fixed;
+}
+.cmp-mini--even thead th:first-child {
+  width: 30%;
+}
+.cmp-mini--even th,
+.cmp-mini--even td {
+  overflow-wrap: break-word;
+}
+.cmp-mini tr:hover td {
+  background: transparent;
+}
+@container (max-width: 34rem) {
+  .cmp-mini,
+  .cmp-mini tbody,
+  .cmp-mini tr,
+  .cmp-mini th,
+  .cmp-mini td {
+    display: block;
+  }
+  .cmp-mini thead {
+    display: none;
+  }
+  .cmp-mini tr {
+    padding: var(--ak-s3) 0;
+    border-top: var(--ak-hairline-w) solid var(--ak-hairline);
+  }
+  .cmp-mini tbody tr:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .wonk-table.cmp-mini tbody th[scope="row"] {
+    border: 0;
+    padding: 0 0 var(--ak-s1);
+  }
+  .cmp-mini td {
+    display: grid;
+    grid-template-columns: minmax(6rem, 42%) minmax(0, 1fr);
+    gap: var(--ak-s3);
+    padding: var(--ak-s1) 0;
+    border: 0;
+  }
+  .cmp-mini td.is-empty {
+    display: none;
+  }
+  /* the label type comes from .wonk-label */
+  .cmp-mini .cmp-cell-label {
+    display: block;
+    line-height: 1.4;
+    padding-top: 0.15rem;
+  }
+  /* stacked rows have room for easier-to-read secondary lines */
+  .cmp-mini .cmp-sub,
+  .cmp-mini .cmp-v-sub {
+    font-size: var(--ak-text-sm);
+  }
+}
+
+/* ---- scoring ---- */
+.cmp-question {
+  margin: 0;
+  padding: var(--ak-s3) var(--ak-s4);
+  max-width: var(--col-read);
+  border-left: 3px solid var(--ak-a1);
+  background: var(--ak-surface);
+  border-radius: 0 var(--ak-radius) var(--ak-radius) 0;
+}
+.cmp-question p {
+  margin: 0 0 var(--ak-s1);
+  color: var(--ak-ink);
+  font-size: var(--ak-text-md);
+}
+.cmp-question footer {
+  color: var(--ak-ink-2);
+}
+.cmp-scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ak-s2) var(--ak-s3);
+  align-items: center;
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+}
+.cmp-scale > .wonk-label {
+  flex-basis: 100%;
+}
+.cmp-scale-item {
+  white-space: nowrap;
+}
+.cmp-score-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.2rem;
+  font-family: var(--ak-font-mono);
+  font-weight: 700;
+  font-size: var(--ak-text-xs);
+  border: 1px solid var(--ak-hairline-strong);
+  border-radius: var(--ak-radius);
+  color: var(--ak-ink);
+}
+.cmp-pairs {
+  display: grid;
+  gap: var(--ak-s3);
+}
+.cmp-pair > summary .headline {
+  font-size: var(--ak-text-lg);
+  font-weight: 700;
+}
+/* the class "facts" is WONK's fold-summary style, but app.css also makes .facts a two-column grid */
+.cmp-pair > summary .facts {
+  display: block;
+  flex-basis: 100%;
+}
+.cmp-pair > .body {
+  display: grid;
+  gap: var(--ak-s4);
+}
+.cmp-pair > .body > * {
+  margin: 0;
+}
+.cmp-pair-lede {
+  color: var(--ak-ink);
+  font-size: var(--ak-text-md);
+}
+.cmp-pair-links {
+  font-size: var(--ak-text-sm);
+}
+.cmp-crit {
+  border-top: var(--ak-hairline-w) solid var(--ak-hairline);
+  padding-top: var(--ak-s4);
+  display: grid;
+  gap: var(--ak-s3);
+}
+.cmp-crit > * {
+  margin: 0;
+}
+.cmp-crit-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ak-s2) var(--ak-s3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+.cmp-crit-head h3 {
+  margin: 0;
+  font-size: var(--ak-text-lg);
+}
+.cmp-crit p {
+  margin: 0;
+}
+.cmp-facts > dd {
+  font-size: var(--ak-text-sm);
+}
+/* school names read like the row headers of the tables around them */
+.facts.cmp-facts > dt {
+  font-family: var(--ak-font-sans);
+  font-size: var(--ak-text-sm);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ak-ink);
+}
+@media (min-width: 481px) {
+  .facts.cmp-facts {
+    grid-template-columns: minmax(8rem, 30%) 1fr;
+  }
+}
+.cmp-verdicts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ak-s1);
+  font-size: var(--ak-text-sm);
+}
+.cmp-verdicts .status {
+  white-space: normal;
+}
+.cmp-verdict-label {
+  color: var(--ak-ink-2);
+}
+.cmp-septic {
+  display: grid;
+  gap: var(--ak-s2);
+  padding: var(--ak-s3) var(--ak-s4);
+  border: 1px dashed var(--ak-hairline-strong);
+  border-radius: var(--ak-radius);
+}
+.cmp-septic > * {
+  margin: 0;
+}
+.cmp-goes {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+}
+.cmp-goes li + li {
+  margin-top: var(--ak-s1);
+}
+.cmp-score {
+  margin: 0;
+  padding: var(--ak-s2) 0 0;
+}
+/* .wonk-label sets the type; app.css's fieldset legend rule would otherwise make it large and bold */
+fieldset.group.cmp-score > legend.wonk-label {
+  font-size: var(--ak-text-xs);
+  font-weight: 600;
+  color: var(--ak-a1-text);
+  margin-bottom: var(--ak-s2);
+}
+.cmp-score .choice label {
+  padding: var(--ak-s2) var(--ak-s3) var(--ak-s2) var(--ak-s2);
+}
+.cmp-score .choice label:has(input:checked) .cmp-score-n {
+  background: var(--ak-a1);
+  border-color: var(--ak-a1);
+  color: var(--ak-a1-ink);
+}
+.cmp-total {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ak-s3) var(--ak-s8);
+  padding: var(--ak-s3) var(--ak-s4);
+  background: var(--ak-surface-2);
+  border: var(--ak-hairline-w) solid var(--ak-hairline);
+  border-radius: var(--ak-radius);
+}
+.cmp-total-item {
+  display: grid;
+  gap: 2px;
+}
+.cmp-total-item .wonk-num {
+  font-size: var(--ak-text-md);
+  color: var(--ak-ink);
+}
+.cmp-ranking {
+  display: grid;
+  gap: var(--ak-s3);
+}
+.cmp-ranking > * {
+  margin: 0;
+}
+.cmp-ranking h3 {
+  font-size: var(--ak-text-xl);
+}
+.cmp-rank-field {
+  margin: 0;
+  max-width: 22rem;
+}
+.cmp-rank-empty {
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+  padding: var(--ak-s3) var(--ak-s4);
+  border: 1px dashed var(--ak-hairline-strong);
+  border-radius: var(--ak-radius);
+}
+.cmp-cleared:empty {
+  display: none;
+}
+.cmp-cleared .wonk-btn {
+  margin-left: var(--ak-s2);
+  padding: 0.35rem 0.7rem;
+}
+.cmp-mismatch {
+  margin: var(--ak-s2) 0 0;
+  padding-left: 1.1rem;
+}
+.cmp-mismatch li + li {
+  margin-top: var(--ak-s1);
+}
+.cmp-note > div > p {
+  margin: 0;
+}
+
+/* ---- other combinations ---- */
+.cmp-combos {
+  display: grid;
+  gap: var(--ak-s4);
+}
+.cmp-combo {
+  display: grid;
+  gap: var(--ak-s4);
+  container: combo / inline-size;
+}
+@media (max-width: 640px) {
+  .cmp-combo {
+    padding: var(--ak-s4);
+  }
+}
+.cmp-combo > * {
+  margin: 0;
+}
+.cmp-combo-head {
+  display: grid;
+  gap: var(--ak-s2);
+  justify-items: start;
+}
+.cmp-combo-head > * {
+  margin: 0;
+}
+.cmp-combo-head h3 {
+  font-size: var(--ak-text-xl);
+}
+.cmp-combo-head p {
+  max-width: var(--col-read);
+}
+.cmp-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--ak-s4);
+  margin: 0;
+}
+@container combo (min-width: 36rem) {
+  .cmp-tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 var(--ak-s6);
+  }
+}
+.cmp-tile {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: var(--ak-s3) 0;
+  border-top: var(--ak-hairline-w) solid var(--ak-hairline);
+}
+.cmp-tile > dd {
+  margin: 0;
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+}
+.cmp-tile .cmp-tile-value {
+  display: block;
+  font-family: var(--ak-font-mono);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--ak-text-md);
+  color: var(--ak-ink);
+}
+.cmp-tile .status {
+  white-space: normal;
+}
+.cmp-tile-src {
+  display: block;
+  margin-top: var(--ak-s1);
+}
+.cmp-combo-note {
+  font-size: var(--ak-text-sm);
+  color: var(--ak-ink-2);
+  max-width: var(--col-read);
+}
+.cmp-combo .wonk-fold > .body.cmp-fold-wide {
+  max-width: none;
+  padding-left: 0;
+  border-left: 0;
+}
+.cmp-variants .cmp-v-name {
+  display: block;
+  font-weight: 700;
+}
+.cmp-variants .cmp-v-sub {
+  display: block;
+  font-weight: 400;
+}
+.cmp-link {
+  font-size: var(--ak-text-sm);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+/* ---- how to read this page ---- */
+/* "What each measure means" scrolls here; on phones the top bar is sticky, so keep the summary clear of it */
+.cmp-howto {
+  margin-top: var(--ak-s4);
+  scroll-margin-top: 5rem;
+}
+.cmp-howto > .body {
+  max-width: var(--col-read);
+}
+.cmp-defs {
+  margin: 0 0 var(--ak-s4);
+}
+.cmp-defs dt {
+  font-weight: 700;
+  color: var(--ak-ink);
+  margin-top: var(--ak-s3);
+}
+.cmp-defs dd {
+  margin: var(--ak-s1) 0 0;
+  color: var(--ak-ink-2);
+}
+
+@media print {
+  .cmp-tools,
+  .cmp-show,
+  .cmp-swipe,
+  .cmp-score,
+  .cmp-ranking .btn-row {
+    display: none !important;
+  }
+  .cmp-pair > .body {
+    display: grid !important;
+  }
+}
+fieldset.group.cmp-reading { max-width: 56rem; margin-bottom: var(--ak-s8); }
+.cmp-reading-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--ak-s3); }
+.cmp-reading-choices label { align-items: flex-start; padding: var(--ak-s3) var(--ak-s4); }
+.cmp-reading-choices input { margin-top: 0.3rem; }
