@@ -1,0 +1,29 @@
+/* options page */
+.opt-assumptions { margin-bottom: var(--ak-s8); }
+.opt-assumptions > .body { max-width: 56rem; }
+.opt-assumptions .basis-pick { margin: var(--ak-s3) 0 var(--ak-s6); }
+.basis-pick { max-width: 56rem; margin-bottom: var(--ak-s6); }
+.choice--stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--ak-s3); }
+.choice--stack label { align-items: flex-start; padding: var(--ak-s3) var(--ak-s4); }
+.choice--stack input { margin-top: 0.3rem; }
+.choice--stack .muted { color: var(--ak-ink-2); }
+.scored { color: var(--ak-ink-2); max-width: var(--col-read); }
+.opt-list { display: grid; gap: var(--ak-s4); margin: var(--ak-s4) 0 var(--ak-s8); }
+.opt-card { padding: var(--ak-s4) var(--ak-s6); border-left: 4px solid var(--ak-hairline-strong); }
+.opt-card--district, .opt-card--b { border-left-color: var(--ak-ink); }
+.opt-card--b-variant { border-left-color: var(--ak-a1); }
+.opt-card h3 { margin: 0 0 var(--ak-s1); font-size: var(--ak-text-lg); }
+.opt-what { margin: 0 0 var(--ak-s3); max-width: 52rem; }
+/* seven metrics: four across on wide screens, with "Students fit" taking two columns */
+.opt-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ak-s3); margin: 0 0 var(--ak-s3); padding: var(--ak-s3) 0; border-top: 1px solid var(--ak-hairline); border-bottom: 1px solid var(--ak-hairline); }
+.opt-metric--wide { grid-column: span 2; }
+@media (max-width: 1100px) { .opt-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .opt-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.opt-metric dt { font-family: var(--ak-font-mono); font-size: var(--ak-text-xs); text-transform: uppercase; letter-spacing: var(--ak-track-label); color: var(--ak-ink-2); margin-bottom: var(--ak-s1); }
+.opt-metric dd { margin: 0; font-family: var(--ak-font-mono); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ak-ink); font-size: var(--ak-text-sm); }
+.opt-metric dd .status { font-family: var(--ak-font-mono); }
+.opt-metric dd .small { font-weight: 400; font-family: var(--ak-font-sans); }
+.opt-note { margin: 0 0 var(--ak-s1); font-size: var(--ak-text-sm); color: var(--ak-ink-2); max-width: 52rem; }
+.opt-actions { margin: var(--ak-s2) 0 0; font-size: var(--ak-text-sm); font-weight: 500; }
+.opt-inline, .opt-actions a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.opt-metric .status { white-space: normal; }

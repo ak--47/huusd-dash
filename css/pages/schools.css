@@ -1,0 +1,28 @@
+/* schools page */
+.map-split { display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: var(--ak-s8); align-items: start; }
+@media (max-width: 900px) { .map-split { grid-template-columns: minmax(0, 1fr); } }
+.map-fig { margin: 0; }
+.school-map { width: 100%; max-width: 22rem; height: auto; display: block; background: var(--ak-surface); border: 1px solid var(--ak-hairline); border-radius: var(--ak-radius); }
+.map-school { fill: var(--ak-a1); stroke: var(--ak-surface); stroke-width: 2; }
+.map-site { fill: none; stroke: var(--ak-a1); stroke-width: 2; stroke-dasharray: 3 2; }
+.map-label { font-family: var(--ak-font-sans); font-size: 13px; font-weight: 700; fill: var(--ak-ink); paint-order: stroke; stroke: var(--ak-surface); stroke-width: 4px; stroke-linejoin: round; }
+.map-label--site { font-weight: 500; fill: var(--ak-ink-2); }
+.map-town { font-family: var(--ak-font-mono); font-size: 10px; fill: var(--ak-ink-3); letter-spacing: 0.06em; text-transform: uppercase; }
+.map-small { font-family: var(--ak-font-mono); font-size: 10px; fill: var(--ak-ink-2); }
+.map-scale { stroke: var(--ak-ink-2); stroke-width: 2; }
+.drive h3 { margin-top: 0; }
+.drive-table td.num { min-width: 3rem; }
+.total-row th, .total-row td { border-top: 2px solid var(--ak-hairline-strong); }
+.fold-all-row { display: flex; justify-content: flex-end; }
+.profiles { display: grid; gap: var(--ak-s3); }
+.profiles .facts { margin-bottom: var(--ak-s3); }
+.gbars { display: flex; gap: 4px; align-items: flex-end; height: 4.5rem; }
+.gbar { position: relative; flex: 1 1 0; min-width: 1.6rem; max-width: 2.4rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.gbar-fill { display: block; width: 100%; height: var(--h); min-height: 2px; background: var(--seg-b); border: 1px solid var(--ak-hairline); border-radius: 2px 2px 0 0; }
+.gbar-n { position: absolute; bottom: calc(var(--h, 0%) + 1.1rem); font-family: var(--ak-font-mono); font-size: 0.68rem; color: var(--ak-ink-2); }
+.gbar-g { font-family: var(--ak-font-mono); font-size: 0.68rem; color: var(--ak-ink-3); margin-top: 2px; }
+.profiles .wonk-card--fold > summary { flex-direction: column; align-items: flex-start; }
+.profiles .wonk-card--fold > summary .headline { font-weight: 700; font-size: var(--ak-text-lg); }
+@media (min-width: 901px) { .map-split { grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); } }
+.drive-table th, .drive-table td { padding-left: 0.45rem; padding-right: 0.45rem; }
+.drive-table thead th { white-space: normal; vertical-align: bottom; }

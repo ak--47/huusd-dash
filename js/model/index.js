@@ -1,0 +1,39 @@
+// One call that answers everything the site shows about a plan.
+
+import { budget } from "./budget.js";
+import { capacity } from "./capacity.js";
+import { maxSchoolsYoung, movedNextFall, studentsAtLeast } from "./impact.js";
+import { closedSchools } from "./plans.js";
+import { FACILITIES } from "../../data/schools.js";
+
+export * from "./plans.js";
+export * from "./assign.js";
+export * from "./journey.js";
+export * from "./capacity.js";
+export * from "./budget.js";
+export * from "./impact.js";
+export * from "./options.js";
+
+const cache = new Map();
+
+export function evaluate(plan, { classSize, basis = "district", reading = "slides" } = {}) {
+  const key = JSON.stringify([plan, classSize ?? null, basis, reading]);
+  if (cache.has(key)) return cache.get(key);
+  const closed = closedSchools(plan);
+  const keptBuildings = ["BPS", ...plan.open];
+  const result = {
+    plan,
+    closed,
+    buildingsOpen: 7 - closed.length,
+    budget: budget(plan, { basis }),
+    capacity: capacity(plan, { ...(classSize ? { classSize } : {}), reading }),
+    moved: movedNextFall(plan),
+    maxYoung: maxSchoolsYoung(plan),
+    fivePlus: studentsAtLeast(plan, 5),
+    deferredKept: keptBuildings.reduce((a, id) => a + FACILITIES[id].deferredMaintenance, 0),
+    deferredClosed: closed.reduce((a, id) => a + FACILITIES[id].deferredMaintenance, 0),
+  };
+  if (cache.size > 200) cache.clear();
+  cache.set(key, result);
+  return result;
+}
