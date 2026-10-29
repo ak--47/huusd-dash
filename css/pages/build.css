@@ -39,7 +39,9 @@
 .bp-bversion { display: grid; gap: var(--ak-s3); margin-top: var(--ak-s4); padding: var(--ak-s3) var(--ak-s4) var(--ak-s4); border: 1px dashed var(--ak-hairline-strong); border-radius: var(--ak-radius); }
 .bp-bversion .wonk-field { margin: 0; min-width: 0; gap: var(--ak-s1); }
 .bp-bversion .wonk-select { width: 100%; min-width: 0; }
-.wonk .bp-bversion-hint { margin: calc(-1 * var(--ak-s2)) 0 0; font-size: var(--ak-text-sm); color: var(--ak-ink-3); }
+.wonk .bp-bversion-hint { margin: var(--ak-s3) 0 0; font-size: var(--ak-text-sm); color: var(--ak-ink-3); }
+/* inside a dashed box the hint sits close under its title; outside, it must clear the box's border */
+.wonk .bp-bversion .bp-bversion-hint { margin: calc(-1 * var(--ak-s2)) 0 0; }
 .wonk .bp-matched { margin: var(--ak-s3) 0 0; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
 .wonk .bp-undo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ak-s2); margin: var(--ak-s2) 0 0; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
 .bp-undo[hidden] { display: none; }

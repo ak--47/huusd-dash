@@ -256,7 +256,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "p",
       { class: "bp-bversion-hint" },
       h("strong", {}, "Pre-K center plan: "),
-      "a resident's suggestion. Fayston closes; Moretown's building becomes the district's Pre-K center; Waitsfield and Warren stay K-6, taking Fayston's and two thirds of Moretown's children, with a third of Moretown's going to Brookside; the middle schools merge."
+      "a resident's suggestion. Fayston closes; Moretown's building becomes the district's Pre-K center; Waitsfield, Warren, and Brookside teach K-6, with Fayston's children mostly at Warren, two thirds of Moretown's at Waitsfield and a third at Brookside; the middle schools merge and Crossett Brook's building holds no classes."
     ),
     matched,
     undoRow
@@ -411,6 +411,17 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     });
     return { v, input, label: h("label", {}, input, h("span", {}, text)) };
   });
+  // Brookside teaches Crossett Brook's 5th and 6th graders too, so Crossett Brook's building holds no classes
+  const bpsBox = h("input", { type: "checkbox", id: "bp-bps6", "aria-describedby": "bp-bps6-d" });
+  bpsBox.addEventListener("change", () => {
+    const on = bpsBox.checked;
+    onPlan((p) => ({ ...p, bpsTop: on ? 6 : 4 }));
+  });
+  const bpsNote = h(
+    "p",
+    { class: "bp-fix-note", id: "bp-bps6-d" },
+    "Brookside teaches K-6, and Crossett Brook's building holds no classes, which could leave it free for repairs. No savings are counted for the empty building: the district has published no operating cost for Crossett Brook. Needs the move to Harwood and valley schools through grade 6."
+  );
   const g4 = group(
     4,
     "Middle schools",
@@ -420,7 +431,9 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       `The district puts the savings from the move at ${money(PATH_B_SAVINGS.middle.amount)} a year and ${num(PATH_B_SAVINGS.middle.fte, 1)} staff positions. `,
       cite(PATH_B_SAVINGS.middle.src)
     ),
-    h("div", { class: "choice bp-choice-stack" }, msRadios.map((r) => r.label))
+    h("div", { class: "choice bp-choice-stack" }, msRadios.map((r) => r.label)),
+    h("label", { class: "wonk-check bp-prek" }, bpsBox, h("span", {}, "Crossett Brook's 5th and 6th graders move to Brookside")),
+    bpsNote
   );
 
   // ---- 5. program cuts ----
@@ -751,7 +764,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     }
     // the warning sits in a polite live region: touch it only when its words change
     const bps = r.capacity.schools.find((s) => s.id === "BPS");
-    const closedKey = plan.open.length === 0 ? `${bps.total}/${bps.limit}` : "";
+    const closedKey = plan.open.length === 0 ? `${bps.total}/${bps.limit}/${plan.bpsTop}` : "";
     if (closedKey !== allClosed.dataset.key) {
       allClosed.dataset.key = closedKey;
       allClosed.replaceChildren(
@@ -759,7 +772,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
           ? note(
               "warn",
               h("strong", {}, "All four valley elementary schools would close. "),
-              `Valley children would go to Brookside in Waterbury through grade 4 and to Crossett Brook for grades 5 and 6. Brookside would have about ${num(bps.total)} students against its limit of ${num(bps.limit)}. The district did not study this option.`
+              `Valley children would go to Brookside in Waterbury ${plan.bpsTop === 6 ? "through grade 6" : "through grade 4 and to Crossett Brook for grades 5 and 6"}. Brookside would have about ${num(bps.total)} students against its limit of ${num(bps.limit)}. The district did not study this option.`
             )
           : ""
       );
@@ -780,6 +793,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
     // middle schools, cuts
     for (const m of msRadios) m.input.checked = plan.msMerge === m.v;
+    bpsBox.checked = plan.bpsTop === 6;
+    bpsBox.disabled = !plan.msMerge || plan.valleyTop !== 6;
     for (const c of cutBoxes) c.cb.checked = plan.cuts.includes(c.id);
 
     // building changes: using 300 for Waitsfield does nothing while it is closed, or under the state permits

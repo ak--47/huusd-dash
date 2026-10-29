@@ -102,6 +102,22 @@ export const FINDINGS = [
     link: { href: "#/build?o=MW&t=6&m=1&s=1&p=WES4.MES1", label: "Try Moretown + Waitsfield, K-6, on Build a plan" },
   },
   {
+    id: "prek-building",
+    weight: "moderate",
+    kind: "missing",
+    title: "Pre-K in a building of its own: asked for, not yet costed",
+    says: "The district's Path B capacity tables plan Pre-K classes in both valley schools that stay open (30 to 42 children in each) and 60 at Brookside. The deck has no version with Pre-K in one building.",
+    found: [
+      "On October 28 a board member asked to see versions where the two schools left open \"did not include pre-k\" and one of the closed buildings \"could be leased back to house pre-k.\" Later a board member described \"a partnership or a lease from the town to use a space of that building to operate a pre-K that served the Valley, as opposed to keeping a third building.\"",
+      "An administrator offered to bring \"maybe an option of moving PK into a building, a separate building, but that would be keeping a building. So our numbers are going to be going down.\"",
+      "The facility slides give each building's yearly operating costs without custodial staff (Moretown: $185,868). Pre-K teachers are already in the Path B tables, so in a separate building they would move rather than be added; a Pre-K-only building may also need its own custodian, office staff, or nurse. Under the Articles of Agreement, a valley building the board decides not to use for educational programs is offered to its town for $1, which is how a lease from a town could come about.",
+      "Taking Pre-K out of the schools that stay open frees room there: about 30 to 42 seats in each, which matters most where a pairing is over its wastewater limit or classroom space.",
+    ],
+    why: "A separate Pre-K building changes both sides of the comparison: it keeps one more building in use, which saves less, and it frees space in the schools that stay open.",
+    ask: "Will the board see the version with Pre-K in one building, run by the district or leased from a town, before it decides? What would that building cost each year, including staff, and how much space would it free in the schools that stay open?",
+    refs: [ref("deck", "slides 27-32"), ref("deck", "slide 22"), ref("meeting1028", "Pre-K in a separate building"), ref("aoa", "Article 6")],
+  },
+  {
     id: "school-count",
     weight: "moderate",
     kind: "missing",

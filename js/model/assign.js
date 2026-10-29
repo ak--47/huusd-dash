@@ -52,8 +52,8 @@ export function offersPreK(plan, school) {
 export function serves(plan, school, grade) {
   if (grade < 0) return offersPreK(plan, school);
   switch (school) {
-    case "BPS": return grade <= 4;
-    case "CBMS": return grade >= 5 && grade <= (plan.msMerge ? 6 : 8);
+    case "BPS": return grade <= (plan.bpsTop ?? 4);
+    case "CBMS": return plan.bpsTop !== 6 && grade >= 5 && grade <= (plan.msMerge ? 6 : 8);
     case "HUMS": return grade === 7 || grade === 8;
     case "HUHS": return grade >= 9;
     default: return (VALLEY.includes(school) || school === "NEW") && plan.open.includes(school) && grade <= plan.valleyTop;
@@ -65,7 +65,7 @@ export function defaultSchool(plan, town, grade) {
   if (grade >= 9) return "HUHS";
   if (grade >= 7) return WATERBURY_TRACK.has(town) && !plan.msMerge ? "CBMS" : "HUMS";
   const elem = receivingSchool(plan, town);
-  if (elem === "BPS") return grade <= 4 ? "BPS" : "CBMS";
+  if (elem === "BPS") return grade <= (plan.bpsTop ?? 4) ? "BPS" : "CBMS";
   if (grade > plan.valleyTop) return "CBMS";
   return elem;
 }
