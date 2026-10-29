@@ -1,5 +1,6 @@
 import { h, num } from "../ui/dom.js";
 import { cite, cites, fold, pageHead, section, tag } from "../ui/kit.js";
+import { track } from "../ui/track.js";
 import { FINDINGS, QUESTIONS } from "../../data/findings.js";
 import { CHECKS, IDEAS, EVIDENCE } from "../../data/context.js";
 import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
@@ -36,6 +37,7 @@ export default {
       const text = `Questions about the HUUSD FY28 plans\n${sourceLine("copied")}\n\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join("\n")}`;
       try {
         await navigator.clipboard.writeText(text);
+        track("Questions Copied", { question_count: questions.length });
         window.wonk?.toast("Questions copied", "ok");
       } catch {
         window.wonk?.toast("Copy did not work in this browser. Select the list and copy it instead.", "warn");
@@ -47,6 +49,7 @@ export default {
     const endPrint = () => document.body.classList.remove("print-questions");
     const printBtn = h("button", { type: "button", class: "wonk-btn wonk-btn--quiet no-print" }, "Print the questions");
     printBtn.addEventListener("click", () => {
+      track("Questions Printed", { question_count: questions.length });
       printNote.textContent = sourceLine("printed");
       document.body.classList.add("print-questions");
       window.addEventListener("afterprint", endPrint, { once: true });
@@ -58,6 +61,7 @@ export default {
     toQuestions.addEventListener("click", (e) => {
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      track("Questions Jumped");
       jumpTo("questions");
     });
 
@@ -87,6 +91,7 @@ export default {
                   type: "button",
                   class: "glance-link",
                   onclick: () => {
+                    track("Finding Jumped", { finding: f.id });
                     const target = document.getElementById(`finding-${f.id}`);
                     target?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
                     target?.querySelector("h3")?.setAttribute("tabindex", "-1");
@@ -99,7 +104,7 @@ export default {
             )
           )
         ),
-        h("p", { class: "small" }, h("button", { type: "button", class: "glance-link", onclick: () => jumpTo("questions") }, "Jump to the questions to ask"))
+        h("p", { class: "small" }, h("button", { type: "button", class: "glance-link", onclick: () => { track("Questions Jumped"); jumpTo("questions"); } }, "Jump to the questions to ask"))
       ),
 
       section(

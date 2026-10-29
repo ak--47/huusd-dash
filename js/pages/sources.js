@@ -45,7 +45,7 @@ export default {
           { class: "prose" },
           h("p", {}, h("strong", {}, "Built by Aaron Krivitzky, a Waitsfield parent."), " It is an independent project, not affiliated with or reviewed by the Harwood Unified Union School District. It does not endorse a plan. It shows the district's figures as published, checks the arithmetic, and adds measures the presentations leave out, mainly how many schools a child would attend."),
           h("p", {}, "Found a mistake? Please ", h("a", { href: "https://github.com/ak--47/huusd-dash/issues" }, "report it on GitHub"), ". Corrections will be posted with the date. The code and data are public at ", h("a", { href: "https://github.com/ak--47/huusd-dash" }, "github.com/ak--47/huusd-dash"), "."),
-          h("p", {}, "The site uses no cookies, ads, or tracking. Anything you enter about your child stays in your browser. Last updated October 29, 2026.")
+          h("p", {}, "Last updated October 29, 2026.")
         ),
         h(
           "dl",

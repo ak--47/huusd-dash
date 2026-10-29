@@ -9,6 +9,7 @@ import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budge
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
 import { cite, note, schoolName, schoolShort, status, tag, term, unsure } from "./kit.js";
 import { heatGrid } from "./heat.js";
+import { track } from "./track.js";
 import { namedLabel, optionOf, pairLabel, relation, topWords, townName } from "./build-controls.js";
 
 const pc = (x) => `${Math.max(0, Math.min(100, x * 100)).toFixed(2)}%`;
@@ -100,10 +101,13 @@ const moreThanToday = (n) => (n > TODAY_SCHOOLS ? `${n - TODAY_SCHOOLS} more tha
 
 // onShowBasis: moves focus to the savings target choice in the controls
 export function resultsPanel({ onShowBasis } = {}) {
-  const folds = new Map(); // fold key -> open, so folds stay put while the panel redraws
+  // fold key -> its <details>, reused so folds stay put while the panel redraws (a new <details open> would fire
+  // a toggle event, which the site's analytics would count as the reader opening it)
+  const folds = new Map();
   const keptFold = (key, summary, ...children) => {
-    const d = h("details", { class: "wonk-fold", open: folds.get(key) ? true : null }, h("summary", {}, summary), h("div", { class: "body" }, ...children));
-    d.addEventListener("toggle", () => folds.set(key, d.open));
+    if (!folds.has(key)) folds.set(key, h("details", { class: "wonk-fold" }));
+    const d = folds.get(key);
+    d.replaceChildren(h("summary", {}, summary), h("div", { class: "body" }, ...children));
     return d;
   };
 
@@ -111,7 +115,8 @@ export function resultsPanel({ onShowBasis } = {}) {
   const matched = h("p", { class: "bp-results-match" });
   const strip = h("div", { class: "bp-strip" });
   const body = h("div", { class: "bp-results-body" });
-  const share = shareBlock();
+  let shownPlan = null; // the plan on screen, for the share event
+  const share = shareBlock(() => encodePlan(shownPlan));
   const head = h("header", { class: "bp-results-head" }, title, matched, backButton(), strip);
   const el = h("section", { class: "bp-results", id: "bp-results", "aria-labelledby": "bp-results-title" }, head, body, share);
   // On wide screens the panel scrolls under its sticky head, which grows and shrinks with the plan. Keep a control
@@ -145,6 +150,7 @@ export function resultsPanel({ onShowBasis } = {}) {
   function update(plan, r, { cs, classSize }) {
     const b = r.budget;
     const rel = relation(plan);
+    shownPlan = plan;
 
     matched.replaceChildren(
       rel.named?.id === "today"
@@ -857,7 +863,11 @@ function studentsSection(plan, r, keptFold) {
     if (plan.valleyTop !== 5) q.set("top", String(plan.valleyTop)); // that page's Path B versions are grade 4 or 6
   }
   const childLink = h("a", { class: "wonk-btn", href: `#/your-child${q.toString() ? `?${q}` : ""}` }, "See your child's path under this plan");
-  childLink.addEventListener("click", () => store.set("plan", encodePlan(plan)));
+  childLink.addEventListener("click", () => {
+    const code = encodePlan(plan);
+    store.set("plan", code);
+    track("Child Path Opened", { from: "build", plan_code: code });
+  });
 
   return h(
     "section",
@@ -970,14 +980,15 @@ function compareSection(plan, r, classSize) {
         ? `Your plan's savings do not count its portable classrooms; if their cost all came out of next year's budget, it ${portWould(r.budget)} fall short. `
         : null,
       // keep the reader's wastewater reading; Compare has no lower target, so say which one it uses
-      h("a", { href: `#/compare${reading === "permits" ? "?w=permits" : ""}` }, "Compare all the plans"),
+      h("a", { href: `#/compare${reading === "permits" ? "?w=permits" : ""}`, onclick: () => track("Compare Opened", { from: "build" }) }, "Compare all the plans"),
       lower ? ` (Compare measures savings against the district's ${money(TARGET)} target.)` : null
     )
   );
 }
 
 // ---------------------------------------------------------------- share
-function shareBlock() {
+// planCode: the plan on screen, as encodePlan writes it
+function shareBlock(planCode) {
   const input = h("input", { class: "wonk-input", id: "bp-share-url", readonly: true, type: "text" });
   const fallback = h(
     "div",
@@ -989,6 +1000,7 @@ function shareBlock() {
   const btn = h("button", { type: "button", class: "wonk-btn wonk-btn--primary" }, "Copy link to this plan");
   btn.addEventListener("click", async () => {
     const url = location.href;
+    track("Plan Link Copied", { plan_code: planCode() }); // copied, or the link shown to copy by hand
     try {
       if (!navigator.clipboard?.writeText) throw new Error("no clipboard");
       await navigator.clipboard.writeText(url);

@@ -33,6 +33,12 @@ export function decodeChild(s) {
   return { town, grade: g, school: okSchool, pk: pk && (SCHOOLS[pk] || pk === "PRIVATE" || pk === "OTHER") ? pk : "" };
 }
 
+// What analytics records about a child: home town and grade (the form's index and label), nothing else.
+export function childProps(code) {
+  const c = decodeChild(code);
+  return c ? { town: c.town, grade: c.grade, grade_label: GRADE_OPTIONS.find(([g]) => g === c.grade)[1] } : {};
+}
+
 export function defaultSchoolToday(town, grade) {
   if (grade < 0) return { waterbury: "BPS", duxbury: "BPS", moretown: "MES", warren: "WRN" }[town] ?? "PRIVATE";
   return defaultSchool(PLAN_TODAY, town, grade);

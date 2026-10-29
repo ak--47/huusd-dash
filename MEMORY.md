@@ -6,6 +6,17 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: Crossett Brook-to-Brookside idea (not modeled)
+
+- A parent suggested moving Crossett Brook's 5th and 6th graders to Brookside for a year so Crossett Brook can close for renovations. Added to Options under "Ideas this site cannot score yet", not as a scored plan, because the district has published no Crossett Brook operating cost or renovation plan (so there is no savings figure to use), and Brookside would hold about 469 with Pre-K (284 K-4 + 54 Pre-K + 131), just under its 480 occupancy without staff but about 70 over the consultant's 399 (about 2 portable units, which could cancel a year's building savings). The consultant's Oct 2025 evaluation lists $10,187,109 of deferred maintenance at Crossett Brook ($489,663 priority 1); new source key `truexEval` links the cached text copy in `sources/`. To model it later: let Brookside teach through grade 6, add a Crossett Brook closure item once the district gives an operating cost, and add the portables.
+
+## 2026-10-29: analytics
+
+- Added anonymous Mixpanel analytics with session replay (owner's request; `js/ui/track.js`), loaded through the owner's proxy so ad blockers do not drop it. Everyone is anonymous: no `identify()`. Autocapture records clicks, inputs, and scrolling; the router sends a page view per route. Off on localhost, where a stub records every call in `window.__mpEvents` for browser tests.
+- Named events for what readers do: shared ones in `js/app.js` (folds opened, sources followed, glossary, menu, printing) and each page's own choices (Build plan changes, Compare sorting and scoring, Your child's path forms, Options settings and links, Findings jumps, copying and printing the questions). The full list with properties is in `AGENTS.md` ("Analytics"). Events carry site choices only, never personal data or typed text.
+- "Section Expanded" counts a reader's click (or Enter or Space) on a closed fold's summary, not the `toggle` event, which also fires when code opens a fold (`?at=` links, settings in a link, redraws, printing) and so sent events on page load. A card fold is named by its headline, without its changing facts. "Glossary Term Opened" no longer fires twice for a Build step 3 label (a label click also clicks its radio). `npm run test:browser` has an `analytics` step (one action each on Build, Compare, Your child's path, Options, What we checked).
+- Privacy wording (owner's call): the Sources page's "The site uses no cookies, ads, or tracking. Anything you enter about your child stays in your browser." was removed, and README and AGENTS no longer say "no tracking". No new privacy statement and no opt-out switch for now; the owner will revisit the language. The site is for parents and is anonymous.
+
 ## 2026-10-29: deep links select their starting point
 
 - Build a plan adds a "Pre-K center plan" starting point (the resident's plan). A link to any starting point (including the Options cards' "Open in Build a plan") now shows that button as selected, and a plan that equals any Options card says which one it matches (`presetOf`, `optionOf`, `centerPlan` in `js/ui/build-controls.js`).
@@ -58,6 +69,7 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 
 ## Open items
 
+- Analytics: after the first deploy, check in Mixpanel that page views, the named events, and session replays arrive through the proxy. The browser checks only see the localhost stub (`window.__mpEvents`).
 - Before sharing widely (owner's call): the Pre-K center card says "suggested by a resident"; it came from the owner's household, and the plan keeps Waitsfield open and fills it, so consider "suggested by the author's family" for transparency. Consider a corrections channel residents will use (a form or a dedicated address, not the work email); GitHub issues is a barrier for most.
 - Owner decision: the `ak--47.github.io` host reads like "AK-47" in link previews. Moving to a GitHub organization or a custom domain means updating `og:url`, `og:image`, README links, and the GitHub links on the site.
 - Owner decision: whether to say the AI-assisted fact-check was "reviewed by the author" (only if true).

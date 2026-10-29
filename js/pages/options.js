@@ -1,5 +1,6 @@
 import { h, moneyShort, num, store } from "../ui/dom.js";
 import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag, unsure } from "../ui/kit.js";
+import { track } from "../ui/track.js";
 import { OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, evaluate } from "../model/index.js";
 import { ref } from "../../data/sources.js";
 import { MODULAR } from "../../data/budget.js";
@@ -61,7 +62,7 @@ export default {
       h(
         "label",
         {},
-        h("input", { type: "radio", name: "reading", value, checked: reading === value, onchange: () => { reading = value; setParams({ w: value === "permits" ? "permits" : null }); draw(); } }),
+        h("input", { type: "radio", name: "reading", value, checked: reading === value, onchange: () => { reading = value; setParams({ w: value === "permits" ? "permits" : null }); track("Wastewater Reading Changed", { reading: value }); draw(); } }),
         h("span", {}, h("strong", {}, label), h("br"), h("span", { class: "small muted" }, sub))
       );
 
@@ -69,7 +70,7 @@ export default {
       h(
         "label",
         {},
-        h("input", { type: "radio", name: "basis", value, checked: basis === value, onchange: () => { basis = value; setParams({ x: value === "exclusion" ? 1 : null }); draw(); } }),
+        h("input", { type: "radio", name: "basis", value, checked: basis === value, onchange: () => { basis = value; setParams({ x: value === "exclusion" ? 1 : null }); track("Savings Target Changed", { target: value === "exclusion" ? "lower" : "district" }); draw(); } }),
         h("span", {}, h("strong", {}, label), h("br"), h("span", { class: "small muted" }, sub))
       );
 
@@ -171,6 +172,14 @@ export default {
           h("li", {}, "Grade-band pairing: Moretown and Warren as K-3, Waitsfield as grades 4-6, and Fayston closed. Asked in the board's question-and-answer document; no answer is recorded. ", cite(ref("qdoc", "K-6 configuration changes"))),
           h("li", {}, "New attendance boundaries that send families to the nearest school regardless of town."),
           h("li", {}, "A bond for deferred maintenance with no closures. Under current law, payments on a new bond would count toward the threshold."),
+          h(
+            "li",
+            {},
+            "Move Crossett Brook's 5th and 6th graders to Brookside for a year so Crossett Brook can close for renovations (a parent's suggestion). With the middle schools merged, Crossett Brook would otherwise hold only about 131 Waterbury-area 5th and 6th graders. Brookside would then hold about 469 students including Pre-K: just under its occupancy of 480 if staff are not counted, and about 70 over the consultant's classroom capacity of 399, roughly 2 portable units. The consultant's 2025 evaluation lists about $10.2 million of deferred maintenance at Crossett Brook, $490,000 of it priority 1. The district has not published Crossett Brook's operating costs or a renovation plan, and a new bond would count toward the threshold. ",
+            cite(ref("truexCap", "Capacities")),
+            " ",
+            cite(ref("truexEval", "Crossett Brook"))
+          ),
           h("li", {}, "District mergers under Act 170, which could change the budget picture from FY29 on.")
         ),
         h("p", {}, h("a", { href: "#/findings?at=ideas" }, "More on these ideas"), ", or ", h("a", { href: "#/build" }, "build your own combination"), ".")
@@ -208,11 +217,11 @@ export default {
 
     function cardFor({ o, s, family }) {
       const kids = store.get("kids");
-      const actions = (plan) =>
+      const actions = (plan, option) =>
         h(
           "p",
           { class: "opt-actions no-print" },
-          h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${reading === "permits" ? "&w=permits" : ""}` }, "Open in Build a plan"),
+          h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${reading === "permits" ? "&w=permits" : ""}`, onclick: () => track("Option Opened in Build", { option }) }, "Open in Build a plan"),
           plan.open.length === 2 && plan.msMerge && !plan.prekCenter
             ? [
                 " · ",
@@ -220,6 +229,7 @@ export default {
                   "a",
                   {
                     href: `#/your-child?${new URLSearchParams({ pair: pairId(plan), top: plan.valleyTop, ...(typeof kids === "string" && kids ? { c: kids } : {}) })}`,
+                    onclick: () => track("Option Child Path Opened", { option }),
                   },
                   "See a child's path"
                 ),
@@ -281,7 +291,7 @@ export default {
         brief ? null : o.notes.map((n, i) => h("p", { class: "opt-note" }, n, o.refs && i === 0 ? [" ", cites(o.refs)] : null)),
         s.upperBound && !brief ? h("p", { class: "opt-note" }, fiveSixNote("this version", "it"), fiveSixCite()) : null,
         portablesNote(s.r.budget.oneTime.portables),
-        actions(o.plan)
+        actions(o.plan, o.id)
       );
     }
 
