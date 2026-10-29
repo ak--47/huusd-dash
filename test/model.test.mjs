@@ -324,12 +324,34 @@ test("split: part of a closed town's children go to a second school", () => {
   assert.deepEqual(M.makePlan({ split: { fayston: { school: "WRN", share: 0.5 } } }).split, {}, "no split while Fayston is open");
 });
 
-test("option: close Fayston, Moretown as a Pre-K center, Waitsfield and Warren K-6, merge the middle schools", () => {
+test("option: close Fayston, Moretown as a Pre-K center, K-6 at Waitsfield, Warren, and Brookside, merge the middle schools", () => {
   const o = M.OPTIONS.find((x) => x.id === "B-center");
   const r = M.evaluate(o.plan);
   assert.equal(r.budget.savings, 3743601);
-  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 252);
-  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 116);
-  assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 315);
-  assert.equal(r.buildingsOpen, 6);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 223);
+  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 145);
+  assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 461);
+  assert.equal(r.buildingsOpen, 5, "Crossett Brook's building holds no classes");
+  assert.equal(r.capacity.middle.find((m) => m.id === "CBMS").total, 0);
+  assert.equal(r.maxYoung.waterbury, 3, "Brookside, Harwood Middle, Harwood High");
+  assert.equal(r.moved.byReasonK12.brookside, 64, "this year's Crossett Brook 5th graders finish grade 6 at Brookside");
+  // the fallback: Crossett Brook keeps its 5th and 6th graders
+  const fall = M.evaluate(M.makePlan({ ...o.plan, bpsTop: 4 }));
+  assert.equal(fall.capacity.schools.find((s) => s.id === "BPS").total, 315);
+  assert.equal(fall.capacity.middle.find((m) => m.id === "CBMS").total, 146);
+  assert.equal(r.moved.k12 - fall.moved.k12, 64);
+});
+
+test("Brookside through grade 6: only with the merger and K-6 valley schools; links keep it", () => {
+  const plan = M.makePlan({ open: ["WES", "WRN"], msMerge: true, bpsTop: 6 });
+  assert.equal(plan.bpsTop, 6);
+  assert.equal(M.decodePlan(M.encodePlan(plan)).bpsTop, 6);
+  assert.equal(M.makePlan({ open: ["WES", "WRN"], bpsTop: 6 }).bpsTop, 4, "not without the merger");
+  assert.equal(M.makePlan({ open: ["WES", "WRN"], msMerge: true, valleyTop: 4, bpsTop: 6 }).bpsTop, 4, "not when valley 5th graders go to Crossett Brook");
+  assert.equal(M.capacity(plan).source, "model", "the district did not table it");
+  // a Waterbury 3rd grader stays at Brookside through grade 6, then Harwood
+  const years = M.journey(plan, { town: "waterbury", grade: 3, school: "BPS" }).map((y) => y.school);
+  assert.ok(!years.includes("CBMS"));
+  // Brookside 4th graders staying at Brookside are not counted as changing schools
+  assert.equal(M.evaluate(plan).moved.byReasonK12.other, 0);
 });

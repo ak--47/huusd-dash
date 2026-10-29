@@ -32,14 +32,15 @@ function reasonFor(plan, before, grade) {
   if (VALLEY.includes(before) && !plan.open.includes(before)) return "closure";
   if (VALLEY.includes(before) && grade >= 5) return "grades56";
   if (before === "CBMS" && grade >= 7) return "middle";
+  if (before === "CBMS" && plan.bpsTop === 6) return "brookside";
   if (grade < 0) return "prek";
   return "other";
 }
 
 // Students who would start fall 2027 in a different school than they would with no change.
 export function movedNextFall(plan) {
-  const byReason = { closure: 0, grades56: 0, middle: 0, prek: 0, other: 0 };
-  const byReasonK12 = { closure: 0, grades56: 0, middle: 0, prek: 0, other: 0 };
+  const byReason = { closure: 0, grades56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
+  const byReasonK12 = { closure: 0, grades56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
   const bySchool = {};
   let k12 = 0;
   let preK = 0;
@@ -48,6 +49,8 @@ export function movedNextFall(plan) {
     const before = schoolFor(PLAN_TODAY, child, START_YEAR);
     const after = schoolFor(plan, child, START_YEAR);
     if (!before || before === after) continue;
+    // staying in this year's school is not a move (Brookside 4th graders when Brookside teaches grade 5)
+    if (after === g.school) continue;
     const nextGrade = g.grade + 1;
     const reason = reasonFor(plan, before, nextGrade);
     byReason[reason] += g.n;

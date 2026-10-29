@@ -29,7 +29,7 @@ export function peopleLimit(plan, id) {
 export function districtTableFor(plan) {
   // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
   // a Pre-K center or a split town changes who goes where, so those use the model's own counts
-  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || Object.keys(plan.split ?? {}).length) return null;
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || Object.keys(plan.split ?? {}).length || plan.bpsTop === 6) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
 }
@@ -80,11 +80,12 @@ export function modelLoads(plan) {
     add(loads, "BPS", "PK", PK_PLAN.BPS);
     for (const id of plan.open) add(loads, id, "PK", PK_PLAN[id]);
   }
-  // Brookside and Crossett Brook's own students
+  // Brookside and Crossett Brook's own students (Crossett Brook's 5-6 at Brookside when it teaches them)
+  const bpsTop = plan.bpsTop ?? 4;
   for (const g of ["K", "1", "2", "3", "4"]) add(loads, "BPS", g, att.BPS[g]);
-  for (const g of ["5", "6"]) add(loads, "CBMS", g, att.CBMS[g]);
+  for (const g of ["5", "6"]) add(loads, gradeNum(g) <= bpsTop ? "BPS" : "CBMS", g, att.CBMS[g]);
   // valley schools
-  const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? 4 : plan.valleyTop) ? dest : "CBMS", g, n);
+  const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? bpsTop : plan.valleyTop) ? dest : "CBMS", g, n);
   for (const id of VALLEY) {
     const town = SCHOOLS[id].town;
     const dest = plan.open.includes(id) ? id : receivingSchool(plan, town);
@@ -195,7 +196,8 @@ const HU_78 = ATT.HU[7] + ATT.HU[8];
 function middleSchools(plan, cbmsFromTable) {
   const cb56 = cbmsFromTable ?? Object.values(modelLoads(plan).CBMS ?? {}).reduce((a, b) => a + b, 0);
   return [
-    { id: "CBMS", grades: plan.msMerge ? "5-6" : "5-8", total: cb56 + (plan.msMerge ? 0 : CB_78), capacity: CONSULTANT_CAPACITY.schools.CBMS },
+    // empty: Brookside teaches Crossett Brook's 5th and 6th graders, and the building holds no classes
+    { id: "CBMS", grades: plan.msMerge ? "5-6" : "5-8", total: cb56 + (plan.msMerge ? 0 : CB_78), capacity: CONSULTANT_CAPACITY.schools.CBMS, empty: plan.bpsTop === 6 },
     { id: "HUMS", grades: "7-8", total: HU_78 + (plan.msMerge ? CB_78 : 0), capacity: CONSULTANT_CAPACITY.schools.HUMS },
   ].map((m) => ({ ...m, over: m.total > m.capacity }));
 }

@@ -42,7 +42,7 @@ const samePlan = (a, b) => encodePlan(a) === encodePlan(b);
 const basisOf = (v) => (v === "exclusion" ? "exclusion" : "district");
 
 // Analytics: the parts of a plan that "Plan Changed" names when they change. canon() ignores object key order.
-const PARTS = ["open", "valleyTop", "msMerge", "cuts", "septicWES", "portables", "receiving", "split", "prekCenter", "roadmap"];
+const PARTS = ["open", "valleyTop", "msMerge", "bpsTop", "cuts", "septicWES", "portables", "receiving", "split", "prekCenter", "roadmap"];
 const canon = (v) => JSON.stringify(v && typeof v === "object" && !Array.isArray(v) ? Object.entries(v).sort() : v);
 
 // The "Plan Changed" event's properties: the plan's settings and its main results (evaluate's r)
@@ -54,6 +54,7 @@ function planProps(p, r) {
     closed_schools: closedSchools(p),
     valley_top: p.valleyTop,
     middle_merge: p.msMerge,
+    brookside_top: p.bpsTop,
     cuts: p.cuts,
     prek_center: p.prekCenter?.school ?? null,
     prek_center_scope: p.prekCenter?.scope ?? null,

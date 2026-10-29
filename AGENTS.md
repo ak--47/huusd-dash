@@ -48,11 +48,11 @@ scripts/                serve.mjs (local server), browser-check.mjs (Playwright 
 
 Pages and routes: `#/` Start here (`overview.js`), `#/your-child` (`journey.js`), `#/compare`, `#/options`, `#/build`, `#/budget`, `#/schools`, `#/findings`, `#/sources`.
 
-URL settings shared across pages: `w=permits` (wastewater reading), `x=1` (lower savings target), `?at=<element id>` (scroll to and focus a section). Build encodes plans as `o, t, m, c, s, p, r, n` (see `encodePlan` in `js/model/plans.js`). Your child's path uses `c` (children), `pair`, `top`, `pk`, `r`, `rt`.
+URL settings shared across pages: `w=permits` (wastewater reading), `x=1` (lower savings target), `?at=<element id>` (scroll to and focus a section). Build encodes plans as `o, t, m, b, c, s, p, r, n, k, sp` (see `encodePlan` in `js/model/plans.js`). Your child's path uses `c` (children), `pair`, `top`, `pk`, `r`, `rt`.
 
 ## The model in one page
 
-- **Plan:** `makePlan({ open, valleyTop, msMerge, cuts, septicWES, portables, receiving, roadmap })`. `open` lists the valley schools that stay open (FES, MES, WES, WRN); `valleyTop` is the highest grade valley schools teach: 6 keeps grades 5-6 in the valley, 5 sends 6th graders to Crossett Brook, 4 sends 5th and 6th graders (the district tabled only 4 and 6, so 5 always uses the model's own counts); `msMerge` moves Crossett Brook's 7th-8th graders to Harwood; `cuts` are Path A cut ids (`transport`, `special`, `prek`, `staff`, `athletics`, `electives`).
+- **Plan:** `makePlan({ open, valleyTop, msMerge, cuts, septicWES, portables, receiving, roadmap })`. `open` lists the valley schools that stay open (FES, MES, WES, WRN); `valleyTop` is the highest grade valley schools teach: 6 keeps grades 5-6 in the valley, 5 sends 6th graders to Crossett Brook, 4 sends 5th and 6th graders (the district tabled only 4 and 6, so 5 always uses the model's own counts); `msMerge` moves Crossett Brook's 7th-8th graders to Harwood; `bpsTop: 6` (only with `msMerge` and `valleyTop` 6) also moves Crossett Brook's 5th-6th graders to Brookside, so Crossett Brook's building holds no classes (no savings counted for it: the district published no operating cost); `cuts` are Path A cut ids (`transport`, `special`, `prek`, `staff`, `athletics`, `electives`).
 - **Named plans:** `PLAN_TODAY`, `PLAN_A`, `pathB(pair, top)`, `PATH_B_PLANS` (12), `withRoadmap(plan, top)` for the district's draft roadmap (new valley school in fall 2029).
 - **Where children go:** `assign.js`. Closed towns go to the nearest open school (`NEAREST`), the rule the district's tables use; families can override in the UI.
 - **Schools per child:** `journey.js`. Harwood Middle and Harwood High are two schools in one building. Pre-K is optional in the count.
@@ -137,7 +137,7 @@ Anonymous usage analytics with Mixpanel, so the owner can see which pages and to
 | Savings Target Changed | Options, Build | `target` ("district", "lower") |
 | Wastewater Reading Changed | Options, Compare, Build | `reading` ("slides", "permits") |
 | Starting Point Chosen | Build | `preset` ("today", "A", "B", "one", "hybrid", "center"); `pairing` and `setup` for B; `closed_school` for one |
-| Plan Changed | Build, about 1.2 seconds after the last change | `changed` (the plan parts that changed), `plan_code`, `open_schools`, `closed_schools`, `valley_top`, `middle_merge`, `cuts`, `prek_center`, `prek_center_scope`, `splits`, `portable_units`, `waitsfield_300`, `roadmap`, `savings`, `gap`, `meets_target`, `upper_bound`, `buildings_in_use`, `max_schools_per_child`, `students_changing_schools`, `over_wastewater`, `over_classrooms`, `target_basis`, `reading` |
+| Plan Changed | Build, about 1.2 seconds after the last change | `changed` (the plan parts that changed), `plan_code`, `open_schools`, `closed_schools`, `valley_top`, `middle_merge`, `brookside_top`, `cuts`, `prek_center`, `prek_center_scope`, `splits`, `portable_units`, `waitsfield_300`, `roadmap`, `savings`, `gap`, `meets_target`, `upper_bound`, `buildings_in_use`, `max_schools_per_child`, `students_changing_schools`, `over_wastewater`, `over_classrooms`, `target_basis`, `reading` |
 | Plan Undone | Build | `preset_before` |
 | Class Sizes Changed | Build | `class_sizes` |
 | Plan Link Copied | Build | `plan_code` |

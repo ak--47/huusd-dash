@@ -26,7 +26,8 @@ export function evaluate(plan, { classSize, basis = "district", reading = "slide
   const result = {
     plan,
     closed,
-    buildingsOpen: 7 - closed.length,
+    // Crossett Brook's building holds no classes when Brookside teaches its 5th and 6th graders
+    buildingsOpen: 7 - closed.length - (plan.bpsTop === 6 ? 1 : 0),
     budget: budget(plan, { basis }),
     capacity: capacity(plan, { ...(classSize ? { classSize } : {}), reading }),
     moved: movedNextFall(plan),

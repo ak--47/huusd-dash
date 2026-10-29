@@ -2,6 +2,8 @@
 //   open        valley elementary buildings that stay open (subset of FES, MES, WES, WRN)
 //   valleyTop   highest grade in the valley elementary schools: 6 (K-6, today) or 4 (PK-4; grades 5-6 go to Crossett Brook)
 //   msMerge     Crossett Brook's grades 7-8 move to Harwood Union Middle School; Crossett Brook keeps 5-6
+//   bpsTop      highest grade Brookside teaches: 4 (today) or 6 (Crossett Brook's 5th and 6th graders move there,
+//               leaving Crossett Brook with no classes); 6 only with the merger and K-6 valley schools
 //   cuts        Path A reductions applied (ids from PATH_A_CUTS)
 //   septicWES   use 300 for Waitsfield (its 1991 permit) instead of the slides' 230
 //   portables   two-classroom portable units added, by school id
@@ -26,6 +28,7 @@ export function makePlan(p = {}) {
   const open = VALLEY.filter((id) => (p.open ?? VALLEY).includes(id));
   const cuts = CUT_IDS.filter((id) => (p.cuts ?? []).includes(id));
   const center = p.prekCenter?.school;
+  const valleyTop = [4, 5, 6].includes(Number(p.valleyTop)) ? Number(p.valleyTop) : 6;
   return {
     id: p.id ?? "custom",
     name: p.name ?? "Your plan",
@@ -33,8 +36,10 @@ export function makePlan(p = {}) {
     kind: p.kind ?? "custom",
     open,
     // the highest grade valley schools teach: 6 as today, 5 (6th graders to Crossett Brook), or 4 (5th and 6th)
-    valleyTop: [4, 5, 6].includes(Number(p.valleyTop)) ? Number(p.valleyTop) : 6,
+    valleyTop,
     msMerge: Boolean(p.msMerge),
+    // with the merger Crossett Brook keeps only grades 5-6; Brookside can take them so the building empties
+    bpsTop: Number(p.bpsTop) === 6 && p.msMerge && valleyTop === 6 ? 6 : 4,
     cuts,
     septicWES: Boolean(p.septicWES),
     portables: Object.fromEntries(
@@ -80,7 +85,7 @@ export const withRoadmap = (plan, top = ROADMAP_TOP_DEFAULT) =>
 export function planAt(plan, fall) {
   if (fall < START_YEAR) return PLAN_TODAY;
   if (plan.roadmap && fall >= plan.roadmap.fall) {
-    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, roadmap: null, prekCenter: null, split: {}, phase: 2 };
+    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, bpsTop: 4, roadmap: null, prekCenter: null, split: {}, phase: 2 };
   }
   return plan;
 }
@@ -132,6 +137,7 @@ export function encodePlan(plan) {
   q.set("o", plan.open.map((id) => LETTER[id]).join("") || "-");
   q.set("t", String(plan.valleyTop));
   if (plan.msMerge) q.set("m", "1");
+  if (plan.bpsTop === 6) q.set("b", "6");
   if (plan.cuts.length) q.set("c", plan.cuts.join("."));
   if (plan.septicWES) q.set("s", "1");
   const port = Object.entries(plan.portables).map(([id, n]) => `${id}${n}`).join(".");
@@ -175,6 +181,7 @@ export function decodePlan(str) {
     open: o === "-" ? [] : [...o].map((c) => FROM_LETTER[c]).filter(Boolean),
     valleyTop: Number(q.get("t")),
     msMerge: q.get("m") === "1",
+    bpsTop: Number(q.get("b")),
     cuts: (q.get("c") ?? "").split(".").filter(Boolean),
     septicWES: q.get("s") === "1",
     portables,

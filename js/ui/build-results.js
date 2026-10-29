@@ -375,7 +375,10 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                     "span",
                     { class: "bp-item-note" },
                     `An upper limit. The district's figure assumes every valley 5th and 6th grader moves to Crossett Brook; this plan keeps ${plan.valleyTop === 5 ? "valley 5th graders" : "them"} in the valley. On October 28 an administrator said keeping them there would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so this would save less. `,
-                    cite(ref("meeting1028", "keeping grades 5-6 in the valley"))
+                    cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
+                    plan.bpsTop === 6
+                      ? " Here those 5th and 6th graders move to Brookside instead, which the district has not costed. Nothing is counted for Crossett Brook's empty building: the district has published no operating cost for it, and an empty building still needs heat, power, and upkeep, more so during repairs."
+                      : null
                   )
                 : it.kind === "estimate"
                   ? h("span", { class: "bp-item-note" }, `The district costed closing exactly two schools (${money(PATH_B_SAVINGS.valley.amount)}). We use half of that, ${money(PATH_B_SAVINGS.valley.amount / 2)}, for each school closed.`)
@@ -715,7 +718,8 @@ function buildingsSection(plan, r, cs, keptFold) {
       r.closed.length ? `${listJoin(r.closed.map(schoolShort))} ${r.closed.length === 1 ? "closes" : "close"}.` : "None close.",
       plan.prekCenter
         ? ` ${schoolShort(plan.prekCenter.school)} becomes a Pre-K center for ${plan.prekCenter.scope === "all" ? "the whole district, Brookside's Pre-K included" : "valley families"}, with this year's district Pre-K children (our estimate of who would attend).`
-        : ""
+        : "",
+      plan.bpsTop === 6 ? " Brookside teaches K-6, and Crossett Brook's building holds no classes." : ""
     ),
     h("p", {}, summary.join(" ")),
     source,
@@ -798,7 +802,8 @@ function middleCaps(middle) {
     "div",
     { class: "bp-cap-school" },
     h("h4", {}, "Middle schools: classroom space"),
-    h("div", { class: "cap" }, middle.map(row)),
+    h("div", { class: "cap" }, middle.filter((m) => !m.empty).map(row)),
+    middle.some((m) => m.empty) ? h("p", {}, "Crossett Brook: no classes. Its 5th and 6th graders are counted at Brookside above.") : null,
     h(
       "p",
       { class: "bp-muted" },
@@ -819,6 +824,7 @@ function studentsSection(plan, r, keptFold) {
     [k12Closure, "because their school closes"],
     [m.byReason.grades56, "because valley grades 5 and 6 move to Crossett Brook"],
     [m.byReason.middle, "because Crossett Brook's 7th and 8th graders move to Harwood"],
+    [m.byReason.brookside, "because Crossett Brook's 5th and 6th graders move to Brookside"],
     [m.byReason.other, "for other reasons"],
   ].filter(([n]) => n > 0);
 
@@ -847,7 +853,11 @@ function studentsSection(plan, r, keptFold) {
           listJoin(
             [
               preKClosure ? `${num(preKClosure)} because their school closes` : null,
-              m.byReason.prek ? `${num(m.byReason.prek)} because district Pre-K classes end (families would get public tuition for private programs, which the superintendent said lack the room)` : null,
+              m.byReason.prek
+                ? plan.prekCenter
+                  ? `${num(m.byReason.prek)} because Pre-K moves to the ${schoolShort(plan.prekCenter.school)} center`
+                  : `${num(m.byReason.prek)} because district Pre-K classes end (families would get public tuition for private programs, which the superintendent said lack the room)`
+                : null,
             ].filter(Boolean)
           ),
           ". ",
