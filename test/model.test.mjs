@@ -318,7 +318,7 @@ test("split: part of a closed town's children go to a second school", () => {
   const all = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true }));
   const half = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true, split: { fayston: { school: "WRN", share: 0.5 } } }));
   assert.equal(all.source, "district");
-  assert.equal(half.source, "model", "a split uses the model's own counts");
+  assert.equal(half.source, "adjusted", "a split adjusts the district's table");
   const wrnGain = half.schools.find((s) => s.id === "WRN").total - M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true, split: { fayston: { school: "WES", share: 0.5 } } })).schools.find((s) => s.id === "WRN").total;
   assert.ok(wrnGain > 0, "Warren takes some Fayston children");
   assert.deepEqual(M.makePlan({ split: { fayston: { school: "WRN", share: 0.5 } } }).split, {}, "no split while Fayston is open");
@@ -328,10 +328,13 @@ test("option: close Fayston, Moretown as a Pre-K center, K-6 at Waitsfield, Warr
   const o = M.OPTIONS.find((x) => x.id === "B-center");
   const r = M.evaluate(o.plan);
   assert.equal(r.budget.savings, 3743601);
-  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 252);
-  assert.deepEqual(r.capacity.overPeople, ["WES"], "22 over the slides' 230");
-  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 116);
-  assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 461);
+  // counts start from the district's Waitsfield + Warren K-6 table (Waitsfield 306, Warren 91, Brookside 297, Crossett Brook 137)
+  assert.equal(r.capacity.source, "adjusted");
+  assert.equal(r.capacity.schools.find((s) => s.id === "WES").total, 231);
+  assert.deepEqual(r.capacity.overPeople, ["WES"], "1 over the slides' 230");
+  assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 120);
+  assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 480, "at its occupancy of 480, counting students only");
+  assert.equal(r.capacity.schools.find((s) => s.id === "MES").total, 118);
   assert.equal(r.buildingsOpen, 5, "Crossett Brook's building holds no classes");
   assert.deepEqual(o.plan.portables, {}, "no portable classrooms, as its suggester asked");
   assert.deepEqual([...r.capacity.overConsultant].sort(), ["BPS", "WES"], "so both are over the consultant's classroom space");
@@ -341,9 +344,21 @@ test("option: close Fayston, Moretown as a Pre-K center, K-6 at Waitsfield, Warr
   assert.equal(r.moved.byReasonK12.brookside, 64, "this year's Crossett Brook 5th graders finish grade 6 at Brookside");
   // the fallback: Crossett Brook keeps its 5th and 6th graders
   const fall = M.evaluate(M.makePlan({ ...o.plan, bpsTop: 4 }));
-  assert.equal(fall.capacity.schools.find((s) => s.id === "BPS").total, 315);
-  assert.equal(fall.capacity.middle.find((m) => m.id === "CBMS").total, 146);
+  assert.equal(fall.capacity.schools.find((s) => s.id === "BPS").total, 328);
+  assert.equal(fall.capacity.middle.find((m) => m.id === "CBMS").total, 152);
   assert.equal(r.moved.k12 - fall.moved.k12, 64);
+});
+
+test("adjusted counts keep the district's table where the plan changes nothing", () => {
+  const t = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true }));
+  // a split of zero children and no center: the same as the table
+  const center = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true, prekCenter: { school: "MES", scope: "valley" } }));
+  for (const id of ["WES", "WRN", "BPS"]) {
+    const k6 = (c) => Object.entries(c.schools.find((s) => s.id === id).byGrade).filter(([g]) => g !== "PK").reduce((a, [, n]) => a + n, 0);
+    assert.equal(k6(center), k6(t), `${id} K-6 unchanged by a Pre-K center`);
+  }
+  assert.equal(center.schools.find((s) => s.id === "BPS").byGrade.PK, 60, "a valley-only center leaves Brookside's Pre-K");
+  assert.equal(center.schools.find((s) => s.id === "MES").total, 64, "this year's valley district Pre-K children");
 });
 
 test("Brookside through grade 6: only with the merger and K-6 valley schools; links keep it", () => {
@@ -352,7 +367,10 @@ test("Brookside through grade 6: only with the merger and K-6 valley schools; li
   assert.equal(M.decodePlan(M.encodePlan(plan)).bpsTop, 6);
   assert.equal(M.makePlan({ open: ["WES", "WRN"], bpsTop: 6 }).bpsTop, 4, "not without the merger");
   assert.equal(M.makePlan({ open: ["WES", "WRN"], msMerge: true, valleyTop: 4, bpsTop: 6 }).bpsTop, 4, "not when valley 5th graders go to Crossett Brook");
-  assert.equal(M.capacity(plan).source, "model", "the district did not table it");
+  const cap = M.capacity(plan);
+  assert.equal(cap.source, "adjusted", "the district did not table it");
+  assert.equal(cap.schools.find((s) => s.id === "BPS").total, 60 + 297 + 137, "the table's Brookside Pre-K-4 and Crossett Brook 5-6");
+  assert.equal(cap.middle.find((m) => m.id === "CBMS").total, 0);
   // a Waterbury 3rd grader stays at Brookside through grade 6, then Harwood
   const years = M.journey(plan, { town: "waterbury", grade: 3, school: "BPS" }).map((y) => y.school);
   assert.ok(!years.includes("CBMS"));

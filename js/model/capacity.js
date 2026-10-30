@@ -26,12 +26,19 @@ export function peopleLimit(plan, id) {
   return FACILITIES[id]?.wastewater ?? null;
 }
 
-export function districtTableFor(plan) {
-  // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
-  // a Pre-K center or a split town changes who goes where, so those use the model's own counts
-  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || Object.keys(plan.split ?? {}).length || plan.bpsTop === 6) return null;
+// The district's table for the plan's two open schools and valley grades: it tabled two open schools with
+// grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only.
+export function pairTable(plan) {
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop)) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
+}
+
+// The table, when the plan is exactly what the district tabled. A Pre-K center, a split town, or Brookside
+// teaching grades 5-6 changes who goes where; those start from the table and adjust it (adjustedLoads).
+export function districtTableFor(plan) {
+  if (plan.prekCenter || Object.keys(plan.split ?? {}).length || plan.bpsTop === 6) return null;
+  return pairTable(plan);
 }
 
 // Students by school and grade from a district table, with totals computed from the rows.
@@ -69,10 +76,11 @@ export function modelLoads(plan) {
   const att = ATTENDING[2026];
   // Pre-K
   if (plan.prekCenter) {
-    // today's district Pre-K children move to the center (Brookside's too when it serves the whole district)
+    // today's district Pre-K children move to the center (Brookside's too when it serves the whole district;
+    // otherwise Brookside keeps the district's planning number, as in its tables)
     for (const [id, pk] of Object.entries(PREK_2026.bySchool)) {
-      const here = id === "BPS" && plan.prekCenter.scope !== "all" ? "BPS" : plan.prekCenter.school;
-      add(loads, here, "PK", pk.PK3 + pk.PK4);
+      if (id === "BPS" && plan.prekCenter.scope !== "all") add(loads, "BPS", "PK", PK_PLAN.BPS);
+      else add(loads, plan.prekCenter.school, "PK", pk.PK3 + pk.PK4);
     }
   } else if (allOpen) {
     for (const [id, pk] of Object.entries(PREK_2026.bySchool)) add(loads, id, "PK", pk.PK3 + pk.PK4);
@@ -97,6 +105,31 @@ export function modelLoads(plan) {
       const moved = alt ? Math.round(n * sp.share) : 0;
       place(dest, g, n - moved);
       if (moved) place(alt, g, moved);
+    }
+  }
+  return loads;
+}
+
+// A plan the district did not table, starting from the table for its two open schools: Brookside teaching
+// grades 5-6 takes the table's Crossett Brook 5th and 6th graders, and a Pre-K center or a split town moves
+// the children the model moves for it (this year's students), so the table's own counts stay where nothing
+// changes.
+export function adjustedLoads(plan, table) {
+  const loads = tableLoads(table);
+  if (plan.bpsTop === 6 && loads.CBMS) {
+    for (const [g, n] of Object.entries(loads.CBMS)) add(loads, "BPS", g, n);
+    loads.CBMS = {};
+  }
+  const now = modelLoads(plan);
+  const before = modelLoads({ ...plan, prekCenter: null, split: {} });
+  for (const id of new Set([...Object.keys(now), ...Object.keys(before)])) {
+    for (const g of new Set([...Object.keys(now[id] ?? {}), ...Object.keys(before[id] ?? {})])) {
+      const d = (now[id]?.[g] ?? 0) - (before[id]?.[g] ?? 0);
+      if (!d) continue;
+      loads[id] ??= {};
+      const n = Math.max(0, (loads[id][g] ?? 0) + d);
+      if (n) loads[id][g] = n;
+      else delete loads[id][g];
     }
   }
   return loads;
@@ -129,8 +162,9 @@ export function staffEstimate(plan, id, total, valleyTotal) {
 export const READINGS = ["slides", "permits"];
 
 export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slides" } = {}) {
-  const table = districtTableFor(plan);
-  const loads = table ? tableLoads(table) : modelLoads(plan);
+  const exact = districtTableFor(plan);
+  const table = exact ?? pairTable(plan);
+  const loads = exact ? tableLoads(exact) : table ? adjustedLoads(plan, table) : modelLoads(plan);
   // The Pre-K cut (Path A) ends Pre-K classes in district buildings.
   if (plan.cuts.includes("prek")) for (const id of Object.keys(loads)) delete loads[id].PK;
   // the buildings in use for elementary grades, plus a Pre-K center if the plan keeps one
@@ -171,7 +205,7 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
   const cbms = loads.CBMS ? Object.values(loads.CBMS).reduce((a, b) => a + b, 0) : null; // null: the district's table leaves Crossett Brook out
   const middle = middleSchools(plan, cbms);
   return {
-    source: table ? "district" : "model",
+    source: exact ? "district" : table ? "adjusted" : "model", // adjusted: the district's table with this plan's changes
     reading,
     table,
     mismatches: table ? tableMismatches(table) : [],
