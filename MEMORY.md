@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: Pre-K center plan, Fayston back to Waitsfield
+
+- The suggesters expect the town to prefer two thirds of Fayston to Waitsfield and a third to Warren (reversing the previous refinement); Moretown stays two thirds Waitsfield, a third Brookside; Brookside K-6 and no portables kept. Results: savings unchanged ($3,743,601); Waitsfield 252 (22 over the slides' 230; under the 1991 permit's 300, about 297 with the staff estimate; 78 over the consultant's 174); Warren 116; Brookside 461; 403 K-12 students change schools. Matches the family's spreadsheet (252 / 116 / 461). Build link: `o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston~WRN~33.moretown~BPS~33`.
+
 ## 2026-10-29: Pre-K center plan without portables
 
 - Its suggester asked to remove the portable classrooms from `B-center` (they found it confusing that adding them did not change the savings). The card now has none; savings unchanged ($3,743,601); Brookside (461) and Waitsfield (223) now show as over the consultant's classroom space, and the notes say about 2 units each would reach it ($1.2M-$1.4M over two years, one-time). The card's Build link is now `o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston~WRN~67.moretown~BPS~33`.
