@@ -6,6 +6,12 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: Pre-K center plan without portables
+
+- Its suggester asked to remove the portable classrooms from `B-center` (they found it confusing that adding them did not change the savings). The card now has none; savings unchanged ($3,743,601); Brookside (461) and Waitsfield (223) now show as over the consultant's classroom space, and the notes say about 2 units each would reach it ($1.2M-$1.4M over two years, one-time). The card's Build link is now `o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston~WRN~67.moretown~BPS~33`.
+- Build step 6: each school's portable count now shows its one-time cost ("+4 classrooms, about $600K to $700K one-time"), and the note says portables do not change the yearly savings.
+- The link the family sent the principal lacks `b=6`, so it opens the fallback (Crossett Brook keeps grades 5-6: Brookside 315, 6 buildings, 339 students moving), not the plan in their email (Brookside 461).
+
 ## 2026-10-29: Pre-K center plan, second refinement (from its suggester)
 
 - The plan is another parent's, worked out in conversation with the owner's spouse; the owner confirmed the card keeps "suggested by a resident" (this settles the earlier open item). Feedback relayed from them: move Crossett Brook's 5th and 6th graders to Brookside (Brookside K-6, Crossett Brook empty and free for renovation), and send more Fayston children to Warren, which has room, so Waitsfield fits. Their own spreadsheet numbers were guesses and were not used; the model computes its own.

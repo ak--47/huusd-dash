@@ -7,7 +7,7 @@ import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
 import { CLASS_SIZE_DEFAULT, OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, makePlan, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
-import { h, listJoin, money, num } from "./dom.js";
+import { h, listJoin, money, moneyShort, num } from "./dom.js";
 import { cite, note, schoolShort, term } from "./kit.js";
 
 export const pairId = (pair) => [...pair].sort().join("+");
@@ -525,7 +525,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "p",
         { class: "bp-fix-note" },
-        `Each unit has 2 classrooms. The district's best preliminary quote is ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units for a two-year period, mostly site preparation, so about ${money(perUnitLo)} to ${money(perUnitHi)} per unit for those two years. `,
+        `Each unit has 2 classrooms. The district's best preliminary quote is ${money(MODULAR.low)} to ${money(MODULAR.high)} for two units for a two-year period, mostly site preparation, so about ${money(perUnitLo)} to ${money(perUnitHi)} per unit for those two years. It is a one-time cost, so it does not change the yearly savings; Budget in the results shows its effect. `,
         cite(MODULAR.src),
         " ",
         cite(ref("meeting1028", "portable classrooms"))
@@ -811,7 +811,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       p.row.hidden = !on;
       const n = plan.portables[p.id] ?? 0;
       if (document.activeElement !== p.input) p.input.value = String(n);
-      p.extra.textContent = n ? `+${n * 2} classrooms` : "";
+      p.extra.textContent = n ? `+${n * 2} classrooms, about ${moneyShort(n * perUnitLo)} to ${moneyShort(n * perUnitHi)} one-time` : "";
     }
 
     // advanced: target, class sizes
