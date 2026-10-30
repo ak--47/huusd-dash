@@ -864,7 +864,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     }
     recvHost.hidden = !anyClosed;
     recvNone.hidden = anyClosed;
-    recvDistrict.hidden = !(anyClosed && r.capacity.source !== "model");
+    recvDistrict.hidden = !(anyClosed && r.capacity.source === "district");
 
     // Pre-K center: only a closed valley school can be one, and not with the Pre-K tuition cut
     const closedValley = VALLEY.filter((id) => !plan.open.includes(id));

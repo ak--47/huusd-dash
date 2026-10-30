@@ -2,7 +2,7 @@
 // district's plans. The panel is rebuilt on every change; the controls are not.
 
 import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
-import { ATTENDING, PREK_2026 } from "../../data/enrollment.js";
+import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
 import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
@@ -677,22 +677,6 @@ function buildingsSection(plan, r, cs, keptFold) {
       tag("district"),
       cite(cap.table.src)
     );
-  } else if (cap.source === "adjusted") {
-    // the district's table for this pairing, with the changes it did not table applied to it
-    const changes = [
-      plan.bpsTop === 6 ? "Crossett Brook's 5th and 6th graders in the table move to Brookside" : null,
-      plan.prekCenter && !noPreK ? `this year's ${num(PREK_2026.inDistrict)} district Pre-K children go to the ${schoolShort(plan.prekCenter.school)} center in place of the table's Pre-K planning numbers` : null,
-      Object.keys(plan.split ?? {}).length ? "the share of a town's children sent to a second school is taken from this year's students at that town's school" : null,
-    ].filter(Boolean);
-    source = h(
-      "p",
-      { class: "bp-source" },
-      `Student counts start from the district's table for this pairing${noPreK ? ", without its Pre-K rows (this plan ends district Pre-K classes)" : ""}. The district did not table this plan's changes, so they are our estimate: ${listJoin(changes)}. `,
-      tag("estimate"),
-      cite(cap.table.src),
-      " ",
-      cite(ATTENDING.src, "Oct 1 report")
-    );
   } else if (plan.open.length === 4 && plan.valleyTop === 6) {
     source = h(
       "p",
@@ -794,7 +778,7 @@ function buildingsSection(plan, r, cs, keptFold) {
         h(
           "li",
           {},
-          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. Changes the district did not table (a Pre-K center, a town split between two schools, Brookside teaching grades 5-6) are applied to that table with this year's students. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. With the Pre-K cut, Pre-K is left out of every building. `,
+          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. With the Pre-K cut, Pre-K is left out of every building. `,
           cite(ref("deck", "slides 27-32"))
         ),
         h("li", {}, "A portable unit adds 2 classrooms but does not change the wastewater limit. Using 300 for Waitsfield changes only its limit.")
