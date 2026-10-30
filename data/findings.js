@@ -110,7 +110,7 @@ export const FINDINGS = [
     found: [
       "On October 28 a board member asked to see versions where the two schools left open \"did not include pre-k\" and one of the closed buildings \"could be leased back to house pre-k.\" Later a board member described \"a partnership or a lease from the town to use a space of that building to operate a pre-K that served the Valley, as opposed to keeping a third building.\"",
       "An administrator offered to bring \"maybe an option of moving PK into a building, a separate building, but that would be keeping a building. So our numbers are going to be going down.\"",
-      "The facility slides give each building's yearly operating costs without custodial staff (Moretown: $185,868). Pre-K teachers are already in the Path B tables, so in a separate building they would move rather than be added; a Pre-K-only building may also need its own custodian, office staff, or nurse. Under the Articles of Agreement, a valley building the board decides not to use for educational programs is offered to its town for $1, with conditions: the town takes on any outstanding bonds and repays any state construction aid and capital improvements since 2017. That is how a lease from a town could come about.",
+      "The facility slides give each building's yearly operating costs without custodial staff (Moretown: $185,868). Pre-K teachers are already in the Path B tables, so in a separate building they would move rather than be added; a Pre-K-only building may also need its own custodian, office staff, or nurse. Under the Articles of Agreement, a valley building the board decides not to use for educational programs is offered to its town for $1, which is how a lease from a town could come about.",
       "Taking Pre-K out of the schools that stay open frees room there: about 30 to 42 seats in each, which matters most where a pairing is over its wastewater limit or classroom space.",
     ],
     why: "A separate Pre-K building changes both sides of the comparison: it keeps one more building in use, which saves less, and it frees space in the schools that stay open.",
@@ -227,12 +227,12 @@ export const FINDINGS = [
       "Fayston's profile prints 84 students; its own grade rows and the October 1 report give 87.",
       "Fayston and Warren both show exactly 25.63 staff FTE.",
       "The October 14 deck gives the FY28 threshold as $16,562 on a card and $16,572 in the footer of the same slide, and the level-service excess as $1,071 on the card and $1,081 in the footer.",
-      "The projected-inflation card prints \"Required Cut: $1,2938,382\", which is not a number; the finance director said on October 28 it would be \"almost $1.3 million.\"",
+      "The projected-inflation card prints \"Required Cut: $1,2938,382\"; the difference between the two budgets is $1,938,382.",
       "The slide that says \"No school would not exceed wastewater capacity\" means no school would exceed it.",
     ],
     why: "None of these changes a conclusion on its own; they are worth fixing before the numbers are used for decisions.",
     ask: "",
-    refs: [ref("deck", "slides 10, 21, 24, 31"), ref("oct14", "Projected FY28 Budget & Excess Spending Threshold"), ref("meeting1028", "required cut")],
+    refs: [ref("deck", "slides 10, 21, 24, 31"), ref("oct14", "Projected FY28 Budget & Excess Spending Threshold")],
   },
 ];
 

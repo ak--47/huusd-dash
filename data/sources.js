@@ -67,7 +67,7 @@ export const SOURCES = {
     date: "2026",
     kind: "state",
     url: "https://legislature.vermont.gov/Documents/2026/Docs/ACTS/ACT169/ACT169%20As%20Enacted.pdf",
-    note: "Cited by the district in the speaker notes of slide 7.",
+    note: "Cited by the district in the speaker notes of slides 7 and 38.",
   },
   aoeTransform: {
     title: "Education Transformation",

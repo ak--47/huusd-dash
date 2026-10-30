@@ -23,7 +23,7 @@ export const BUDGET = {
       plain: "Grow the budget with inflation only",
       budget: 53285738,
       growth: 0.027,
-      cut: null, // printed as "$1,2938,382", a typo; the finance director said "almost $1.3 million" (transcript 0:33:11)
+      cut: 1938382, // printed as "$1,2938,382"
       perPupilVsThreshold: 172,
       penalty: 445340,
       src: ref("deck", "slide 10"),
