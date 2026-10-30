@@ -332,6 +332,9 @@ test("option: close Fayston, Moretown as a Pre-K center, K-6 at Waitsfield, Warr
   assert.equal(r.capacity.schools.find((s) => s.id === "WRN").total, 145);
   assert.equal(r.capacity.schools.find((s) => s.id === "BPS").total, 461);
   assert.equal(r.buildingsOpen, 5, "Crossett Brook's building holds no classes");
+  assert.deepEqual(o.plan.portables, {}, "no portable classrooms, as its suggester asked");
+  assert.deepEqual([...r.capacity.overConsultant].sort(), ["BPS", "WES"], "so both are over the consultant's classroom space");
+  assert.equal(M.encodePlan(o.plan).toString(), "o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston%7EWRN%7E67.moretown%7EBPS%7E33");
   assert.equal(r.capacity.middle.find((m) => m.id === "CBMS").total, 0);
   assert.equal(r.maxYoung.waterbury, 3, "Brookside, Harwood Middle, Harwood High");
   assert.equal(r.moved.byReasonK12.brookside, 64, "this year's Crossett Brook 5th graders finish grade 6 at Brookside");
