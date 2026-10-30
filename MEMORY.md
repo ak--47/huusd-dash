@@ -6,6 +6,12 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-29: PR #11 reverted, kept for later
+
+- PR #11 ("Anchor untabled two-school plans to the district's tables; audit fixes") was reverted at the owner's request: it changed the Pre-K center plan's numbers (Waitsfield 252 → 231, Warren 116 → 120, Brookside 461 → 480) in a way the family wanted to understand before using. The site is back to the state after PR #10.
+- The change is saved on branch `saved/audit-slides-adjusted-counts` and tag `saved-pr11-adjusted-counts` (commit 97d477a). To apply it later: `git cherry-pick 97d477a`, or revert this revert. That commit's `MEMORY.md` entry explains the method and the audit findings.
+- What it did, in short: (1) all twelve capacity tables were checked cell by cell against the slide images and match; (2) plans with a Pre-K center, a split town, or Brookside K-6 with two valley schools open started from the district's table for that pair and changed only what the plan changes (`adjustedLoads()`), instead of this year's enrollment by school, which runs about 20 higher at Waitsfield than the slides' Waitsfield + Warren table (327 vs 306); (3) small audit fixes: slide 10's garbled "Required Cut: $1,2938,382" described as "almost $1.3 million" (said at the meeting) instead of $1,938,382; the $1 building offer's conditions (Article 6(B)); 2,565 pupils no longer called a district projection; Act 169 cited to slide 7's notes only; board seats cite Articles Article 7. Item (3) does not change any plan numbers and could be reapplied on its own.
+
 ## 2026-10-29: Pre-K center plan, Fayston back to Waitsfield
 
 - The suggesters expect the town to prefer two thirds of Fayston to Waitsfield and a third to Warren (reversing the previous refinement); Moretown stays two thirds Waitsfield, a third Brookside; Brookside K-6 and no portables kept. Results: savings unchanged ($3,743,601); Waitsfield 252 (22 over the slides' 230; under the 1991 permit's 300, about 297 with the staff estimate; 78 over the consultant's 174); Warren 116; Brookside 461; 403 K-12 students change schools. Matches the family's spreadsheet (252 / 116 / 461). Build link: `o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston~WRN~33.moretown~BPS~33`.
