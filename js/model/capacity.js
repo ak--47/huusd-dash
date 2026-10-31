@@ -9,6 +9,7 @@ import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
 import { ATTENDING, PREK_2026 } from "../../data/enrollment.js";
 import { CONSULTANT_CAPACITY, FACILITIES, SCHOOLS, VALLEY } from "../../data/schools.js";
 import { receivingSchool } from "./assign.js";
+import { effectiveSplit } from "./placement.js";
 import { closedSchools } from "./plans.js";
 import { PATH_B_SAVINGS } from "../../data/budget.js";
 
@@ -28,8 +29,10 @@ export function peopleLimit(plan, id) {
 
 export function districtTableFor(plan) {
   // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
-  // a Pre-K center or a split town changes who goes where, so those use the model's own counts
-  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || Object.keys(plan.split ?? {}).length || plan.bpsTop === 6) return null;
+  // a Pre-K center, a town's children sent elsewhere, or Brookside K-6 changes who goes where, so those use the
+  // model's own counts, which start from the shares the table implies (placement.js)
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || plan.bpsTop === 6) return null;
+  if (Object.keys(plan.split ?? {}).length || Object.keys(plan.receiving ?? {}).length) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
 }
@@ -84,19 +87,22 @@ export function modelLoads(plan) {
   const bpsTop = plan.bpsTop ?? 4;
   for (const g of ["K", "1", "2", "3", "4"]) add(loads, "BPS", g, att.BPS[g]);
   for (const g of ["5", "6"]) add(loads, gradeNum(g) <= bpsTop ? "BPS" : "CBMS", g, att.CBMS[g]);
-  // valley schools
+  // valley schools: a closed town's children go to its receiving school, less the shares sent elsewhere
   const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? bpsTop : plan.valleyTop) ? dest : "CBMS", g, n);
+  const split = effectiveSplit(plan);
   for (const id of VALLEY) {
     const town = SCHOOLS[id].town;
     const dest = plan.open.includes(id) ? id : receivingSchool(plan, town);
-    // a share of a closed town's children going to a second school
-    const sp = plan.open.includes(id) ? null : plan.split?.[town];
-    const alt = sp && sp.school !== dest ? sp.school : null;
+    const shares = plan.open.includes(id) ? [] : Object.entries(split[town] ?? {});
     for (const g of ["K", "1", "2", "3", "4", "5", "6"]) {
       const n = att[id][g];
-      const moved = alt ? Math.round(n * sp.share) : 0;
-      place(dest, g, n - moved);
-      if (moved) place(alt, g, moved);
+      let left = n;
+      for (const [school, share] of shares) {
+        const moved = Math.min(left, Math.round(n * share));
+        place(school, g, moved);
+        left -= moved;
+      }
+      place(dest, g, left);
     }
   }
   return loads;

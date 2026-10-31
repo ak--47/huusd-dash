@@ -187,9 +187,10 @@ export const MUSIC = {
   ],
 };
 
-// Board seats and vote weights (Superintendent's report, Oct 28, 2026; approved Oct 27, 2021).
+// Board seats (Articles of Agreement, Article 7) and vote weights (Superintendent's report, Oct 28, 2026; approved Oct 27, 2021).
 export const BOARD = {
   src: ref("supt", "Articles of Agreement and Board Voting Weights"),
+  seatsSrc: ref("aoa", "Article 7"),
   seats: [
     { town: "Duxbury", members: 2, weight: 5.2 },
     { town: "Fayston", members: 2, weight: 5.0 },

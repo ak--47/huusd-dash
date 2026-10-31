@@ -17,6 +17,13 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## September 23, 2026 board meeting
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [budget-development.pptx](2026-09-23-board-meeting/budget-development.pptx) | The district's first FY28 budget presentation, "FY28 Budget Development & Early Projections": this year's budget by program (slide 34), the ranked cost drivers for FY28 (slide 44), and past reductions (slide 47). Retrieved October 31. | `sep23` | [Google Slides](https://docs.google.com/presentation/d/1dTrrCMIKtqg-loY-jyUNOtlDgh0xfSmKSn9qN820zE0/edit) |
+| [budget-development-slide-text.txt](2026-09-23-board-meeting/budget-development-slide-text.txt) | Text of the presentation above, for searching. | `sep23` | |
+
 ## October 14, 2026 board meeting
 
 | File | What it is | Key | Original |

@@ -13,6 +13,7 @@ export * from "./capacity.js";
 export * from "./budget.js";
 export * from "./impact.js";
 export * from "./options.js";
+export * from "./placement.js";
 
 const cache = new Map();
 

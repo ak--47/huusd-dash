@@ -359,3 +359,83 @@ test("Brookside through grade 6: only with the merger and K-6 valley schools; li
   // Brookside 4th graders staying at Brookside are not counted as changing schools
   assert.equal(M.evaluate(plan).moved.byReasonK12.other, 0);
 });
+
+test("district shares: what each K-6 table implies for each closed town", () => {
+  assert.deepEqual(M.DISTRICT_SHARES["WES+WRN"], { fayston: { WRN: 0.05 }, moretown: { BPS: 0.14 } });
+  assert.deepEqual(M.DISTRICT_SHARES["MES+WRN"], { fayston: { MES: 0.07 }, waitsfield: { MES: 0.07 } });
+  assert.deepEqual(M.DISTRICT_SHARES["FES+WRN"].moretown, {}, "every Moretown child to Brookside and Crossett Brook");
+  // with those shares, our counts land within a few students of each table; the Waitsfield + Fayston table also
+  // moves 16 children who attend Fayston today to Waitsfield, which we do not
+  for (const t of DISTRICT_TABLES) {
+    const plan = M.makePlan({ open: t.pair, valleyTop: t.config === "K6" ? 6 : 4, msMerge: true });
+    const table = M.capacity(plan);
+    const model = M.capacity({ ...plan, receiving: { none: 1 } });
+    assert.equal(table.source, "district");
+    assert.equal(model.source, "model");
+    const slack = t.pair.includes("FES") && t.pair.includes("WES") ? 20 : 6;
+    for (const s of table.schools) assert.ok(Math.abs(model.schools.find((x) => x.id === s.id).total - s.total) <= slack, `${t.id} ${s.id}`);
+  }
+});
+
+test("shares: several schools per town, whole percents, links old and new", () => {
+  const plan = M.makePlan({ open: ["WES", "WRN"], msMerge: true, split: { moretown: { BPS: 0.141, WRN: 0.05 }, fayston: {} } });
+  assert.deepEqual(plan.split, { fayston: {}, moretown: { BPS: 0.14, WRN: 0.05 } });
+  assert.equal(M.encodePlan(plan), "o=WR&t=6&m=1&sp=fayston.moretown%7EBPS%7E14%7EWRN%7E5");
+  assert.deepEqual(M.decodePlan(M.encodePlan(plan)).split, plan.split);
+  // links made before several schools were possible read the same
+  assert.deepEqual(M.decodePlan("o=WR&t=6&m=1&k=MES.all&sp=fayston~WRN~67.moretown~BPS~33").split, { fayston: { WRN: 0.67 }, moretown: { BPS: 0.33 } });
+  // never more than all of a town; never to a closed school or the town's own
+  assert.deepEqual(M.makePlan({ open: ["WES", "WRN"], split: { fayston: { BPS: 0.8, WRN: 0.5, FES: 0.2, MES: 0.1 } } }).split.fayston, { BPS: 0.8, WRN: 0.2 });
+  // "all to the receiving school" overrides the district's shares
+  const c = M.capacity(plan);
+  assert.equal(c.source, "model");
+  assert.deepEqual(M.effectiveSplit(plan).fayston, {});
+  assert.deepEqual(M.splitSource(plan, "fayston"), "plan");
+  assert.deepEqual(M.splitSource(M.makePlan({ open: ["WES", "WRN"], msMerge: true, bpsTop: 6 }), "moretown"), "district");
+});
+
+test("two valley schools open, off the district's table: counts start from the table's shares", () => {
+  // Brookside K-6 with Waitsfield + Warren: Moretown and Fayston split as the table places them
+  const plan = M.makePlan({ open: ["WES", "WRN"], msMerge: true, bpsTop: 6 });
+  assert.deepEqual(M.effectiveSplit(plan), M.DISTRICT_SHARES["WES+WRN"]);
+  const wes = M.capacity(plan).schools.find((s) => s.id === "WES").total;
+  const table = M.capacity(M.makePlan({ open: ["WES", "WRN"], msMerge: true })).schools.find((s) => s.id === "WES").total;
+  assert.ok(Math.abs(wes - table) <= 6, `${wes} vs the table's ${table}`);
+  // a receiving school chosen for a town: that town's children all go there, and the counts are ours
+  const recv = M.makePlan({ open: ["WES", "WRN"], msMerge: true, receiving: { fayston: "WRN" } });
+  assert.equal(M.capacity(recv).source, "model");
+  assert.deepEqual(M.effectiveSplit(recv).fayston, {});
+  // three schools open: no district table, so every child goes to the nearest open school
+  assert.deepEqual(M.effectiveSplit(M.makePlan({ open: ["FES", "MES", "WRN"], msMerge: true })), { waitsfield: {} });
+});
+
+test("option: the Pre-K center plan's Waitsfield version", () => {
+  const o = M.OPTIONS.find((x) => x.id === "B-center");
+  const v = o.versions.find((x) => x.id === "B-center-WES");
+  const r = M.evaluate(v.plan);
+  assert.equal(r.budget.savings, 2102942 + 1826527 - 196038);
+  assert.equal(r.budget.savings, 3733431);
+  const at = (id) => r.capacity.schools.find((s) => s.id === id).total;
+  assert.deepEqual([at("MES"), at("WRN"), at("BPS"), at("WES")], [238, 176, 415, 118]);
+  assert.deepEqual(r.capacity.overPeople, ["MES"], "3 over the slides' 235");
+  assert.equal(r.moved.k12, 351);
+  assert.equal(r.moved.k12, M.evaluate(o.plan).moved.k12 - 52);
+  assert.equal(r.buildingsOpen, 5);
+  assert.equal(r.maxYoung.waitsfield, 4);
+  assert.equal(M.encodePlan(v.plan), "o=MR&t=6&m=1&b=6&r=waitsfield%7EMES&k=WES.all&sp=fayston%7EMES%7E20.waitsfield%7EWRN%7E20");
+  // the link in its suggesters' write-up lists the towns the other way round and opens the same plan
+  assert.equal(M.encodePlan(M.decodePlan("o=MR&t=6&m=1&b=6&r=waitsfield~MES&k=WES.all&sp=waitsfield~WRN~20.fayston~MES~20")), M.encodePlan(v.plan));
+});
+
+test("option: three valley K-6 schools and a Pre-K center, every building kept", () => {
+  const o = M.OPTIONS.find((x) => x.id === "K6x3-center");
+  const r = M.evaluate(o.plan);
+  assert.equal(r.buildingsOpen, 7);
+  assert.equal(r.budget.savings, 2102942 + Math.round(1826527 / 2) - 196038);
+  assert.equal(r.budget.upperBound, true);
+  assert.equal(Math.round(r.budget.gap), 519105);
+  assert.equal(Math.round(M.evaluate(o.plan, { basis: "exclusion" }).budget.gap), 18917);
+  assert.equal(r.capacity.schools.find((s) => s.id === "FES").total, 190);
+  assert.deepEqual(r.capacity.overConsultant, ["FES"]);
+  assert.equal(r.moved.k12, 213);
+});

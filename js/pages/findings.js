@@ -4,7 +4,7 @@ import { track } from "../ui/track.js";
 import { FINDINGS, QUESTIONS } from "../../data/findings.js";
 import { CHECKS, IDEAS, EVIDENCE } from "../../data/context.js";
 import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
-import { CLASS_SIZE_DEFAULT, capacity, makePlan, pathB, tableLoads } from "../model/index.js";
+import { CLASS_SIZE_DEFAULT, NEAREST, capacity, districtShares, makePlan, pathB, tableLoads, townK6 } from "../model/index.js";
 import { PAIRS } from "../../data/district-scenarios.js";
 import { SCHOOLS } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
@@ -188,6 +188,7 @@ function findingCard(f) {
     f.table === "fw" ? fwTable() : null,
     f.table === "k6" ? k6Table() : null,
     f.table === "permits" ? permitsTable() : null,
+    f.table === "placement" ? placementTable() : null,
     f.why ? h("div", { class: "f-part" }, h("p", { class: "wonk-label" }, "Why it matters"), h("p", {}, f.why)) : null,
     f.ask ? h("div", { class: "f-part f-ask" }, h("p", { class: "wonk-label" }, "Question to ask"), h("p", {}, h("strong", {}, f.ask))) : null,
     h("p", { class: "small f-src" }, "Sources: ", cites(f.refs), f.link ? [" · ", h("a", { href: f.link.href }, f.link.label)] : null),
@@ -202,6 +203,44 @@ function findingCard(f) {
 
 function verdict(c) {
   return c.overPeople.length ? `✕ Over at ${c.overPeople.map((id) => SCHOOLS[id].short).join(", ")}` : "✓ Fits";
+}
+
+// For each pair, where the district's K-6 table places each closed town's children (placement.js).
+function placementTable() {
+  const name = (id) => SCHOOLS[id].short;
+  const townName = (town) => town[0].toUpperCase() + town.slice(1);
+  const rows = PAIRS.flatMap((pair) =>
+    Object.entries(districtShares(pair)).map(([town, shares], i, all) => {
+      const main = NEAREST[town].find((id) => pair.includes(id) || id === "BPS");
+      const rest = 100 - Object.values(shares).reduce((a, x) => a + Math.round(x * 100), 0);
+      const where = (id) => (id === "BPS" ? "Brookside and Crossett Brook" : name(id));
+      const parts = [`${rest}% ${where(main)}`, ...Object.entries(shares).map(([id, x]) => `${Math.round(x * 100)}% ${where(id)}`)];
+      return h(
+        "tr",
+        {},
+        i === 0 ? h("th", { scope: "row", rowspan: String(all.length) }, pair.map(name).join(" + ")) : null,
+        h("td", {}, `${townName(town)} (${num(townK6(town))})`),
+        h("td", {}, parts.join(", "))
+      );
+    })
+  );
+  return h(
+    "div",
+    { class: "table-scroll" },
+    h(
+      "table",
+      { class: "wonk-table" },
+      h("caption", {}, "Where each closed town's K-6 children go in the district's K-6 tables, as shares of this year's students (our calculation)"),
+      h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "Schools that stay open"), h("th", { scope: "col" }, "Closed town (K-6 students today)"), h("th", { scope: "col" }, "Where they go"))),
+      h("tbody", {}, rows)
+    ),
+    h(
+      "p",
+      { class: "small muted" },
+      "Each school's gain over this year's own students is credited to the closed towns nearest it; a school that is no closed town's nearest is credited to the towns for which it is next nearest. Brookside's share includes 5th and 6th graders counted at Crossett Brook. ",
+      tag("derived")
+    )
+  );
 }
 
 function k6Table() {

@@ -23,6 +23,9 @@
 .opt-metric dd { margin: 0; font-family: var(--ak-font-mono); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ak-ink); font-size: var(--ak-text-sm); }
 .opt-metric dd .status { font-family: var(--ak-font-mono); }
 .opt-metric dd .small { font-weight: 400; font-family: var(--ak-font-sans); }
+/* a card with several versions: each one's measures under its own heading */
+.opt-version { margin: var(--ak-s4) 0; padding-top: var(--ak-s3); border-top: 2px solid var(--ak-hairline-strong); }
+.opt-version h4 { margin: 0 0 var(--ak-s1); font-size: var(--ak-text-md); }
 .opt-note { margin: 0 0 var(--ak-s1); font-size: var(--ak-text-sm); color: var(--ak-ink-2); max-width: 52rem; }
 .opt-actions { margin: var(--ak-s2) 0 0; font-size: var(--ak-text-sm); font-weight: 500; }
 .opt-inline, .opt-actions a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }

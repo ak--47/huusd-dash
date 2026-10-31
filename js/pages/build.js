@@ -10,12 +10,12 @@ import { note, pageHead } from "../ui/kit.js";
 import { track } from "../ui/track.js";
 import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, centerPlan, hybridPlan, onePlan, pairId } from "../ui/build-controls.js";
 import { resultsPanel, verdictSentence } from "../ui/build-results.js";
-import { PLAN_A, PLAN_TODAY, closedSchools, decodePlan, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
+import { PLAN_A, PLAN_TODAY, closedSchools, decodePlan, effectiveSplit, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
 import { PATH_A_CUTS } from "../../data/budget.js";
 
 // every query key encodePlan can write; absent keys are cleared from the URL. "n" is the district's
 // draft roadmap (a new valley building in fall 2029).
-const PLAN_KEYS = ["o", "t", "m", "c", "s", "p", "r", "n", "k", "sp"];
+const PLAN_KEYS = ["o", "t", "m", "b", "c", "s", "p", "r", "n", "k", "sp"];
 
 // A link's list of open valley schools: "-" for none, or letters from F, M, W, R. Anything else
 // (a typo, or a link cut short) would decode as "every school closes", so it is not read.
@@ -23,7 +23,9 @@ const readableOpen = (o) => o === "-" || /^[FMWR]{1,4}$/.test(o);
 
 // Keep a plan consistent with itself and with these controls: no portables or septic work at a
 // closed school, no more portable units than the steppers offer, no receiving choice that is not
-// open or that is already the nearest-school default.
+// open or that is already the nearest-school default, and no town shares that are the default anyway
+// (the district's, with two valley schools open; otherwise all to the receiving school).
+const sameShares = (a, b) => JSON.stringify(Object.entries(a ?? {}).sort()) === JSON.stringify(Object.entries(b ?? {}).sort());
 function tidy(plan) {
   const portables = Object.fromEntries(
     Object.entries(plan.portables)
@@ -35,7 +37,11 @@ function tidy(plan) {
     const opts = receivingOptions(plan, town);
     if (opts.includes(id) && opts[0] !== id) receiving[town] = id;
   }
-  return makePlan({ ...plan, portables, receiving, septicWES: plan.septicWES && plan.open.includes("WES") });
+  const withRecv = makePlan({ ...plan, portables, receiving, septicWES: plan.septicWES && plan.open.includes("WES") });
+  const mine = effectiveSplit(withRecv);
+  const defaults = effectiveSplit({ ...withRecv, split: {} });
+  const split = Object.fromEntries(Object.entries(withRecv.split).filter(([town]) => !sameShares(mine[town], defaults[town])));
+  return makePlan({ ...withRecv, split });
 }
 
 const samePlan = (a, b) => encodePlan(a) === encodePlan(b);
@@ -58,7 +64,7 @@ function planProps(p, r) {
     cuts: p.cuts,
     prek_center: p.prekCenter?.school ?? null,
     prek_center_scope: p.prekCenter?.scope ?? null,
-    splits: Object.entries(p.split).map(([town, s]) => `${town}>${s.school} ${Math.round(s.share * 100)}%`),
+    splits: Object.entries(p.split).flatMap(([town, s]) => (Object.keys(s).length ? Object.entries(s).map(([id, x]) => `${town}>${id} ${Math.round(x * 100)}%`) : [`${town}>all`])),
     portable_units: Object.values(p.portables).reduce((a, n) => a + n, 0),
     waitsfield_300: p.septicWES,
     roadmap: Boolean(p.roadmap),
@@ -185,8 +191,8 @@ export default {
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top, closed }) => {
-        const which = kind === "B" ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" } : kind === "one" ? { closed_school: closed } : {};
+      onPreset: (kind, { pair, top, closed, center }) => {
+        const which = kind === "B" ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" } : kind === "one" ? { closed_school: closed } : kind === "center" ? { center_school: center } : {};
         send("Starting Point Chosen", { preset: kind, ...which });
         setPlan(
           kind === "today"
@@ -198,7 +204,7 @@ export default {
                 : kind === "hybrid"
                   ? hybridPlan()
                   : kind === "center"
-                    ? centerPlan()
+                    ? centerPlan(center)
                     : pathB(pair, top),
           { kind }
         );

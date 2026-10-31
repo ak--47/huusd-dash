@@ -22,7 +22,6 @@ export const schoolYear = (fall) => `${fall}-${String((fall + 1) % 100).padStart
 
 const CUT_IDS = PATH_A_CUTS.items.map((c) => c.id);
 
-const TOWN_OF = Object.fromEntries(VALLEY.map((id) => [SCHOOLS[id].town, id]));
 
 export function makePlan(p = {}) {
   const open = VALLEY.filter((id) => (p.open ?? VALLEY).includes(id));
@@ -59,14 +58,33 @@ export function makePlan(p = {}) {
       center && VALLEY.includes(center) && !open.includes(center) && !cuts.includes("prek")
         ? { school: center, scope: p.prekCenter.scope === "all" ? "all" : "valley" }
         : null,
-    // Part of a closed town's K-6 children going to a second school (families closer to it):
-    // { town: { school, share } }, share between 0 and 1. Only for towns whose school closes.
-    split: Object.fromEntries(
-      Object.entries(p.split ?? {})
-        .filter(([town, v]) => TOWN_OF[town] && !open.includes(TOWN_OF[town]) && v && Number(v.share) > 0 && (v.school === "BPS" || open.includes(v.school)))
-        .map(([town, v]) => [town, { school: v.school, share: Math.min(1, Math.max(0.05, Math.round(Number(v.share) * 100) / 100 || 0.5)) }])
-    ),
+    // Part of a closed town's K-6 children going to other schools (families closer to them):
+    // { town: { school: share } }, shares in whole percents adding to at most 1; the rest go to the town's
+    // receiving school. {} sends them all there, instead of the district's shares (placement.js).
+    split: normSplit(p.split, open),
   };
+}
+
+// Split shares in a fixed order, so equal plans encode the same. Accepts the older { school, share } form.
+const SPLIT_SCHOOLS = ["BPS", ...VALLEY];
+function normSplit(split, open) {
+  const out = {};
+  for (const id of VALLEY) {
+    const town = SCHOOLS[id].town;
+    const v = split && Object.prototype.hasOwnProperty.call(split, town) ? split[town] : null;
+    if (!v || typeof v !== "object" || open.includes(id)) continue;
+    const given = typeof v.school === "string" ? { [v.school]: v.share } : v;
+    let left = 100;
+    const shares = {};
+    for (const s of SPLIT_SCHOOLS) {
+      if (!Object.prototype.hasOwnProperty.call(given, s) || s === id || (s !== "BPS" && !open.includes(s))) continue;
+      const pct = Math.min(left, Math.max(0, Math.round(Number(given[s]) * 100) || 0));
+      if (pct > 0) shares[s] = pct / 100;
+      left -= pct;
+    }
+    out[town] = shares;
+  }
+  return out;
 }
 
 // Draft roadmap, Phase 2 (FY30 = fall 2029): "2 Valley elementary move into new elementary facility;
@@ -146,7 +164,8 @@ export function encodePlan(plan) {
   if (recv) q.set("r", recv);
   if (plan.roadmap) q.set("n", `${plan.roadmap.fall}.${plan.roadmap.top}`);
   if (plan.prekCenter) q.set("k", `${plan.prekCenter.school}.${plan.prekCenter.scope}`);
-  const split = Object.entries(plan.split ?? {}).map(([town, v]) => `${town}~${v.school}~${Math.round(v.share * 100)}`).join(".");
+  // sp=fayston~WRN~33.moretown~BPS~14~WRN~5; a town alone sends all its children to its receiving school
+  const split = Object.entries(plan.split ?? {}).map(([town, v]) => [town, ...Object.entries(v).map(([s, x]) => `${s}~${Math.round(x * 100)}`)].join("~")).join(".");
   if (split) q.set("sp", split);
   return q.toString();
 }
@@ -171,8 +190,9 @@ export function decodePlan(str) {
   const [kSchool, kScope] = (q.get("k") ?? "").split(".");
   const split = {};
   for (const part of (q.get("sp") ?? "").split(".").filter(Boolean)) {
-    const [town, school, pct] = part.split("~");
-    if (town && school) split[town] = { school, share: Number(pct) / 100 };
+    const [town, ...rest] = part.split("~");
+    split[town] = {};
+    for (let i = 0; i + 1 < rest.length; i += 2) split[town][rest[i]] = Number(rest[i + 1]) / 100;
   }
   return makePlan({
     prekCenter: kSchool ? { school: kSchool, scope: kScope } : null,

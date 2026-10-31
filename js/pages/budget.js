@@ -115,11 +115,33 @@ export default {
       ),
 
       section(
+        { id: "drivers", title: "Why the budget is rising", intro: "In September the district ranked what drives next year's increase. Four costs make up all of it." },
+        h(
+          "ul",
+          { class: "prose change-list" },
+          h("li", {}, h("strong", {}, "Salaries. "), "Up about $2,114,801 (7.8%), from negotiated agreements for teachers and support staff and pay for staff outside the unions."),
+          h("li", {}, h("strong", {}, "Health care. "), "Up about $675,624 (10%)."),
+          h("li", {}, h("strong", {}, "Special education. "), "Up about $407,122 (8%), from more students with education plans and higher costs. Special education services cost about $9.22 million this year."),
+          h("li", {}, h("strong", {}, "Transportation. "), "Up about $141,727 (8%) for general education, including rides to alternative placements and for homeless students.")
+        ),
+        h(
+          "p",
+          {},
+          "The four add up to the ",
+          money(BUDGET.requiredCut),
+          " the district says must be saved (to within a dollar). The district also says it has cut about $7.2 million and more than 53 positions over the last three years. ",
+          cite(ref("sep23", "slides 34, 44, and 47")),
+          " ",
+          cite(ref("oct14", "Recognizing Past Reductions"), "Oct 14 deck")
+        )
+      ),
+
+      section(
         { id: "could-change", title: "What could still change these numbers", intro: "The FY28 figures are projections. Several inputs were still moving as of October 28." },
         h(
           "ul",
           { class: "prose change-list" },
-          h("li", {}, h("strong", {}, "Teacher health insurance. "), "A legislator told the board the increase will be held below 3%, after just over 7% last year. The administration called it \"very good news\" that would require remodeling the budget. ", cite(ref("meeting1028", "legislators"))),
+          h("li", {}, h("strong", {}, "Teacher health insurance. "), "The district's September estimate assumed a 10% rise. On October 28 a legislator told the board the increase will be held below 3%, after just over 7% last year. The administration called it \"very good news\" that would require remodeling the budget. ", cite(ref("sep23", "slide 44")), " ", cite(ref("meeting1028", "legislators"))),
           h("li", {}, h("strong", {}, "The official limit. "), "The Secretary of Education sets the FY28 threshold by November 15; $16,562 is a projection. ", cite(ref("vsa5401", "§ 5401(12)"), "State law")),
           h("li", {}, h("strong", {}, "The tax yield. "), "The yield is a state number that turns spending per pupil into a tax rate. The finance director said Path B's figures use last December's first estimate, $8,849; last year's yield ended at $9,406. ", cite(ref("meeting1028", "finance director"))),
           h("li", {}, h("strong", {}, "Staff costs. "), "The consolidation savings use the current seniority list and could change as retirements become known. ", cite(ref("meeting1028", "finance director"))),
