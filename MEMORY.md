@@ -6,6 +6,13 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-31: staging copy at /staging/
+
+- The site is being shared in the community, and others are bringing new work. To keep the live site steady while that work is drafted, the owner asked for a staging copy: https://ak--47.github.io/huusd-dash/staging/, built from a new `staging` branch, for a small working group.
+- One Pages deploy publishes both branches (`main` at the root, `staging` under `staging/`); a push to either rebuilds both. The `github-pages` environment now allows the `staging` branch.
+- `js/ui/staging.js`: under /staging/ the site shows a notice above the top bar with a link to the same page on the live site, "[Staging]" in the tab title, a noindex tag, its own `hspe-staging:` storage keys, and the analytics super property `env: "staging"` (live sends `env: "live"`). `npm run serve` serves /staging/ too, and `npm run test:browser` has a `staging` step.
+- `npm run staging:diff` lists what staging has that live does not. The workflow (branch from staging, promote with a merge-commit pull request) is in `AGENTS.md`, "Staging and live". From now on every change goes to staging first.
+
 ## 2026-10-29: PR #11 reverted, kept for later
 
 - PR #11 ("Anchor untabled two-school plans to the district's tables; audit fixes") was reverted at the owner's request: it changed the Pre-K center plan's numbers (Waitsfield 252 → 231, Warren 116 → 120, Brookside 461 → 480) in a way the family wanted to understand before using. The site is back to the state after PR #10.

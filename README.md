@@ -3,6 +3,7 @@
 An independent, plain-language guide to the Harwood Unified Union School District's (HUUSD) FY28 budget and school consolidation choices. It shows the district's figures as published, re-checks the arithmetic, models other combinations of the same building blocks, and adds what the presentations leave out, mainly **how many different schools a child would attend** under each plan.
 
 **Live site:** https://ak--47.github.io/huusd-dash/
+**Staging (changes being previewed, not final):** https://ak--47.github.io/huusd-dash/staging/
 
 Built by Aaron Krivitzky, a Waitsfield parent. Independent, not affiliated with HUUSD. Corrections are welcome as [GitHub issues](https://github.com/ak--47/huusd-dash/issues).
 
@@ -68,6 +69,7 @@ npm run test:browser     # every page in headless Chromium, desktop and phone, w
 1. Change the number in `data/`, keeping its source reference.
 2. Run `npm test` and `npm run test:browser`.
 3. Add a line to `UPDATES` in `data/history.js` (shown on the site) and to [`MEMORY.md`](MEMORY.md) (the project changelog).
-4. Open a pull request and merge it to `main`. GitHub Actions tests and publishes the site (`.github/workflows/pages.yml`); changes show up within about 10 minutes.
+4. Open a pull request into `staging` and merge it. GitHub Actions tests it and publishes it at /staging/ (`.github/workflows/pages.yml`) within about 10 minutes.
+5. When the working group is happy, `npm run staging:diff` shows what is waiting, and a pull request from `staging` into `main` (merged with a merge commit) puts it on the live site. Details in [`AGENTS.md`](AGENTS.md) under "Staging and live".
 
 Working with an AI coding assistant? Point it at [`AGENTS.md`](AGENTS.md) first.

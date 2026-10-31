@@ -3,7 +3,7 @@
 // Then runs a few things a reader does on a phone: opening the child forms, the menu, and section links, and
 // one action per page that the analytics events must record.
 //   node scripts/browser-check.mjs [--shots <dir>] [--only route,route] [--axe-mobile]
-// --only also takes the step names below (phone-widths, drawer, at-links, analytics); a step also runs when its page does.
+// --only also takes the step names below (phone-widths, drawer, at-links, analytics, staging); a step also runs when its page does.
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
@@ -339,11 +339,34 @@ async function analytics(page) {
   return problems;
 }
 
+// The staging copy (/staging/) says so above the top bar, links to the same page on the live site, and keeps
+// its stored settings apart from the live site's; the live site shows no notice.
+async function staging(page) {
+  const problems = [];
+  await page.goto(`${base.replace(/index\.html$/, "staging/index.html")}#/build`);
+  await page.waitForSelector('#view[aria-busy="false"]', { timeout: 15000 });
+  const bar = page.locator(".staging-bar");
+  if ((await bar.count()) !== 1) return ["no staging notice at /staging/"];
+  if (!(await bar.isVisible())) problems.push("staging notice not visible on a phone");
+  const href = await bar.locator("a").getAttribute("href");
+  if (href !== "/#/build") problems.push(`live link goes to ${href}, expected /#/build`);
+  if (!(await page.title()).startsWith("[Staging]")) problems.push("tab title does not say Staging");
+  if ((await page.locator('meta[name="robots"][content*="noindex"]').count()) !== 1) problems.push("staging is not marked noindex");
+  if ((await sideways(page)) > 1) problems.push("staging page scrolls sideways");
+  await page.addScriptTag({ path: AXE });
+  const axe = await page.evaluate(async () => (await window.axe.run(document.querySelector(".staging-bar"))).violations.map((v) => v.id));
+  if (axe.length) problems.push(`a11y on the staging notice: ${axe.join(", ")}`);
+  await open(page, "#/build");
+  if (await page.locator(".staging-bar").count()) problems.push("the live site shows the staging notice");
+  return problems;
+}
+
 const STEPS = [
   ["phone-widths", ["journey", "overview", "sources"], phoneWidths],
   ["drawer", ["overview"], drawer],
   ["at-links", ["budget", "findings"], atLinks],
   ["analytics", ["build", "compare", "journey", "options", "findings"], analytics],
+  ["staging", ["build"], staging],
 ].filter(([name, pages]) => !only || only.includes(name) || pages.some((p) => only.includes(p)));
 
 for (const [name, , run] of STEPS) {

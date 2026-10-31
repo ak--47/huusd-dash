@@ -5,6 +5,7 @@
 import { track, pageview } from "./ui/track.js";
 import { h, scrollRegions } from "./ui/dom.js";
 import { GLOSSARY } from "./ui/glossary.js";
+import { STAGING, markStaging } from "./ui/staging.js";
 
 const ROUTES = {
   "": () => import("./pages/overview.js"),
@@ -83,7 +84,7 @@ async function route() {
     view.replaceChildren(h("div", { class: "wonk-state", "data-state": "error" }, h("h1", { id: "page-title", tabindex: "-1" }, "Something went wrong drawing this page."), h("p", {}, "Please reload. If it keeps happening, report it on GitHub with the page address.")));
   }
   view.setAttribute("aria-busy", "false");
-  document.title = path ? `${mod.title} · ${SITE}` : `${SITE}: what Path A and Path B mean for HUUSD`;
+  document.title = `${STAGING ? "[Staging] " : ""}${path ? `${mod.title} · ${SITE}` : `${SITE}: what Path A and Path B mean for HUUSD`}`;
   for (const a of document.querySelectorAll("[data-route]")) {
     const on = a.dataset.route === path;
     a.classList.toggle("active", on);
@@ -179,6 +180,7 @@ function boot() {
     if (at && reveal(at)) e.preventDefault();
   });
   // Tables that scroll sideways take keyboard focus, including ones a page redraws later.
+  markStaging();
   scrollRegions(view);
   printFolds();
   trackShared();

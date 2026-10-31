@@ -12,6 +12,8 @@ Guide for AI coding agents (and humans) working on this repository. Read this fi
 
 ## Rules that are not negotiable
 
+0. **Every change goes to staging first.** Branch from `staging` and open pull requests against `staging`, never `main`. The live site changes only when the owner asks to promote staging (see "Staging and live" below) or asks for an urgent fix on the live site.
+
 1. **Never look official.** No HUUSD logos, no district branding, no wording that implies affiliation. The independence note must stay visible on phones and desktop.
 2. **Neutral.** Report what documents show. No advocacy for or against any path, no implied bad faith. When the site adds caveats to one option, check that comparable caveats exist for the others. The district's own case for consolidation stays on the site.
 3. **Every number has a source.** Numbers live in `data/*.js` with a `ref(sourceKey, locator)`. Each figure on screen is tagged as a district figure, calculated (our arithmetic on district numbers), or an estimate (where the district published nothing). Never let an estimate read as a district figure.
@@ -81,6 +83,7 @@ npm test                    # node --test test/*.test.mjs
 npm run test:browser        # every route at 1280 and 390 px, axe on both, overflow, drawer, deep links, analytics events
 ```
 
+- Start work from staging: `git fetch origin && git checkout -b <branch> origin/staging`. Preview the staging notice locally at http://127.0.0.1:4848/staging/.
 - After any change: `npm test` and `npm run test:browser` must pass. Add a route to `scripts/browser-check.mjs` when you add a new page state worth guarding.
 - Match the surrounding code: the `h()` helper, kit helpers, compact one-line CSS rules, `--ak-*` tokens. Prettier settings exist (`.prettierrc.json`), but the repo has not been run through Prettier as a whole; do not reformat whole files (data tables are hand-aligned).
 - Gotchas:
@@ -97,7 +100,7 @@ Anonymous usage analytics with Mixpanel, so the owner can see which pages and to
 
 - **Where it lives:** `js/ui/track.js` loads Mixpanel and exports `track(event, props, options)` (adds `page`, never throws; `options` goes to `mixpanel.track`) and `pageview(path, params)`. `js/app.js` sends a page view per route and the events every page shares; each page tracks its own actions where it handles them.
 - **Proxy:** the library, the session recorder, and every request go through the owner's proxy, `https://express-proxy-lmozz6xkha-uc.a.run.app` (`api_host`, `recorder_src`), so ad blockers do not drop them. The project token in `track.js` is public by design.
-- **What it collects:** page views from the router, autocapture (clicks, inputs, scrolling, rage and dead clicks), session replay of every visit with nothing masked, and the named events below. Everyone is anonymous: no `identify()`; Mixpanel keeps an anonymous ID in `localStorage`. Every event carries `page` (the route; `start` for Start here) and the super property `site`.
+- **What it collects:** page views from the router, autocapture (clicks, inputs, scrolling, rage and dead clicks), session replay of every visit with nothing masked, and the named events below. Everyone is anonymous: no `identify()`; Mixpanel keeps an anonymous ID in `localStorage`. Every event carries `page` (the route; `start` for Start here) and the super properties `site` and `env` ("live" or "staging"); filter on `env` to keep the working group's staging visits out of the live numbers.
 - **Off on localhost:** on `localhost` and `127.0.0.1`, `track.js` installs a stub instead of the library. The stub keeps every call in `window.__mpEvents` as `["track", event, props]` (plus `options` when given), `["track_pageview", props]`, or `["register", props]`. The `analytics` step of `scripts/browser-check.mjs` reads events there: one action each on Build, Compare, Your child's path, Options, and What we checked.
 - **Privacy wording:** the site makes no privacy statement for now (the owner removed the old "no tracking" line and will write new wording later). Do not add one without asking.
 - **Events never carry personal data.** Properties describe choices on the site only: pages, sections, towns, grades, school ids, plan settings, scores. Never names, contact details, free text a reader typed, or anything that could identify someone. The site has no free-text fields; if one is added, keep it out of replay with the class `mp-no-record`.
@@ -148,9 +151,23 @@ Anonymous usage analytics with Mixpanel, so the owner can see which pages and to
 | Questions Copied | What we checked | `question_count` |
 | Questions Printed | What we checked | `question_count` |
 
-## Deploy
+## Staging and live
 
-Push to `main` (normally by merging a pull request from a feature branch). `.github/workflows/pages.yml` runs the tests on Ubuntu 22.04 with Node 22, then publishes `index.html og.png css js data wonk` to GitHub Pages (`sources/` is not published). Pages caches files for about 10 minutes. Commit messages end with a `Co-Authored-By` line when an AI agent wrote the change.
+One GitHub Pages site holds two copies of the site:
+
+| | Branch | Address | Who it is for |
+|---|---|---|---|
+| Live | `main` | https://ak--47.github.io/huusd-dash/ | the public |
+| Staging | `staging` | https://ak--47.github.io/huusd-dash/staging/ | the working group previewing changes |
+
+- **The code is the same on both.** `js/ui/staging.js` decides from the address: under `/staging/` it shows a notice above the top bar ("Staging preview, not the live site", with a link to the same page on the live site), starts the tab title with "[Staging]", asks search engines not to index the page, keeps stored settings under `hspe-staging:` instead of `hspe:` (both copies share one origin), and sends analytics with `env: "staging"`. Nothing needs to change when staging is promoted.
+- **Deploy:** `.github/workflows/pages.yml` runs on a push to `main` or `staging`. It tests the branch that was pushed (Ubuntu 22.04, Node 22, `npm test` and `npm run test:browser`), then publishes both: `main` at the root and `staging` under `staging/` (`index.html og.png css js data wonk` from each; `sources/` is not published). So a push to one never erases the other. Pages caches files for about 10 minutes. The `github-pages` environment allows deploys from `main` and `staging` only (Settings → Environments).
+- **Making a change:** branch from `origin/staging`, open a pull request into `staging`, merge it. It shows at /staging/ a few minutes later.
+- **What is on staging but not live:** `npm run staging:diff` lists the commits and files, and any live commits staging lacks. Or open https://github.com/ak--47/huusd-dash/compare/main...staging.
+- **Promoting staging to live** (only when the owner asks): run `npm run staging:diff`, then open a pull request from `staging` into `main` titled "Promote staging to live" with the list of changes, and merge it with **Create a merge commit** (not squash or rebase, so the two branches keep the same history). Each reader-visible change should already have its `UPDATES` line in `data/history.js` and its `MEMORY.md` entry.
+- **Promoting only some changes:** branch from `origin/main`, `git cherry-pick` the commits, open a pull request into `main`, then bring `main` back into `staging` (next item).
+- **Urgent fix to the live site** (only when the owner asks): branch from `origin/main`, pull request into `main`, then bring it into staging: `git checkout staging && git pull && git merge origin/main && git push`.
+- Commit messages end with a `Co-Authored-By` line when an AI agent wrote the change.
 
 ## Sources and verification
 
