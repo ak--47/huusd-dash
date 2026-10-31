@@ -6,6 +6,12 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-31: staging is up; docs made explicit
+
+- `staging` branch created from `main` after PR #13; the `github-pages` environment now allows it. https://ak--47.github.io/huusd-dash/staging/ is live with its notice.
+- AGENTS.md now opens with a "work on staging, not main" callout (CLAUDE.md repeats it), and "Staging and live" gives exact commands for a change, a promotion (merge commit only), a partial promotion, and an urgent live fix. Owner's call: staging links may be shared; the `/staging/` address and the notice are the separation.
+- This entry itself went through staging and was promoted to live, the first use of the workflow.
+
 ## 2026-10-31: staging copy at /staging/
 
 - The site is being shared in the community, and others are bringing new work. To keep the live site steady while that work is drafted, the owner asked for a staging copy: https://ak--47.github.io/huusd-dash/staging/, built from a new `staging` branch, for a small working group.

@@ -2,9 +2,12 @@
 
 Guide for AI coding agents (and humans) working on this repository. Read this first, then `MEMORY.md` (the running changelog) for recent history and open items.
 
+> **Before you change anything: work on `staging`, not `main`.**
+> The site has two copies. `main` is the **live** site the public uses: https://ak--47.github.io/huusd-dash/. `staging` is the **preview** for a small working group: https://ak--47.github.io/huusd-dash/staging/. Every change, including data, wording, model, and docs, starts from `origin/staging` and goes into `staging` by pull request (`gh pr create --base staging`; without `--base`, `gh` targets `main`). Nothing goes into `main` unless the owner asks for it in so many words ("promote staging", "put it on live", "ship it to live", "fix the live site"). Local checkouts often sit on `main`, so check `git branch --show-current` first. Full steps are in "Staging and live" below.
+
 ## What this is
 
-**Harwood School Plans Explorer** (https://ak--47.github.io/huusd-dash/): an independent, plain-language website about the Harwood Unified Union School District's (HUUSD, Vermont) FY28 budget and school consolidation decision. It shows the district's figures as published, re-checks them, models other combinations of the same building blocks, and adds the measure the district's slides leave out: **how many different K-12 schools a child would attend** under each plan.
+**Harwood School Plans Explorer** (live: https://ak--47.github.io/huusd-dash/; staging preview: https://ak--47.github.io/huusd-dash/staging/): an independent, plain-language website about the Harwood Unified Union School District's (HUUSD, Vermont) FY28 budget and school consolidation decision. It shows the district's figures as published, re-checks them, models other combinations of the same building blocks, and adds the measure the district's slides leave out: **how many different K-12 schools a child would attend** under each plan.
 
 - **Owner:** Aaron Krivitzky (GitHub `ak--47`), a Waitsfield parent. Byline on the site: "Built by Aaron Krivitzky, a Waitsfield parent. Independent, not affiliated with HUUSD."
 - **Readers:** residents and parents, most on phones, with no school-finance background; also board members.
@@ -12,8 +15,7 @@ Guide for AI coding agents (and humans) working on this repository. Read this fi
 
 ## Rules that are not negotiable
 
-0. **Every change goes to staging first.** Branch from `staging` and open pull requests against `staging`, never `main`. The live site changes only when the owner asks to promote staging (see "Staging and live" below) or asks for an urgent fix on the live site.
-
+0. **Every change goes to staging first.** Branch from `origin/staging` and open pull requests into `staging`, never `main`. The live site changes only when the owner asks to promote staging or asks for an urgent fix on the live site (see "Staging and live").
 1. **Never look official.** No HUUSD logos, no district branding, no wording that implies affiliation. The independence note must stay visible on phones and desktop.
 2. **Neutral.** Report what documents show. No advocacy for or against any path, no implied bad faith. When the site adds caveats to one option, check that comparable caveats exist for the others. The district's own case for consolidation stays on the site.
 3. **Every number has a source.** Numbers live in `data/*.js` with a `ref(sourceKey, locator)`. Each figure on screen is tagged as a district figure, calculated (our arithmetic on district numbers), or an estimate (where the district published nothing). Never let an estimate read as a district figure.
@@ -89,7 +91,7 @@ npm run test:browser        # every route at 1280 and 390 px, axe on both, overf
 - Gotchas:
   - `cites()` in `js/ui/kit.js` takes an **array**; the one in `js/ui/compare-table.js` takes varargs.
   - The router treats `#something` as a route. Use `?at=<id>` for in-page links, or buttons that call `scrollIntoView`.
-  - `store` keys are prefixed `hspe:` and every read is wrapped for blocked storage.
+  - `store` keys are prefixed `hspe:` on live and `hspe-staging:` on staging, and every read is wrapped for blocked storage.
   - Avoid browser features Safari 15 lacks (`Array.prototype.at`, unguarded `color-mix()`, container-query-only layouts).
   - d3 and Plot load lazily, only on the Budget page.
 - When a number changes: edit `data/`, keep its `ref`, run the tests, add an entry to `UPDATES` in `data/history.js` (shown on the Sources page), and add a line to `MEMORY.md`.
@@ -153,21 +155,53 @@ Anonymous usage analytics with Mixpanel, so the owner can see which pages and to
 
 ## Staging and live
 
-One GitHub Pages site holds two copies of the site:
+One GitHub Pages site holds two copies of the site. The `/staging/` in the address is what separates them.
 
 | | Branch | Address | Who it is for |
 |---|---|---|---|
 | Live | `main` | https://ak--47.github.io/huusd-dash/ | the public |
 | Staging | `staging` | https://ak--47.github.io/huusd-dash/staging/ | the working group previewing changes |
 
-- **The code is the same on both.** `js/ui/staging.js` decides from the address: under `/staging/` it shows a notice above the top bar ("Staging preview, not the live site", with a link to the same page on the live site), starts the tab title with "[Staging]", asks search engines not to index the page, keeps stored settings under `hspe-staging:` instead of `hspe:` (both copies share one origin), and sends analytics with `env: "staging"`. Nothing needs to change when staging is promoted.
-- **Deploy:** `.github/workflows/pages.yml` runs on a push to `main` or `staging`. It tests the branch that was pushed (Ubuntu 22.04, Node 22, `npm test` and `npm run test:browser`), then publishes both: `main` at the root and `staging` under `staging/` (`index.html og.png css js data wonk` from each; `sources/` is not published). So a push to one never erases the other. Pages caches files for about 10 minutes. The `github-pages` environment allows deploys from `main` and `staging` only (Settings → Environments).
-- **Making a change:** branch from `origin/staging`, open a pull request into `staging`, merge it. It shows at /staging/ a few minutes later.
-- **What is on staging but not live:** `npm run staging:diff` lists the commits and files, and any live commits staging lacks. Or open https://github.com/ak--47/huusd-dash/compare/main...staging.
-- **Promoting staging to live** (only when the owner asks): run `npm run staging:diff`, then open a pull request from `staging` into `main` titled "Promote staging to live" with the list of changes, and merge it with **Create a merge commit** (not squash or rebase, so the two branches keep the same history). Each reader-visible change should already have its `UPDATES` line in `data/history.js` and its `MEMORY.md` entry.
-- **Promoting only some changes:** branch from `origin/main`, `git cherry-pick` the commits, open a pull request into `main`, then bring `main` back into `staging` (next item).
-- **Urgent fix to the live site** (only when the owner asks): branch from `origin/main`, pull request into `main`, then bring it into staging: `git checkout staging && git pull && git merge origin/main && git push`.
-- Commit messages end with a `Co-Authored-By` line when an AI agent wrote the change.
+**How the two copies differ.** They run the same code; `js/ui/staging.js` checks the address. Under `/staging/` the site:
+- shows a notice above the top bar on every page: "Staging preview, not the live site. This copy tests changes still being worked on, so its numbers and wording may be wrong or change." with a link to the same page on the live site;
+- starts the tab title with "[Staging]" and adds a `noindex` tag;
+- keeps stored settings under `hspe-staging:` instead of `hspe:` (both copies share one origin, so they would otherwise share a reader's saved children);
+- sends analytics with the super property `env: "staging"` (live sends `env: "live"`).
+
+So nothing has to be edited when staging is promoted. Do not add `if (STAGING)` branches to page code for features; a feature that should only be on staging belongs on the `staging` branch. Staging links can be shared freely; their link previews use the live site's title and image, which is fine (the owner's call, Oct 31, 2026).
+
+**Deploy.** `.github/workflows/pages.yml` runs on a push to `main` or `staging`. It tests the branch that was pushed (Ubuntu 22.04, Node 22, `npm test` and `npm run test:browser`), then publishes both: `main` at the root and `staging` under `staging/` (`index.html og.png css js data wonk` from each; `sources/` is not published). A push to one never erases the other. Runs queue rather than cancel. Pages caches files for about 10 minutes. The `github-pages` environment allows deploys from `main` and `staging` only (Settings → Environments); a deploy from any other branch fails.
+
+**Making a change (the normal case):**
+```sh
+git fetch origin
+git checkout -b <short-topic> origin/staging
+# edit, then: npm test && npm run test:browser
+# add a dated entry to MEMORY.md, and an UPDATES line in data/history.js for reader-visible changes
+git push -u origin <short-topic>
+gh pr create --base staging --title "..." --body "..."
+```
+Merge it into `staging` (the owner merges, or asks you to). It shows at /staging/ a few minutes later. Preview locally at http://127.0.0.1:4848/staging/ (`npm run serve`).
+
+**What is on staging but not live:** `npm run staging:diff` lists the commits and files, and any live commits staging lacks. Or open https://github.com/ak--47/huusd-dash/compare/main...staging.
+
+**Promoting staging to live** (only when the owner asks):
+```sh
+npm run staging:diff                      # list what will go live; put it in the PR body
+gh pr create --base main --head staging --title "Promote staging to live" --body "..."
+gh pr merge <number> --merge              # a merge commit, never --squash or --rebase
+```
+A merge commit keeps the two branches on the same history, so the next `staging:diff` shows nothing. Afterwards `staging` needs no reset. Add a line to the MEMORY.md changelog (on `staging`) saying what was promoted.
+
+**Promoting only some changes:** branch from `origin/main`, `git cherry-pick` the commits, open a pull request into `main`, then bring `main` back into `staging` (next item).
+
+**Urgent fix to the live site** (only when the owner asks): branch from `origin/main`, pull request into `main` (`--base main`), then bring it into staging so it is not lost or undone at the next promotion:
+```sh
+git fetch origin && git checkout -B staging origin/staging
+git merge origin/main && git push origin staging
+```
+
+Commit messages end with a `Co-Authored-By` line when an AI agent wrote the change.
 
 ## Sources and verification
 
