@@ -6,7 +6,22 @@ import { PAIRS } from "../../data/district-scenarios.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { CLASS_SIZE_DEFAULT, OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, makePlan, matchNamed, pathB, receivingOptions, receivingSchool } from "../model/index.js";
+import {
+  CLASS_SIZE_DEFAULT,
+  OPTIONS,
+  TARGET,
+  TARGET_WITH_EXCLUSION,
+  districtShares,
+  effectiveSplit,
+  encodePlan,
+  makePlan,
+  matchNamed,
+  pathB,
+  receivingOptions,
+  receivingSchool,
+  splitSource,
+  townK6,
+} from "../model/index.js";
 import { h, listJoin, money, moneyShort, num } from "./dom.js";
 import { cite, note, schoolShort, term } from "./kit.js";
 
@@ -35,8 +50,15 @@ export const HYBRID_CUTS = ["special", "prek", "athletics"];
 export const onePlan = (closed) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: 6, msMerge: true });
 export const hybridPlan = () => makePlan({ open: VALLEY, valleyTop: 6, msMerge: true, cuts: HYBRID_CUTS });
 
-// The resident's plan on the Options page: Fayston closes, Moretown becomes the district's Pre-K center.
-export const centerPlan = () => OPTIONS.find((o) => o.id === "B-center").plan;
+// The residents' plan on the Options page: Fayston closes, and Moretown's or Waitsfield's building becomes the
+// district's Pre-K center (the card's two versions).
+const centerCard = () => OPTIONS.find((o) => o.id === "B-center");
+export const CENTER_SCHOOLS = ["MES", "WES"];
+export const centerPlan = (school = "MES") => {
+  const o = centerCard();
+  const v = o.versions.find((x) => x.center === school) ?? o.versions[0];
+  return v.plan ?? o.plan;
+};
 
 // Which starting point a plan is, if any: "today", "A", "B", "one", "hybrid", "center", or null.
 export function presetOf(plan) {
@@ -45,12 +67,17 @@ export function presetOf(plan) {
   const same = (a) => encodePlan(a) === encodePlan({ ...plan, receiving: {} });
   if (plan.open.length === 3 && same(onePlan(VALLEY.find((id) => !plan.open.includes(id))))) return "one";
   if (same(hybridPlan())) return "hybrid";
-  return same(centerPlan()) ? "center" : null;
+  // the Waitsfield version chooses Moretown for Waitsfield's children, so its receiving choice counts
+  return CENTER_SCHOOLS.some((id) => encodePlan(centerPlan(id)) === encodePlan(plan)) ? "center" : null;
 }
 
 // The Options-page combination a plan matches, if any (a link from an Options card lands here).
 export function optionOf(plan) {
-  const code = encodePlan({ ...plan, receiving: {} });
+  const code = encodePlan(plan);
+  for (const o of OPTIONS) {
+    const v = o.versions?.find((x) => encodePlan(x.plan ?? o.plan) === code);
+    if (v) return { ...o, id: v.id, name: `${o.name.split(":")[0]} (${v.name})` };
+  }
   const o = OPTIONS.find((x) => x.plan && encodePlan(x.plan) === code);
   return o ? { ...o, name: o.closed ? `${o.name}: ${SCHOOLS[o.closed].short} closes` : o.name } : null;
 }
@@ -202,15 +229,24 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     VALLEY.map((id) => h("option", { value: id }, SCHOOLS[id].short))
   );
   oneSel.value = startPlan.open.length === 3 ? VALLEY.find((id) => !startPlan.open.includes(id)) : "";
+  // the building that becomes the Pre-K center in "Pre-K center plan"
+  const centerPick = h(
+    "select",
+    { class: "wonk-select", id: "bp-centerpick", "aria-describedby": "bp-centerpick-hint" },
+    h("option", { value: "", disabled: true }, "Pick one"),
+    CENTER_SCHOOLS.map((id) => h("option", { value: id }, SCHOOLS[id].short))
+  );
   const chosen = () => ({
     pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2],
     top: Number(topSel.value) === 6 ? 6 : 4,
     closed: VALLEY.includes(oneSel.value) ? oneSel.value : "FES",
+    center: CENTER_SCHOOLS.includes(centerPick.value) ? centerPick.value : "MES",
   });
   for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosen()));
   pairSel.addEventListener("change", () => onPreset("B", chosen()));
   topSel.addEventListener("change", () => onPreset("B", chosen()));
   oneSel.addEventListener("change", () => onPreset("one", chosen()));
+  centerPick.addEventListener("change", () => onPreset("center", chosen()));
 
   const matched = h("p", { class: "bp-matched" });
   const undoText = h("span", {});
@@ -253,10 +289,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "every valley school stays open; the middle schools merge; and three of Path A's smaller cuts (special programming, the Pre-K tuition model, and 70% of athletics and activities) fill the rest. It meets the target on paper only if the merger saves nearly the district's full figure with grades 5-6 in the valley."
     ),
     h(
-      "p",
-      { class: "bp-bversion-hint" },
-      h("strong", {}, "Pre-K center plan: "),
-      "a resident's suggestion. Fayston closes; Moretown's building becomes the district's Pre-K center; Waitsfield, Warren, and Brookside teach K-6, with Fayston's children mostly at Warren, two thirds of Moretown's at Waitsfield and a third at Brookside; the middle schools merge and Crossett Brook's building holds no classes."
+      "div",
+      { class: "bp-bversion" },
+      h("p", { class: "bp-sub" }, "Pre-K center plan"),
+      h(
+        "p",
+        { class: "bp-bversion-hint", id: "bp-centerpick-hint" },
+        "Residents' suggestion, in two versions. Fayston closes and a second valley building becomes the district's Pre-K center; the two other valley schools and Brookside teach K-6; the middle schools merge and Crossett Brook's building holds no classes. Each version starts from the shares its suggesters chose."
+      ),
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-centerpick" }, "Pre-K center building"), centerPick)
     ),
     matched,
     undoRow
@@ -585,6 +626,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const csReset = h("button", { type: "button", class: "wonk-btn wonk-btn--quiet" }, "Reset class sizes");
   csReset.addEventListener("click", () => onClassSize({ ...CS_DEFAULT }));
 
+  // Where a closed town's children go: the school that takes the rest, and a share to each other open school
   const recvRows = VALLEY.map((sid) => {
     const town = SCHOOLS[sid].town;
     const id = `bp-recv-${town}`;
@@ -595,26 +637,26 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     });
     const field = h("div", { class: "wonk-field bp-recv-field" }, h("label", { class: "wonk-label", for: id }, `${townName(town)} children go to`), sel);
     const only = h("p", { class: "bp-recv-only" });
-    // part of the town's children going to a second open school
-    const splitSel = h("select", { class: "wonk-select", id: `${id}-split` });
-    splitSel.addEventListener("change", () => {
-      const [school, pct] = splitSel.value.split("~");
-      onPlan((p) => {
-        const split = { ...p.split };
-        if (school) split[town] = { school, share: Number(pct) / 100 };
-        else delete split[town];
-        return { ...p, split };
-      });
-    });
-    const splitField = h("div", { class: "wonk-field bp-recv-field" }, h("label", { class: "wonk-label", for: `${id}-split` }, `Some ${townName(town)} children closer to another school?`), splitSel);
-    const wrap = h("div", { class: "bp-recv", hidden: true }, field, only, splitField);
-    return { sid, town, sel, field, only, splitSel, splitField, wrap, sig: "" };
+    const shares = h("div", { class: "bp-shares", role: "group", "aria-labelledby": `${id}-sh` });
+    const wrap = h("div", { class: "bp-recv", hidden: true }, field, only, shares);
+    return { sid, town, id, sel, field, only, shares, wrap, sig: "", shareSig: "", steppers: [] };
   });
+  // set one school's share of a town's children, starting from the shares the plan uses now (the district's,
+  // with two valley schools open); the school that takes the rest can never go below 0%
+  const setShare = (p, town, school, pct) => {
+    const cur = { ...(effectiveSplit(p)[town] ?? {}) };
+    const others = Object.entries(cur).reduce((a, [s2, x]) => a + (s2 === school ? 0 : Math.round(x * 100)), 0);
+    const n = Math.max(0, Math.min(100 - others, pct));
+    if (n) cur[school] = n / 100;
+    else delete cur[school];
+    return { ...p, split: { ...p.split, [town]: cur } };
+  };
+  const pctOf = (plan, town, school) => Math.round((effectiveSplit(plan)[town]?.[school] ?? 0) * 100);
   const recvNone = h("p", { class: "bp-recv-none" }, "Every valley school is open, so every town keeps its own school.");
   const recvDistrict = h(
     "p",
     { class: "bp-fix-note", hidden: true },
-    "With exactly two valley schools open, the student counts come from the district's own table, which places children by home address. A choice here changes children's school paths, not those counts."
+    "Right now the student counts are the district's own table for this pair. Change a school or a share here and they become our count, which starts from the same shares, so the numbers move by only a few students."
   );
 
   const advanced = h(
@@ -668,7 +710,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     h(
       "p",
       { class: "hint" },
-      "The nearest open school is the default, the rule the district's tables use. Families on a town's edge may live closer to another school, so part of a town can go elsewhere. We do not know where each family lives: the shares are your choice."
+      "The district's tables place children by home address, so most of a town goes to its nearest open school and some go elsewhere. With two valley schools open, the shares start where the district's table puts them (our calculation); otherwise every child goes to the nearest open school. We do not know where families live, so set the shares to what you think is right. Under the Articles of Agreement, families can ask for the closest school, and the board also weighs space and class sizes. ",
+      cite(ref("aoa", "Article 6(E)"), "Articles"),
+      " ",
+      h("a", { href: "#/findings?at=finding-placement" }, "How the district placed children")
     ),
     recvNone,
     ...recvRows.map((r) => r.wrap),
@@ -753,12 +798,12 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       c.cb.checked = open;
       c.label.classList.toggle("is-closed", !open);
       const town = SCHOOLS[c.id].town;
-      const sp = plan.split?.[town];
+      const sp = Object.entries(effectiveSplit(plan)[town] ?? {});
       const center = plan.prekCenter?.school === c.id;
       c.status.textContent = open
         ? "Stays open"
         : `${center ? "Becomes the Pre-K center" : "Closes"}. ${townName(town)} children go to ${schoolShort(receivingSchool(plan, town))}${
-            sp ? `, about ${Math.round(sp.share * 100)}% to ${schoolShort(sp.school)}` : ""
+            sp.length ? `, except about ${listJoin(sp.map(([id, x]) => `${Math.round(x * 100)}% to ${schoolShort(id)}`))}` : ""
           }.`;
       c.limitEl.textContent = permitsOn ? PERMIT_WORDS[c.id] : slidesLimit(FACILITIES[c.id]);
     }
@@ -842,29 +887,80 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       }
       row.sel.value = receivingSchool(plan, row.town);
     }
-    // splits: a share of the town's children to one of the other open schools
+    // shares: part of the town's children to each of the other open schools
     for (const row of recvRows) {
       const opts = receivingOptions(plan, row.town);
       const main = opts.length ? receivingSchool(plan, row.town) : null;
       const alts = opts.filter((sid) => sid !== main);
-      row.splitField.hidden = !alts.length;
+      row.shares.hidden = !alts.length;
       if (!alts.length) continue;
-      const cur = plan.split?.[row.town];
-      const value = cur ? `${cur.school}~${Math.round(cur.share * 100)}` : "";
-      const sig = `${main}|${alts.join(",")}`;
-      if (sig !== row.splitSig) {
-        const shares = [[25, "About a quarter"], [33, "About a third"], [50, "About half"], [67, "About two thirds"], [75, "About three quarters"]];
-        row.splitSel.replaceChildren(
-          h("option", { value: "" }, `No, all go to ${schoolShort(main)}`),
-          ...alts.flatMap((sid) => shares.map(([pct, words]) => h("option", { value: `${sid}~${pct}` }, `${words} go to ${schoolShort(sid)}`)))
+      const kids = townK6(row.town);
+      const source = splitSource(plan, row.town);
+      const fromDistrict = districtShares(plan.open) && !plan.receiving[row.town];
+      const sig = `${main}|${alts.join(",")}|${fromDistrict}`;
+      if (sig !== row.shareSig) {
+        row.steppers = alts.map((sid) => {
+          const sid2 = `${row.id}-${sid}`;
+          const st = stepper({
+            id: sid2,
+            min: 0,
+            max: 100,
+            get: () => pctOf(state.plan, row.town, sid),
+            onSet: (n) => {
+              onPlan((p) => setShare(p, row.town, sid, n));
+              // a share the other schools leave no room for shows what was kept
+              if (document.activeElement === st.input && pctOf(state.plan, row.town, sid) !== n) st.input.value = String(pctOf(state.plan, row.town, sid));
+            },
+            describedby: `${sid2}-n`,
+          });
+          const n = h("span", { class: "bp-share-n", id: `${sid2}-n` });
+          const el = h(
+            "div",
+            { class: "bp-share" },
+            h("label", { class: "bp-share-name", for: sid2 }, h("span", { class: "wonk-sr" }, `Percent of ${townName(row.town)} children going to `), schoolShort(sid), sid === "BPS" ? " (Waterbury)" : ""),
+            st.el,
+            n
+          );
+          return { sid, input: st.input, n, el };
+        });
+        const allBtn = h("button", { type: "button", class: "wonk-btn wonk-btn--quiet bp-share-btn" }, `All to ${schoolShort(main)}`);
+        allBtn.addEventListener("click", () => onPlan((p) => ({ ...p, split: { ...p.split, [row.town]: {} } })));
+        const districtBtn = h("button", { type: "button", class: "wonk-btn wonk-btn--quiet bp-share-btn" }, "As in the district's table");
+        districtBtn.addEventListener("click", () =>
+          onPlan((p) => {
+            const split = { ...p.split };
+            delete split[row.town];
+            return { ...p, split };
+          })
         );
-        row.splitSig = sig;
+        row.mainLine = h("p", { class: "bp-share-main" });
+        row.shareSrc = h("span", { class: "bp-share-src" });
+        row.allBtn = allBtn;
+        row.districtBtn = districtBtn;
+        row.shares.replaceChildren(
+          h("p", { class: "bp-sub", id: `${row.id}-sh` }, `Where ${townName(row.town)}'s ${num(kids)} K-6 children go `, row.shareSrc),
+          row.mainLine,
+          ...row.steppers.map((x) => x.el),
+          h("p", { class: "bp-share-btns" }, allBtn, fromDistrict ? districtBtn : null)
+        );
+        row.shareSig = sig;
       }
-      row.splitSel.value = value;
+      let rest = 100;
+      for (const st of row.steppers) {
+        const pct = pctOf(plan, row.town, st.sid);
+        rest -= pct;
+        if (document.activeElement !== st.input) st.input.value = String(pct);
+        st.n.textContent = `${pct}%, about ${num(Math.round((kids * pct) / 100))} children`;
+      }
+      row.mainLine.textContent = `${schoolShort(main)}: the rest, ${rest}%, about ${num(Math.round((kids * rest) / 100))} children`;
+      row.shareSrc.textContent = source === "district" ? "(as in the district's table, our calculation)" : source === "plan" ? "(your shares)" : "(all to the nearest open school)";
+      row.allBtn.disabled = rest === 100;
+      row.districtBtn.disabled = source === "district";
     }
     recvHost.hidden = !anyClosed;
     recvNone.hidden = anyClosed;
     recvDistrict.hidden = !(anyClosed && r.capacity.source === "district");
+    centerPick.value = preset === "center" ? (CENTER_SCHOOLS.find((id) => plan.prekCenter?.school === id) ?? "") : "";
 
     // Pre-K center: only a closed valley school can be one, and not with the Pre-K tuition cut
     const closedValley = VALLEY.filter((id) => !plan.open.includes(id));

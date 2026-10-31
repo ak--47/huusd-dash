@@ -28,7 +28,7 @@ export const CLOSURE_PROCESS = {
     "An affirmative vote of two-thirds of the board.",
   ],
   placement: "Students in a town whose school closes may attend the district school closest to their home, unless parents choose another. Receiving-school space, classroom needs, and student-to-teacher ratios are also considered.",
-  property: "A closed valley school building is offered to its town for $1, if the town uses it for community purposes for at least five years (Article 6(B)).",
+  property: "A closed valley school building is offered to its town for $1, if the town uses it for community purposes for at least five years and takes on any outstanding bonds, state construction aid, and capital improvements since 2017 (Article 6(B)).",
   caution: "The district's own Articles presentation cautions against converting \"two-thirds\" into a number of members or vote-weight points without confirming current voting rules with counsel.",
 };
 

@@ -5,7 +5,7 @@ import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
+import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, effectiveSplit, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
 import { cite, note, schoolName, schoolShort, status, tag, term, unsure } from "./kit.js";
 import { heatGrid } from "./heat.js";
@@ -635,16 +635,16 @@ function schoolCap(s, receives) {
 function buildingsSection(plan, r, cs, keptFold) {
   const cap = r.capacity;
   // which towns' children each school takes: every valley school that no longer teaches K-6 (a Pre-K center
-  // included), with the share when part of a town goes to a second school
+  // included), with the share when part of a town goes to other schools
   const receivers = {};
-  const part = (share) => (share > 0.6 ? "about two thirds of" : share > 0.4 ? "about half of" : share > 0.3 ? "about a third of" : share > 0.2 ? "about a quarter of" : "some of");
+  const split = effectiveSplit(plan);
   for (const id of VALLEY.filter((v) => !plan.open.includes(v))) {
     const town = SCHOOLS[id].town;
     const main = receivingSchool(plan, town);
-    const sp = plan.split?.[town];
-    const alt = sp && sp.school !== main ? sp : null;
-    (receivers[main] ??= []).push(alt ? `${part(1 - alt.share)} ${townName(town)}'s` : `${townName(town)}`);
-    if (alt) (receivers[alt.school] ??= []).push(`${part(alt.share)} ${townName(town)}'s`);
+    const alts = Object.entries(split[town] ?? {});
+    const rest = 100 - alts.reduce((a, [, x]) => a + Math.round(x * 100), 0);
+    if (rest > 0) (receivers[main] ??= []).push(alts.length ? `about ${rest}% of ${townName(town)}'s` : `${townName(town)}`);
+    for (const [sid, x] of alts) (receivers[sid] ??= []).push(`about ${Math.round(x * 100)}% of ${townName(town)}'s`);
   }
   const overP = cap.schools.filter((s) => s.overPeople);
   const overR = cap.schools.filter((s) => s.overConsultant);
@@ -697,7 +697,9 @@ function buildingsSection(plan, r, cs, keptFold) {
     source = h(
       "p",
       { class: "bp-source" },
-      `The district did not publish a table for this combination, so the counts are our estimate: this year's students move with their school to the school that receives them, and ${
+      `The district did not publish a table for this combination, so the counts are our estimate: this year's students move with their school to the school that receives them${
+        plan.open.length === 2 ? ", split the way the district's table for this pair places them unless you changed the shares in step 2" : Object.keys(plan.split).length ? ", split by the shares in step 2" : ""
+      }, and ${
         noPreK ? "Pre-K is left out (this plan ends district Pre-K classes)" : `Pre-K follows the district's planning numbers, ${PK_WORDS}`
       }. `,
       tag("estimate"),

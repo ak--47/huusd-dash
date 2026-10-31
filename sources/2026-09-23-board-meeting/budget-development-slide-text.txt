@@ -1,0 +1,1177 @@
+FY28 Budget
+Development & Early Projections 
+event
+9/23/2026
+HARWOOD UNIFIED UNION
+School Board Meeting
+1
+language
+ONLINE RESOURCE
+Budget information:
+HUUSD.ORG/BUDGET
+The board sets district policy, hires and oversees the superintendent, and prepares and presents a proposed budget to voters.
+
+Preliminary
+Subject to Change
+warning
+Important Notice
+The financial data, projections, and estimates presented in this document are initial drafts intended solely for discussion and planning purposes.
+All figures remain subject to further revision based on updated state data, local board decisions, and upcoming legislative impacts.
+update
+Next Steps
+Updated numbers and formal proposals will be presented in subsequent board meetings as state models finalize.
+Please refer to the official district budget webpage for the most current documentation and timeline updates.
+
+Presentation Includes the Following
+Overview of key agenda topics and structural modules covered in this session.
+account_balance
+Finance Overview
+Quick Overview of Vermont Education Finance System and the Education Fund
+groups
+Pupils
+Weighted pupils and pupil weighting factors breakdown
+settings_suggest
+Process
+Budget development process and planning framework
+3
+event_note
+HUUSD Timeline
+Budget time-line, key milestones & board actions
+insights
+Projections
+Preliminary FY28 projections and financial outlook
+
+Vermont’s Education Finance System
+Couples Local and State Decisions
+how_to_vote
+Local & State Level
+Expenses are determined at the local and state level
+calculate
+Tax Rate Funding
+Property tax rates are then set to fully fund those expenditures
+account_balance
+Education Fund
+All Education property taxes are dedicated to the statewide Education fund.
+
+What is the Education Fund?
+The Total Cost of Public Education in Vermont
+Annually, local and State decisions determine total expenditures from the education fund.
+how_to_vote
+Local Decisions
+School districts build budgets that must be approved by voters
+account_balance
+State Decisions
+Certain appropriations and categorical aid
+Policies that impact local budgets
+location_city
+Local spending decisions
++
+gavel
+State spending decisions
+=
+assignment
+Total expenditures from the Education Fund
+
+6
+FY27 Education Fund Revenue Sources
+Total Revenue Available: $2.433 Billion
+Non-Homestead Property Tax 37.5% ($941.8M)
+Education property tax paid on non-homestead property.
+Homestead Property Tax26.1% ($655.2M)
+Education property tax paid on homestead property. FY27 gross homestead education property tax revenue is $789.4M, with a $134.2M property-tax credit reflected in the Education Fund calculation.
+Sales & Use Tax25.5% ($640.9M)
+All sales and use tax revenue is deposited into the Education Fund.
+Other Revenue Sources
+One-Time GF Transfer — 4.0%
+$100.9M | One-time General Fund transfer for FY27.
+Meals & Rooms Tax — 3.4%
+$86.0M | Over one-quarter of revenue deposited under FY27 changes.
+Purchase & Use Tax — 1.7%
+$41.9M | Less than one-third of revenue deposited under FY27 changes.
+Lottery — 1.3%
+$33.4M | Lottery revenue transferred to Education Fund.
+Medicaid & Other — 0.6%
+$13.8M combined | Medicaid ($9.5M), wind/solar & interest ($4.3M).
+
+
+
+
+Education Finance Timeline
+01
+PHASE 1
+Budget Prep
+School boards begin preparing school district budgets.
+02
+DECEMBER 1
+December 1 Letter
+Commissioner of Taxes publishes forecasting rates for the next fiscal year.
+03
+January
+Budgets Warned
+Boards prepare budgets and warn for voters, informed by the Dec 1 letter.
+04
+MARCH
+Voter Approval
+Vermonters vote on school district budgets (usually at annual town meetings).
+05
+April/May
+Yield Bill Set
+General Assembly sets property taxes at level necessary to fund approved budgets.
+06
+ON/BEFORE JUNE 30
+Tax Rates Set
+Department of Taxes sets spending-adjusted homestead tax rates for towns.
+07
+LATE SUMMER/FALL
+Administration
+Town officials formally administer education property taxes to taxpayers.
+08
+FALL & BEYOND
+Implementation
+Taxpayers pay taxes, and school districts implement their operating budgets.
+
+Offsetting Revenues
+Local Revenues (i.e. tuition collected)
+State & Federal Grants Such as:
+Special Education Reimbursement
+Merger Support Grant (formerly Small Schools Grant)
+Transportation Aid
+Once a budget is approved, the state is obligated to fund the district’s education spending from the Vermont Education Fund. 
+BUDGET
+APPROVED
+BY VOTERS
+OFFSETTING REVENUES
+DISTRICT EDUCATION SPENDING
+HUUSD Education Spending
+8
+
+Calculation for District Homestead Tax Rate
+LTW ADM = Factors state assesses based upon cost to educate a student.  For example a high school student has a higher factor since they are more expensive to educate than a graded school student. 
+DISTRICT
+EDUCATION
+SPENDING
+DISTRICT LTW ADM
+(Long Term Weighted Average Daily Membership)
+STATE DOLLAR EQUIVALENT YIELD RATE
+HUUSD HOMESTEAD TAX RATE
+EDUCATION SPENDING PER LTW ADM 
+(Long Term Weighted Average Daily Membership)
+
+EDUCATION SPENDING PER 
+LTW ADM 
+(Long Term Weighted Average Daily Membership)
+
+9
+The District Education Spending is then divided by the number of LTW ADM.  This number is the Education Spending per LTW ADM.  This number is then divided by the State Dollar Equivalent Yield, which gives you the HHUSD Homestead Tax Rate.
+
+
+
+What is the Yield?
+DEFINITION
+"The yield is the statewide benchmark used to translate a district's education spending per weighted pupil into a homestead education tax rate."
+FY2027 BENCHMARK
+$9,401
+For FY2027, the property yield is $9,401.
+VERMONT LAW DEFINITION
+Vermont law defines the property yield as the amount of per-pupil education spending that would produce a $1.00 homestead tax rate per $100 of equalized education property value.
+KEY EQUIVALENCE
+$9,401 of education spending per weighted pupil  =  $1.00 tax rate
+Its basically a statewide checkbook so if Ed Spending statewide it growing more money is needed statewide and the yield is set accordingly. The yield is difficult to estimate as it is driven by the financial status of the education fund and other political factors but also by the Legislature’s management of the fund— including decisions to shift costs into the fund and whether to use reserves. The yield is the lever the legislature has to determine how much money comes into the education fund. When the Legislature lowers the yield, tax rates go up, and if it raises the yield, tax rates go down.
+
+
+What is the Purpose of the Dollar Yield?
+Purpose & Scope
+Ensures there is enough money in the State Education Fund to fund all school district budgets (Education Spending portion).
+11
+Calculation
+Calculated jointly by the Vermont Agency of Education working in coordination with the VT Department of Taxes.
+Timeline
+Dec 1: Commissioner announces estimated yield.
+Final: Set by State Legislature once school budgets pass.
+HOMESTEAD TAX RATE FORMULA
+Education Spending
+Per LTW ADM
+÷
+Dollar Yield
+=
+HUUSD Homestead
+Tax Rate
+The VT Agency of Education and the VT Department of Taxes work together to determine how much all Vermont schools need from the Education Fund to fund their school budget(s) for the year.  This is determined by estimated budget increases collected from all districts.  A statewide budget increase is calculated and the Dollar Yield is announced by the Commissioner from the VT Department of Taxes.  The Education Spending Per LTW ADM is divided by the Dollar Yield to equal the HUUSD Homestead Tax Rate.
+
+The Multiple Components That Determine the Homestead Tax Rate and Town property Tax Rates
+✓ IN OUR CONTROL
+1. District Spending 
+Proposed Expenditures: District operating budget
+Estimated Revenues: Grants, tuition & local aid
+Net result is District Education Spending
+STATE FORMULA
+2. District LTWADM
+Long Term Weighted Average Daily Membership
+Weighted factors for grade levels & demographics
+Determines spending per weighted student
+LEGISLATURE SET
+3. State Dollar Yield Rate
+Set annually by the VT State Legislature
+Statewide benchmark for yield rate
+Establishes standard baseline tax rate
+TOWN LEVEL
+4. Common Level of Appraisal (CLA)
+Calculated individually for each town
+Adjusts for fair market property values
+Directly determines Actual Tax Rate Increase
+Homestead Tax Rate = (Net Education Spending ÷ LTWADM) ÷ State Yield Rate ÷ Town CLA
+Local control is expenditures and revenues.
+
+Long Term Weighted Average Daily Membership (LTWADM)
+What is LTWADM?
+Student Count Adjusted for Need & Time
+Core Definition: LTWADM is essentially the district’s student count, averaged over a two-year period.
+Weighting Factors: It is adjusted to account for the additional costs associated with serving specific student populations and demographics.
+Why LTWADM Matters?
+Tax-Capacity & Funding Formula Metric
+Beyond Headcount: LTWADM is not simply a raw enrollment number.
+Financial Impact: It serves as a key tax-capacity and funding-formula metric that directly determines district spending capacity and property tax calculations.
+
+Long Term Weighted Average Daily Membership (LTWADM)
+Students who incur higher education costs are weighted to count for more.
+Grade & Student Demographics
+EEE / PreK
+-0.54
+Middle (6-8)
+0.36
+Secondary (9-12)
+0.39
+Poverty
+1.03
+English Language Learners (ELL)
+2.49
+Sparsity & Small School Factors
+Sparsity
+< 36 pop/sq. mile
+0.15
+Sparsity
+36 ≤ pop/sq. mile < 55
+0.12
+Sparsity
+55 ≤ pop/sq. mile < 100
+0.07
+Small School
+≤ 55 pop/sq. mile, enrollment ≤ 100
+0.21
+Small School
+≤ 55 pop/sq. mile, enrollment 101–250
+0.07
+
+Unfunded Mandates & Federal Requirements
+A few Legislative acts and state/federal mandates impacting school district operations and budget.
+Legislative Acts & Compliance Standards
+• 2018 Act 11: Commission on Public School Employee Health Benefits. 
+• 2021-Act 172: Radon Testing
+• 2022-Act 29: Access Control, Emergency Operations & Threat Assessment
+ • 2022-Act 127: Improving student equity by adjusting the school funding formula
+• 2021-Act 72: Requirement to Employ a Facilities Director
+• 2021-Act 74: PCB Testing and Remediation Program
+• Act 35: Ban on Suspension or Expulsion for Under 8
+• Hazing, Harassment and Bullying Legislation
+• Title IX Requirements
+• Act 166: Universal PreK
+• Act 76: Child Care Contribution
+• 3 Acre Storm Water Project (Clean Water Act 2015)
+• Act 139: Evidence-based Literacy Instruction
+• Act 64: Universal Meals
+Operational & District Mandates
+• Act 77: Flexible Pathways
+• Act 66: Lead in Water Testing & Remediation
+• Act 173: MTSS and Special Education Funding
+• Act 114: Pension Costs (In Appropriations Bill)
+• Act 66: Access to Menstrual Products
+• Act 157: Access to Contraceptives
+• Uniform Chart of Accounts
+• Shared School District Data Management System
+• Continuous Improvement Planning
+• Resource Allocation Reviews (RAR)
+• Requirement to Have a Food Service Director
+• Shared District Administrative Reporting Standards
+HARWOOD UNIFIED UNION SCHOOL DISTRICT
+Update the title of the slide and examples to fit your context.
+
+How do town CLAs affect our town tax rates? Common Level of Appraisal (CLA) ensures each town pays its fair share of education property tax to the state's Education Fund.
+Baseline Scenario
+SALE AMOUNT $150,000
+ASSESSED VALUE $150,000
+CLA 100% TAX RATE Baseline
+Sales Higher Than Assessed
+SALE AMOUNT $200,000
+ASSESSED VALUE $150,000
+CLA ⬇ Lower TAX RATE ⬆ Higher
+Sales Lower Than Assessed
+SALE AMOUNT $150,000
+ASSESSED VALUE $200,000
+CLA ⬆ Higher TAX RATE ⬇ Lower
+New Last Year: There is a statewide "adjustment" of X.XX% to your CLA. It inflates your CLA, thus decreasing your town's ESTIMATED tax rate.
+HARWOOD UNIFIED UNION SCHOOL DISTRICT
+
+Our Budget Planning Framework
+Five questions guide the development of the budget and the decisions that shape it.
+1
+What do our students need?
+Programs
+Staffing
+Services
+2
+What will it cost?
+Wages & Benefits
+Contracts
+Operations
+Special Education
+Transportation
+Utilities
+3
+What can we expect?
+Tax Revenues
+Educational Spending
+Grant Funding
+Other Revenues
+4
+What can we control?
+Staffing
+Programs
+Contracts
+Purchasing
+5
+What are the implications?
+Tax Impact
+Spending
+Thresholds
+Debt Service
+The framework keeps the focus on both educational priorities and long-term financial sustainability.
+
+What Drives the Budget?
+Some factors are local decisions; others are influenced by contracts, markets, enrollment, or State policy.
+PERSONNEL
+Wages & salaries
+Collective bargaining
+Health insurance
+Retirement & benefits
+Staffing levels
+STUDENT & PROGRAM NEEDS
+Enrollment
+Special education
+Student support
+PreK
+Transportation
+OPERATIONS
+Fuel & utilities
+Technology
+Maintenance
+Insurance
+Supplies & services
+CAPITAL & LONG-TERM
+Operations of Buildings & grounds
+Deferred maintenance
+Vehicles/equipment
+Debt
+Capital reserves
+STATE & EXTERNAL
+Education funding formula
+Property values / CLA
+Spending thresholds
+Inflation & economy
+Under funded State Mandates
+The budget reflects both decisions we make locally and financial factors outside the District’s direct control.
+
+How We Build the Budget
+
+
+SEP–OCT
+
+FORECAST & ASSESS
+School Board reviews priorities 
+SB sets guideline /targets
+Enrollment projections
+Revenue assumptions
+Staffing & compensation
+Program/service needs
+
+OCT–NOV
+
+BUILD & PRIORITIZE
+School & dept. requests
+Contracts & commitments
+Capital & Operational. needs
+Potential efficiencies
+
+DEC–JAN
+
+BOARD REVIEW
+Major assumptions
+Priorities & trade-offs
+Financial outlook
+Board reviews budget projections
+
+
+JAN–FEB
+
+FINALIZE
+Tax & spending calcs
+Finalize Budget
+Community engagement
+
+Warn the budget
+
+Voter materials
+
+MAR
+
+VOTE
+Annual meeting
+Budget vote
+Throughout the process: update assumptions • test scenarios • identify impacts • communicate changes
+
+NOV–DEC
+
+ANALYZE & REFINE
+Budget scenarios
+Program & staffing impacts
+Tax implications
+Multi-year projections
+School Board Sets Priorities & Guidelines
+Student & Program Needs Enrollment & Financial Forecast
+Enrollment & Financial Forecast
+Budget Scenarios
+Board Review & Direction
+Proposed Budget Presentations
+Community Vote
+
+How We Build the Budget
+The process moves from forecasting and information gathering to scenario development, Board direction, and a proposed budget.
+
+SEP–OCT
+
+FORECAST & ASSESS
+School Board reviews priorities 
+SB sets guideline /targets
+Enrollment projections
+Revenue assumptions
+Staffing & compensation
+Program/service needs
+
+OCT–NOV
+
+BUILD & PRIORITIZE
+School & dept. requests
+Contracts & commitments
+Capital & Operational. needs
+Potential efficiencies
+
+NOV–DEC
+
+ANALYZE & REFINE
+Budget scenarios
+Program & staffing impacts
+Tax implications
+Multi-year projections
+
+DEC–JAN
+
+BOARD REVIEW
+Major assumptions
+Priorities & trade-offs
+Financial outlook
+Board reviews budget projections
+
+
+JAN–FEB
+
+FINALIZE
+Tax & spending calcs
+Finalize Budget
+Community engagement
+
+Warn the budget
+
+Voter materials
+
+MAR
+
+VOTE
+Annual meeting
+Budget vote
+Throughout the process: update assumptions • test scenarios • identify impacts • communicate changes
+
+FY28 HUUSD Budget Development Timeline Process & Milestones
+SEPTEMBER 2026
+Sep 23 School Board Meeting
+Overview of education finance & budget development
+Preliminary FY28 projections
+Board direction & targets
+OCTOBER 2026
+Oct 14 Board Meeting
+FY28 projections & impacts
+Oct 28 Board Meeting
+Targets, scenarios, enrollment
+Oct 30 Feasibility Proposals
+Proposals due
+NOVEMBER 2026
+Nov 4 Board Mtg: Finalize Board direction 
+Wk of Nov 9: RFP Interviews
+Nov 18 Board Mtg: 1st review FY28 expenditures
+Nov 20: VEHI health estimate rates 
+Late Nov: Selection of RFP firms
+DECEMBER 2026
+Dec 1: VT Tax Comm. letter
+Dec (est): Rates & inflation index
+Dec 2 Board Mtg: 2nd review expenditures & revenues
+Dec 16 Board Mtg: 3rd review of budget 
+Late Dec: RFP Notice to proceed
+After Dec. 21: Spec Ed & Transp rev.
+JANUARY 2027
+Early Jan: LTWADMS shared
+Jan 6 Board Mtg: Budget Recap, CLA & VEHI rate
+Jan 13 Board Mtg: Calculation of Ed Spending and estimate of town tax rates, Finalize budget, approve Tuition, approve warning & articles
+Jan 20: Extra mtg if needed
+FEBRUARY 2027
+Feb Admin Report
+FY26 Annual Report + Proposed FY28 Budget
+Feb 3 Board Meeting
+Feb 17 Board Meeting
+Early Spring
+Feasibility study completion
+MARCH – MAY 2027
+Mar 1: Annual Mtg Pres.
+Mar 2: Town Mtg & Vote
+Mar 10: Board Reorg
+Apr 1: Teacher contracts / LOI
+Apr 7 & 14: Board Mtgs
+Apr 15: Union staff contracts
+Apr 20 / May 1: Contracts due
+ONGOING / ADDITIONAL
+VEHI Rate Info: Nov 20, 2026
+RFP Selection: Nov–Dec 2026
+LTWADMS: Jan 2027
+Annual Report & FY28 Budget: Feb 2027
+Feasibility Study: Early Spring 2027
+Budget Prep: Throughout
+FY28 HUUSD Budget Development Timeline 
+
+Why We Plan Beyond One Fiscal Year
+A sustainable budget considers how today's decisions affect future years—not just whether the current year.
+FY27
+FY28
+FY29
+FY30
+Long-Term
+Student impact
+How does the decision affect students and programs?
+Educational impact
+What changes to services, staffing, or opportunities result?
+Operational impact
+What does it mean for buildings, transportation, technology, and operations?
+Financial impact
+What does it mean for future budgets and reserves?
+Taxpayer impact
+What are the implications for local taxpayers and communities?
+Sustainability
+Can the District maintain the decision over time?
+A budget for one year is only one part of a sustainable financial plan.
+
+HUUSD K-12 Enrollment: 2009–10 to 2025–26
+Total enrollment has declined by 349 students (18.0%) since 2009–10.
+Overall Decline
+18.0%
+Representing 349 fewer students than the 2009–10 peak of 1,940.
+Recent 10-Year Trend
+-354
+Net student decline from 2015–16 to 2025–26 (currently at 1,591).
+Pattern: enrollment fell steadily through the 2010s, dropped notably in 2020–21, and has remained near 1,600 students since.
+
+Enrollment Change by Campus: 2009–10 to 2025–26
+Comparing campus-level shifts that contribute to the overall 18.0% district decline.
+Campus
+2009–10
+2025–26
+Enrollment Change
+% Change
+HUHS/MS
+780
+604
+−176
+−22.6%
+BPS
+343
+285
+−58
+−16.9%
+WAR
+148
+93
+−55
+−37.2%
+WES
+154
+118
+−36
+−23.4%
+FES
+112
+91
+−21
+−18.8%
+CBMS
+283
+263
+−20
+−7.1%
+MES
+120
+137
++17
++14.2%
+HUUSD Total
+1,940
+1,591
+−349
+−18.0%
+Only one campus (MES) saw positive growth, while others experienced declines of up to 37.2%.
+
+Enrollment Summary & Projections 
+School Year 
+Grade K-12 
+YOY 
+Change +/-
+School Year 
+Grade 
+K-12 
+YOY Change +/-
+
+October 1, 2014
+1761
+-38
+
+October 1, 2023
+1605
+-14
+October 1, 2015
+1746
+-15
+October 1, 2024
+1613
++8
+October 1, 2016
+1769
++23
+October 1, 2025
+1591
+-22
+October 1, 2017
+1721
+-48
+October 1, 2026
+ 1567
+-24
+October 1, 2018
+    1682
+-39
+October 1, 2027
+1539*
+-22
+October 1, 2019
+1668
+-14
+October 1, 2028
+1517*
+-22
+October 1, 2020
+1586
+-82
+October 1, 2029
+1495*
+-22
+October 1, 2021
+1619
++33
+October 1, 2030
+1473*
+-22
+October 1, 2022
+1619
+0
+October 1, 2031
+1451*
+-22
+* Based on the New England School Development Council (NESDEC)  Enrollment Projection Report 
+
+HUUSD K-12 Enrollment: 2009-10 to Projected 2031-32 
+
+An additional 140 - student projected decline from 2025-26 to 2031-32
+-8.8%
+Representing 349 fewer students than the 2009–10 peak of 1,940.
+-489
+Few students overall
+ From 2009-10 to the 2031-32 projection. 
+-25.2%
+
+HUUSD Enrollment Has Declined 18% Since 2009-10 and Is Project to Decline Further 
+
+Vermont Demographic Trends & HUUSD Enrollment
+Indexed to 2009 = 100 | Population, resident live births, and HUUSD K–12 enrollment
+Key Trends
+Vermont Population+3.2% (2009 to 2025)
+Vermont Live Births-17.8% (2009 to 2024)
+HUUSD Enrollment-18.0% (2009–10 to 2025–26)
+Births have declined much faster than population, creating a smaller student pipeline.
+*2025 Vermont birth data not yet included.
+Sources: Vermont Department of Health, Vermont Vital Statistics Annual Report 2024; U.S. Census Bureau population estimates; HUUSD enrollment data.
+Town births
+
+Resident Births in HUUSD Communities
+Historical live births in Duxbury, Fayston, Moretown, Waterbury, Warren, and Waitsfield (2020-2024)
+Births by Town and Year
+Key Observations
+Waterbury Leads: Consistently records the highest birth numbers in the district, rising to 52 in 2024.
+Declining Areas: Fayston and Warren saw notable decreases, dropping to just 4 and 1 births respectively in 2024.
+Pipeline Impact: Highly localized birth variations directly influence future elementary school enrollment and class sizes.
+Year
+Fayston
+Duxbury 
+Moretown
+Waitsfield
+Waterbury 
+Warren
+Total 
+2026
+7
+10
+9
+9
+34
+4
+73
+2025
+2
+9
+17
+5
+58
+16
+107
+2024
+4
+14
+23
+13
+52
+1
+107
+2023
+10
+14
+23
+14
+47
+11
+119
+2022
+7
+8
+21
+13
+41
+8
+98
+2021
+7
+6
+18
+8
+47
+14
+100
+2020
+10
+8
+18
+10
+43
+6
+95
+
+Birth Year
+Births
+Grad Year
+Seniors
+Diff (+/-)
+2020
+95
+2023
+130
+-35
+2021
+100
+2024
+105
+-5
+2022
+98
+2025
+122
+-24
+2023
+119
+2026
+119
+0
+2024
+107
+2027
+—
+—
+2025
+107
+2028
+—
+—
+2026
+73
+2029
+—
+—
+Pipeline Analysis
+Outflow Outpaces Inflow
+Graduating classes have consistently been larger than incoming resident birth cohorts (average gap of ~16 students).
+Future Enrollment Impact
+As larger graduating classes leave the district, smaller incoming PK cohorts will create a net contraction in overall K–12 enrollment.
+Key Takeaway
+Planning must account for long-term class size structural adjustments across all campus levels.
+Tracking Incoming PK to Graduates
+Comparing resident birth cohorts with graduating senior class sizes to track long-term pipeline trends
+
+How do we align our educational program, facilities, staffing, and resources with the number of students we are projected to serve?
+THE CHALLENGE
+What does this
+mean for our
+district?
+STAFFING
+How does declining enrollment affect staffing levels, class sizes, and the allocation of personnel across schools?
+FACILITIES
+How should the district plan for buildings that may serve fewer students while continuing to carry fixed operating and maintenance costs?
+TRANSPORTATION
+How do enrollment and geographic distribution affect routes, buses, travel times, and transportation costs?
+SEVEN CAMPUSES
+What is the appropriate number and configuration of campuses to serve our projected student population?
+BUDGET & AFFORDABILITY
+How does maintaining our current structure affect the resources available for instruction and student services?
+STRATEGIC DIRECTIVE
+Ensure absolute alignment of resources with enrollment realities to protect educational excellence.
+
+FY2027 Budget View
+31
+Nearly three-quarters of HUUSD budget is dedicated to salaries and employee benefits
+Key Insights:
+• Salary & Wages comprise the majority of the budget at 51.51%.
+• Benefits make up 21.82%, leading to a combined 73.33% personnel investment.
+Total FY2027 Proposed Budget: $51,884,847
+
+What is in our Budget 
+
+HUUSD – FY2027 School Budgets DISTRICT-WIDE SHOWN SEPARATELY
+District-Wide Budget Highlight
+Separated from individual school programs
+$10,761,43720.7% of Total
+Special Education: $5,114,708 (47.5%)
+Salary & Wages: $1,899,090(17.6%)
+Operations & Maintenance:  $1,269,265 (11.8%)
+Transportation: $1,132,558 (10.5%)
+Employee Benefits: $845,827 (7.8%)
+Maintenance Reserve: $500,000 (4.6%)
+
+Total Budget by Expense Type
+Overall FY2027 Budget: $51,884,847
+Salary & Wages$26,725,734 (51.51%)
+Employee Benefits$11,321,407 (21.82%)
+Operations$13,837,706 (26.67%)
+Personnel Investment: Salaries & Benefits make up 73.33% of the total budget.
+School / Program
+Total Budget
+% of Total
+HUHS
+$14,765,337
+28.5%
+Brookside Primary
+$7,813,070
+15.0%
+CBMS
+$6,490,488
+12.5%
+Moretown Elementary
+$3,233,280
+6.2%
+Waitsfield Elementary
+$2,990,160
+5.8%
+Warren Elementary
+$2,883,758
+5.6%
+Fayston Elementary
+$2,947,318
+5.7%
+School Programs Total
+    $41,123,410
+79.3%
+
+FY2027 Total Budget
+Key Programs
+General Instructional Programs
+$18.95M
+Special Education Services
+$9.22M
+Health Services
+$5.15M
+Operation & Maintenance
+$4.47M
+School Administration
+$2.78M
+Technology & Librarian Services
+$2.61M
+Student Support Services
+$2.19M
+
+
+Inflation Over the Years & Projected Future Rates
+Historical inflation figures (2022–2026) alongside estimated projections through 2031
+HISTORICAL RATES
+PROJECTED ESTIMATES (EST.)
+36
+2022
+6.5%
+2023
+3.4%
+2024
+2.9%
+2025
+2.7%
+2026
+2.8%
+2027
+(Est.)
+2.4%
+2028
+(Est.)
+2.7%
+2029
+(Est.)
+2.6%
+2030
+(Est.)
+2.5%
+2031
+(Est.)
+2.5%
+Key Takeaway: Inflation peaked at 6.5% in 2022 and is projected to stabilize between 2.4% and 2.7% long-term.
+Sean: 
+
+
+
+$51.9 million
+Fiscal Year 2027 Approved Budget
+
+$55.2 million
+Fiscal Year 2028 Projected Budget
+
+6.4%
+Year over Year Projected Increase
+
+$18,714
+Projected Cost Per Pupil
+$1,071 over the excess spending threshold
+
+$2.7 million
+Projected Spending Penalty
+
+Preliminary Major Cost Drivers
+
+
+FY27 to FY28 | Ranked by Dollar Increase
+1.
+2.
+3.
+4.
+District Wide Salaries 
+Negotiated agreements for Teachers, Support Staff and for non-unioned support staff
+Health Care Costs
+SPECIAL EDUCATION Costs (K-12)
+# of IEP’s, increased costs
+Transportation (General Ed )
+Rural community, limited options, alternative placements transportation, homeless transportation
+Estimated  increase: $3,339,273
+$2,114,801   7.8%
+                  $675,624   10%
+                    $407,122   8.0%
+         $141,727  8.0%
+6.436% overall growth
+44
+HUUSD SCHOOL DISTRICT
+
+
+Preliminary FY28 HUUSD Budget
+
+FY28
+Proposed Budget
+FY27 Budget
+Difference
+FY28 ESTIMATED HUUSD Homestead Tax Rate Increase
+Total Budget
+$55,224,120
+$51,884,847
+
+   $3,339,273
+
+6.436%
+Education Spending Per LTW ADM
+$17,623
+$16,229
+$1,395
+8.59%
+% Change
+45
+
+HUUSD Budget Growth
+Approved Budgets through FY2027 • FY2028* projected
+Budget Growth
+FY2023 Budget
+$42.66M
+FY2027 Approved
+$51.88M
+FY2028 Projected
+$55.22M
+Overall Increase
++$12.57M
++29.5% Growth
+55.0M
+50.0M
+45.0M
+40.0M
+FY2023
+FY2024
+FY2025
+FY2026
+FY2027
+FY2028*
+Year-over-Year Increase: 5.60% (FY24) • 6.50% (FY25) • 5.40% (FY26) • 2.75% (FY27) • 5.43% (FY28*) • 6.43% projected overall
+Source: HUUSD budget data provided. *FY2028 is projected.
+
+How did we get here?
+Key historical and structural factors limiting the District's financial flexibility
+Spending Threshold Limits
+The last ten years of operating near the excess spending threshold have limited the District's financial flexibility.
+Rising Cost of Education
+The cost of education has continued to increase, particularly salaries, health insurance, transportation, facilities, and other operating costs.
+External Cost Pressures
+Many cost increases are outside the District's direct control, while opportunities to reduce costs without affecting students have become increasingly limited.
+Significant Prior Reductions
+HUUSD has already made significant reductions—approximately $7.2 million over three years and more than 53 positions.
+Enrollment & Campus Infrastructure
+Enrollment has declined and shifted among our communities, but the District continues to operate seven campus’ with substantial fixed costs.
+Incremental reductions alone are no longer sufficient to address the underlying structural pressures.
+
+What have we done to reduce expenses?
+Summary of district financial and staffing adjustments over the past 3 years
+Financial Impact
+$7.2 M
+Reduction in Expenses
+Achieved over the last 3 fiscal years through operational, program, and service efficiency adjustments.
+Personnel Impact
+~53
+Staff Positions Reduced
+Reductions across classroom teachers, administrative leadership, interventionists, nurses and support staff.
+Strategic Multi-Year Expense Management
+Reductions were executed across consecutive budget cycles, targeting administrative efficiencies, program adjustments, class consolidation, and operational route optimizations.
+
+Average Salary & Benefits
+Position compensation analysis and targeted reductions to meet budget goals
+Role / Position Avg. Salary & Benefits Positions to Cut
+Teachers $135,000 ?
+Technology $119,400 ?
+Custodian $106,500 ?
+Administrative Assistant $93,400 ?
+Instructional Assistant $80,250 ?
+Food Service $78,500 ?
+Reduction Planning
+Target reductions depend on required expenditure targets across departments.
+HIGHEST AVERAGE COST
+$135,000
+Teachers
+LOWEST AVERAGE COST
+$78,500
+Food Service
+
+Requirement
+Minimum $3.3M Cut
+Required to stay under the spending threshold
+
+Proposed Budget Impacts
+Proposed Budget
+Cost per Pupil
+Excess over/(under) spending threshold
+Penalty to Education Spending
+Year over Year Increase %
+Reduction in Expenses
+$55.2M
+$18,714
+$1,071
+$2.7M
+6.435%
+(0)
+$54.2M
+$17,934
+$681
+$1.74M
+4.50%
+($1.0M)
+$53.3M
+$16,906
+$172
+$445K
+2.70% *(Projected Inflation)
+($1.9M)
+$52.8M
+$16,838
+$133
+$242K
+1.8%
+($2.7M)
+$51.9M
+$16,341
+($221)
+0
+0%
+($3.3M)
+
+Board Priorities & Directions
+Evaluating budget pathways and structural options for the upcoming fiscal year
+Option A: Not to Exceed Spending Threshold 
+Would require -$3.3M Reduction in expenses 
+Program Reductions
+Transportation 
+Extra-Curricular 
+Field trips 
+
+Short-Term Considerations
+Middle School consolidation
+School Closure(s)
+Efficencies of Scale
+Option B: Alternative Path
+Exceeds Spending Threshold
+This direction represents the scenario where budget requirements exceed the state-mandated spending threshold to protect current educational programming levels.
+Long-Term Considerations
+Long-term facility master planning
+Consolidation 
+Structural realignment and footprint optimization
+
+HARWOOD UNIFIED UNION SCHOOL DISTRICT 
+
+Questions 
+54
+HARWOOD UNIFIED
+UNION
+SCHOOL DISTRICT

@@ -73,7 +73,7 @@ export default {
           "From the October 1, 2026 enrollment report: every group of students (school and grade) is moved forward one grade to fall 2027, and placed under the plan and under no change. If the two schools differ, those students count. Normal moves, like 6th graders going to Harwood, are not counted.",
         ]),
         methodItem("Spending per pupil and the penalty", [
-          `The district's level-funded budget is $25.67 per pupil under the threshold and its Path B budget, ${money(590196)} lower, is $255.76 under. That is ${money(590196)} ÷ $230.09 = about ${num(PUPILS)} weighted pupils, which matches the district's own projection of 2,565 and its level-service penalty (${money(2773267)} ÷ $1,081).`,
+          `The district's level-funded budget is $25.67 per pupil under the threshold and its Path B budget, ${money(590196)} lower, is $255.76 under. That is ${money(590196)} ÷ $230.09 = about ${num(PUPILS)} weighted pupils, which also matches the district's level-service penalty (${money(2773267)} ÷ $1,081).`,
           `So for any plan: spending per pupil = $16,536.33 + (${money(TARGET)} − savings) ÷ ${num(PUPILS)}. If that is over the ${money(BUDGET.threshold)} threshold, the penalty is roughly the amount over times ${num(PUPILS)}, since Vermont counts the excess twice when it sets tax rates.`,
           "This reproduces the district's level-funded and Path B figures to the cent. It is a simplification: the state's official calculation also depends on next year's pupil count and excluded debt.",
         ]),
