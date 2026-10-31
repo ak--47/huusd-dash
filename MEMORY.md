@@ -6,6 +6,11 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-10-31: community ideas promoted to live
+
+- At the owner's request ("everyone likes them"), PR #19 promoted staging to live with a merge commit, carrying PR #18 (per-school shares, the Waitsfield Pre-K center version, the three K-6 + center plan, the placement finding, budget drivers, text fixes, and the `b=6` link fix).
+- Added a project skill, `.claude/skills/promote-to-live/SKILL.md`, with the promotion steps (when to do it, merge commit only, watching the deploy, confirming, recording it).
+
 ## 2026-10-31: community ideas folded in (staging only)
 
 Inputs from residents (in `~/Desktop/tmp/new-huusd-workstreams`, not in the repo): a write-up of the Pre-K center plan with Waitsfield as the center; a resident's alternative proposal, spreadsheet, and ChatGPT research; a parent's email exchange with a valley principal. Owner's calls: start shares from the district's implied placement; one Pre-K center card with two versions; add only research figures that verify; keep "suggested by residents", no names. Nothing from the principal's emails is on the site (district staff, confidentiality notice, would read as endorsement).
