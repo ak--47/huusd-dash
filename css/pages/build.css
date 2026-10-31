@@ -151,6 +151,19 @@
 .bp-recv[hidden], .bp-recv-field[hidden], .bp-recv-only[hidden], .bp-recv-none[hidden] { display: none; }
 .bp-recv-field { margin: 0; max-width: 22rem; }
 .wonk .bp-recv-only, .wonk .bp-recv-none { margin: 0; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
+/* a closed town's shares: the school that takes the rest, then a percent stepper for each other open school */
+.bp-shares { margin-top: var(--ak-s3); padding-left: var(--ak-s3); border-left: 2px solid var(--ak-hairline-strong); }
+.bp-shares[hidden] { display: none; }
+.bp-share-src { font-weight: 400; color: var(--ak-ink-3); }
+.wonk .bp-share-main { margin: var(--ak-s1) 0 var(--ak-s2); font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
+.bp-share {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name step" "n step";
+  align-items: center; column-gap: var(--ak-s3); padding: var(--ak-s2) 0; border-top: 1px solid var(--ak-hairline);
+}
+.bp-share-name { grid-area: name; font-weight: 600; color: var(--ak-ink); }
+.bp-share-n { grid-area: n; font-family: var(--ak-font-mono); font-size: var(--ak-text-xs); color: var(--ak-ink-3); }
+.bp-share .bp-stepper { grid-area: step; }
+.wonk .bp-share-btns { display: flex; flex-wrap: wrap; gap: var(--ak-s2); margin: var(--ak-s2) 0 0; }
 
 /* ---- results ---- */
 .bp-results { min-width: 0; background: var(--ak-surface); border: 1px solid var(--ak-hairline); border-radius: var(--ak-radius); scroll-margin-top: 4.5rem; }

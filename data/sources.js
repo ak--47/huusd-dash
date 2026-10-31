@@ -67,7 +67,7 @@ export const SOURCES = {
     date: "2026",
     kind: "state",
     url: "https://legislature.vermont.gov/Documents/2026/Docs/ACTS/ACT169/ACT169%20As%20Enacted.pdf",
-    note: "Cited by the district in the speaker notes of slides 7 and 38.",
+    note: "Cited by the district in the speaker notes of slide 7.",
   },
   aoeTransform: {
     title: "Education Transformation",
@@ -83,6 +83,21 @@ export const SOURCES = {
     kind: "district",
     url: "https://www.youtube.com/watch?v=nIYZIJAZqPk",
     note: "Quotes come from an automatic transcript of the public recording. It has no speaker labels, so we name a speaker only where the recording makes it clear.",
+  },
+  sep23: {
+    title: "FY28 Budget Development & Early Projections",
+    by: "HUUSD",
+    date: "2026-09-23",
+    kind: "district",
+    url: "https://docs.google.com/presentation/d/1dTrrCMIKtqg-loY-jyUNOtlDgh0xfSmKSn9qN820zE0/edit",
+    note: "The first FY28 budget presentation to the board, with this year's budget by program and the district's ranking of what drives next year's increase.",
+  },
+  upkRate: {
+    title: "Universal Prekindergarten: Funding",
+    by: "Vermont Agency of Education",
+    date: "2026",
+    kind: "state",
+    url: "https://education.vermont.gov/student-support/early-education/universal-prekindergarten-act-166/funding",
   },
   oct14: {
     title: "FY28 Budget Development: Scenarios & Timeline",

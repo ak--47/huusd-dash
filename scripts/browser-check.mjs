@@ -37,6 +37,9 @@ const ROUTES = [
   ["build-grade5", "#/build?o=MWR&t=5&m=1&c=prek"],
   ["build-prek-center", "#/build?o=WR&t=6&m=1&b=6&k=MES.all&sp=fayston~WRN~33.moretown~BPS~33"],
   ["build-prek-center-cb56", "#/build?o=WR&t=6&m=1&k=MES.all&sp=fayston~WRN~33.moretown~BPS~33&p=WES2.BPS2"],
+  ["build-prek-center-wes", "#/build?o=MR&t=6&m=1&b=6&r=waitsfield~MES&k=WES.all&sp=fayston~MES~20.waitsfield~WRN~20"],
+  ["build-shares", "#/build?o=WR&t=6&m=1&sp=fayston.moretown~BPS~14~WRN~5"],
+  ["build-three-k6-center", "#/build?o=FMR&t=6&m=1&k=WES.valley"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 

@@ -189,7 +189,9 @@ export default {
     function draw() {
       const rows = [];
       for (const o of OPTIONS) {
-        if (o.family) {
+        if (o.versions) {
+          rows.push({ o, versions: o.versions.map((v) => ({ v, s: score(v.plan ?? o.plan, basis, reading) })) });
+        } else if (o.family) {
           const s = o.family.map((p) => score(p, basis, reading));
           rows.push({ o, family: s });
         } else {
@@ -215,7 +217,21 @@ export default {
 
     const muted = (...text) => [h("br"), h("span", { class: "small muted" }, ...text)];
 
-    function cardFor({ o, s, family }) {
+    // the measures for one plan, as on every single-plan card
+    const metricsFor = (s) =>
+      h(
+        "dl",
+        { class: "opt-metrics" },
+        metric("Saves a year", `${s.upperBound ? "Up to " : ""}${moneyShort(s.savings)}`, s.estimate ? [" ", tag("estimate")] : null),
+        metric("Against the target", gapCell(s.gap, s.upperBound)),
+        metric("Buildings in use", String(s.buildings)),
+        metric("Grades 5-6", s.r.plan.valleyTop === 6 ? "Stay in the valley" : "Go to Crossett Brook"),
+        metric("Students fit", fitCell(s), null, { wide: true }),
+        metric("Change schools next fall", num(s.moved)),
+        metric(MOST_SCHOOLS, `${s.valleyMax} / ${s.wbMax}`)
+      );
+
+    function cardFor({ o, s, family, versions }) {
       const kids = store.get("kids");
       const actions = (plan, option) =>
         h(
@@ -270,6 +286,29 @@ export default {
           inValley ? h("p", { class: "opt-note" }, fiveSixNote(`the ${inValley} versions that keep them there`, "them"), fiveSixCite()) : null
         );
       }
+      // one card, several versions of the same plan: each with its own measures, then the notes they share
+      if (versions) {
+        return h(
+          "article",
+          { class: `wonk-card opt-card opt-card--${o.group}` },
+          h("h3", {}, o.name),
+          h("p", { class: "opt-what" }, o.what),
+          versions.map(({ v, s: vs }) =>
+            h(
+              "section",
+              { class: "opt-version", "aria-label": v.name },
+              h("h4", {}, v.name),
+              h("p", { class: "opt-what" }, v.what),
+              metricsFor(vs),
+              v.notes.map((n) => h("p", { class: "opt-note" }, n)),
+              portablesNote(vs.r.budget.oneTime.portables),
+              actions(v.plan ?? o.plan, v.id)
+            )
+          ),
+          o.notes.map((n, i) => h("p", { class: "opt-note" }, n, o.refs && i === 0 ? [" ", cites(o.refs)] : null)),
+          versions.some((x) => x.s.upperBound) ? h("p", { class: "opt-note" }, fiveSixNote("these versions", "them"), fiveSixCite()) : null
+        );
+      }
       const label = o.group === "one-closure" ? `${o.name}: ${schoolShort(o.closed)} closes` : o.name;
       const brief = o.group === "one-closure" && o.closed !== "FES";
       return h(
@@ -277,17 +316,7 @@ export default {
         { class: `wonk-card opt-card opt-card--${o.group}` },
         h("h3", {}, label),
         brief ? h("p", { class: "opt-what" }, `Same as above, with ${schoolShort(o.closed)} closing.`) : h("p", { class: "opt-what" }, o.what),
-        h(
-          "dl",
-          { class: "opt-metrics" },
-          metric("Saves a year", `${s.upperBound ? "Up to " : ""}${moneyShort(s.savings)}`, s.estimate ? [" ", tag("estimate")] : null),
-          metric("Against the target", gapCell(s.gap, s.upperBound)),
-          metric("Buildings in use", String(s.buildings)),
-          metric("Grades 5-6", s.r.plan.valleyTop === 6 ? "Stay in the valley" : "Go to Crossett Brook"),
-          metric("Students fit", fitCell(s), null, { wide: true }),
-          metric("Change schools next fall", num(s.moved)),
-          metric(MOST_SCHOOLS, `${s.valleyMax} / ${s.wbMax}`)
-        ),
+        metricsFor(s),
         brief ? null : o.notes.map((n, i) => h("p", { class: "opt-note" }, n, o.refs && i === 0 ? [" ", cites(o.refs)] : null)),
         s.upperBound && !brief ? h("p", { class: "opt-note" }, fiveSixNote("this version", "it"), fiveSixCite()) : null,
         portablesNote(s.r.budget.oneTime.portables),

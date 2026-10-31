@@ -110,12 +110,30 @@ export const FINDINGS = [
     found: [
       "On October 28 a board member asked to see versions where the two schools left open \"did not include pre-k\" and one of the closed buildings \"could be leased back to house pre-k.\" Later a board member described \"a partnership or a lease from the town to use a space of that building to operate a pre-K that served the Valley, as opposed to keeping a third building.\"",
       "An administrator offered to bring \"maybe an option of moving PK into a building, a separate building, but that would be keeping a building. So our numbers are going to be going down.\"",
-      "The facility slides give each building's yearly operating costs without custodial staff (Moretown: $185,868). Pre-K teachers are already in the Path B tables, so in a separate building they would move rather than be added; a Pre-K-only building may also need its own custodian, office staff, or nurse. Under the Articles of Agreement, a valley building the board decides not to use for educational programs is offered to its town for $1, which is how a lease from a town could come about.",
+      "The facility slides give each building's yearly operating costs without custodial staff (Moretown: $185,868). Pre-K teachers are already in the Path B tables, so in a separate building they would move rather than be added; a Pre-K-only building may also need its own custodian, office staff, or nurse. Under the Articles of Agreement, a valley building the board decides not to use for educational programs is offered to its town for $1, with conditions: the town takes on any outstanding bonds and repays any state construction aid and capital improvements since 2017. That is how a lease from a town could come about.",
       "Taking Pre-K out of the schools that stay open frees room there: about 30 to 42 seats in each, which matters most where a pairing is over its wastewater limit or classroom space.",
     ],
     why: "A separate Pre-K building changes both sides of the comparison: it keeps one more building in use, which saves less, and it frees space in the schools that stay open.",
     ask: "Will the board see the version with Pre-K in one building, run by the district or leased from a town, before it decides? What would that building cost each year, including staff, and how much space would it free in the schools that stay open?",
     refs: [ref("deck", "slides 27-32"), ref("deck", "slide 22"), ref("meeting1028", "Pre-K in a separate building"), ref("aoa", "Article 6")],
+  },
+  {
+    id: "placement",
+    weight: "moderate",
+    kind: "missing",
+    title: "The capacity tables send about 9 in 10 children from a closed town to one school, but do not say how they were placed",
+    says: "Each capacity table says it is \"Based on home location to nearest school.\"",
+    found: [
+      "The tables do not say which town each child lives in. Comparing each school's K-6 count with this year's students (our calculation): the Waitsfield + Warren table puts about 203 of the 224 Fayston and Moretown children at Waitsfield (about 91%), about 4 at Warren, and about 19 at Brookside and Crossett Brook. The Moretown + Warren table puts about 174 of the 190 Waitsfield and Fayston children at Warren (about 92%) and about 14 at Moretown. Every table sends between about 86% and 100% of each closed town to one school.",
+      "Placing children by home address also moves some whose school stays open. The Waitsfield + Fayston table puts 71 K-6 students at Fayston, 16 fewer than attend it today.",
+      "The Articles of Agreement give children in a town whose school closes the option of the district school closest to their home, unless their parents choose another, and require the board to consider the receiving school's space, classroom needs, and student-to-teacher ratios. So the real split could differ from the tables, in either direction.",
+      "Build a plan starts from these shares for any plan that keeps two valley schools open, and lets you set each town's share to the percent.",
+    ],
+    why: "Whether a pairing fits its wastewater limit or classroom space often comes down to a few dozen children. A different split of the same towns can move a school over or under its limit.",
+    ask: "How were children placed in the capacity tables: by home address, from which year's list, and counting families who use school choice? What share of each closed town would go to each school? Would the board use the Articles' clause on space and class sizes to balance the schools?",
+    refs: [ref("deck", "slides 27-32"), ref("enroll", "p. 1"), ref("aoa", "Article 6(E)")],
+    table: "placement",
+    link: { href: "#/build", label: "Set the shares in Build a plan" },
   },
   {
     id: "school-count",
@@ -183,7 +201,7 @@ export const FINDINGS = [
       "Neither deck shows how the consolidation savings break down between staff, buildings, and transportation.",
     ],
     why: "Shifts this large between presentations suggest the estimates are still being worked out. The breakdown matters because the yearly saving from closing a particular building depends on what is cut.",
-    ask: "What changed between October 14 and 28, and what is in each savings figure (positions, building costs, buses)? What would closing one valley school, rather than two, save?",
+    ask: "What changed between October 14 and 28, and what is in each savings figure (positions, building costs, buses)? What would closing one valley school, rather than two, save? What one-time costs come with each plan, such as moving, portable classrooms, or new bus routes, and what would each plan do to each town's tax rate?",
     refs: [ref("oct14", "Scenario 02 and 03; Scenario 01 summary"), ref("deck", "slides 13, 17-19"), ref("meeting1028", "finance director")],
   },
   {
@@ -199,7 +217,7 @@ export const FINDINGS = [
       "Path A's largest cut is $1,360,000 from transportation, out of a transportation budget of about $1.9 million (October 14 deck).",
     ],
     why: "Ride times are one of the main ways consolidation changes a child's day, and transportation costs can offset savings from closing buildings.",
-    ask: "What would the longest ride be for an elementary student in each pairing, and what would buses cost?",
+    ask: "What would the longest ride be for an elementary student in each pairing, how many students would ride longer than 45 minutes, and what would buses cost?",
     refs: [ref("minutes1014", "Discussion: Budget"), ref("busRoutes", "Route 13 AM"), ref("oct14", "Scenario 01: Transportation"), ref("truexCap", "planning guidelines"), ref("truexReport", "planning guidelines"), ref("meeting1028", "transportation")],
   },
   {
@@ -211,11 +229,12 @@ export const FINDINGS = [
     found: [
       "The finance director said Path A is \"not putting us on a sustainable path for the future... we're going to constantly see cuts,\" because the threshold keeps stepping down after FY28.",
       "The superintendent described the tuition-only Pre-K model as \"giving parents vouchers to go to private Pre-K, which we know there's not capacity.\" He said cutting tier 2 and 3 supports, the extra help for students who are behind, is \"a short-term gain for a long-term higher cost,\" because more students would then need special education.",
+      "Under the tuition model, Vermont's Pre-K tuition rate for 2026-27 is $4,106 a child, which pays for 10 hours a week for 35 weeks.",
       "The deck does not say which bus routes would end or how many students ride them. The superintendent said the district has already cut bus routes, most recently in its last bus contract, and is now \"at a minimum.\"",
     ],
     why: "Path A keeps every building, but it would change many children's school days, and the finance director said more cuts would follow. Comparing the two paths fairly takes the same detail on each.",
     ask: "Under Path A, which bus routes would end, and how many children ride them? Where would children now in district Pre-K classes go? How much more would have to be cut in FY29 and FY30?",
-    refs: [ref("deck", "slide 13"), ref("meeting1028", "Path A")],
+    refs: [ref("deck", "slide 13"), ref("meeting1028", "Path A"), ref("upkRate", "2026/2027 tuition rate")],
   },
   {
     id: "minor",
@@ -227,12 +246,12 @@ export const FINDINGS = [
       "Fayston's profile prints 84 students; its own grade rows and the October 1 report give 87.",
       "Fayston and Warren both show exactly 25.63 staff FTE.",
       "The October 14 deck gives the FY28 threshold as $16,562 on a card and $16,572 in the footer of the same slide, and the level-service excess as $1,071 on the card and $1,081 in the footer.",
-      "The projected-inflation card prints \"Required Cut: $1,2938,382\"; the difference between the two budgets is $1,938,382.",
+      "The projected-inflation card prints \"Required Cut: $1,2938,382\", which is not a number; the finance director said on October 28 it would be \"almost $1.3 million.\"",
       "The slide that says \"No school would not exceed wastewater capacity\" means no school would exceed it.",
     ],
     why: "None of these changes a conclusion on its own; they are worth fixing before the numbers are used for decisions.",
     ask: "",
-    refs: [ref("deck", "slides 10, 21, 24, 31"), ref("oct14", "Projected FY28 Budget & Excess Spending Threshold")],
+    refs: [ref("deck", "slides 10, 21, 24, 31"), ref("oct14", "Projected FY28 Budget & Excess Spending Threshold"), ref("meeting1028", "required cut")],
   },
 ];
 
