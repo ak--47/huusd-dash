@@ -1,4 +1,4 @@
-// The staging copy of the site lives at /staging/ next to the live site (see "Staging" in AGENTS.md).
+// The staging copy of the site lives at /staging/ next to the live site (see "Staging and live" in AGENTS.md).
 // The code is the same on both; it only knows which one it is from its address. No imports, so dom.js can
 // use it.
 
