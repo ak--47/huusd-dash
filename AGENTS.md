@@ -186,7 +186,7 @@ Merge it into `staging` (the owner merges, or asks you to). It shows at /staging
 
 **What is on staging but not live:** `npm run staging:diff` lists the commits and files, and any live commits staging lacks. Or open https://github.com/ak--47/huusd-dash/compare/main...staging.
 
-**Promoting staging to live** (only when the owner asks):
+**Promoting staging to live** (only when the owner asks; Claude Code sessions have the `promote-to-live` skill in `.claude/skills/` with these steps and the checks around them):
 ```sh
 npm run staging:diff                      # list what will go live; put it in the PR body
 gh pr create --base main --head staging --title "Promote staging to live" --body "..."
