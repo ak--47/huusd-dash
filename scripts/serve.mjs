@@ -10,7 +10,8 @@ const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; ch
 export function startServer(port = 0) {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, "http://x");
-    let file = path.join(ROOT, decodeURIComponent(url.pathname));
+    // /staging/ serves the same files, so the staging notice can be checked locally
+    let file = path.join(ROOT, decodeURIComponent(url.pathname).replace(/^\/staging(?=\/|$)/, ""));
     if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
     if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
     fs.readFile(file, (err, buf) => {

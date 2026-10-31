@@ -1,8 +1,10 @@
 name: Test and deploy to GitHub Pages
 
+# One Pages site holds two copies: main at the root (the live site) and the staging branch at /staging/.
+# A push to either branch tests that branch, then publishes both, so neither copy erases the other.
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
   workflow_dispatch:
 
 permissions:
@@ -12,7 +14,8 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # queue rather than cancel: a cancelled run would skip testing the branch it was started for
+  cancel-in-progress: false
 
 jobs:
   test:
@@ -38,10 +41,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble the static site
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Assemble the static site (main at the root, staging at /staging/)
         run: |
           mkdir _site
           cp -R index.html og.png css js data wonk _site/
+          if git rev-parse --verify --quiet origin/staging >/dev/null; then
+            git worktree add --detach ../staging origin/staging
+            mkdir _site/staging
+            (cd ../staging && cp -R index.html og.png css js data wonk "$GITHUB_WORKSPACE/_site/staging/")
+          fi
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

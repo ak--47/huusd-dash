@@ -49,6 +49,9 @@ body { margin: 0; background: var(--ak-ground); }
 .side-note { margin-top: auto; padding-top: var(--ak-s6); font-size: var(--ak-text-sm); color: var(--ak-ink-3); }
 
 .wonk-topbar { background: var(--ak-ground); }
+/* Only on the staging copy (js/ui/staging.js) */
+.staging-bar { padding: var(--ak-s2) var(--ak-s4); border-bottom: 3px solid var(--ak-warn); background: var(--ak-ground); color: var(--ak-ink); font-size: var(--ak-text-sm); line-height: 1.4; }
+.staging-bar a { text-decoration: underline; }
 .topbar-id { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
 .topbar-title { color: var(--ak-ink); font-weight: 700; line-height: 1.25; display: none; }
 /* On phones the nav's independence note sits in the closed drawer, so the top bar says it too. */

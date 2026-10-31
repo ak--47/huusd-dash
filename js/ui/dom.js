@@ -1,5 +1,7 @@
 // Small DOM and formatting helpers. Data never goes through innerHTML.
 
+import { STAGING } from "./staging.js";
+
 export function h(tag, attrs = {}, ...children) {
   const el = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs ?? {})) {
@@ -136,10 +138,12 @@ export function dateLong(iso) {
 }
 
 // ---- storage: per-viewer conveniences only; the page works without it ----
+// Staging shares the live site's origin, so it keeps its own keys.
+const PREFIX = STAGING ? "hspe-staging:" : "hspe:";
 export const store = {
   get(key, fallback = null) {
     try {
-      const v = localStorage.getItem(`hspe:${key}`);
+      const v = localStorage.getItem(`${PREFIX}${key}`);
       return v == null ? fallback : JSON.parse(v);
     } catch {
       return fallback;
@@ -147,7 +151,7 @@ export const store = {
   },
   set(key, value) {
     try {
-      localStorage.setItem(`hspe:${key}`, JSON.stringify(value));
+      localStorage.setItem(`${PREFIX}${key}`, JSON.stringify(value));
     } catch {
       /* private mode or blocked storage: keep going */
     }

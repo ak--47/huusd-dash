@@ -2,6 +2,8 @@
 // blockers do not drop them. Nobody is identified. Off on localhost, where a stub keeps every call
 // in window.__mpEvents for the browser checks.
 
+import { STAGING } from "./staging.js";
+
 const TOKEN = "0695defd4c9fb470c8c838dc4c72f24c"; // public project token, meant for browser code
 const PROXY = "https://express-proxy-lmozz6xkha-uc.a.run.app";
 
@@ -82,7 +84,7 @@ function loadMixpanel() {
     record_collect_fonts: true,
     record_heatmap_data: true,
     loaded(mp) {
-      mp.register({ site: "harwood-school-plans", $mp_user_agent: navigator.userAgent });
+      mp.register({ site: "harwood-school-plans", env: STAGING ? "staging" : "live", $mp_user_agent: navigator.userAgent });
     },
   });
 }

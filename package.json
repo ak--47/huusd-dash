@@ -7,7 +7,8 @@
     "serve": "node scripts/serve.mjs",
     "test": "node --test test/*.test.mjs",
     "test:browser": "node scripts/browser-check.mjs --axe-mobile",
-    "format": "npx prettier@3 --write \"js/**/*.js\" \"data/**/*.js\" \"css/**/*.css\" \"scripts/**/*.mjs\" \"test/**/*.mjs\""
+    "format": "npx prettier@3 --write \"js/**/*.js\" \"data/**/*.js\" \"css/**/*.css\" \"scripts/**/*.mjs\" \"test/**/*.mjs\"",
+    "staging:diff": "node scripts/staging-diff.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",
