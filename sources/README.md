@@ -26,6 +26,7 @@ Provided by the site's owner on November 3; the agenda and the October 12 minute
 | [meeting-transcript.txt](2026-11-02-committee-meeting/meeting-transcript.txt) | Automatic transcript of the meeting recording, with timestamps. Machine transcription (some lines are word-timing fragments); check the recording for exact wording. | `meeting1102` | [District YouTube channel](https://tinyurl.com/huwebapp-youtube-live) |
 | [committee-agenda.md](2026-11-02-committee-meeting/committee-agenda.md) | The committee's agenda, with links to the October 12 minutes and the folder of feasibility-study proposals. | `meeting1102`, `cabotRfps` | [Proposals folder](https://drive.google.com/drive/folders/1kbyn-otsGNQwtlcOErfvSZ2CCgns0UyG) |
 | [committee-minutes-2026-10-12-draft.md](2026-11-02-committee-meeting/committee-minutes-2026-10-12-draft.md) | Draft minutes of the committee's October 12 meeting, approved on November 2. | | [Google Docs](https://docs.google.com/document/d/1gdWOjAwmDzzW2gJiOW69FoZYqlUOmb7swakRVfodEvU/edit) |
+| [proposals/](2026-11-02-committee-meeting/proposals/) | Text extracted (`pdftotext -layout`) from the five firms' feasibility-study proposals for 193 Home Farm Way: Black River Design, gbArchitecture, Harriman, TruexCullins, and Vermont Integrated Architecture. The PDFs (about 50 MB) are not kept here; some fee tables and schedules are images and do not come through in the text. | `cabotRfps` | [Proposals folder](https://drive.google.com/drive/folders/1kbyn-otsGNQwtlcOErfvSZ2CCgns0UyG) |
 
 ## September 23, 2026 board meeting
 
