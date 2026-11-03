@@ -62,3 +62,57 @@ export const MEETING = {
   publicComment:
     "Six people spoke in the 15 minutes of public comment, at least five of them from Moretown. Several spoke for keeping Moretown Elementary open and against repeated cuts; one said quality comes from people rather than buildings and that a plan keeping quality within budget would have his vote even if it closed his town's school. The chair of the Moretown select board offered the town's 170 acres for a school as an alternative to 193 Home Farm Way in Waitsfield (the Cabot Creamery building), the site in the district's feasibility study.",
 };
+
+// The board's Building Use & Visioning Committee, November 2, 2026 (on Zoom), from an automatic transcript of the
+// recording, which labels speakers by their Zoom names. We name people by role. Bracketed words fix obvious
+// transcription errors; "uh" and "um" are cut only with ellipses. Figures said here are preliminary: the finance
+// director said she would present them on November 4.
+export const MEETING_1102 = {
+  src: ref("meeting1102", "transcript of the recording"),
+  groups: [
+    {
+      title: "New numbers",
+      items: [
+        { who: "The finance director, on lower health insurance rates", text: "So, it is roughly a $300,000 savings in our level service." },
+        { who: "The finance director, on closing one valley school with grades 5-6 kept in the valley", text: "So instead of the projected $3.9 million in cost savings, we would only be seeing $2.3 million." },
+        { who: "The finance director, on why", text: "...just having Brookside fifth and sixth graders, that only gives us 131 students in Crossett Brook. So, we're underutilizing Crossett Brook." },
+        { who: "The finance director, with the health insurance savings counted", text: "We still would be having a penalty of $165,324... fiscal year 29 to not have an excess spending threshold penalty, we would have to cut another minimum of $350,000." },
+        { who: "The finance director, on whether that version needs portable classrooms", text: "...this trailers would not be necessary, but they're larger, much larger class sizes." },
+        { who: "The superintendent, on how many more students it would take to stay under the threshold", text: "We would need districtwide an additional 200 students in our district to be under that amount." },
+      ],
+    },
+    {
+      title: "The administration",
+      items: [
+        { who: "The superintendent, on Path B", text: "...it's the best option educationally... We would have K to four buildings, a 5 to six building and a 7 through 12." },
+        { who: "An administrator who was once principal at Moretown", text: "...this is an opportunity to get fifth and sixth graders together to have alignment." },
+        { who: "The superintendent, on closing one school now and another later", text: "...those students would move another time and they would not necessarily be moving with the same cohort of students that they would be if we did that at once." },
+        { who: "The superintendent, on shared staff with one closure", text: "...you would have to take that capacity probably from Crossett Brook, who is a full-time nurse now... There's not an even split." },
+        { who: "The superintendent, on other homes for Pre-K", text: "We would not recommend that for next year without... a lot of further work and research." },
+        { who: "The superintendent, on rated and functional capacity", text: "...rated is what you could conceivably put in... but that's very large classes... that are not conducive to learning." },
+        { who: "The superintendent, on Brookside's 480 and the consultant's 399", text: "I would go with the functional capacity." },
+      ],
+    },
+    {
+      title: "Buildings and wastewater",
+      items: [
+        { who: "The finance director, on the capacity tables", text: "...this right now is only including students. We haven't plugged in staff." },
+        { who: "The finance director, on Waitsfield", text: "It's 230, but we would have to do an an amendment... to be able to reach up to 300." },
+        { who: "The district's buildings and grounds representative", text: "...we don't we don't use our wastewater systems to capacity now... unless you're talking huge numbers you know almost doubling what you have... I don't see waste water as a constraint." },
+        { who: "The committee chair, on Waitsfield's town wastewater system", text: "...the goal is to have the system online... by the fall of 2028." },
+        { who: "The committee chair", text: "...the town of Waitsfield did... receive funding from the Northern Borders Regional Commission... of approximately $1 million... on an application that was premised on expanding the school to accommodate potential consolidation." },
+        { who: "The superintendent, on Moretown's meals", text: "It's then transported in an employee[']s vehicle to get to... Moretown." },
+      ],
+    },
+    {
+      title: "Committee members",
+      items: [
+        { who: "The committee's co-chair", text: "...if we close one school for fiscal year 28 and then we close another school for fiscal 29, you're going to have kids that are going to move three times in three years." },
+        { who: "A board member from Waterbury, on moving Crossett Brook's 5th and 6th graders back to Brookside", text: "...it was going to be incredibly challenging and tight squeeze because there are empty classrooms but it wasn't logistically feasible and then there were concerns about the cafeteria size..." },
+        { who: "A board member, on sending valley 5th and 6th graders to Crossett Brook while a new school is planned", text: "I am worried about them being caught with a failed bond as someone from the public raised." },
+      ],
+    },
+  ],
+  publicComment:
+    "Four people spoke. One favored a central school and did not like the idea of separating the 5th and 6th graders; one asked the board to consider new consultants and new ways to involve the public; two asked it not to lose sight of Harwood's building, and one of them urged it to look at two valley schools teaching K-6, with Pre-K elsewhere if needed, and worried that a bond for a new school might not pass. The committee put off reviewing the five feasibility-study proposals to a later meeting.",
+};

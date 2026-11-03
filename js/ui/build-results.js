@@ -1,11 +1,11 @@
 // Results for the "Build a plan" page: budget, buildings, students, and a comparison with the
 // district's plans. The panel is rebuilt on every change; the controls are not.
 
-import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
+import { BUDGET, HEALTH_UPDATE, MODULAR, ONE_CLOSURE, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
-import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, budget, effectiveSplit, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
+import { EXCLUSION_PER_PUPIL, PK_PLAN, PLAN_A, PLAN_TODAY, PUPILS, TARGET, TARGET_WITH_EXCLUSION, budget, effectiveSplit, encodePlan, evaluate, pathB, receivingSchool, townSchool } from "../model/index.js";
 import { h, listJoin, money, moneyShort, num, plural, store } from "./dom.js";
 import { cite, note, schoolName, schoolShort, status, tag, term, unsure } from "./kit.js";
 import { heatGrid } from "./heat.js";
@@ -237,6 +237,7 @@ function savingsMeter(b) {
 
 function itemSource(it, plan) {
   if (it.id === "prekCenter") return FACILITIES[plan.prekCenter.school].src;
+  if (it.id === "oneClosure") return ONE_CLOSURE.src;
   if (it.id === "middle") return PATH_B_SAVINGS.middle.src;
   if (it.id === "valley") return PATH_B_SAVINGS.valley.src;
   return PATH_A_CUTS.src;
@@ -248,7 +249,14 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
   const closed = r.closed.length;
   const lower = lowerTarget(b);
   // no change on the same basis: the district's level-service budget (slide 10)
-  const noChange = budget(PLAN_TODAY, { basis: b.basis });
+  const noChange = budget(PLAN_TODAY, { basis: b.basis, health: b.health });
+  // the November 2 health insurance update, when the reader counts it (Advanced)
+  const healthWords = b.health
+    ? [
+        ` The target here also takes off about ${money(HEALTH_UPDATE.amount)} for the lower health insurance rates the finance director reported on November 2; the district has not yet published a target that includes them. `,
+        cite(HEALTH_UPDATE.src),
+      ]
+    : null;
 
   // where the total comes from: printed (a district plan), our sum of printed items, or with our estimate
   const totalKind = b.hasEstimate ? "estimate" : named?.kind === "district" || b.items.length <= 1 ? "district" : "derived";
@@ -260,25 +268,27 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
         {},
         b.upperBound ? "Saves at most " : "Saves ",
         h("strong", { class: "wonk-num" }, money(b.savings)),
-        ` a year. Using the lower target, ${money(b.target)}: the cut needed if payments on bonds voters approved before July 1, 2026 are left out of the FY28 test, as state law provides. The district's own target is ${money(TARGET)}. `,
+        ` a year. Using the lower target, ${money(b.target)}: ${b.health ? `${money(TARGET_WITH_EXCLUSION)} is` : "it is"} the cut needed if payments on bonds voters approved before July 1, 2026 are left out of the FY28 test, as state law provides. The district's own target is ${money(TARGET)}. `,
         STATE_LAW(),
         " ",
-        tag("derived")
+        tag("derived"),
+        healthWords
       )
     : h(
         "p",
         {},
         b.upperBound ? "Saves at most " : "Saves ",
         h("strong", { class: "wonk-num" }, money(b.savings)),
-        ` a year. The district's target is ${money(b.target)}, the amount that keeps next year's budget level with this year's. `,
-        cite(BUDGET.src)
+        b.health ? ` a year. The target here is ${money(b.target)}. The district's own target, ${money(TARGET)}, is the amount that keeps next year's budget level with this year's. ` : ` a year. The district's target is ${money(b.target)}, the amount that keeps next year's budget level with this year's. `,
+        cite(BUDGET.src),
+        healthWords
       );
 
   const pp = Math.round(Math.abs(b.vsThreshold));
   const thresholdTerm = term("threshold", "excess spending threshold");
   // a plan that saves nothing is the district's level-service budget, which slide 10 also prices
   const slide10 =
-    b.savings === 0
+    b.savings === 0 && !b.health
       ? lower
         ? [`Slide 10 prints the same figures for this budget: ${money(LEVEL_SERVICE.perPupilVsThreshold)} per pupil and ${money(LEVEL_SERVICE.penalty)}. `, cite(BUDGET.src)]
         : [
@@ -376,13 +386,28 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                     { class: "bp-item-note" },
                     `An upper limit. The district's figure assumes every valley 5th and 6th grader moves to Crossett Brook; this plan keeps ${plan.valleyTop === 5 ? "valley 5th graders" : "them"} in the valley. On October 28 an administrator said keeping them there would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so this would save less. `,
                     cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
+                    closed === 1 && plan.valleyTop === 5
+                      ? ` With grades 5 and 6 both kept in the valley, the district put one closure plus the merger at about ${money(ONE_CLOSURE.amount)} in all on November 2, so this version may well save less than the total shown here.`
+                      : null,
                     plan.bpsTop === 6
                       ? " Here those 5th and 6th graders move to Brookside instead, which the district has not costed. Nothing is counted for Crossett Brook's empty building: the district has published no operating cost for it, and an empty building still needs heat, power, and upkeep, more so during repairs."
                       : null
                   )
-                : it.kind === "estimate"
-                  ? h("span", { class: "bp-item-note" }, `The district costed closing exactly two schools (${money(PATH_B_SAVINGS.valley.amount)}). We use half of that, ${money(PATH_B_SAVINGS.valley.amount / 2)}, for each school closed.`)
-                  : null
+                : it.id === "oneClosure"
+                  ? h(
+                      "span",
+                      { class: "bp-item-note" },
+                      `The finance director's figure from the November 2 committee meeting, said aloud and to be presented on November 4: about ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, against ${money(PATH_B_SAVINGS.total)} for Path B. It keeps valley 5th and 6th graders in the valley, which she said leaves about 131 students at Crossett Brook and "still impacts the merger of the middle schools." She did not say which school; it is used for each.`
+                    )
+                  : it.kind === "estimate"
+                    ? h(
+                        "span",
+                        { class: "bp-item-note" },
+                        `The district costed closing exactly two schools (${money(PATH_B_SAVINGS.valley.amount)}). We use half of that, ${money(PATH_B_SAVINGS.valley.amount / 2)}, for each school closed.${
+                          closed === 1 && plan.valleyTop === 4 ? ` Its November 2 figure for one closure keeps grades 5-6 in the valley, so it does not apply here.` : ""
+                        }`
+                      )
+                    : null
             )
           )
         ),
@@ -522,7 +547,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
           ? h(
               "li",
               {},
-              `The lower target, ${money(b.target)}, is the district's ${money(TARGET)} less ${money(TARGET - b.target)}: ${correction} per pupil, the amount slide 10 added to its level-funded figure when it removed the debt exclusion. State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test; payments on a new bond would count. `,
+              `The lower target, ${money(TARGET_WITH_EXCLUSION)}, is the district's ${money(TARGET)} less ${money(TARGET - TARGET_WITH_EXCLUSION)}: ${correction} per pupil, the amount slide 10 added to its level-funded figure when it removed the debt exclusion. State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test; payments on a new bond would count. `,
               STATE_LAW(),
               " ",
               cite(BUDGET.src)
@@ -530,18 +555,28 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
           : h(
               "li",
               {},
-              `The target, ${money(b.target)}, is the cut the district says holds the FY28 budget level with this year's, which keeps spending per pupil just under the state threshold. `,
+              `The district's target, ${money(TARGET)}, is the cut it says holds the FY28 budget level with this year's, which keeps spending per pupil just under the state threshold. `,
               cite(BUDGET.src),
               ` If payments on bonds voters approved before July 1, 2026 are left out of the test, as state law provides, the cut needed is about $500,000 smaller. You can switch to that target under Advanced. `,
               STATE_LAW()
             ),
+        b.health
+          ? h(
+              "li",
+              {},
+              `Health insurance: on November 2 the superintendent said next year's increase came in at about 2.5% for most plans, lower than projected, and the finance director called it "roughly a ${money(HEALTH_UPDATE.amount)} savings in our level service." She said spending per pupil over the threshold with no change falls from ${money(HEALTH_UPDATE.perPupilBefore)} to ${money(HEALTH_UPDATE.perPupilAfter, 2)}. The target here is lowered by that ${money(HEALTH_UPDATE.amount)}; the district has not published a restated target. `,
+              cite(HEALTH_UPDATE.src)
+            )
+          : null,
         h(
           "li",
           {},
           "Savings for each lever are the district's figures. ",
-          closed && closed !== 2
-            ? `The district costed closing exactly two valley schools. For ${closed === 1 ? "one" : closed === 3 ? "three" : "four"}, we scale its figure by the number of buildings closed. Real savings would depend on which schools close and how staff are reassigned. `
-            : "The district costed closing exactly two valley schools; for any other number we scale its figure by the number of buildings closed and label it an estimate. ",
+          b.items.some((i) => i.id === "oneClosure")
+            ? `For one closure with the middle schools merged and grades 5-6 kept in the valley, the district gave a figure on November 2, about ${money(ONE_CLOSURE.amount)} in all, which this plan uses. `
+            : closed && closed !== 2
+              ? `The district costed closing exactly two valley schools. For ${closed === 1 ? "one" : closed === 3 ? "three" : "four"}, we scale its figure by the number of buildings closed. Real savings would depend on which schools close and how staff are reassigned. `
+              : "The district costed closing exactly two valley schools; for any other number we scale its figure by the number of buildings closed and label it an estimate. ",
           cite(PATH_B_SAVINGS.valley.src)
         ),
         h(
@@ -550,7 +585,16 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
           `Spending per pupil and the penalty are calculated on this site. The district's level-funded and Path B figures fall on a straight line: every ${money(Math.round(PUPILS))} saved lowers spending per pupil by $1. The penalty is the amount over the threshold times about ${num(Math.round(PUPILS))} pupils. `,
           cite(ref("deck", "slides 10 and 20"))
         ),
-        lower
+        b.health
+          ? h(
+              "li",
+              {},
+              `For no change, this gives about ${money(Math.round(noChange.vsThreshold))} per pupil over the threshold and a penalty of about ${moneyShort(noChange.penalty)}. Slide 10, before the health insurance update, prints ${money(LEVEL_SERVICE.perPupilVsThreshold)} and ${money(LEVEL_SERVICE.penalty)}; on November 2 the finance director gave ${money(HEALTH_UPDATE.perPupilAfter, 2)} per pupil with the update${lower ? "" : ", counting older bond payments the way slide 10's level-service card does"}. `,
+              cite(BUDGET.src),
+              " ",
+              cite(HEALTH_UPDATE.src)
+            )
+          : lower
           ? h(
               "li",
               {},
@@ -952,8 +996,9 @@ function compareSection(plan, r, classSize) {
   const pairB = plan.open.length === 2;
   const planB = pairB ? pathB(plan.open, plan.valleyTop === 4 ? 4 : 6) : pathB(["MES", "WRN"], 4);
   const reading = r.capacity.reading;
-  const a = evaluate(PLAN_A, { classSize, basis, reading });
-  const bb = evaluate(planB, { classSize, basis, reading });
+  const health = r.budget.health;
+  const a = evaluate(PLAN_A, { classSize, basis, reading, health });
+  const bb = evaluate(planB, { classSize, basis, reading, health });
   const cols = [
     ["Your plan", r],
     ["Path A", a],
@@ -987,13 +1032,13 @@ function compareSection(plan, r, classSize) {
     h(
       "p",
       { class: "bp-muted" },
-      `Path B here: ${bName}${pairB ? ", the same schools as your plan" : ", one of twelve versions"}. “Most schools for any child” is for a child now in Pre-K to grade 2; “changing schools” counts K-12 students. Savings for Path A and Path B are the district's figures (an upper limit when grades 5 and 6 stay in the valley); the rest is calculated${lower ? `, against the lower target of ${moneyShort(r.budget.target)}` : ""}. `,
+      `Path B here: ${bName}${pairB ? ", the same schools as your plan" : ", one of twelve versions"}. “Most schools for any child” is for a child now in Pre-K to grade 2; “changing schools” counts K-12 students. Savings for Path A and Path B are the district's figures (an upper limit when grades 5 and 6 stay in the valley); the rest is calculated${lower || health ? `, against ${lower ? "the lower target" : "the target"} of ${moneyShort(r.budget.target)}${health ? " (with the November 2 health insurance update)" : ""}` : ""}. `,
       portablesShort(r.budget) && !r.budget.upperBound
         ? `Your plan's savings do not count its portable classrooms; if their cost all came out of next year's budget, it ${portWould(r.budget)} fall short. `
         : null,
       // keep the reader's wastewater reading; Compare has no lower target, so say which one it uses
       h("a", { href: `#/compare${reading === "permits" ? "?w=permits" : ""}`, onclick: () => track("Compare Opened", { from: "build" }) }, "Compare all the plans"),
-      lower ? ` (Compare measures savings against the district's ${money(TARGET)} target.)` : null
+      lower || health ? ` (Compare measures savings against the district's ${money(TARGET)} target.)` : null
     )
   );
 }

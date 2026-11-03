@@ -16,7 +16,7 @@ export const CHECKS = [
 export const IDEAS = [
   {
     title: "Close one valley school instead of two",
-    text: "Fewer children change schools, and the district keeps more buildings. The district has not published what closing one school would save.",
+    text: "Fewer children change schools, and the district keeps more buildings. On November 2 the district gave its first figure: about $2.3 million in all with the middle-school merger and grades 5-6 kept in the valley, against $3.9 million for Path B, still leaving a penalty. It has no figure for one closure with grades 5-6 at Crossett Brook.",
     record: "The board's question-and-answer document says that from the models so far, closing one school \"does not look like it would save enough money to make it worthwhile.\"",
     ref: ref("qdoc", "closing one school"),
     refLabel: "Board Q&A",

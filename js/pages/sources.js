@@ -4,7 +4,7 @@ import { SOURCES, ref } from "../../data/sources.js";
 import { GLOSSARY } from "../ui/glossary.js";
 import { HISTORY, UPDATES, VOTES } from "../../data/history.js";
 import { PUPILS, TARGET, CLASS_SIZE_DEFAULT } from "../model/index.js";
-import { BUDGET, PATH_B_SAVINGS } from "../../data/budget.js";
+import { BUDGET, HEALTH_UPDATE, ONE_CLOSURE, PATH_B_SAVINGS } from "../../data/budget.js";
 
 const KIND_LABEL = { district: "District documents", state: "State and federal", research: "Research", news: "News", derived: "Our calculations" };
 const TERM_LABEL = {
@@ -79,7 +79,8 @@ export default {
         ]),
         methodItem("Savings from closing schools and merging the middle schools", [
           `For closing two valley schools we use the district's figure, ${money(PATH_B_SAVINGS.valley.amount)} and 16 positions, for every pairing, as the district does. For merging the middle schools we use its ${money(PATH_B_SAVINGS.middle.amount)}.`,
-          `For closing one or three schools, which the district has not costed, we scale the two-school figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
+          `For closing one school with the middle schools merged and valley 5th and 6th graders kept in the valley, we use the district's November 2 figure: about ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, said aloud by the finance director at a committee meeting. For other one- or three-school closures, which the district has not costed (including one closure with grades 5-6 at Crossett Brook), we scale the two-school figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
+          `Health insurance: on November 2 the finance director said lower rates take about ${money(HEALTH_UPDATE.amount)} off next year's level-service budget. The district has not restated its target, so the Options and Build pages offer it as a choice that lowers either target by that amount.`,
           [
             "The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so those versions would save less. The district has not costed them. For plans that keep grades 5-6 in the valley we still show the district's figures, but as an upper limit, with the middle school saving labeled an estimate. ",
             cite(ref("meeting1028", "keeping grades 5-6 in the valley")),

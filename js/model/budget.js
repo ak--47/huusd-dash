@@ -5,7 +5,7 @@
 // $590,196 / ($255.76 - $25.67) = about 2,565 pupils, the same count the level-service card implies
 // ($2,773,267 penalty / $1,081 per pupil). So each $2,565 saved lowers spending per pupil by $1.
 
-import { BUDGET, MODULAR, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
+import { BUDGET, HEALTH_UPDATE, MODULAR, ONE_CLOSURE, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { closedSchools } from "./plans.js";
 import { FACILITIES, SCHOOLS } from "../../data/schools.js";
 
@@ -19,6 +19,11 @@ const PER_PUPIL_AT_TARGET = BUDGET.threshold - 25.67; // level funded, as correc
 // approved before July 1, 2026 out of the FY28 test. basis "exclusion" applies that reading.
 export const EXCLUSION_PER_PUPIL = 220.67 - 25.67;
 export const TARGET_WITH_EXCLUSION = Math.round(TARGET - EXCLUSION_PER_PUPIL * PUPILS);
+// On November 2 the finance director said lower health insurance rates take about $300,000 off next year's
+// level-service budget. The district has not published a restated target, so counting it is a choice (health: true)
+// that lowers either target by that amount.
+export const HEALTH_SAVING = HEALTH_UPDATE.amount;
+export const targetFor = ({ basis = "district", health = false } = {}) => (basis === "exclusion" ? TARGET_WITH_EXCLUSION : TARGET) - (health ? HEALTH_SAVING : 0);
 const PER_BUILDING_ESTIMATE = PATH_B_SAVINGS.valley.amount / 2;
 
 // Savings from closing valley schools. The district costed only "4 into 2". For other counts we
@@ -33,19 +38,35 @@ export function valleySavings(closedCount) {
   };
 }
 
+// The district's November 2 figure covers exactly this shape: one valley school closes, the middle schools merge, and
+// valley 5th and 6th graders stay in the valley (Crossett Brook keeps only its own). Such plans use it in place of
+// the merger figure and the one-closure estimate.
+export const usesOneClosureFigure = (plan) => Boolean(plan.msMerge) && closedSchools(plan).length === 1 && plan.valleyTop === 6 && plan.bpsTop !== 6;
+
 export function perPupil(savings) {
   return PER_PUPIL_AT_TARGET + (TARGET - savings) / PUPILS;
 }
 
-export function budget(plan, { basis = "district" } = {}) {
-  const adj = basis === "exclusion" ? EXCLUSION_PER_PUPIL : 0;
-  const target = basis === "exclusion" ? TARGET_WITH_EXCLUSION : TARGET;
+export function budget(plan, { basis = "district", health = false } = {}) {
+  const adj = (basis === "exclusion" ? EXCLUSION_PER_PUPIL : 0) + (health ? HEALTH_SAVING / PUPILS : 0);
+  const target = targetFor({ basis, health });
   const items = [];
+  const oneFigure = usesOneClosureFigure(plan);
   // The district's savings assume valley 5th and 6th graders move into Crossett Brook. On October 28 an
   // administrator said that keeping them in the valley would leave about 126 students there and would not
   // reach the full $3.9 million. For those plans the middle-school figure is an upper limit, not a costing.
-  const upperBound = Boolean(plan.msMerge && plan.valleyTop > 4); // some valley 5th or 6th graders stay in the valley
-  if (plan.msMerge) {
+  // The district's own one-closure figure already reflects keeping them there, so it is not an upper limit.
+  const upperBound = Boolean(plan.msMerge && plan.valleyTop > 4) && !oneFigure; // some valley 5th or 6th graders stay in the valley
+  const closed = closedSchools(plan);
+  if (oneFigure) {
+    items.push({
+      id: "oneClosure",
+      label: "Close 1 valley school and merge the middle schools, with grades 5-6 in the valley",
+      amount: ONE_CLOSURE.amount,
+      fte: ONE_CLOSURE.fte,
+      kind: "district",
+    });
+  } else if (plan.msMerge) {
     items.push({
       id: "middle",
       label: "Merge the middle schools",
@@ -55,9 +76,8 @@ export function budget(plan, { basis = "district" } = {}) {
       upperBound,
     });
   }
-  const closed = closedSchools(plan);
   const valley = valleySavings(closed.length);
-  if (closed.length) {
+  if (closed.length && !oneFigure) {
     items.push({
       id: "valley",
       label: `Close ${closed.length} valley elementary school${closed.length === 1 ? "" : "s"}`,
@@ -87,6 +107,7 @@ export function budget(plan, { basis = "district" } = {}) {
     items,
     savings,
     basis,
+    health,
     target,
     gap: target - savings, // positive = still short
     perPupil: pp,

@@ -40,6 +40,9 @@ const ROUTES = [
   ["build-prek-center-wes", "#/build?o=MR&t=6&m=1&b=6&r=waitsfield~MES&k=WES.all&sp=fayston~MES~20.waitsfield~WRN~20"],
   ["build-shares", "#/build?o=WR&t=6&m=1&sp=fayston.moretown~BPS~14~WRN~5"],
   ["build-three-k6-center", "#/build?o=FMR&t=6&m=1&k=WES.valley"],
+  ["build-close-one-k4", "#/build?o=MWR&t=4&m=1"],
+  ["build-close-one-k4-health", "#/build?o=MWR&t=4&m=1&x=1&hc=1"],
+  ["options-health", "#/options?hc=1"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 
@@ -317,7 +320,9 @@ async function analytics(page) {
   await visit("#/options", "options");
   await page.locator("details.opt-assumptions > summary").click();
   await page.locator('input[name="basis"][value="exclusion"]').check();
-  await expect("Options: the lower savings target", "options", { "Section Expanded": {}, "Savings Target Changed": { target: "lower" } });
+  await expect("Options: the lower savings target", "options", { "Section Expanded": {}, "Savings Target Changed": { target: "lower", health_update: false } });
+  await page.locator(".opt-health input").check();
+  await expect("Options: count the health insurance update", "options", { "Savings Target Changed": { target: "lower", health_update: true } });
 
   // What we checked: copy the questions (the clipboard is allowed above)
   await visit("#/findings", "findings");

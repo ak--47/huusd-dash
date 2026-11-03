@@ -69,7 +69,7 @@ export default {
       pageHead({
         kicker: "What we checked",
         title: "We re-did the district's arithmetic. Most of it adds up. Here is what does not, and what is missing.",
-        lede: "We checked the October 14 and October 28 presentations against each other and against the district's own reports. Each item shows what the slides say, what we found, and a question you can ask.",
+        lede: "We checked the October 14 and October 28 presentations, and the figures given at the November 2 committee meeting, against each other and against the district's own reports. Each item shows what the slides say, what we found, and a question you can ask.",
       }),
 
       h("div", { class: "btn-row no-print questions-jump" }, toQuestions),
