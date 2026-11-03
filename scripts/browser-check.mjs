@@ -299,6 +299,14 @@ async function analytics(page) {
     "Plan Changed": { changed: ["valleyTop"], plan_code: "o=MR&t=6&m=1", open_schools: ["MES", "WRN"], valley_top: 6, middle_merge: true },
   });
 
+  // Build: the one-closure-with-Path-B's-grades starting point loads Fayston closing and shows as chosen
+  await page.locator('.bp-preset[data-kind="k4x3"]').click();
+  await expect("Build: one closure, Path B's grades", "build", { "Starting Point Chosen": { preset: "k4x3", closed_school: "FES" } });
+  if (!(await page.evaluate(() => location.hash)).includes("o=MWR&t=4&m=1")) problems.push("Build: the k4x3 starting point did not load o=MWR&t=4&m=1");
+  if ((await page.locator('.bp-preset[data-kind="k4x3"]').getAttribute("aria-pressed")) !== "true") problems.push("Build: the k4x3 starting point is not shown as chosen");
+  await page.waitForTimeout(1500);
+  await fresh();
+
   // Compare: open a pairing's scoring card and score one criterion
   await visit("#/compare", "compare");
   await page.locator("details.cmp-pair > summary").first().click();

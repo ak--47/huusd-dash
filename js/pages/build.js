@@ -196,28 +196,24 @@ export default {
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top, closed, oneTop, center }) => {
-        const which =
-          kind === "B"
-            ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" }
-            : kind === "one"
-              ? { closed_school: closed, setup: oneTop === 4 ? "pk4" : "k6" }
-              : kind === "center"
-                ? { center_school: center }
-                : {};
+      onPreset: (kind, { pair, top, closed, closedK4, center }) => {
+        const which = {
+          B: { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" },
+          one: { closed_school: closed },
+          k4x3: { closed_school: closedK4 },
+          center: { center_school: center },
+        }[kind] ?? {};
         send("Starting Point Chosen", { preset: kind, ...which });
+        const plans = {
+          today: () => PLAN_TODAY,
+          A: () => PLAN_A,
+          one: () => onePlan(closed),
+          k4x3: () => onePlan(closedK4, 4),
+          hybrid: () => hybridPlan(),
+          center: () => centerPlan(center),
+        };
         setPlan(
-          kind === "today"
-            ? PLAN_TODAY
-            : kind === "A"
-              ? PLAN_A
-              : kind === "one"
-                ? onePlan(closed, oneTop)
-                : kind === "hybrid"
-                  ? hybridPlan()
-                  : kind === "center"
-                    ? centerPlan(center)
-                    : pathB(pair, top),
+          (plans[kind] ?? (() => pathB(pair, top)))(),
           { kind }
         );
       },
