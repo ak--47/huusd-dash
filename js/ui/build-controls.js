@@ -1,7 +1,7 @@
 // Controls for the "Build a plan" page. They are built once; sync() sets their values in place,
 // so a keyboard user never loses their place while the results redraw.
 
-import { PATH_A_CUTS, PATH_B_SAVINGS, MODULAR } from "../../data/budget.js";
+import { HEALTH_UPDATE, MODULAR, ONE_CLOSURE, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { PAIRS } from "../../data/district-scenarios.js";
 import { ATTENDING } from "../../data/enrollment.js";
 import { FACILITIES, SCHOOLS, TOWNS, VALLEY } from "../../data/schools.js";
@@ -44,10 +44,11 @@ const slidesLimit = (f) => `Wastewater limit ${f.wastewater} on the slides${f.wa
 export const topWords = (top) => (top === 4 ? "grades 5 and 6 at Crossett Brook" : top === 5 ? "grade 6 at Crossett Brook" : "grades 5 and 6 in the valley");
 
 // Two starting points beyond the district's plans. "one": Path B's middle-school move with one valley school
-// closing instead of two (the district has not costed it). "hybrid": the fewest closures that meets the target on
-// paper: the middle-school move, every valley school open, and three of the smaller Path A cuts.
+// closing instead of two, with grades 5-6 in the valley (the district's November 2 figure) or at Crossett Brook as
+// in Path B (not costed; Options' K4x3 card). "hybrid": the fewest closures that meets the target on paper: the
+// middle-school move, every valley school open, and three of the smaller Path A cuts.
 export const HYBRID_CUTS = ["special", "prek", "athletics"];
-export const onePlan = (closed) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: 6, msMerge: true });
+export const onePlan = (closed, top = 6) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: top === 4 ? 4 : 6, msMerge: true });
 export const hybridPlan = () => makePlan({ open: VALLEY, valleyTop: 6, msMerge: true, cuts: HYBRID_CUTS });
 
 // The residents' plan on the Options page: Fayston closes, and Moretown's or Waitsfield's building becomes the
@@ -65,7 +66,7 @@ export function presetOf(plan) {
   const kind = presetKind(matchNamed(plan));
   if (kind) return kind;
   const same = (a) => encodePlan(a) === encodePlan({ ...plan, receiving: {} });
-  if (plan.open.length === 3 && same(onePlan(VALLEY.find((id) => !plan.open.includes(id))))) return "one";
+  if (plan.open.length === 3 && [4, 6].some((top) => same(onePlan(VALLEY.find((id) => !plan.open.includes(id)), top)))) return "one";
   if (same(hybridPlan())) return "hybrid";
   // the Waitsfield version chooses Moretown for Waitsfield's children, so its receiving choice counts
   return CENTER_SCHOOLS.some((id) => encodePlan(centerPlan(id)) === encodePlan(plan)) ? "center" : null;
@@ -191,7 +192,7 @@ function stepper({ id, min, max, get, onSet, describedby }) {
   return { input, el: h("span", { class: "bp-stepper" }, btn(-1, "−"), input, btn(1, "+")) };
 }
 
-export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, onBasis, onReading }) {
+export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, onBasis, onHealth, onReading }) {
   // ---- 1. start from ----
   const presetBtns = [
     ["today", "No change"],
@@ -229,6 +230,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     VALLEY.map((id) => h("option", { value: id }, SCHOOLS[id].short))
   );
   oneSel.value = startPlan.open.length === 3 ? VALLEY.find((id) => !startPlan.open.includes(id)) : "";
+  // where grades 5 and 6 go in "Close one school": same words as Path B's choice; an empty choice keeps them in the valley
+  const oneTopSel = h(
+    "select",
+    { class: "wonk-select", id: "bp-onetop", "aria-describedby": "bp-one-hint" },
+    h("option", { value: "", disabled: true }, "Pick one"),
+    h("option", { value: "6" }, "Stay in valley schools"),
+    h("option", { value: "4" }, "Move to Crossett Brook")
+  );
+  oneTopSel.value = startPlan.open.length === 3 && [4, 6].includes(startPlan.valleyTop) ? String(startPlan.valleyTop) : "";
   // the building that becomes the Pre-K center in "Pre-K center plan"
   const centerPick = h(
     "select",
@@ -240,12 +250,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2],
     top: Number(topSel.value) === 6 ? 6 : 4,
     closed: VALLEY.includes(oneSel.value) ? oneSel.value : "FES",
+    oneTop: Number(oneTopSel.value) === 4 ? 4 : 6,
     center: CENTER_SCHOOLS.includes(centerPick.value) ? centerPick.value : "MES",
   });
   for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosen()));
   pairSel.addEventListener("change", () => onPreset("B", chosen()));
   topSel.addEventListener("change", () => onPreset("B", chosen()));
   oneSel.addEventListener("change", () => onPreset("one", chosen()));
+  oneTopSel.addEventListener("change", () => onPreset("one", chosen()));
   centerPick.addEventListener("change", () => onPreset("center", chosen()));
 
   const matched = h("p", { class: "bp-matched" });
@@ -278,9 +290,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "p",
         { class: "bp-bversion-hint", id: "bp-one-hint" },
-        "Path B's middle-school move with one valley school closing instead of two. The district has not costed closing one; the savings are our estimate, half its figure for two."
+        `Path B's middle-school move with one valley school closing instead of two. With grades 5 and 6 in the valley, the district put it at about ${moneyShort(ONE_CLOSURE.amount)} in all on November 2. With them at Crossett Brook, as in Path B, it has no figure; we add half its figure for closing two to its merger figure. Changing either one loads that version.`
       ),
-      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, "School that closes"), oneSel)
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, "School that closes"), oneSel),
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-onetop" }, h("span", { class: "wonk-sr" }, "Close one school: "), "Where grades 5 and 6 go"), oneTopSel)
     ),
     h(
       "p",
@@ -350,7 +363,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "span",
         { class: "bp-hint-line" },
-        `Uncheck one school to close one, or two to close two; their children go to the nearest open school. The district puts the savings from closing two at ${money(PATH_B_SAVINGS.valley.amount)} a year; for one, we use half, an estimate. `,
+        `Uncheck one school to close one, or two to close two; their children go to the nearest open school. The district puts the savings from closing two at ${money(PATH_B_SAVINGS.valley.amount)} a year. For one, with the middle schools merged and grades 5-6 in the valley, it gave about ${moneyShort(ONE_CLOSURE.amount)} in all on November 2; otherwise we use half the two-school figure, an estimate. `,
         cite(PATH_B_SAVINGS.valley.src)
       ),
       // the definition sits outside the school cards, so tapping it never opens or closes a school
@@ -582,7 +595,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     [
       "exclusion",
       `${money(TARGET_WITH_EXCLUSION)}: if older bond payments are left out`,
-      "State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test. The district's figures appear to count them; it has not said why.",
+      "State law leaves payments on bonds voters approved before July 1, 2026 out of the FY28 test. The district's target appears to count them; it has not said why.",
     ],
   ].map(([v, title, sub]) => {
     const input = h("input", { type: "radio", name: "bp-basis", value: v });
@@ -591,6 +604,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     });
     return { v, input, label: h("label", {}, input, h("span", {}, h("span", { class: "bp-choice-title" }, title), h("span", { class: "bp-choice-sub" }, sub))) };
   });
+
+  // the November 2 health insurance update: lowers either target by about $300,000 (the district has not restated it)
+  const healthBox = h("input", { type: "checkbox", id: "bp-health", class: "wonk-check-input" });
+  healthBox.addEventListener("change", () => onHealth(healthBox.checked));
 
   // the wastewater limits: as the slides apply them, or as each state permit is written
   const readingRadios = [
@@ -678,7 +695,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
           ". ",
           cite(ref("vsa4001", "§ 4001(6)(B)"), "State law")
         ),
-        h("div", { class: "choice bp-choice-stack" }, basisRadios.map((r) => r.label))
+        h("div", { class: "choice bp-choice-stack" }, basisRadios.map((r) => r.label)),
+        h("label", { class: "wonk-check", for: "bp-health" }, healthBox, ` Count the November 2 health insurance update: about ${moneyShort(HEALTH_UPDATE.amount)} less to cut`),
+        h(
+          "p",
+          { class: "hint" },
+          "The finance director said next year's health insurance rates came in lower than projected. The district has not yet published a target that includes it. ",
+          cite(HEALTH_UPDATE.src, "Nov 2 committee")
+        )
       ),
       h(
         "fieldset",
@@ -720,7 +744,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     recvDistrict
   );
   // a link that arrives with the lower target opens this section, so the reader sees which target is in use
-  if (state.basis === "exclusion" || state.reading === "permits" || state.plan.roadmap) advanced.open = true;
+  if (state.basis === "exclusion" || state.health || state.reading === "permits" || state.plan.roadmap) advanced.open = true;
 
   const el = h(
     "div",
@@ -750,6 +774,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     const preset = presetOf(plan);
     for (const b of presetBtns) b.setAttribute("aria-pressed", String(b.dataset.kind === preset));
     oneSel.value = preset === "one" ? VALLEY.find((id) => !plan.open.includes(id)) : "";
+    oneTopSel.value = preset === "one" ? String(plan.valleyTop) : "";
     if (plan.open.length === 2) {
       pairSel.value = pairId(plan.open);
       topSel.value = String(plan.valleyTop);
@@ -776,7 +801,16 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
                   h("button", { type: "button", class: "bp-textbtn", onclick: addMove }, "Add that move")
                 )
               : preset === "one"
-                ? h("span", {}, "Path B's middle-school move with ", h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`), " instead of two schools. Not costed by the district.")
+                ? h(
+                    "span",
+                    {},
+                    "Path B's middle-school move with ",
+                    h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`),
+                    " instead of two schools, ",
+                    plan.valleyTop === 4
+                      ? ["and Path B's grades. Not costed by the district; it is the ", h("a", { href: "#/options?at=option-K4x3" }, "one-closure card on Options"), "."]
+                      : "with grades 5 and 6 in the valley: the district's November 2 figure."
+                  )
                 : preset === "hybrid"
                   ? h("span", {}, "The middle-school move with ", h("strong", {}, "every valley school open"), " and three of Path A's smaller cuts. Not one of the district's plans.")
                   : optionOf(plan)
@@ -861,6 +895,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
 
     // advanced: target, class sizes
     for (const b of basisRadios) b.input.checked = r.budget.basis === b.v;
+    healthBox.checked = Boolean(r.budget.health);
     for (const b of readingRadios) b.input.checked = r.capacity.reading === b.v;
     roadmapBox.checked = Boolean(plan.roadmap);
     if (plan.roadmap) roadmapTop.value = String(plan.roadmap.top);

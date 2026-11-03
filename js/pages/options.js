@@ -1,9 +1,9 @@
 import { h, moneyShort, num, store } from "../ui/dom.js";
 import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag, unsure } from "../ui/kit.js";
 import { track } from "../ui/track.js";
-import { OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, evaluate } from "../model/index.js";
+import { OPTIONS, TARGET, TARGET_WITH_EXCLUSION, encodePlan, evaluate, targetFor } from "../model/index.js";
 import { ref } from "../../data/sources.js";
-import { MODULAR } from "../../data/budget.js";
+import { HEALTH_UPDATE, MODULAR, ONE_CLOSURE } from "../../data/budget.js";
 
 const VALLEY_TOWNS = ["moretown", "waitsfield", "fayston", "warren"];
 const pairId = (plan) => [...plan.open].sort().join("+");
@@ -15,8 +15,8 @@ const fiveSixNote = (which, it) =>
   `The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so ${which} would save less, with “an impact in terms of a penalty”: staff would have to stay to serve those students or be shared with Brookside. The district has not costed ${it}. `;
 const fiveSixCite = () => cite(ref("meeting1028", "keeping grades 5-6 in the valley"));
 
-function score(plan, basis, reading) {
-  const r = evaluate(plan, { basis, reading });
+function score(plan, basis, reading, health) {
+  const r = evaluate(plan, { basis, reading, health });
   return {
     r,
     savings: r.budget.savings,
@@ -55,6 +55,7 @@ export default {
   render(el, { params, setParams }) {
     let basis = params.get("x") === "1" ? "exclusion" : "district";
     let reading = params.get("w") === "permits" ? "permits" : "slides";
+    let health = params.get("hc") === "1";
     const host = h("div", {});
     const scored = h("p", { class: "small scored", role: "status" });
 
@@ -70,7 +71,7 @@ export default {
       h(
         "label",
         {},
-        h("input", { type: "radio", name: "basis", value, checked: basis === value, onchange: () => { basis = value; setParams({ x: value === "exclusion" ? 1 : null }); track("Savings Target Changed", { target: value === "exclusion" ? "lower" : "district" }); draw(); } }),
+        h("input", { type: "radio", name: "basis", value, checked: basis === value, onchange: () => { basis = value; setParams({ x: value === "exclusion" ? 1 : null }); track("Savings Target Changed", { target: value === "exclusion" ? "lower" : "district", health_update: health }); draw(); } }),
         h("span", {}, h("strong", {}, label), h("br"), h("span", { class: "small muted" }, sub))
       );
 
@@ -84,8 +85,24 @@ export default {
           "div",
           { class: "choice choice--stack" },
           radio("district", `${moneyShort(TARGET)}: the district's target`, "As presented on October 14 and 28."),
-          radio("exclusion", `${moneyShort(TARGET_WITH_EXCLUSION)}: if older bond payments are left out`, "State law leaves payments on bonds approved before July 1, 2026 out of the FY28 test. The district's figures appear to count them; it has not said why.")
+          radio("exclusion", `${moneyShort(TARGET_WITH_EXCLUSION)}: if older bond payments are left out`, "State law leaves payments on bonds approved before July 1, 2026 out of the FY28 test. The district's target appears to count them; it has not said why.")
         ),
+        h(
+          "label",
+          { class: "wonk-check opt-health" },
+          h("input", {
+            type: "checkbox",
+            checked: health,
+            onchange: (e) => {
+              health = e.target.checked;
+              setParams({ hc: health ? 1 : null });
+              track("Savings Target Changed", { target: basis === "exclusion" ? "lower" : "district", health_update: health });
+              draw();
+            },
+          }),
+          ` Count the November 2 health insurance update: about ${moneyShort(HEALTH_UPDATE.amount)} less to cut, from either target`
+        ),
+        h("p", { class: "hint" }, "Next year's health insurance rates came in lower than projected; the finance director called it \"roughly a $300,000 savings in our level service.\" The district has not yet published a target that includes it. ", cite(HEALTH_UPDATE.src, "Nov 2 committee")),
         h("p", { class: "hint" }, "Why there are two targets: ", h("a", { href: "#/findings?at=finding-debt-basis" }, "What we checked"), ". ", cite(ref("vsa4001", "§ 4001(6)(B)"), "State law"))
       ),
       h(
@@ -111,7 +128,7 @@ export default {
     );
     assumptions.classList.add("no-print", "opt-assumptions");
     // A shared link with other settings opens the choices, so the reader sees what changed.
-    if (basis !== "district" || reading !== "slides") assumptions.open = true;
+    if (basis !== "district" || reading !== "slides" || health) assumptions.open = true;
 
     el.append(
       pageHead({
@@ -132,7 +149,7 @@ export default {
               "li",
               {},
               h("strong", {}, "Saves"),
-              ": yearly savings. District figures for the Path A cuts, for closing two valley schools ($1.83M), and for merging the middle schools ($2.10M); the last two assume valley 5th and 6th graders move to Crossett Brook. Where a plan keeps grades 5-6 in the valley, the middle-school figure is an upper limit. Our estimate for closing one school is half the two-school figure. Upper limits and estimates are marked ",
+              `: yearly savings. District figures for the Path A cuts, for closing two valley schools ($1.83M), and for merging the middle schools ($2.10M); the last two assume valley 5th and 6th graders move to Crossett Brook. Where a plan keeps grades 5-6 in the valley, the middle-school figure is an upper limit. For closing one school with the merger and grades 5-6 kept in the valley, we use the district's November 2 figure, about ${moneyShort(ONE_CLOSURE.amount)} in all. Otherwise our estimate for closing one school is half the two-school figure. Upper limits and estimates are marked `,
               tag("estimate"),
               "."
             ),
@@ -190,15 +207,16 @@ export default {
       const rows = [];
       for (const o of OPTIONS) {
         if (o.versions) {
-          rows.push({ o, versions: o.versions.map((v) => ({ v, s: score(v.plan ?? o.plan, basis, reading) })) });
+          rows.push({ o, versions: o.versions.map((v) => ({ v, s: score(v.plan ?? o.plan, basis, reading, health) })) });
         } else if (o.family) {
-          const s = o.family.map((p) => score(p, basis, reading));
+          const s = o.family.map((p) => score(p, basis, reading, health));
           rows.push({ o, family: s });
         } else {
-          rows.push({ o, s: score(o.plan, basis, reading) });
+          rows.push({ o, s: score(o.plan, basis, reading, health) });
         }
       }
-      scored.textContent = `Scored against ${basis === "exclusion" ? `${moneyShort(TARGET_WITH_EXCLUSION)} (older bond payments left out)` : `the district's ${moneyShort(TARGET)} target`}, with wastewater limits ${reading === "permits" ? "as the state permits read" : "as on the slides"}.`;
+      const against = basis === "exclusion" ? `${moneyShort(TARGET_WITH_EXCLUSION)} (older bond payments left out)` : `the district's ${moneyShort(TARGET)} target`;
+      scored.textContent = `Scored against ${health ? `${moneyShort(targetFor({ basis, health }))}: ${against}, less the November 2 health insurance update` : against}, with wastewater limits ${reading === "permits" ? "as the state permits read" : "as on the slides"}.`;
       host.replaceChildren(
         note(
           "info",
@@ -237,7 +255,7 @@ export default {
         h(
           "p",
           { class: "opt-actions no-print" },
-          h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${reading === "permits" ? "&w=permits" : ""}`, onclick: () => track("Option Opened in Build", { option }) }, "Open in Build a plan"),
+          h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${health ? "&hc=1" : ""}${reading === "permits" ? "&w=permits" : ""}`, onclick: () => track("Option Opened in Build", { option }) }, "Open in Build a plan"),
           plan.open.length === 2 && plan.msMerge && !plan.prekCenter
             ? [
                 " · ",
@@ -290,7 +308,7 @@ export default {
       if (versions) {
         return h(
           "article",
-          { class: `wonk-card opt-card opt-card--${o.group}` },
+          { class: `wonk-card opt-card opt-card--${o.group}`, id: `option-${o.id.replace(/[^A-Za-z0-9-]/g, "-")}` },
           h("h3", {}, o.name),
           h("p", { class: "opt-what" }, o.what),
           versions.map(({ v, s: vs }) =>

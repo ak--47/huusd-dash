@@ -3,7 +3,8 @@
 // shared) and in local storage (so "Your child's path" can show it as "Your plan").
 //
 // URL keys: the plan's own (o, t, m, c, s, p, r: see encodePlan), cs (class sizes, when not the
-// defaults), and x=1 (the lower savings target, as on the Options page).
+// defaults), x=1 (the lower savings target, as on the Options page), and hc=1 (count the November 2
+// health insurance update).
 
 import { h, store } from "../ui/dom.js";
 import { note, pageHead } from "../ui/kit.js";
@@ -78,6 +79,7 @@ function planProps(p, r) {
     over_wastewater: cap.overPeople,
     over_classrooms: [...cap.overConsultant, ...cap.overMiddle], // the consultant's classroom space
     target_basis: b.basis === "exclusion" ? "lower" : "district",
+    health_update: Boolean(b.health),
     reading: cap.reading,
   };
 }
@@ -102,6 +104,7 @@ export default {
       // defaults. The viewer's saved settings apply only when no plan arrives in the link.
       cs: urlCs ?? (fromUrl ? { ...CS_DEFAULT } : (csFromString(store.get("buildCs", null)) ?? { ...CS_DEFAULT })),
       basis: urlBasis ?? (fromUrl ? "district" : basisOf(store.get("buildBasis", null))),
+      health: params.has("hc") ? params.get("hc") === "1" : fromUrl ? false : store.get("buildHealth", null) === "1",
       reading: params.get("w") === "permits" ? "permits" : fromUrl ? "slides" : store.get("buildReading", null) === "permits" ? "permits" : "slides",
       undo: null, // { plan, kind } after a preset replaces the plan: the plan Undo restores, and the preset used
     };
@@ -113,12 +116,14 @@ export default {
       const patch = Object.fromEntries(PLAN_KEYS.map((k) => [k, q[k] ?? null]));
       patch.cs = csIsDefault(state.cs) ? null : csToString(state.cs);
       patch.x = state.basis === "exclusion" ? 1 : null;
+      patch.hc = state.health ? 1 : null;
       patch.w = state.reading === "permits" ? "permits" : null;
       setParams(patch);
       if (save) {
         store.set("plan", encodePlan(state.plan));
         store.set("buildCs", csIsDefault(state.cs) ? null : csToString(state.cs));
         store.set("buildBasis", state.basis === "exclusion" ? "exclusion" : null);
+        store.set("buildHealth", state.health ? "1" : null);
         store.set("buildReading", state.reading === "permits" ? "permits" : null);
       }
     };
@@ -165,7 +170,7 @@ export default {
 
     const refresh = ({ speak = true } = {}) => {
       const classSize = csExpand(state.cs);
-      const r = evaluate(state.plan, { classSize, basis: state.basis, reading: state.reading });
+      const r = evaluate(state.plan, { classSize, basis: state.basis, reading: state.reading, health: state.health });
       shown = r;
       controls.sync(state.plan, r);
       results.update(state.plan, r, { cs: state.cs, classSize });
@@ -191,8 +196,15 @@ export default {
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top, closed, center }) => {
-        const which = kind === "B" ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" } : kind === "one" ? { closed_school: closed } : kind === "center" ? { center_school: center } : {};
+      onPreset: (kind, { pair, top, closed, oneTop, center }) => {
+        const which =
+          kind === "B"
+            ? { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" }
+            : kind === "one"
+              ? { closed_school: closed, setup: oneTop === 4 ? "pk4" : "k6" }
+              : kind === "center"
+                ? { center_school: center }
+                : {};
         send("Starting Point Chosen", { preset: kind, ...which });
         setPlan(
           kind === "today"
@@ -200,7 +212,7 @@ export default {
             : kind === "A"
               ? PLAN_A
               : kind === "one"
-                ? onePlan(closed)
+                ? onePlan(closed, oneTop)
                 : kind === "hybrid"
                   ? hybridPlan()
                   : kind === "center"
@@ -225,8 +237,14 @@ export default {
         later();
       },
       onBasis: (basis) => {
-        send("Savings Target Changed", { target: basisOf(basis) === "exclusion" ? "lower" : "district" });
+        send("Savings Target Changed", { target: basisOf(basis) === "exclusion" ? "lower" : "district", health_update: state.health });
         state.basis = basisOf(basis);
+        persist();
+        refresh();
+      },
+      onHealth: (on) => {
+        state.health = Boolean(on);
+        send("Savings Target Changed", { target: state.basis === "exclusion" ? "lower" : "district", health_update: state.health });
         persist();
         refresh();
       },
