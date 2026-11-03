@@ -43,10 +43,11 @@ const slidesLimit = (f) => `Wastewater limit ${f.wastewater} on the slides${f.wa
 // Where valley 5th and 6th graders go, in words (no hyphens, so a line never breaks inside "K-6").
 export const topWords = (top) => (top === 4 ? "grades 5 and 6 at Crossett Brook" : top === 5 ? "grade 6 at Crossett Brook" : "grades 5 and 6 in the valley");
 
-// Two starting points beyond the district's plans. "one": Path B's middle-school move with one valley school
-// closing instead of two, with grades 5-6 in the valley (the district's November 2 figure) or at Crossett Brook as
-// in Path B (not costed; Options' K4x3 card). "hybrid": the fewest closures that meets the target on paper: the
-// middle-school move, every valley school open, and three of the smaller Path A cuts.
+// Starting points beyond the district's plans. "one": Path B's middle-school move with one valley school closing
+// instead of two and grades 5-6 kept in the valley (the district's November 2 figure). "k4x3": the same closure with
+// Path B's grades, every 5th and 6th grader at Crossett Brook (not costed; Options' K4x3 card). "hybrid": the fewest
+// closures that meets the target on paper: the middle-school move, every valley school open, and three of the
+// smaller Path A cuts.
 export const HYBRID_CUTS = ["special", "prek", "athletics"];
 export const onePlan = (closed, top = 6) => makePlan({ open: VALLEY.filter((id) => id !== closed), valleyTop: top === 4 ? 4 : 6, msMerge: true });
 export const hybridPlan = () => makePlan({ open: VALLEY, valleyTop: 6, msMerge: true, cuts: HYBRID_CUTS });
@@ -61,12 +62,14 @@ export const centerPlan = (school = "MES") => {
   return v.plan ?? o.plan;
 };
 
-// Which starting point a plan is, if any: "today", "A", "B", "one", "hybrid", "center", or null.
+// Which starting point a plan is, if any: "today", "A", "B", "one", "k4x3", "hybrid", "center", or null.
 export function presetOf(plan) {
   const kind = presetKind(matchNamed(plan));
   if (kind) return kind;
   const same = (a) => encodePlan(a) === encodePlan({ ...plan, receiving: {} });
-  if (plan.open.length === 3 && [4, 6].some((top) => same(onePlan(VALLEY.find((id) => !plan.open.includes(id)), top)))) return "one";
+  const shut = VALLEY.find((id) => !plan.open.includes(id));
+  if (plan.open.length === 3 && same(onePlan(shut, 6))) return "one";
+  if (plan.open.length === 3 && same(onePlan(shut, 4))) return "k4x3";
   if (same(hybridPlan())) return "hybrid";
   // the Waitsfield version chooses Moretown for Waitsfield's children, so its receiving choice counts
   return CENTER_SCHOOLS.some((id) => encodePlan(centerPlan(id)) === encodePlan(plan)) ? "center" : null;
@@ -199,6 +202,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ["A", "Path A"],
     ["B", "Path B"],
     ["one", "Close one school"],
+    ["k4x3", "One closure, Path B's grades"],
     ["hybrid", "Merger + smaller cuts"],
     ["center", "Pre-K center plan"],
   ].map(([kind, label]) => h("button", { type: "button", class: "wonk-btn bp-preset", "aria-pressed": "false", "data-kind": kind }, label));
@@ -229,16 +233,17 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     h("option", { value: "", disabled: true }, "Pick one"),
     VALLEY.map((id) => h("option", { value: id }, SCHOOLS[id].short))
   );
-  oneSel.value = startPlan.open.length === 3 ? VALLEY.find((id) => !startPlan.open.includes(id)) : "";
-  // where grades 5 and 6 go in "Close one school": same words as Path B's choice; an empty choice keeps them in the valley
-  const oneTopSel = h(
+  const startPreset = presetOf(startPlan);
+  const startShut = VALLEY.find((id) => !startPlan.open.includes(id)) ?? "";
+  oneSel.value = startPreset === "one" ? startShut : "";
+  // the one school that closes in "One closure, Path B's grades"
+  const k4Sel = h(
     "select",
-    { class: "wonk-select", id: "bp-onetop", "aria-describedby": "bp-one-hint" },
+    { class: "wonk-select", id: "bp-k4", "aria-describedby": "bp-k4-hint" },
     h("option", { value: "", disabled: true }, "Pick one"),
-    h("option", { value: "6" }, "Stay in valley schools"),
-    h("option", { value: "4" }, "Move to Crossett Brook")
+    VALLEY.map((id) => h("option", { value: id }, SCHOOLS[id].short))
   );
-  oneTopSel.value = startPlan.open.length === 3 && [4, 6].includes(startPlan.valleyTop) ? String(startPlan.valleyTop) : "";
+  k4Sel.value = startPreset === "k4x3" ? startShut : "";
   // the building that becomes the Pre-K center in "Pre-K center plan"
   const centerPick = h(
     "select",
@@ -250,14 +255,14 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2],
     top: Number(topSel.value) === 6 ? 6 : 4,
     closed: VALLEY.includes(oneSel.value) ? oneSel.value : "FES",
-    oneTop: Number(oneTopSel.value) === 4 ? 4 : 6,
+    closedK4: VALLEY.includes(k4Sel.value) ? k4Sel.value : "FES",
     center: CENTER_SCHOOLS.includes(centerPick.value) ? centerPick.value : "MES",
   });
   for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosen()));
   pairSel.addEventListener("change", () => onPreset("B", chosen()));
   topSel.addEventListener("change", () => onPreset("B", chosen()));
   oneSel.addEventListener("change", () => onPreset("one", chosen()));
-  oneTopSel.addEventListener("change", () => onPreset("one", chosen()));
+  k4Sel.addEventListener("change", () => onPreset("k4x3", chosen()));
   centerPick.addEventListener("change", () => onPreset("center", chosen()));
 
   const matched = h("p", { class: "bp-matched" });
@@ -273,7 +278,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const g1 = group(
     1,
     "Start from",
-    "Load no change, one of the district's plans, or one of three other starting points, then change anything below.",
+    "Load no change, one of the district's plans, or one of four other starting points, then change anything below.",
     h("div", { class: "bp-presets" }, presetBtns),
     h(
       "div",
@@ -290,10 +295,20 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "p",
         { class: "bp-bversion-hint", id: "bp-one-hint" },
-        `Path B's middle-school move with one valley school closing instead of two. With grades 5 and 6 in the valley, the district put it at about ${moneyShort(ONE_CLOSURE.amount)} in all on November 2. With them at Crossett Brook, as in Path B, it has no figure; we add half its figure for closing two to its merger figure. Changing either one loads that version.`
+        `Path B's middle-school move with one valley school closing instead of two, and grades 5 and 6 staying in the valley. The district put this at about ${moneyShort(ONE_CLOSURE.amount)} in all on November 2.`
       ),
-      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, "School that closes"), oneSel),
-      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-onetop" }, h("span", { class: "wonk-sr" }, "Close one school: "), "Where grades 5 and 6 go"), oneTopSel)
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, h("span", { class: "wonk-sr" }, "Close one school: "), "School that closes"), oneSel)
+    ),
+    h(
+      "div",
+      { class: "bp-bversion" },
+      h("p", { class: "bp-sub" }, "One closure, Path B's grades"),
+      h(
+        "p",
+        { class: "bp-bversion-hint", id: "bp-k4-hint" },
+        "One valley school closes and the other three teach Pre-K to grade 4; every 5th and 6th grader goes to Crossett Brook and every 7th and 8th grader to Harwood, as in Path B. The district has not costed it: we add half its figure for closing two to its merger figure. Options shows each school closing."
+      ),
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-k4" }, h("span", { class: "wonk-sr" }, "One closure, Path B's grades: "), "School that closes"), k4Sel)
     ),
     h(
       "p",
@@ -774,7 +789,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     const preset = presetOf(plan);
     for (const b of presetBtns) b.setAttribute("aria-pressed", String(b.dataset.kind === preset));
     oneSel.value = preset === "one" ? VALLEY.find((id) => !plan.open.includes(id)) : "";
-    oneTopSel.value = preset === "one" ? String(plan.valleyTop) : "";
+    k4Sel.value = preset === "k4x3" ? VALLEY.find((id) => !plan.open.includes(id)) : "";
     if (plan.open.length === 2) {
       pairSel.value = pairId(plan.open);
       topSel.value = String(plan.valleyTop);
@@ -806,11 +821,18 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
                     {},
                     "Path B's middle-school move with ",
                     h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`),
-                    " instead of two schools, ",
-                    plan.valleyTop === 4
-                      ? ["and Path B's grades. Not costed by the district; it is the ", h("a", { href: "#/options?at=option-K4x3" }, "one-closure card on Options"), "."]
-                      : "with grades 5 and 6 in the valley: the district's November 2 figure."
+                    " instead of two schools, with grades 5 and 6 in the valley: the district's November 2 figure."
                   )
+                : preset === "k4x3"
+                  ? h(
+                      "span",
+                      {},
+                      "Path B's grades with ",
+                      h("strong", {}, `${SCHOOLS[VALLEY.find((id) => !plan.open.includes(id))].short} closing`),
+                      " instead of two schools. Not costed by the district; see the ",
+                      h("a", { href: "#/options?at=option-K4x3" }, "one-closure card on Options"),
+                      " for each school closing."
+                    )
                 : preset === "hybrid"
                   ? h("span", {}, "The middle-school move with ", h("strong", {}, "every valley school open"), " and three of Path A's smaller cuts. Not one of the district's plans.")
                   : optionOf(plan)
