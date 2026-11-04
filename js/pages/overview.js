@@ -73,7 +73,12 @@ export default {
           h("li", {}, h("strong", {}, "Not decided: "), "which two schools, where grades 5 and 6 go, and the later phases of the district's draft roadmap, including a new valley building in 2029. ", cite(ref("oct14", "Draft Proposal for School Reconfiguration & Consolidation Roadmap"))),
           h("li", {}, h("strong", {}, "What we checked: "), "several items in the district's numbers that could change which options work, including the wastewater limits and the size of the cut. ", h("a", { href: "#/findings" }, "See them, and questions to ask the board"))
         ),
-        h("div", { class: "btn-row" }, h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "See options beyond A and B"))
+        h(
+          "div",
+          { class: "btn-row" },
+          h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "See options beyond A and B"),
+          h("a", { class: "wonk-btn", href: "#/vote", onclick: opens("Vote Simulator Opened") }, "Try the board vote simulator")
+        )
       ),
 
       section(

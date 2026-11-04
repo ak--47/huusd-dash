@@ -6,6 +6,14 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-04: board vote simulator (staging only)
+
+- Asked for by a working-group member (Lynn) before the Nov 4 board meeting: a table of the 14 board seats with Yes/No buttons that totals the weighted vote, for a closure (two-thirds) or any other motion (Path B, etc.). New page `#/vote` ("Board vote simulator", in the sidebar after Build a plan; Start here's status card links to it). Model in `js/model/vote.js`, tests in `test/model.test.mjs`, browser checks `vote` and `vote-set` plus an `analytics` step.
+- Owner's calls: use the board's current 2021 weights (superintendent's Oct 28 report), cited, without mentioning the 2018 Articles' older 2010-census weights (Lynn's screenshot used those: Waterbury 9.85, Warren 6.70, Moretown 6.45, Fayston 5.25); show members by name and town (an exception to naming people by role, since these are the officials casting the vote; names from the Oct 14 minutes); Yes / No / Absent, with both readings of two-thirds (whole board, and votes cast); a new page plus a Start here link.
+- Neutral by design: every vote starts blank, the page says it is a calculator and not a prediction, and analytics carry seat ids ("waterbury-2"), never names.
+- On the whole-board reading (calculated): a closure can pass with as few as 8 members (Waterbury's 4, Warren's 2, Waitsfield's 2: 66.80) and can fail with as many as 10 Yes (everyone outside Waterbury: 61.00); 4 members (Waterbury's) can stop it. The page shows these with the district deck's caution against turning two-thirds into a member count.
+- Open: the majority rule for other motions is our assumption. If the board's rules say otherwise (quorum, a majority of members present), change `RULES.majority`. If membership changes (resignation, appointment), update `BOARD.members`.
+
 ## 2026-11-03: November 2 committee meeting; one closure with Path B's grades (staging only)
 
 Inputs from the owner (in `~/Desktop/tmp/huusd-meeting-and-more-materials`, not in the repo): the agenda and transcript of the board's Building Use & Visioning Committee on Nov 2, its Oct 12 minutes, the five feasibility-study proposals for 193 Home Farm Way, a parent's enrollment spreadsheet, a resident's "three-year path" proposal for Nov 4, and notes from the owner's spouse (the consultant's capacities, which the site already had; Waitsfield's kitchen and sewer grant; Moretown's meals brought by car; Waitsfield, Moretown, and Warren walkable to town). The owner was away and asked for the work to go up on staging.
