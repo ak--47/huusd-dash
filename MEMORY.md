@@ -8,6 +8,8 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## 2026-11-04: board vote simulator (staging only)
 
+- Follow-up PR #24: the members list's header says "Weight" (it overlapped "Vote"), and README lists the live and staging links on separate lines. Its Pages deploy timed out on GitHub's side, and re-runs of the same commit were refused; a new commit (this note, in AGENTS.md "Deploy") published it.
+
 - Asked for by a working-group member (Lynn) before the Nov 4 board meeting: a table of the 14 board seats with Yes/No buttons that totals the weighted vote, for a closure (two-thirds) or any other motion (Path B, etc.). New page `#/vote` ("Board vote simulator", in the sidebar after Build a plan; Start here's status card links to it). Model in `js/model/vote.js`, tests in `test/model.test.mjs`, browser checks `vote` and `vote-set` plus an `analytics` step.
 - Owner's calls: use the board's current 2021 weights (superintendent's Oct 28 report), cited, without mentioning the 2018 Articles' older 2010-census weights (Lynn's screenshot used those: Waterbury 9.85, Warren 6.70, Moretown 6.45, Fayston 5.25); show members by name and town (an exception to naming people by role, since these are the officials casting the vote; names from the Oct 14 minutes); Yes / No / Absent, with both readings of two-thirds (whole board, and votes cast); a new page plus a Start here link.
 - Neutral by design: every vote starts blank, the page says it is a calculator and not a prediction, and analytics carry seat ids ("waterbury-2"), never names.
