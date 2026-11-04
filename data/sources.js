@@ -84,6 +84,22 @@ export const SOURCES = {
     url: "https://www.youtube.com/watch?v=nIYZIJAZqPk",
     note: "Quotes come from an automatic transcript of the public recording. It has no speaker labels, so we name a speaker only where the recording makes it clear.",
   },
+  meeting1102: {
+    title: "HUUSD Building Use & Visioning Committee meeting, November 2, 2026 (public recording)",
+    by: "HUUSD",
+    date: "2026-11-02",
+    kind: "district",
+    url: "https://tinyurl.com/huwebapp-youtube-live",
+    note: "A board committee meeting on Zoom, with the superintendent, the finance director, and the district's buildings and grounds staff. Figures said aloud there are preliminary: the finance director said she would present them at the November 4 board meeting. Quotes come from an automatic transcript of the recording, which labels speakers by their Zoom names; we name people by role. The link is the district's YouTube channel, where the recording is posted.",
+  },
+  cabotRfps: {
+    title: "Proposals for the elementary consolidation feasibility study (193 Home Farm Way)",
+    by: "Five architecture firms, for HUUSD",
+    date: "2026-10-30",
+    kind: "district",
+    url: "https://drive.google.com/drive/folders/1kbyn-otsGNQwtlcOErfvSZ2CCgns0UyG",
+    note: "Linked from the November 2 committee agenda. Four of the five give end dates between April and June 2027 (one says October 2027 may be needed); the fifth says 4 to 9 months. None gives a year a new school could open; a bond vote, design, and permits would come after the study.",
+  },
   sep23: {
     title: "FY28 Budget Development & Early Projections",
     by: "HUUSD",

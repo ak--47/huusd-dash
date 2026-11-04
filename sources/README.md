@@ -17,6 +17,17 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## November 2, 2026 Building Use & Visioning Committee meeting
+
+Provided by the site's owner on November 3; the agenda and the October 12 minutes are copies of the district's documents, and the transcript is an automatic transcript of the committee's Zoom recording, with speakers labeled by their Zoom names. In this copy the four residents who spoke in public comment are shown as "member of the public 1" to "4"; board members and staff keep their names. The site names people by role only.
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [meeting-transcript.txt](2026-11-02-committee-meeting/meeting-transcript.txt) | Automatic transcript of the meeting recording, with timestamps. Machine transcription (some lines are word-timing fragments); check the recording for exact wording. | `meeting1102` | [District YouTube channel](https://tinyurl.com/huwebapp-youtube-live) |
+| [committee-agenda.md](2026-11-02-committee-meeting/committee-agenda.md) | The committee's agenda, with links to the October 12 minutes and the folder of feasibility-study proposals. | `meeting1102`, `cabotRfps` | [Proposals folder](https://drive.google.com/drive/folders/1kbyn-otsGNQwtlcOErfvSZ2CCgns0UyG) |
+| [committee-minutes-2026-10-12-draft.md](2026-11-02-committee-meeting/committee-minutes-2026-10-12-draft.md) | Draft minutes of the committee's October 12 meeting, approved on November 2. | | [Google Docs](https://docs.google.com/document/d/1gdWOjAwmDzzW2gJiOW69FoZYqlUOmb7swakRVfodEvU/edit) |
+| [proposals/](2026-11-02-committee-meeting/proposals/) | Text extracted (`pdftotext -layout`) from the five firms' feasibility-study proposals for 193 Home Farm Way: Black River Design, gbArchitecture, Harriman, TruexCullins, and Vermont Integrated Architecture. The PDFs (about 50 MB) are not kept here; some fee tables and schedules are images and do not come through in the text. | `cabotRfps` | [Proposals folder](https://drive.google.com/drive/folders/1kbyn-otsGNQwtlcOErfvSZ2CCgns0UyG) |
+
 ## September 23, 2026 board meeting
 
 | File | What it is | Key | Original |

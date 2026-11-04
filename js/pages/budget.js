@@ -137,11 +137,11 @@ export default {
       ),
 
       section(
-        { id: "could-change", title: "What could still change these numbers", intro: "The FY28 figures are projections. Several inputs were still moving as of October 28." },
+        { id: "could-change", title: "What could still change these numbers", intro: "The FY28 figures are projections. Several inputs were still moving as of November 2." },
         h(
           "ul",
           { class: "prose change-list" },
-          h("li", {}, h("strong", {}, "Teacher health insurance. "), "The district's September estimate assumed a 10% rise. On October 28 a legislator told the board the increase will be held below 3%, after just over 7% last year. The administration called it \"very good news\" that would require remodeling the budget. ", cite(ref("sep23", "slide 44")), " ", cite(ref("meeting1028", "legislators"))),
+          h("li", {}, h("strong", {}, "Teacher health insurance. "), "The district's September estimate assumed a 10% rise. On October 28 a legislator told the board the increase will be held below 3%, after just over 7% last year. The administration called it \"very good news\" that would require remodeling the budget. On November 2 the superintendent said the rates came in at about 2.5% for most plans, and the finance director called it \"roughly a $300,000 savings in our level service,\" lowering spending per pupil over the threshold with no change from $1,081 to $962.81. The district has not yet restated its target; Options and Build a plan let you count the update. ", cite(ref("sep23", "slide 44")), " ", cite(ref("meeting1028", "legislators")), " ", cite(ref("meeting1102", "health insurance update"))),
           h("li", {}, h("strong", {}, "The official limit. "), "The Secretary of Education sets the FY28 threshold by November 15; $16,562 is a projection. ", cite(ref("vsa5401", "§ 5401(12)"), "State law")),
           h("li", {}, h("strong", {}, "The tax yield. "), "The yield is a state number that turns spending per pupil into a tax rate. The finance director said Path B's figures use last December's first estimate, $8,849; last year's yield ended at $9,406. ", cite(ref("meeting1028", "finance director"))),
           h("li", {}, h("strong", {}, "Staff costs. "), "The consolidation savings use the current seniority list and could change as retirements become known. ", cite(ref("meeting1028", "finance director"))),

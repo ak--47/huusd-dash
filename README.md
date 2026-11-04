@@ -2,8 +2,8 @@
 
 An independent, plain-language guide to the Harwood Unified Union School District's (HUUSD) FY28 budget and school consolidation choices. It shows the district's figures as published, re-checks the arithmetic, models other combinations of the same building blocks, and adds what the presentations leave out, mainly **how many different schools a child would attend** under each plan.
 
-**Live site:** https://ak--47.github.io/huusd-dash/
-**Staging (changes being previewed, not final):** https://ak--47.github.io/huusd-dash/staging/
+- **Live site:** https://ak--47.github.io/huusd-dash/
+- **Staging (changes being previewed, not final):** https://ak--47.github.io/huusd-dash/staging/
 
 Built by Aaron Krivitzky, a Waitsfield parent. Independent, not affiliated with HUUSD. Corrections are welcome as [GitHub issues](https://github.com/ak--47/huusd-dash/issues).
 

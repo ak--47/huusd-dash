@@ -113,6 +113,32 @@ export const PATH_B_SAVINGS = {
   fteTotal: 32.5,
 };
 
+// November 2, 2026 (committee meeting, said aloud; to be presented on November 4). Health insurance: next year's
+// increase came in at about 2.5% (one plan 2.9%), which the finance director said is "roughly a $300,000 savings in
+// our level service": spending per pupil over the threshold falls from $1,081 to $962.81, and the year-over-year
+// increase from 6.34% to 5.85%. The district has not published a restated target; the site offers it as a choice.
+export const HEALTH_UPDATE = {
+  amount: 300000,
+  perPupilBefore: 1081,
+  perPupilAfter: 962.81,
+  growthBefore: 0.0634,
+  growthAfter: 0.0585,
+  src: ref("meeting1102", "health insurance update"),
+};
+
+// November 2, 2026: the district's first figure for closing one valley school instead of two. With the middle
+// schools merged and valley 5th and 6th graders kept in the valley, the finance director put the total at "only
+// 2.3" million (21 positions, against 32.5 for Path B), still with an FY28 penalty of $165,324 after the health
+// insurance update, and at least $350,000 more to cut for FY29. She said keeping grades 5-6 in the valley leaves
+// about 131 students at Crossett Brook, which "still impacts the merger of the middle schools." It includes Pre-K.
+export const ONE_CLOSURE = {
+  amount: 2300000,
+  fte: 21,
+  penaltyAfterHealth: 165324,
+  fy29More: 350000,
+  src: ref("meeting1102", "closing one school"),
+};
+
 // The excess spending threshold: a percent of the FY25 statewide spending per pupil, adjusted
 // for inflation (deck slides 7 and 38, citing Act 169 of 2026).
 export const THRESHOLD_SCHEDULE = {
