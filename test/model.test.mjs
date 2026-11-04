@@ -6,6 +6,7 @@ import { ATTENDING, RESIDENTS_2026, PREK_2026, ENROLLMENT_FACTS } from "../data/
 import { BUDGET, PATH_A_CUTS, PATH_B_SAVINGS } from "../data/budget.js";
 import { BOARD } from "../data/schools.js";
 import * as M from "../js/model/index.js";
+import * as V from "../js/model/vote.js";
 
 const sum = (o) => Object.values(o).reduce((a, b) => a + b, 0);
 
@@ -172,6 +173,37 @@ test("next-fall moves: no change moves nobody; Path A moves only Pre-K", () => {
 
 test("board vote weights add to 100", () => {
   assert.equal(BOARD.seats.reduce((a, s) => a + s.members * s.weight, 0), 100);
+});
+
+test("board vote simulator: 14 named seats, weights in hundredths, two readings", () => {
+  for (const s of BOARD.seats) assert.equal(BOARD.members[s.town].length, s.members, s.town);
+  assert.equal(V.SEATS.length, 14);
+  assert.equal(V.SEATS.reduce((a, s) => a + s.weight, 0), V.TOTAL);
+  const { closure, majority } = V.RULES;
+  assert.equal(V.boardNeed(closure), 6667);
+  assert.equal(V.boardNeed(majority), 5001);
+  const all = (v) => Object.fromEntries(V.SEATS.map((s) => [s.id, v]));
+  assert.deepEqual(V.outcome(V.tally({}), closure), { board: "open", cast: "open" });
+  assert.deepEqual(V.outcome(V.tally(all("yes")), closure), { board: "pass", cast: "pass" });
+  assert.deepEqual(V.outcome(V.tally(all("absent")), majority), { board: "fail", cast: "fail" });
+  // everyone outside Waterbury votes yes, Waterbury absent: 61 points, short of the whole board, all of the votes cast
+  const noWaterbury = Object.fromEntries(V.SEATS.map((s) => [s.id, s.town === "Waterbury" ? "absent" : "yes"]));
+  assert.equal(V.tally(noWaterbury).yes, 6100);
+  assert.deepEqual(V.outcome(V.tally(noWaterbury), closure), { board: "fail", cast: "pass" });
+  // exactly two-thirds of the votes cast passes a closure (both Waitsfield members Yes, one member of the same weight No); a tie fails a majority
+  const t = { yes: 1340, no: 670, absent: V.TOTAL - 2010, unset: 0, count: {} };
+  assert.equal(V.outcome(t, closure).cast, "pass");
+  assert.equal(V.outcome({ ...t, yes: 670, no: 670 }, majority).cast, "fail");
+  // fewest and most members on the whole-board reading
+  const e = V.extremes(closure);
+  assert.deepEqual([e.pass.seats.length, e.pass.points, e.short.seats.length, e.short.points, e.block.seats.length, e.block.points], [8, 6680, 10, 6100, 4, 3900]);
+  const m = V.extremes(majority);
+  assert.deepEqual([m.pass.seats.length, m.short.seats.length, m.block.seats.length], [6, 8, 6]);
+  // links
+  const votes = { "waterbury-2": "yes", "fayston-2": "absent", "warren-1": "no" };
+  assert.deepEqual(V.decodeVotes(V.encodeVotes(votes)), votes);
+  assert.equal(V.encodeVotes({}), "");
+  assert.deepEqual(V.decodeVotes("zz?"), {});
 });
 
 test("draft roadmap: a new valley school in fall 2029 makes six schools for some of today's kindergartners", () => {

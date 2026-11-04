@@ -43,6 +43,8 @@ const ROUTES = [
   ["build-close-one-k4", "#/build?o=MWR&t=4&m=1"],
   ["build-close-one-k4-health", "#/build?o=MWR&t=4&m=1&x=1&hc=1"],
   ["options-health", "#/options?hc=1"],
+  ["vote", "#/vote"],
+  ["vote-set", "#/vote?m=majority&v=yyynyya-nnyyan"],
   ["journey-roadmap", "#/your-child?c=fayston.0.FES~warren.1.WRN&pair=MES+WES&rt=6"],
 ].filter(([name]) => !only || only.includes(name));
 
@@ -339,9 +341,20 @@ async function analytics(page) {
   await waitFor("Questions Copied");
   await expect("What we checked: copy the questions", "findings", { "Questions Copied": { question_count: questions } });
 
+  // Board vote simulator: one member's vote, then the motion, then everyone yes
+  await visit("#/vote", "vote");
+  await page.locator('[data-seat="waterbury-1"] .vt-btn--yes').click();
+  await expect("Vote: one member's vote", "vote", { "Board Vote Set": { seat: "waterbury-1", town: "waterbury", vote: "yes", motion: "closure", yes_points: 9.75, result_board: "open" } });
+  if (!(await page.evaluate(() => location.hash)).includes("v=y")) problems.push("Vote: the vote is not in the address");
+  await page.locator('input[name="vt-motion"][value="majority"]').check();
+  await expect("Vote: the motion", "vote", { "Vote Motion Chosen": { motion: "majority" } });
+  await page.getByRole("button", { name: "Everyone yes" }).click();
+  await expect("Vote: everyone yes", "vote", { "All Votes Set": { vote: "yes", motion: "majority" } });
+  if (!(await page.locator(".vt-result").textContent()).includes("100.00%")) problems.push("Vote: everyone yes does not show 100.00%");
+
   const all = await log();
   const views = all.filter((e) => e[0] === "track_pageview").map((e) => e[1]?.page);
-  if (views.join() !== "build,compare,your-child,options,findings") problems.push(`page views recorded: ${views.join(", ") || "none"}`);
+  if (views.join() !== "build,compare,your-child,options,findings,vote") problems.push(`page views recorded: ${views.join(", ") || "none"}`);
   const scan = (v, where) => {
     if (typeof v === "string" && (v.includes("@") || v.length > 400)) problems.push(`${where} is ${JSON.stringify(v.slice(0, 80))}${v.length > 80 ? "..." : ""} (${v.length} characters)`);
     else if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) scan(x, `${where}.${k}`);
@@ -381,7 +394,7 @@ const STEPS = [
   ["phone-widths", ["journey", "overview", "sources"], phoneWidths],
   ["drawer", ["overview"], drawer],
   ["at-links", ["budget", "findings"], atLinks],
-  ["analytics", ["build", "compare", "journey", "options", "findings"], analytics],
+  ["analytics", ["build", "compare", "journey", "options", "findings", "vote"], analytics],
   ["staging", ["build"], staging],
 ].filter(([name, pages]) => !only || only.includes(name) || pages.some((p) => only.includes(p)));
 

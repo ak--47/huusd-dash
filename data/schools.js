@@ -188,9 +188,19 @@ export const MUSIC = {
 };
 
 // Board seats (Articles of Agreement, Article 7) and vote weights (Superintendent's report, Oct 28, 2026; approved Oct 27, 2021).
+// Members by town from the October 14, 2026 minutes (present and absent). Public officials, named with their town only.
 export const BOARD = {
   src: ref("supt", "Articles of Agreement and Board Voting Weights"),
   seatsSrc: ref("aoa", "Article 7"),
+  namesSrc: ref("minutes1014", "Board members present and absent"),
+  members: {
+    Duxbury: ["Emily Dolloff", "Cindy Senning"],
+    Fayston: ["Langford Davidson", "Karl Naden"],
+    Moretown: ["Caitlin Lovegrove", "Steve Rosenberg"],
+    Waitsfield: ["Alexina Cather", "JB Weir"],
+    Warren: ["Macon Phillips", "Ashley Woods"],
+    Waterbury: ["Jillan Cantor-Sackett", "Robert Dabrowski", "Pam Eaton", "Theo Hanna"],
+  },
   seats: [
     { town: "Duxbury", members: 2, weight: 5.2 },
     { town: "Fayston", members: 2, weight: 5.0 },
