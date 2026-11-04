@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-04: Nov 2 work and the board vote simulator promoted to live
+
+- At the owner's request ("everything on staging can now go live"), PR #26 promoted staging to live with a merge commit, carrying staging PRs #20-#25: the promote-to-live skill, the Nov 2 committee meeting (one-closure figure, health insurance checkbox, `K4x3`), Build's "One closure, Path B's grades" starting point, the board vote simulator and its header fix, the README link fix, and the deploy-timeout note. The live deploy passed; `staging:diff` shows nothing.
+
 ## 2026-11-04: board vote simulator (staging only)
 
 - Follow-up PR #24: the members list's header says "Weight" (it overlapped "Vote"), and README lists the live and staging links on separate lines. Its Pages deploy timed out on GitHub's side, and re-runs of the same commit were refused; a new commit (this note, in AGENTS.md "Deploy") published it.
