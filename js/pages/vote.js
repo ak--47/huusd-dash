@@ -294,7 +294,7 @@ export default {
           h(
             "div",
             { class: "vt-list-wrap" },
-            h("div", { class: "vt-head", "aria-hidden": "true" }, h("span", {}, "Member and town"), h("span", {}, "Vote weight"), h("span", {}, "Vote")),
+            h("div", { class: "vt-head", "aria-hidden": "true" }, h("span", {}, "Member and town"), h("span", {}, "Weight"), h("span", {}, "Vote")),
             h("ul", { class: "vt-list", "aria-label": "Board members" }, rows),
             h("p", { class: "small muted vt-names" }, "Members by town as listed in the board's October 14 minutes ", cite(BOARD.namesSrc), "; weights approved by the board on October 27, 2021 ", cite(BOARD.src), ".")
           ),
