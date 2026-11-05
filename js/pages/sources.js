@@ -6,7 +6,7 @@ import { HISTORY, UPDATES, VOTES } from "../../data/history.js";
 import { PUPILS, TARGET, CLASS_SIZE_DEFAULT } from "../model/index.js";
 import { BUDGET, HEALTH_UPDATE, ONE_CLOSURE, PATH_B_SAVINGS } from "../../data/budget.js";
 
-const KIND_LABEL = { district: "District documents", state: "State and federal", research: "Research", news: "News", derived: "Our calculations" };
+const KIND_LABEL = { district: "District documents", board: "Board members' own writing", state: "State and federal", research: "Research", news: "News", derived: "Our calculations" };
 const TERM_LABEL = {
   threshold: "Excess spending threshold",
   penalty: "Excess spending penalty",
@@ -45,7 +45,7 @@ export default {
           { class: "prose" },
           h("p", {}, h("strong", {}, "Built by Aaron Krivitzky, a Waitsfield parent."), " It is an independent project, not affiliated with or reviewed by the Harwood Unified Union School District. It does not endorse a plan. It shows the district's figures as published, checks the arithmetic, and adds measures the presentations leave out, mainly how many schools a child would attend."),
           h("p", {}, "Found a mistake? Please ", h("a", { href: "https://github.com/ak--47/huusd-dash/issues" }, "report it on GitHub"), ". Corrections will be posted with the date. The code and data are public at ", h("a", { href: "https://github.com/ak--47/huusd-dash" }, "github.com/ak--47/huusd-dash"), "."),
-          h("p", {}, "Last updated October 29, 2026.")
+          h("p", {}, "Last updated November 5, 2026.")
         ),
         h(
           "dl",
@@ -79,8 +79,8 @@ export default {
         ]),
         methodItem("Savings from closing schools and merging the middle schools", [
           `For closing two valley schools we use the district's figure, ${money(PATH_B_SAVINGS.valley.amount)} and 16 positions, for every pairing, as the district does. For merging the middle schools we use its ${money(PATH_B_SAVINGS.middle.amount)}.`,
-          `For closing one school with the middle schools merged and valley 5th and 6th graders kept in the valley, we use the district's November 2 figure: about ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, said aloud by the finance director at a committee meeting. For other one- or three-school closures, which the district has not costed (including one closure with grades 5-6 at Crossett Brook), we scale the two-school figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
-          `Health insurance: on November 2 the finance director said lower rates take about ${money(HEALTH_UPDATE.amount)} off next year's level-service budget. The district has not restated its target, so the Options and Build pages offer it as a choice that lowers either target by that amount.`,
+          `For closing one school with the middle schools merged and valley 5th and 6th graders kept in the valley, we use the district's figure: ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, given by the finance director at the November 2 committee meeting and presented on November 4. For other one- or three-school closures, which the district has not costed (including one closure with grades 5-6 at Crossett Brook), we scale the two-school figure by the number of buildings closed: about ${money(Math.round(PATH_B_SAVINGS.valley.amount / 2))} per building. This is an estimate and is always labeled as one.`,
+          `Health insurance: on November 2 the finance director said lower rates take about ${money(HEALTH_UPDATE.amount)} off next year's level-service budget. Its November 4 presentation shows the lower level-service penalty but keeps the $3,339,273 target, so the Options and Build pages offer the update as a choice that lowers either target by that amount.`,
           [
             "The district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so those versions would save less. The district has not costed them. For plans that keep grades 5-6 in the valley we still show the district's figures, but as an upper limit, with the middle school saving labeled an estimate. ",
             cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
@@ -136,7 +136,7 @@ export default {
 
       section(
         { id: "list", title: "Sources" },
-        ...["district", "state", "research", "news", "derived"].filter((k) => groups[k]).map((k) =>
+        ...["district", "board", "state", "research", "news", "derived"].filter((k) => groups[k]).map((k) =>
           h(
             "div",
             { class: "source-group" },

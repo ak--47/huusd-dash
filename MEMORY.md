@@ -6,6 +6,16 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-05: the November 4 board meeting (staging only)
+
+Inputs from the owner (in `~/Desktop/tmp/huusd-11-04-updates`, not in the repo): the agenda, the meeting transcript, the November 4 deck, the district's workbook and dashboard of board members' scores, the chair's open meeting law statement, and, unofficial and kept out of the repo, a working-group member's (Lynn's) grades 5-6 center sketch, her questions from the meeting, and her email to the board.
+
+- **What happened:** the board's scores ranked Waitsfield + Warren first (248) and Moretown + Warren second (241); in a straw poll at about 9:55 PM the board chose Moretown + Warren 9 to 4 (chair not voting), so Fayston and Waitsfield are proposed to close. Path A was dropped unanimously. Closure vote set for January 6 after three hearings (vote to warn them on November 18).
+- **New page `#/decision`** ("The Nov. 4 decision", second in the nav): the scores (published totals and per-question averages), each member's scores for the two finalists next to their answer, the weighted count, reasons on the record, the finalists side by side, and next steps. Owner's calls: name board members (public scores and votes); no bad faith, but show plainly that the poll contradicted the scores. Three members answered against their own sheets (Cantor-Sackett 20-16, Dabrowski 20-15, Phillips 18-16); by the sheets it would have been 7-6 for Waitsfield + Warren. Cindy Senning's answer is not on the recording (no open microphone); it is inferred from the 9-4 count and marked. The owner confirmed the other answers against the video (the transcript mislabels Rob Dabrowski at 3:58:04 as Lang Davidson).
+- **What the data says, honestly:** Waitsfield + Warren's 7-point lead is all in the kitchen question (+29); Moretown + Warren scored higher on capacity, wastewater, buildings, and overall fit, fits the administration's Pre-K to 4 classroom chart (Waitsfield + Warren is one room short), and moves fewer students on our count (352 vs 398). We found no single fact that rules out Moretown + Warren; its unpriced costs (Moretown's prep kitchen, Warren's staff-counting permit) are in the new `finalists` finding, alongside Waitsfield + Warren's.
+- **Model:** `plan.center56` (link key `f`), a valley building teaching every 5th and 6th grader with Crossett Brook empty. Options card `center56` (Waitsfield, Warren, Moretown versions; Waitsfield default, owner's call) and Build starting point "Grades 5-6 center". Savings = Path B figures minus the center's operating cost, an estimate ($3.73M-$3.75M). `ONE_CLOSURE` is now the deck's exact $2,304,281 (was $2.3M), moving the one-closure and `K6x3-center` figures by $4,281.
+- **Also:** findings `straw-poll`, `finalists`, `grades56-home` (with Lynn's questions rephrased), `nov2-figures` updated; timeline through Town Meeting; Start here's headline, status card, a November 4 section, and the 5-6 center card; new source keys `meeting1104`, `deck1104`, `scores1104`, `agenda1104`, `omlResponse1104`, `maconScores` (a new "board" source kind); cached sources in `sources/2026-11-04-board-meeting/`; `test/decision.test.mjs` checks every quote against the transcript.
+
 ## 2026-11-04: Nov 2 work and the board vote simulator promoted to live
 
 - At the owner's request ("everything on staging can now go live"), PR #26 promoted staging to live with a merge commit, carrying staging PRs #20-#25: the promote-to-live skill, the Nov 2 committee meeting (one-closure figure, health insurance checkbox, `K4x3`), Build's "One closure, Path B's grades" starting point, the board vote simulator and its header fix, the README link fix, and the deploy-timeout note. The live deploy passed; `staging:diff` shows nothing.
@@ -149,6 +159,9 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 
 ## Open items
 
+- Cindy Senning's November 4 straw-poll answer is inferred (no open microphone). Check the board's minutes when approved and update `STRAW_POLL` in `data/decision.js`.
+- After November 18: record the vote to warn the hearings (who voted how), the hearing dates and places, and any kitchen/van costing for Moretown or early-retirement modeling.
+- The grades 5-6 center plan (`center56`) has no district costing; if the district prices it or Crossett Brook's operating cost, replace the estimate.
 - Analytics: after the first deploy, check in Mixpanel that page views, the named events, and session replays arrive through the proxy. The browser checks only see the localhost stub (`window.__mpEvents`).
 - Before sharing widely (owner's call): consider a corrections channel residents will use (a form or a dedicated address, not the work email); GitHub issues is a barrier for most.
 - Owner decision: the `ak--47.github.io` host reads like "AK-47" in link previews. Moving to a GitHub organization or a custom domain means updating `og:url`, `og:image`, README links, and the GitHub links on the site.
@@ -156,7 +169,6 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 - After Nov 4: replace the Nov 2 figures said aloud (`ONE_CLOSURE`, `HEALTH_UPDATE`, the `nov2-figures` finding, `MEETING_1102` notes) with the presentation's. If the district restates its target with the health insurance rates, make that the default target (or drop the checkbox). If it costs one closure with grades 5-6 at Crossett Brook, replace the `K4x3` estimate. Check whether its penalty figures leave out older bond payments, as the Nov 2 numbers suggest.
 - Ask the district: what one closure saves with valley 5th and 6th graders at Crossett Brook (decides `K4x3`); what the middle-school merger saves with only Crossett Brook's own 5th and 6th graders (the Nov 2 figure implies it is below the $1,926,000 `MS+cuts` needs unless one closure saves under about $374,000); bus routes and ride times by pairing.
 - Attendee notes from the Nov 2 and Nov 4 meetings: add to `data/meeting.js`, labeled "reported by attendees".
-- After Nov 4: update `data/timeline.js` and the "Where things stand" card on Start here (`js/pages/overview.js`) with what the board decided.
 - CI: the `ubuntu-22.04` runner retires in April 2027; upgrade Playwright (currently 1.44.1) and move the test job to `ubuntu-latest` before then. WebKit is not in CI; a WebKit overflow check on Your child's path would catch iPhone-only layout bugs.
 - No license file yet; the owner may want one (for example CC BY for text, MIT for code).
 - The district may bring a costed "Pre-K in a separate building" version to the Nov 2 or Nov 4 meeting (offered Oct 28). If it does, replace the `B-center` estimate (operating cost only) with the district's figure, and update the `prek-building` finding.

@@ -28,7 +28,8 @@ export function studentGroups() {
   return groups;
 }
 
-function reasonFor(plan, before, grade) {
+function reasonFor(plan, before, grade, after) {
+  if (plan.center56 && after === plan.center56) return "center56";
   if (VALLEY.includes(before) && !plan.open.includes(before)) return "closure";
   if (VALLEY.includes(before) && grade >= 5) return "grades56";
   if (before === "CBMS" && grade >= 7) return "middle";
@@ -39,8 +40,8 @@ function reasonFor(plan, before, grade) {
 
 // Students who would start fall 2027 in a different school than they would with no change.
 export function movedNextFall(plan) {
-  const byReason = { closure: 0, grades56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
-  const byReasonK12 = { closure: 0, grades56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
+  const byReason = { closure: 0, grades56: 0, center56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
+  const byReasonK12 = { closure: 0, grades56: 0, center56: 0, middle: 0, brookside: 0, prek: 0, other: 0 };
   const bySchool = {};
   let k12 = 0;
   let preK = 0;
@@ -52,7 +53,7 @@ export function movedNextFall(plan) {
     // staying in this year's school is not a move (Brookside 4th graders when Brookside teaches grade 5)
     if (after === g.school) continue;
     const nextGrade = g.grade + 1;
-    const reason = reasonFor(plan, before, nextGrade);
+    const reason = reasonFor(plan, before, nextGrade, after);
     byReason[reason] += g.n;
     bySchool[g.school] = (bySchool[g.school] ?? 0) + g.n;
     if (nextGrade >= 0) {

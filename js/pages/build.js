@@ -9,14 +9,14 @@
 import { h, store } from "../ui/dom.js";
 import { note, pageHead } from "../ui/kit.js";
 import { track } from "../ui/track.js";
-import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, centerPlan, hybridPlan, onePlan, pairId } from "../ui/build-controls.js";
+import { CS_DEFAULT, PORT_MAX, buildControls, csExpand, csFromString, csIsDefault, csToString, centerPlan, center56Plan, hybridPlan, onePlan, pairId } from "../ui/build-controls.js";
 import { resultsPanel, verdictSentence } from "../ui/build-results.js";
 import { PLAN_A, PLAN_TODAY, closedSchools, decodePlan, effectiveSplit, encodePlan, evaluate, makePlan, pathB, receivingOptions } from "../model/index.js";
 import { PATH_A_CUTS } from "../../data/budget.js";
 
 // every query key encodePlan can write; absent keys are cleared from the URL. "n" is the district's
 // draft roadmap (a new valley building in fall 2029).
-const PLAN_KEYS = ["o", "t", "m", "b", "c", "s", "p", "r", "n", "k", "sp"];
+const PLAN_KEYS = ["o", "t", "m", "b", "c", "s", "p", "r", "n", "k", "sp", "f"];
 
 // A link's list of open valley schools: "-" for none, or letters from F, M, W, R. Anything else
 // (a typo, or a link cut short) would decode as "every school closes", so it is not read.
@@ -49,7 +49,7 @@ const samePlan = (a, b) => encodePlan(a) === encodePlan(b);
 const basisOf = (v) => (v === "exclusion" ? "exclusion" : "district");
 
 // Analytics: the parts of a plan that "Plan Changed" names when they change. canon() ignores object key order.
-const PARTS = ["open", "valleyTop", "msMerge", "bpsTop", "cuts", "septicWES", "portables", "receiving", "split", "prekCenter", "roadmap"];
+const PARTS = ["open", "valleyTop", "msMerge", "bpsTop", "cuts", "septicWES", "portables", "receiving", "split", "prekCenter", "center56", "roadmap"];
 const canon = (v) => JSON.stringify(v && typeof v === "object" && !Array.isArray(v) ? Object.entries(v).sort() : v);
 
 // The "Plan Changed" event's properties: the plan's settings and its main results (evaluate's r)
@@ -65,6 +65,7 @@ function planProps(p, r) {
     cuts: p.cuts,
     prek_center: p.prekCenter?.school ?? null,
     prek_center_scope: p.prekCenter?.scope ?? null,
+    grades56_center: p.center56 ?? null,
     splits: Object.entries(p.split).flatMap(([town, s]) => (Object.keys(s).length ? Object.entries(s).map(([id, x]) => `${town}>${id} ${Math.round(x * 100)}%`) : [`${town}>all`])),
     portable_units: Object.values(p.portables).reduce((a, n) => a + n, 0),
     waitsfield_300: p.septicWES,
@@ -196,12 +197,13 @@ export default {
     const controls = buildControls({
       state,
       onPlan: (fn) => setPlan(fn(state.plan)),
-      onPreset: (kind, { pair, top, closed, closedK4, center }) => {
+      onPreset: (kind, { pair, top, closed, closedK4, center, c56 }) => {
         const which = {
           B: { pairing: pairId(pair), setup: top === 4 ? "pk4" : "k6" },
           one: { closed_school: closed },
           k4x3: { closed_school: closedK4 },
           center: { center_school: center },
+          c56: { center56_school: c56 },
         }[kind] ?? {};
         send("Starting Point Chosen", { preset: kind, ...which });
         const plans = {
@@ -211,6 +213,7 @@ export default {
           k4x3: () => onePlan(closedK4, 4),
           hybrid: () => hybridPlan(),
           center: () => centerPlan(center),
+          c56: () => center56Plan(c56),
         };
         setPlan(
           (plans[kind] ?? (() => pathB(pair, top)))(),

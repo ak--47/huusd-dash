@@ -123,7 +123,12 @@ export const HEALTH_UPDATE = {
   perPupilAfter: 962.81,
   growthBefore: 0.0634,
   growthAfter: 0.0585,
+  // November 4 deck, slide 3: level service $54,924,120 (+5.858%), $962.81 per pupil over, penalty $2,469,605. The
+  // level-funded card keeps the required cut at $3,339,273, so the district's target is unchanged.
+  levelService: 54924120,
+  levelServicePenalty: 2469605,
   src: ref("meeting1102", "health insurance update"),
+  deckSrc: ref("deck1104", "slide 3"),
 };
 
 // November 2, 2026: the district's first figure for closing one valley school instead of two. With the middle
@@ -131,12 +136,16 @@ export const HEALTH_UPDATE = {
 // 2.3" million (21 positions, against 32.5 for Path B), still with an FY28 penalty of $165,324 after the health
 // insurance update, and at least $350,000 more to cut for FY29. She said keeping grades 5-6 in the valley leaves
 // about 131 students at Crossett Brook, which "still impacts the merger of the middle schools." It includes Pre-K.
+// November 4 deck, slide 10: $2,304,281 exactly, "a net loss of $1,625,188 in savings" against Path B; budget
+// $52,619,839 (+1.42%); penalty $165,324. Slide 11 (FY29): a $325,299 penalty, or about $350,000 of cuts.
 export const ONE_CLOSURE = {
-  amount: 2300000,
+  amount: 2304281,
   fte: 21,
   penaltyAfterHealth: 165324,
   fy29More: 350000,
-  src: ref("meeting1102", "closing one school"),
+  fy29Penalty: 325299,
+  src: ref("deck1104", "slide 10"),
+  saidSrc: ref("meeting1102", "closing one school"),
 };
 
 // The excess spending threshold: a percent of the FY25 statewide spending per pupil, adjusted

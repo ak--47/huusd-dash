@@ -1,0 +1,21 @@
+/* The November 4 decision (js/pages/decision.js) */
+.dc-steps li { margin-bottom: var(--ak-s2); }
+.dc-scores tr.is-finalist th, .dc-scores tr.is-finalist td { font-weight: 700; }
+.dc-rank { color: var(--ak-ink-2); font-family: var(--ak-font-mono); font-size: var(--ak-text-sm); }
+.dc-diff { margin: var(--ak-s2) 0 var(--ak-s3); }
+.dc-members th[scope="row"] { min-width: 10rem; }
+.dc-name { display: block; }
+.dc-town { display: block; font-size: var(--ak-text-sm); font-weight: 400; color: var(--ak-ink-2); }
+.dc-members td.is-higher { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.dc-members tr.is-against th .dc-name { font-weight: 700; }
+.dc-flag { font-weight: 700; cursor: help; }
+.dc-findings { display: grid; gap: var(--ak-s4); margin: var(--ak-s5) 0 var(--ak-s4); }
+@media (min-width: 720px) { .dc-findings { grid-template-columns: 1fr 1fr; } }
+.dc-card { padding: var(--ak-s4); border-left: 4px solid var(--ak-a1); }
+.wonk .dc-card h3 { margin: 0 0 var(--ak-s2); font-size: var(--ak-text-md); }
+.dc-big { margin: 0; font-family: var(--ak-font-mono); font-size: var(--ak-text-2xl, 2rem); font-weight: 700; line-height: 1.1; }
+.dc-quotes { margin-bottom: var(--ak-s5); }
+.wonk .dc-quotes h3 { font-size: var(--ak-text-md); }
+.dc-finalists th[scope="row"] { min-width: 9rem; vertical-align: top; }
+.dc-finalists td { vertical-align: top; min-width: 14rem; }
+.dc-line { display: block; margin-bottom: var(--ak-s1); }

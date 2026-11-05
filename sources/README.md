@@ -17,6 +17,21 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## November 4, 2026 board meeting
+
+Provided by the site's owner on November 5. The transcript is an automatic transcript of the meeting recording with machine speaker names, some of them wrong (see AGENTS.md, "Sources and verification"); residents who spoke in public comment are shown as "member of the public 1" to "17", and two students' names are removed. Board members and staff keep their names.
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [meeting-transcript.txt](2026-11-04-board-meeting/meeting-transcript.txt) | Automatic transcript of the recording, with timestamps. The straw poll (3:56-3:59) was checked against the video; see `STRAW_POLL` in `data/decision.js`. | `meeting1104` | [YouTube](https://www.youtube.com/watch?v=F8DYbxu1FDw) |
+| [budget-presentation.pptx](2026-11-04-board-meeting/budget-presentation.pptx) | The district's presentation, "Aligning Facilities, Enrollment, & Educational Opportunities, Part 2" (26 slides), including the chart-paper classroom modeling (slides 7-9, photos). | `deck1104` | [Google Slides](https://docs.google.com/presentation/d/1J59Y6xs6XilX7s-q5C1vC-J1PR0OJMjOBnCOTaawG3I/edit) |
+| [budget-presentation-slide-text.txt](2026-11-04-board-meeting/budget-presentation-slide-text.txt) | Text of the slides and notes above. | `deck1104` | |
+| [consolidation-scores-workbook.xlsx](2026-11-04-board-meeting/consolidation-scores-workbook.xlsx) | The district's workbook of the 14 board members' scores of the six pairs (one tab each) and the scoring guide. | `scores1104` | [Google Sheets](https://docs.google.com/spreadsheets/d/16sSuS2n3b3V3EHH6H_ELTzcyqbfXufiOXdZ-5xFXVWw/edit?gid=1442237206) |
+| [consolidation-scores-workbook.txt](2026-11-04-board-meeting/consolidation-scores-workbook.txt) | Cell-by-cell text of the workbook, for searching. | `scores1104` | |
+| [consolidation-dashboard-leaderboard.png](2026-11-04-board-meeting/consolidation-dashboard-leaderboard.png), [consolidation-dashboard-matrix.png](2026-11-04-board-meeting/consolidation-dashboard-matrix.png) | Screenshots of the district's dashboard of the scores (totals 248, 241, 223, 180, 175, 165). | `scores1104` | |
+| [board-agenda.md](2026-11-04-board-meeting/board-agenda.md) | Meeting agenda. | `agenda1104` | [Google Docs](https://docs.google.com/document/d/11H3cFZDYPAsmxRpRIunwERCNA8-w40zKkbT9APdfUl4/edit) |
+| [board-response-oml-complaint.md](2026-11-04-board-meeting/board-response-oml-complaint.md) | The chair's statement on the open meeting law complaint about October 28 public comment. | `omlResponse1104` | [Google Docs](https://docs.google.com/document/d/1qCBSz4l5retvQIaY9aOTR-GUp2gqtOP7xz6D2Xo781s/edit) |
+
 ## November 2, 2026 Building Use & Visioning Committee meeting
 
 Provided by the site's owner on November 3; the agenda and the October 12 minutes are copies of the district's documents, and the transcript is an automatic transcript of the committee's Zoom recording, with speakers labeled by their Zoom names. In this copy the four residents who spoke in public comment are shown as "member of the public 1" to "4"; board members and staff keep their names. The site names people by role only.

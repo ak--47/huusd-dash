@@ -8,6 +8,9 @@
 //   septicWES   use 300 for Waitsfield (its 1991 permit) instead of the slides' 230
 //   portables   two-classroom portable units added, by school id
 //   receiving   for a town whose school closes, the school its children go to (overrides the nearest-school default)
+//   center56    a closed valley building that teaches grades 5-6 for the whole district (a "grades 5-6 center");
+//               only with Pre-K to 4 valley schools and the merger. Crossett Brook's 5th and 6th graders move there too,
+//               so Crossett Brook's building holds no classes
 //   roadmap     the district's draft roadmap (Oct 14, 2026): from fall `fall`, every valley elementary student
 //               attends one new central valley school for grades Pre-K to `top`; grades above `top` go to Crossett Brook
 
@@ -62,6 +65,12 @@ export function makePlan(p = {}) {
     // { town: { school: share } }, shares in whole percents adding to at most 1; the rest go to the town's
     // receiving school. {} sends them all there, instead of the district's shares (placement.js).
     split: normSplit(p.split, open),
+    // A closed valley building that teaches every 5th and 6th grader in the district (valley and Waterbury-Duxbury),
+    // so Crossett Brook's building holds no classes. Only with Pre-K to 4 valley schools and the merger.
+    center56:
+      p.center56 && VALLEY.includes(p.center56) && !open.includes(p.center56) && valleyTop === 4 && p.msMerge && p.prekCenter?.school !== p.center56
+        ? p.center56
+        : null,
   };
 }
 
@@ -103,7 +112,7 @@ export const withRoadmap = (plan, top = ROADMAP_TOP_DEFAULT) =>
 export function planAt(plan, fall) {
   if (fall < START_YEAR) return PLAN_TODAY;
   if (plan.roadmap && fall >= plan.roadmap.fall) {
-    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, bpsTop: 4, roadmap: null, prekCenter: null, split: {}, phase: 2 };
+    return { ...plan, open: ["NEW"], valleyTop: plan.roadmap.top, bpsTop: 4, roadmap: null, prekCenter: null, center56: null, split: {}, phase: 2 };
   }
   return plan;
 }
@@ -144,7 +153,7 @@ export const NAMED_PLANS = [PLAN_TODAY, PLAN_A, ...PATH_B_PLANS];
 
 export const closedSchools = (plan) => VALLEY.filter((id) => !plan.open.includes(id));
 
-export const isPathB = (plan) => plan.msMerge && plan.open.length === 2 && plan.cuts.length === 0;
+export const isPathB = (plan) => plan.msMerge && plan.open.length === 2 && plan.cuts.length === 0 && !plan.center56;
 
 // ---- share links: a plan round-trips through a short query string ----
 const LETTER = { FES: "F", MES: "M", WES: "W", WRN: "R" };
@@ -164,6 +173,7 @@ export function encodePlan(plan) {
   if (recv) q.set("r", recv);
   if (plan.roadmap) q.set("n", `${plan.roadmap.fall}.${plan.roadmap.top}`);
   if (plan.prekCenter) q.set("k", `${plan.prekCenter.school}.${plan.prekCenter.scope}`);
+  if (plan.center56) q.set("f", LETTER[plan.center56]);
   // sp=fayston~WRN~33.moretown~BPS~14~WRN~5; a town alone sends all its children to its receiving school
   const split = Object.entries(plan.split ?? {}).map(([town, v]) => [town, ...Object.entries(v).map(([s, x]) => `${s}~${Math.round(x * 100)}`)].join("~")).join(".");
   if (split) q.set("sp", split);
@@ -195,6 +205,7 @@ export function decodePlan(str) {
     for (let i = 0; i + 1 < rest.length; i += 2) split[town][rest[i]] = Number(rest[i + 1]) / 100;
   }
   return makePlan({
+    center56: FROM_LETTER[q.get("f")] ?? null,
     prekCenter: kSchool ? { school: kSchool, scope: kScope } : null,
     split,
     roadmap: rf ? { fall: ROADMAP_FALL, top: rt } : null,
