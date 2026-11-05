@@ -39,18 +39,18 @@ export default {
     el.append(
       pageHead({
         kicker: "Independent guide · HUUSD FY28 budget decision",
-        title: "The board's straw poll chose Moretown + Warren. Its own scores had ranked Waitsfield + Warren first.",
+        title: "Where things stand on next year's budget and the valley schools",
         lede: [
           `District leaders say next year's budget needs about ${moneyShort(BUDGET.requiredCut)} in savings to stay under Vermont's `,
           term("threshold", "excess spending threshold"),
-          ", a state limit on education spending per pupil; going over raises local property taxes. The board has dropped Path A's program cuts and is working on Path B: close 2 of the 4 valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. On November 4 it chose, in a straw poll, to plan around keeping Moretown and Warren open, which would close Fayston and Waitsfield. Nothing is final until the public hearings and a two-thirds vote, set for January 6.",
+          ", a state limit on education spending per pupil; going over raises local property taxes. The board has dropped Path A's program cuts and is working on Path B: close 2 of the 4 valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. Nothing is final until the public hearings and a two-thirds vote, set for January 6.",
         ],
       }),
 
       h(
         "section",
         { class: "wonk-card status-card", "aria-labelledby": "status-title" },
-        h("h2", { id: "status-title" }, "Where things stand"),
+        h("h2", { id: "status-title" }, "The latest"),
         h(
           "ul",
           { class: "status-list" },
