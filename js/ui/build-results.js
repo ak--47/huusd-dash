@@ -237,6 +237,7 @@ function savingsMeter(b) {
 
 function itemSource(it, plan) {
   if (it.id === "prekCenter") return FACILITIES[plan.prekCenter.school].src;
+  if (it.id === "center56") return FACILITIES[plan.center56].src;
   if (it.id === "oneClosure") return ONE_CLOSURE.src;
   if (it.id === "middle") return PATH_B_SAVINGS.middle.src;
   if (it.id === "valley") return PATH_B_SAVINGS.valley.src;
@@ -374,7 +375,13 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
               tag(it.kind),
               cite(itemSource(it, plan)),
               it.fte ? h("span", {}, `${fte(it.fte)} staff positions`) : null,
-              it.id === "prekCenter"
+              it.id === "center56"
+                ? h(
+                    "span",
+                    { class: "bp-item-note" },
+                    "The building's annual operating costs from the district's facility slide, which leave out custodial salaries and benefits. The district's Path B figures assume two valley buildings close and Crossett Brook stays open; here a valley building stays open for grades 5 and 6 and Crossett Brook empties, and the district has published no operating cost for Crossett Brook, so nothing is counted for it. The district has not costed this plan."
+                  )
+                : it.id === "prekCenter"
                 ? h(
                     "span",
                     { class: "bp-item-note" },
@@ -387,7 +394,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                     `An upper limit. The district's figure assumes every valley 5th and 6th grader moves to Crossett Brook; this plan keeps ${plan.valleyTop === 5 ? "valley 5th graders" : "them"} in the valley. On October 28 an administrator said keeping them there would leave about 126 students at Crossett Brook and would not achieve as many staff cuts, so this would save less. `,
                     cite(ref("meeting1028", "keeping grades 5-6 in the valley")),
                     closed === 1 && plan.valleyTop === 5
-                      ? ` With grades 5 and 6 both kept in the valley, the district put one closure plus the merger at about ${money(ONE_CLOSURE.amount)} in all on November 2, so this version may well save less than the total shown here.`
+                      ? ` With grades 5 and 6 both kept in the valley, the district put one closure plus the merger at ${money(ONE_CLOSURE.amount)} in all on November 4, so this version may well save less than the total shown here.`
                       : null,
                     plan.bpsTop === 6
                       ? " Here those 5th and 6th graders move to Brookside instead, which the district has not costed. Nothing is counted for Crossett Brook's empty building: the district has published no operating cost for it, and an empty building still needs heat, power, and upkeep, more so during repairs."
@@ -397,7 +404,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                   ? h(
                       "span",
                       { class: "bp-item-note" },
-                      `The finance director's figure from the November 2 committee meeting, said aloud and to be presented on November 4: about ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, against ${money(PATH_B_SAVINGS.total)} for Path B. It keeps valley 5th and 6th graders in the valley, which she said leaves about 131 students at Crossett Brook and "still impacts the merger of the middle schools." She did not say which school; it is used for each.`
+                      `The district's figure, first given at the November 2 committee meeting and presented on November 4: ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, against ${money(PATH_B_SAVINGS.total)} for Path B. It keeps valley 5th and 6th graders in the valley, which she said leaves about 131 students at Crossett Brook and "still impacts the merger of the middle schools." She did not say which school; it is used for each.`
                     )
                   : it.kind === "estimate"
                     ? h(
@@ -573,7 +580,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
           {},
           "Savings for each lever are the district's figures. ",
           b.items.some((i) => i.id === "oneClosure")
-            ? `For one closure with the middle schools merged and grades 5-6 kept in the valley, the district gave a figure on November 2, about ${money(ONE_CLOSURE.amount)} in all, which this plan uses. `
+            ? `For one closure with the middle schools merged and grades 5-6 kept in the valley, the district presented a figure on November 4, ${money(ONE_CLOSURE.amount)} in all, which this plan uses. `
             : closed && closed !== 2
               ? `The district costed closing exactly two valley schools. For ${closed === 1 ? "one" : closed === 3 ? "three" : "four"}, we scale its figure by the number of buildings closed. Real savings would depend on which schools close and how staff are reassigned. `
               : "The district costed closing exactly two valley schools; for any other number we scale its figure by the number of buildings closed and label it an estimate. ",
@@ -765,7 +772,8 @@ function buildingsSection(plan, r, cs, keptFold) {
       plan.prekCenter
         ? ` ${schoolShort(plan.prekCenter.school)} becomes a Pre-K center for ${plan.prekCenter.scope === "all" ? "the whole district, Brookside's Pre-K included" : "valley families"}, with this year's district Pre-K children (our estimate of who would attend).`
         : "",
-      plan.bpsTop === 6 ? " Brookside teaches K-6, and Crossett Brook's building holds no classes." : ""
+      plan.bpsTop === 6 ? " Brookside teaches K-6, and Crossett Brook's building holds no classes." : "",
+      plan.center56 ? ` ${schoolShort(plan.center56)}'s building teaches every 5th and 6th grader in the district, and Crossett Brook's building holds no classes.` : ""
     ),
     h("p", {}, summary.join(" ")),
     source,
@@ -871,6 +879,7 @@ function studentsSection(plan, r, keptFold) {
     [m.byReason.grades56, "because valley grades 5 and 6 move to Crossett Brook"],
     [m.byReason.middle, "because Crossett Brook's 7th and 8th graders move to Harwood"],
     [m.byReason.brookside, "because Crossett Brook's 5th and 6th graders move to Brookside"],
+    [m.byReason.center56, plan.center56 ? `because grades 5 and 6 move to the ${schoolShort(plan.center56)} center` : ""],
     [m.byReason.other, "for other reasons"],
   ].filter(([n]) => n > 0);
 

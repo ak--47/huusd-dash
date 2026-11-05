@@ -4,7 +4,7 @@ import { track } from "../ui/track.js";
 import { FINDINGS, QUESTIONS } from "../../data/findings.js";
 import { CHECKS, IDEAS, EVIDENCE } from "../../data/context.js";
 import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
-import { CLASS_SIZE_DEFAULT, NEAREST, capacity, districtShares, makePlan, pathB, tableLoads, townK6 } from "../model/index.js";
+import { CLASS_SIZE_DEFAULT, DISTRICT_SHARES, DISTRICT_SHARES_K4, NEAREST, capacity, makePlan, pathB, tableLoads, townK4, townK6 } from "../model/index.js";
 import { PAIRS } from "../../data/district-scenarios.js";
 import { SCHOOLS } from "../../data/schools.js";
 import { ref } from "../../data/sources.js";
@@ -205,39 +205,60 @@ function verdict(c) {
   return c.overPeople.length ? `✕ Over at ${c.overPeople.map((id) => SCHOOLS[id].short).join(", ")}` : "✓ Fits";
 }
 
-// For each pair, where the district's K-6 table places each closed town's children (placement.js).
+// For each pair, where the district's tables place each closed town's children (placement.js): the K-6 tables
+// (K-6 children) and the Pre-K to 4 tables (K-4 children; their 5th and 6th graders all go to Crossett Brook).
 function placementTable() {
+  return [placementMatrix("K6"), placementMatrix("PK4")];
+}
+
+function placementMatrix(config) {
+  const k4 = config === "PK4";
   const name = (id) => SCHOOLS[id].short;
   const townName = (town) => town[0].toUpperCase() + town.slice(1);
+  const shares = k4 ? DISTRICT_SHARES_K4 : DISTRICT_SHARES;
+  const where = (id) => (id === "BPS" ? (k4 ? "Brookside" : "Brookside and Crossett Brook") : name(id));
   const rows = PAIRS.flatMap((pair) =>
-    Object.entries(districtShares(pair)).map(([town, shares], i, all) => {
+    Object.entries(shares[[...pair].sort().join("+")]).map(([town, s], i, all) => {
       const main = NEAREST[town].find((id) => pair.includes(id) || id === "BPS");
-      const rest = 100 - Object.values(shares).reduce((a, x) => a + Math.round(x * 100), 0);
-      const where = (id) => (id === "BPS" ? "Brookside and Crossett Brook" : name(id));
-      const parts = [`${rest}% ${where(main)}`, ...Object.entries(shares).map(([id, x]) => `${Math.round(x * 100)}% ${where(id)}`)];
+      const rest = 100 - Object.values(s).reduce((a, x) => a + Math.round(x * 100), 0);
+      const parts = [`${rest}% ${where(main)}`, ...Object.entries(s).map(([id, x]) => `${Math.round(x * 100)}% ${where(id)}`)];
       return h(
         "tr",
         {},
         i === 0 ? h("th", { scope: "row", rowspan: String(all.length) }, pair.map(name).join(" + ")) : null,
-        h("td", {}, `${townName(town)} (${num(townK6(town))})`),
+        h("td", {}, `${townName(town)} (${num(k4 ? townK4(town) : townK6(town))})`),
         h("td", {}, parts.join(", "))
       );
     })
   );
   return h(
     "div",
-    { class: "table-scroll" },
+    { class: "placement-matrix" },
+    h("h3", {}, k4 ? "Pre-K to 4 setup (grades 5-6 at Crossett Brook)" : "K-6 setup (grades 5-6 stay in the valley)"),
     h(
-      "table",
-      { class: "wonk-table" },
-      h("caption", {}, "Where each closed town's K-6 children go in the district's K-6 tables, as shares of this year's students (our calculation)"),
-      h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "Schools that stay open"), h("th", { scope: "col" }, "Closed town (K-6 students today)"), h("th", { scope: "col" }, "Where they go"))),
-      h("tbody", {}, rows)
+      "div",
+      { class: "table-scroll" },
+      h(
+        "table",
+        { class: "wonk-table" },
+        h(
+          "caption",
+          {},
+          k4
+            ? "Where each closed town's K-4 children go in the district's Pre-K to 4 tables, as shares of this year's students (our calculation). Every valley 5th and 6th grader goes to Crossett Brook."
+            : "Where each closed town's K-6 children go in the district's K-6 tables, as shares of this year's students (our calculation)"
+        ),
+        h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "Schools that stay open"), h("th", { scope: "col" }, `Closed town (${k4 ? "K-4" : "K-6"} students today)`), h("th", { scope: "col" }, "Where they go"))),
+        h("tbody", {}, rows)
+      )
     ),
     h(
       "p",
       { class: "small muted" },
-      "Each school's gain over this year's own students is credited to the closed towns nearest it; a school that is no closed town's nearest is credited to the towns for which it is next nearest. Brookside's share includes 5th and 6th graders counted at Crossett Brook. ",
+      "Each school's gain over this year's own students is credited to the closed towns nearest it; a school that is no closed town's nearest is credited to the towns for which it is next nearest. ",
+      k4
+        ? "Only kindergarten to grade 4 is counted, since these tables send every valley 5th and 6th grader to Crossett Brook. Build a plan uses the K-6 shares for both setups. "
+        : "Brookside's share includes 5th and 6th graders counted at Crossett Brook. ",
       tag("derived")
     )
   );

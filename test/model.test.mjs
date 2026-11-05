@@ -328,7 +328,7 @@ test("valley schools through grade 5: 6th graders go to Crossett Brook", () => {
 test("closing one school: the district's November 2 figure with grades 5-6 in the valley, our estimate otherwise", () => {
   // grades 5-6 in the valley: the finance director's total for one closure plus the merger
   const k6 = M.budget(M.makePlan({ open: ["MES", "WES", "WRN"], msMerge: true }));
-  assert.deepEqual(k6.items.map((i) => [i.id, i.amount, i.kind]), [["oneClosure", 2300000, "district"]]);
+  assert.deepEqual(k6.items.map((i) => [i.id, i.amount, i.kind]), [["oneClosure", 2304281, "district"]]);
   assert.equal(k6.fte, 21);
   assert.equal(k6.upperBound, false, "the district's figure already reflects keeping them in the valley");
   // grades 5-6 at Crossett Brook: the district's merger figure, and half its two-school figure for the closure
@@ -523,11 +523,11 @@ test("option: three valley K-6 schools and a Pre-K center, every building kept",
   const r = M.evaluate(o.plan);
   assert.equal(r.buildingsOpen, 7);
   // the district's November 2 figure for one closure with grades 5-6 in the valley, less the center's building costs
-  assert.equal(r.budget.savings, 2300000 - 196038);
+  assert.equal(r.budget.savings, 2304281 - 196038);
   assert.equal(r.budget.upperBound, false);
-  assert.equal(Math.round(r.budget.gap), 1235311);
-  assert.equal(Math.round(M.evaluate(o.plan, { basis: "exclusion" }).budget.gap), 735123);
-  assert.equal(Math.round(M.evaluate(o.plan, { basis: "exclusion", health: true }).budget.gap), 435123);
+  assert.equal(Math.round(r.budget.gap), 1231030);
+  assert.equal(Math.round(M.evaluate(o.plan, { basis: "exclusion" }).budget.gap), 730842);
+  assert.equal(Math.round(M.evaluate(o.plan, { basis: "exclusion", health: true }).budget.gap), 430842);
   assert.equal(r.capacity.schools.find((s) => s.id === "FES").total, 190);
   assert.deepEqual(r.capacity.overConsultant, ["FES"]);
   assert.equal(r.moved.k12, 213);

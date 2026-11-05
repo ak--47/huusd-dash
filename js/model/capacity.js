@@ -31,7 +31,7 @@ export function districtTableFor(plan) {
   // the district tabled two open schools with grades 5-6 at Crossett Brook (PK4) or in the valley (K6) only
   // a Pre-K center, a town's children sent elsewhere, or Brookside K-6 changes who goes where, so those use the
   // model's own counts, which start from the shares the table implies (placement.js)
-  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || plan.bpsTop === 6) return null;
+  if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || plan.center56 || plan.bpsTop === 6) return null;
   if (Object.keys(plan.split ?? {}).length || Object.keys(plan.receiving ?? {}).length) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
   return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
@@ -86,9 +86,11 @@ export function modelLoads(plan) {
   // Brookside and Crossett Brook's own students (Crossett Brook's 5-6 at Brookside when it teaches them)
   const bpsTop = plan.bpsTop ?? 4;
   for (const g of ["K", "1", "2", "3", "4"]) add(loads, "BPS", g, att.BPS[g]);
-  for (const g of ["5", "6"]) add(loads, gradeNum(g) <= bpsTop ? "BPS" : "CBMS", g, att.CBMS[g]);
+  // grades 5-6 that leave an elementary school: Crossett Brook, or the plan's grades 5-6 center
+  const upper = plan.center56 ?? "CBMS";
+  for (const g of ["5", "6"]) add(loads, gradeNum(g) <= bpsTop ? "BPS" : upper, g, att.CBMS[g]);
   // valley schools: a closed town's children go to its receiving school, less the shares sent elsewhere
-  const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? bpsTop : plan.valleyTop) ? dest : "CBMS", g, n);
+  const place = (dest, g, n) => add(loads, gradeNum(g) <= (dest === "BPS" ? bpsTop : plan.valleyTop) ? dest : upper, g, n);
   const split = effectiveSplit(plan);
   for (const id of VALLEY) {
     const town = SCHOOLS[id].town;
@@ -140,7 +142,7 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
   // The Pre-K cut (Path A) ends Pre-K classes in district buildings.
   if (plan.cuts.includes("prek")) for (const id of Object.keys(loads)) delete loads[id].PK;
   // the buildings in use for elementary grades, plus a Pre-K center if the plan keeps one
-  const ids = ["BPS", ...plan.open, ...(plan.prekCenter ? [plan.prekCenter.school] : [])];
+  const ids = ["BPS", ...plan.open, ...(plan.prekCenter ? [plan.prekCenter.school] : []), ...(plan.center56 ? [plan.center56] : [])];
   const totals = Object.fromEntries(ids.map((id) => [id, Object.values(loads[id] ?? {}).reduce((a, b) => a + b, 0)]));
   const valleyTotal = ids.filter((id) => id !== "BPS").reduce((a, id) => a + totals[id], 0);
   const schools = [];
@@ -165,6 +167,7 @@ export function capacity(plan, { classSize = CLASS_SIZE_DEFAULT, reading = "slid
       limit,
       limitKind: id === "BPS" ? "occupancy" : "wastewater",
       center: plan.prekCenter?.school === id, // kept open for Pre-K only
+      center56: plan.center56 === id, // kept open for grades 5-6 only
       overPeople: limit != null && counted > limit,
       consultantCapacity: cap,
       overConsultant: total > cap,
@@ -203,7 +206,7 @@ function middleSchools(plan, cbmsFromTable) {
   const cb56 = cbmsFromTable ?? Object.values(modelLoads(plan).CBMS ?? {}).reduce((a, b) => a + b, 0);
   return [
     // empty: Brookside teaches Crossett Brook's 5th and 6th graders, and the building holds no classes
-    { id: "CBMS", grades: plan.msMerge ? "5-6" : "5-8", total: cb56 + (plan.msMerge ? 0 : CB_78), capacity: CONSULTANT_CAPACITY.schools.CBMS, empty: plan.bpsTop === 6 },
+    { id: "CBMS", grades: plan.msMerge ? "5-6" : "5-8", total: cb56 + (plan.msMerge ? 0 : CB_78), capacity: CONSULTANT_CAPACITY.schools.CBMS, empty: plan.bpsTop === 6 || Boolean(plan.center56) },
     { id: "HUMS", grades: "7-8", total: HU_78 + (plan.msMerge ? CB_78 : 0), capacity: CONSULTANT_CAPACITY.schools.HUMS },
   ].map((m) => ({ ...m, over: m.total > m.capacity }));
 }

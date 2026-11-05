@@ -1,0 +1,281 @@
+
+######## SLIDE 1
+T: Aligning Facilities, Enrollment, & Educational Opportunities | Part 2
+T: November 4, 2026
+[picture] Google Shape;75;p19
+NOTES: Prepared for the HUUSD Board meeting on September 9, 2026.
+
+######## SLIDE 2
+[picture] Google Shape;80;p20
+
+######## SLIDE 3
+T: FINANCIAL OVERVIEW & THRESHOLDS | Revised FY28 Proposed Budget Impacts with Health Care Cost 2.5% | Level service budget, projected inflation rates, and Level funded (not to exceed excess spending threshold [EST])
+G: Level Service | $54,924,120 | +5.858% Year over Year north | Exceeds EST by $962.81 per pupil | Adjusted cost per pupil $18,487.62 | EXCESS SPENDING PENALTY | $2,469,605 | IMPACT ON TAXPAYERS
+G: Projected Inflation | $53,285,738 | +2.70% Year over Year north | Required Cut: $1,2938,382 | Exceeds EST by $172 | EXCESS SPENDING PENALTY | $445,340 | IMPACT ON TAXPAYERS
+G: Level Funded (Cap EST) | $51,884,847 | 0% Year over Year | Required Cut: $3,339,273 south | Does Not Exceed EST | ($220.67) corrected to remove debt exclusion | $(25.67) | UNDER THRESHOLD PER PUPIL
+G: FY28 EST Threshold: $16,562  •  Proposed Per Pupil Exceeds Threshold by $962.81  •  Target Cut Needed: $3,339,273
+
+######## SLIDE 4
+T: District Planning Framework | Guiding Principles | Core criteria for evaluating school consolidation scenarios and future budget options.
+G: school
+G: 01
+G: Grade Alignment | Ensure consistent grade structures across district schools to support curriculum continuity and student development.
+G: meeting_room
+G: 02
+G: Facility Fit | Available Classrooms | Match student enrollment with available classroom capacity and specialized learning spaces.
+G: account_balance
+G: 03
+G: Financial Framework | Align with state spending threshold caps (EST) and achieve long-term fiscal sustainability.
+
+######## SLIDE 5
+T: District Planning | Agreements | Core criteria for evaluating school consolidation scenarios and future budget options.
+G: 01 school | Kindergarten Classrooms | Trigger Threshold | 18+ Students | Regular Ed Para Added | If there are 18 or more students in a kindergarten classroom, a regular education para will be added.
+G: 02 child_care | PreK Guidelines | 1 Section | Up to 15 students | Shared Classrooms | 2 PreK sections can share a class | 30 PreK Students | Equals 1 full classroom
+G: 03 verified | EQS | Educational Quality Standards | Average Class-Size Maximums: | GRADES | K – 3 | MAX SIZE | 20 | GRADES | 4 – 6 | MAX SIZE | 25
+
+######## SLIDE 6
+T: DISTRICT RESOURCE ALLOCATION | Elementary Classrooms & Current Classroom Teacher Counts | Side-by-side comparison of physical classroom spaces and current classroom teacher staffing across district schools.
+G: FAYSTON
+G: MORETOWN
+G: WAITSFIELD
+G: WARREN
+G: BROOKSIDE
+
+######## SLIDE 7
+[picture] Google Shape;211;p25
+
+######## SLIDE 8
+[picture] Google Shape;216;p26
+[picture] Google Shape;217;p26
+
+######## SLIDE 9
+[picture] Google Shape;222;p27
+
+######## SLIDE 10
+G: HUUSD RECONFIGURATION ANALYSIS · FINANCIAL & OPERATIONAL IMPACTS | Valley Elementary Consolidation (4 to 3 Schools) Keeping Valley PK–6th Grade 
+G: FINANCIAL IMPACT & OPERATING EFFICIENCIES FOR FY28
+G: MIDDLE SCHOOL MERGER & CBMS IMPACTS
+
+######## SLIDE 11
+T: HUUSD RECONFIGURATION ANALYSIS · FINANCIAL & OPERATIONAL IMPACTS | Valley Elementary Consolidation (4 to 3 Schools) Keeping Valley PK–6th Grade
+G: FINANCIAL IMPACT ANALYSIS | FY29 Budget Projections
+G: SCENARIO A: LEVEL-FUNDED BUDGET | Excess Spending Penalty | $325,299 | Projected Tax Penalty | trending_up | Cost Per Pupil Impact | +$128.62 | Above the state excess spending threshold. | Under level funding, the district immediately triggers severe financial penalties, significantly escalating taxpayer costs without service additions.
+G: SCENARIO B: PENALTY AVOIDANCE | Required Budget Cuts | ~$350,000 | Minimum YoY Budget Reduction | warning_amber | Remaining Buffer | Only $10 | Margin below the excess spending threshold. | Even after cutting $350k year-over-year, the district is left with virtually zero financial flexibility to handle unforeseen cost variations.
+G: STRATEGIC IMPLICATIONS | Fiscal Flexibility Risk | account_balance_wallet | Zero Operational Cushion | Illustrates how little room exists to absorb inflationary or unexpected cost growth. | Years of Prior Cuts: Previous budget reductions have exhausted operational redundancies. | Taxpayer Pressure: Maintaining level services continues to place intense strain on district taxpayers. | Structural Action Needed: Reconfiguration is vital to avoid continuous cycle of deep operational cuts.
+
+######## SLIDE 12
+G: HUUSD RECONFIGURATION ANALYSIS · SCENARIO OPTION | 6th Grade Relocation to HUMS: Space & Facility Impacts
+G: CONFIGURATION PROPOSAL | 2 Valley Schools + BPS (PK–5) & HUMS (6–8)
+G: CRITICAL OPERATIONAL & FINANCIAL IMPACTS
+
+######## SLIDE 13
+T: Grade Alignment: One Student Pathway, Stronger Opportunities
+T: Grade alignment means students follow consistent grade bands, learning expectations, and transitions across HUUSD 
+T: ONE COORDINATED PATHWAY
+T: Illustrative grade bands under discussion
+T: PK–4
+T: ELEMENTARY
+T: 5–6
+T: UPPER GRADES
+T: 7–8
+T: MIDDLE GRADES
+T: 9–12
+T: HIGH SCHOOL
+T: WHY IT MATTERS FOR STUDENTS
+T: WHAT IT MEANS FOR COMMUNITIES
+T: 1
+T: Fairer access
+T: Specialists, enrichment, and student supports.
+T: 2
+T: Consistent learning
+T: Aligned curriculum, expectations.
+T: 3
+T: Stronger peer groups
+T: More same-grade connections and coordinated teams.
+T: 1
+T: A clearer family pathway
+T: Know when school transitions are expected.
+T: 2
+T: A unified HUUSD identity
+T: Shared pride, connections, and belonging across towns.
+T: 3
+T: Sustainable programs
+T: Organize staff and resources around student needs.
+T: COMMUNITY COMMITMENT
+T: Plan carefully for community engagement, school traditions, and local identity.
+T: The goal is a stronger student experience — not simply a different arrangement of buildings.
+NOTES: Presenter notes — Grade Alignment |  | Definition: Grade alignment is the intentional organization of grade spans and teaching pathways across HUUSD, so students in the same grade have comparable access and coordinated experiences. The pathway shown is illustrative, not a final Board-approved placement plan. |  | Talking points: | 1. Student opportunity: A common grade structure can make it easier to schedule specialized instruction, enrichment, electives and peer experiences equitably, and coordinate teachers and student-support teams. | 2. Curriculum continuity: Alignment facilitates a shared curriculum sequence, common expectations and purposeful transition planning. | 3. Community and unified district identity: Families can plan around a clear pathway; students can make connections across HUUSD towns. Shared learning experiences can cultivate one HUUSD identity, a sense of districtwide pride, belonging, and responsibility for all students. This is additive: a unified district identity should celebrate, not erase, the distinct traditions and character of each town and school. However, community schools are centers of local identity and relationships. Families will rightly ask about school identity, travel time, after-school participation, siblings and traditions. Those concerns must be addressed in design and implementation, not dismissed. | 4. Important nuance: Grade configuration alone does not guarantee academic benefits; research is mixed and school-to-school transitions can create challenges without careful support. Present these as design goals, not proven outcomes. |  | Sources for background: University of Minnesota Center for Applied Research and Educational Improvement, Review of Literature on Grade Configuration and School Transitions (https://carei.umn.edu/review-literature-grade-configuration-and-school-transitions); NEASC, Curriculum Alignment, 2024 (https://www.neasc.org/sites/default/files/2024-01/neasc-cis%20-%20MANUAL%20school%20improvement%20-%20r2024-01_final.pdf); National Rural Education Association rural consolidation overview (https://eric.ed.gov/?id=EJ783851).
+
+######## SLIDE 14
+[picture] Google Shape;387;p32
+T: SCHOOL LEVEL  LEADERSHIP UPDATE | Message from the PreK-12 Principals | 
+
+######## SLIDE 15
+T: HUUSD   /   BUILDING UNITY
+[picture] Google Shape;398;p33
+T: SIX DISTINCT | COMMUNITIES.
+T: ONE SHARED | COMMITMENT.
+T: OUR STRENGTH IS IN | OUR CONNECTIONS.
+T: Unity does not diminish what makes each town special. It brings those strengths together for every student.
+T: CONNECTED COMMUNITIES  •  SHARED PURPOSE
+T: EVERY | STUDENT
+T: DUXBURY
+T: FAYSTON
+T: MORETOWN
+T: WAITSFIELD
+T: WARREN
+T: WATERBURY
+T: STRONGER TOGETHER  •  FOR ALL OUR STUDENTS
+
+######## SLIDE 16
+T: The Charge | Key financial and operational models under evaluation for budget development
+G: payments
+G: Budget Cap Threshold | Per Pupil Spending Limit
+G: EVALUATION QUESTION | What reductions would be necessary to achieve a budget not to exceed the per pupil projected spending threshold?
+G: KEY FOCUS | Targeted expenditure reductions
+G: school
+G: Elementary & Middle Schools Consolidation | 4 Elem ➔ 2 Elem | 7th & 8th merge with HUMH
+G: EVALUATION QUESTION | What are the cost efficiencies if we were to consolidate 4 valley elementary schools into 2 elementary schools and merge 2 middle schools into 1 middle school?
+G: KEY FOCUS | Valley elementary & middle school consolidation
+
+######## SLIDE 17
+T: Budget Cap Threshold Summary | Total High Impact Reductions
+G: CUMULATIVE BUDGET REDUCTION TARGET | Combined cuts across transportation, academics, athletics, and student programs | $3,339,273
+G: DEVASTATING IMPACT ON STUDENTS & COMMUNITIES | Access & Equity: Severe transportation & Pre-K barriers disproportionately affect vulnerable families. | Student Development: Widespread loss of sports, arts, electives, hands-on learning, and intervention support. | School Community: Eroded support structures, strained classroom environments, and loss of shared traditions.
+
+######## SLIDE 18
+T: Valley Elementary Consolidation | Financial evaluation and outcomes of restructuring elementary school facilities
+G: PROPOSAL SCOPE: 4 SCHOOLS ➜ 2 SCHOOLS | Educational Efficiencies | EVALUATION QUESTION | What educational and financial efficiencies could result from consolidating 4 valley elementary schools into 2? | KEY EDUCATIONAL OUTCOMES | More flexible staff and scheduling across grade levels | Greater opportunities for peer interaction and collaborative learning | More consistent access to specialized instruction, interventions, and support | Elimination of shared staff and travel time across buildings | Full time nurse at each location | More robust educational experiences
+G: FINANCIAL IMPACT & EFFICIENCIES | We would achieve consolidation cost efficiencies of: | ~$1,826,527    | ESTIMATED ANNUAL OPERATING SAVINGS |  | A REDUCTION OF -16 FTE* |  |  |  |  | KEY OUTCOME | Significant annual operating savings redirected to educational quality and staff retention. |  |  |  |  | *FTE = Full-Time Equivalent (i.e. one person)
+
+######## SLIDE 19
+T: Middle Schools Merger   | 
+G: Middle Schools Merger  | 7th & 8th graders merge with HUMH 5th & 6th remain at CB |   | EVALUATION QUESTION | What are the cost efficiencies if we were to consolidate 2 middle schools into 1 middle school? |   | KEY EDUCATIONAL OUTCOMES | Expanded academic electives, athletics, and extracurricular offerings | Dedicated grade-level teacher teams and enhanced peer collaboration | Consolidated special education, counseling, and intervention support | More equitable access to advanced coursework and specialized facilities
+G: FINANCIAL IMPACT & EFFICIENCIES | We would achieve consolidation cost efficiencies of: | ~$2,102,942 | ESTIMATED ANNUAL OPERATING SAVINGS | -16.5 FTEs |  |  | KEY OUTCOME | Significant annual operating savings redirected to educational quality and staff retention.
+
+######## SLIDE 20
+T: Combined School Consolidation Impact | Comprehensive educational outcomes and combined financial efficiencies from facility restructuring
+G: Elementary Consolidation | 4 Schools ➜ 2 Schools | EVALUATION QUESTION | What efficiencies result from consolidating 4 valley elementary schools into 2? | KEY EDUCATIONAL OUTCOMES | More flexible staff & scheduling across grades | Greater peer interaction & collaborative learning | Consistent access to specialized instruction | Elimination of shared staff travel time | Increased nursing staff & support | SUBTOTAL SAVINGS | ~$1,826,527 | -16 FTEs  | 
+G: Middle Schools Merger  | 7th & 8th graders merge with HUMH 5th & 6th remain at CB | EVALUATION QUESTION | What cost efficiencies exist by consolidating 2 middle schools into 1? | KEY EDUCATIONAL OUTCOMES | Expanded electives, athletics & extracurriculars | Dedicated grade-level teacher teams | Consolidated special education & counseling | Equitable access to advanced coursework | SUBTOTAL SAVINGS | ~$2,102,942 | -16.5 FTEs
+G: TOTAL POTENTIAL IMPACT | Combined Annual Operating Savings | ~$3,929,469 | ESTIMATED ANNUAL OPERATING SAVINGS |  | A REDUCTION OF -32.5 FTEs | KEY STRATEGIC OUTCOME | Substantial long-term budget sustainability with savings directly redirected to educational quality, student support, and staff retention.
+
+######## SLIDE 21
+T: FINANCIAL OVERVIEW & THRESHOLDS | Review Of FY28 Proposed Budget Impact | Elementary & Middle Schools Consolidation
+G: PROJECTED BUDGET | $51,294,651 | -1.138%  arrow_downward Budget Change
+G: PROJECTED PER PUPIL VARIANCE AS OF 11-4-2026 | ($255.76) | Below the excess spending threshold
+G: FY28 EST THRESHOLD | $16,562
+G: PROJECTED PER PUPIL | $16,306.24
+G: THRESHOLD STATUS | Below Threshold Limit
+
+######## SLIDE 22
+ROW: Rank | Scenario (Schools Open) | Total Pts | Mean / 25 | Enrollment | Building | Kitchen | Wastewater | Feasibility Assessment
+ROW: #1 | Waitsfield + Warren | 248 | 17.71 | 3.21 | 3.43 | 4.57 | 2.86 | Top overall score; exceptional kitchen/meal ops
+ROW: #2 | Moretown + Warren | 241 | 17.21 | 3.79 | 3.50 | 2.50 | 3.71 | Highest enrollment & wastewater rating
+ROW: #3 | Moretown + Waitsfield | 223 | 15.93 | 3.00 | 3.50 | 2.64 | 3.57 | Balanced fit; strong facility/wastewater viability
+ROW: #4 | Fayston + Warren | 180 | 12.86 | 2.29 | 1.57 | 3.64 | 3.36 | Severe building condition & enrollment barriers
+ROW: #5 | Fayston + Waitsfield | 175 | 12.50 | 2.00 | 2.07 | 4.14 | 2.29 | Strong kitchen; limited capacity & capital concerns
+ROW: #6 | Moretown + Fayston | 165 | 11.79 | 2.07 | 2.00 | 2.14 | 3.36 | Lowest composite score; multiple operational hurdles
+T: ELEMENTARY CONSOLIDATION · BOARD EVALUATION RESULTS | Evaluation of Six Elementary Consolidation Scenarios | Composite scores from 14 School Board member evaluations across 4 feasibility categories (1=Poor to 5=Strong fit)
+T: TOP OVERALL RANKING | Waitsfield + Warren | Score: 248 pts (Avg 17.71 / 25) · Kitchen 4.57
+T: BEST ENROLLMENT & BALANCED FIT | Moretown + Warren | Score: 241 pts (Avg 17.21) · Highest Enrollment 3.79
+T: EMERGING BOARD CONSENSUS | Top 3 vs. Bottom 3 Divide | Top tier averages 17.0 pts vs. 12.4 pts for Fayston pairs
+T: The link to the dashboard results can be found here
+
+######## SLIDE 23
+T: HUUSD CONSOLIDATION GANTT CHART
+T: October 2026 – August 2027 | Decision milestones, planning, and implementation
+T: MILESTONE / WORKSTREAM
+T: Oct
+T: Nov
+T: Dec
+T: Jan
+T: Feb
+T: Mar
+T: Apr
+T: May
+T: Jun
+T: Jul
+T: Aug
+T: Board direction: Path A or Path B
+T: Feasibility proposals due
+T: Board reviews data / identifies options
+T: Select RFP firm(s), if applicable
+T: December 1 tax letter / projected yield
+T: Budget Overviews 2 & 3
+T: Community engagement meetings on school closings
+T: RFP / statutory notice process (confirm)
+T: Board vote on school closures (listed date)
+T: Announced tuition due (confirm date)
+T: Common Level of Appraisal published (confirm)
+T: Final budget, warning & articles
+T: Administrator contract notifications
+T: Interdistrict choice deadline (confirm)
+T: HUUSD annual report
+T: Budget informational hearing
+T: Town Meeting Day
+T: Preliminary school assignments
+T: Teacher contracts / LOIs / RIF planning
+T: Union staff contracts
+T: Teacher contracts due back (confirm)
+T: Non-union contracts
+T: Union staff contracts due back (confirm)
+T: Financial year-end close
+T: Prepare for possible school closings
+T: Plan receiving-school readiness / reopening
+T: School openings
+T: WORKING DRAFT
+T: Note: A Gantt chart is a visual bar chart that illustrates a project schedule, showing tasks, start and end dates, durations, and how activities depend on one another across a timeline.
+
+######## SLIDE 24
+T: HUUSD FY28 Budget Development Timeline Process & Milestones
+T: Key board decisions and budget-development milestones from October through Town Meeting Day
+G: 01
+G: Oct. 14, 2026
+G: BOARD MEETING | Budget Impact Presentation #1 Level Service | Consolidation of Middle Schools & Valley Elementary
+G: 02
+G: Oct. 28, 2026
+G: BOARD MEETING | Budget Impact Presentation #2 | Review Enrollment Projections
+G: 03
+G: Nov. 4, 2026
+G: BOARD MEETING | Building Analysis Chart |  | FY28 Finalize Board Budget Priorities
+G: 04
+G: Nov. 18, 2026
+G: BOARD MEETING | Budget Overview #1 | Enrollment & Staffing
+G: 05
+G: Dec. 2 & 16 2026
+G: BOARD MEETING | December 2: | Budget Overview #2 | December 16: | Budget Overview #3
+G: 06
+G: Jan 6 & 13, 2027
+G: BOARD MEETING | January 6: | Budget Recap Receive CLA from VT Dept of Taxes | January 13: | Final Budget Approve Warning & Articles
+G: 07
+G: Mar 1, 2027
+G: BOARD MEETING | Budget Informational Hearing
+G: 08
+G: Mar. 2, 2027
+G: VOTE | Town Meeting Day
+T: ***Addition meeting January 20, 2027 if necessary for budget adoption
+
+######## SLIDE 25
+T: BOARD DIRECTION & TIMELINE DIRECTIVES | Board Direction: Decision Path A or Path B & Next Steps
+G: PATH A
+G: High Impact Budget Reductions | District-wide budget reductions without school consolidation.
+G: PATH B
+G: Valley Consolidation & Middle School Merger | What schools the board is considering maintaining
+G: IF PATH B: STATUTORY PUBLIC HEARING & VOTING TIMELINE
+G: NOVEMBER 18
+G: Schedule Public Hearings | Leadership to bring back 3 scheduled hearing dates to be held between Nov 18 - Dec 16.
+G: LATE NOV & DECEMBER
+G: Community Meetings | Convene three public meetings for community presentation and feedback. At least one must be held in each town/ school(s) proposed to close. 
+G: DEC 16 → JAN 6 VOTE
+G: Closure Warning & Vote | If closing schools, must issue warning notice on Dec 16 for the Jan 6 vote meeting.
+G: GOVERNANCE MANDATE: Board decisions guide administrative compliance with statutory public hearing timelines and warnings.
+
+######## SLIDE 26
+G: Questions & Discussion
+G: We welcome your feedback, thoughts, and community questions regarding the district plans.
+G: language
+G: HUUSD Board | huusd.org/board | Access board meeting schedules, agendas, and policy updates.
+G: forum
+G: Public Input | Comments & Inquiries | Submit community feedback & share perspectives with district leadership.
+G: ?
+T: HARWOOD UNIFIED UNION SCHOOL DISTRICT

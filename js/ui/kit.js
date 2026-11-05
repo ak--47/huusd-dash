@@ -52,6 +52,13 @@ export function cites(refs) {
 const SHORT_LABEL = {
   oct14: "Oct 14 deck",
   meeting1028: "Oct 28 meeting",
+  meeting1102: "Nov 2 meeting",
+  meeting1104: "Nov 4 meeting",
+  deck1104: "Nov 4 deck",
+  agenda1104: "Nov 4 agenda",
+  scores1104: "Board scores",
+  omlResponse1104: "Board statement",
+  maconScores: "A board member's notes",
   enroll: "Oct 1 report",
   supt: "Supt. report",
   aoa: "Articles",
@@ -89,6 +96,7 @@ const SHORT_LABEL = {
 
 function shortLoc(ref) {
   if (ref.id === "deck" && ref.loc && /^slides? \d/.test(ref.loc)) return ref.loc.replace(/^s/, "S").replace(/ \(.*\)$/, "");
+  if (ref.id === "deck1104" && ref.loc && /^slides? \d/.test(ref.loc)) return `Nov 4 ${ref.loc.replace(/ \(.*\)$/, "")}`;
   return SHORT_LABEL[ref.id] ?? (SOURCES[ref.id].kind === "state" ? "State law" : "Source");
 }
 

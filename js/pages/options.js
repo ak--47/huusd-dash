@@ -220,9 +220,10 @@ export default {
       host.replaceChildren(
         note(
           "info",
-          h("strong", {}, "Where things stand. "),
-          "In a straw poll at the end of the October 28 meeting, not a formal vote, the board agreed to keep developing Path B. A board member asked to see a version that keeps valley 5th and 6th graders in temporary classrooms in the valley, and the administration said it would bring one. ",
-          cite(ref("meeting1028", "end of meeting"))
+          h("p", {}, h("strong", {}, "Where things stand. "),
+          "On November 4 the board dropped Path A and, in a straw poll, chose to plan Path B around keeping Moretown and Warren open. The administration said temporary classrooms to keep grades 5-6 in the valley would push the budget over the threshold. These options are not before the board; they show what the same building blocks do in other combinations. ",
+          cite(ref("meeting1104", "straw poll, 3:56-3:59"))),
+          h("p", {}, h("a", { href: "#/decision" }, "How the board decided"))
         ),
         h("div", { class: "opt-list" }, rows.map(cardFor))
       );
@@ -243,7 +244,7 @@ export default {
         metric("Saves a year", `${s.upperBound ? "Up to " : ""}${moneyShort(s.savings)}`, s.estimate ? [" ", tag("estimate")] : null),
         metric("Against the target", gapCell(s.gap, s.upperBound)),
         metric("Buildings in use", String(s.buildings)),
-        metric("Grades 5-6", s.r.plan.valleyTop === 6 ? "Stay in the valley" : "Go to Crossett Brook"),
+        metric("Grades 5-6", s.r.plan.center56 ? `Every 5th and 6th grader at ${schoolShort(s.r.plan.center56)}` : s.r.plan.valleyTop === 6 ? "Stay in the valley" : "Go to Crossett Brook"),
         metric("Students fit", fitCell(s), null, { wide: true }),
         metric("Change schools next fall", num(s.moved)),
         metric(MOST_SCHOOLS, `${s.valleyMax} / ${s.wbMax}`)
@@ -256,7 +257,7 @@ export default {
           "p",
           { class: "opt-actions no-print" },
           h("a", { href: `#/build?${encodePlan(plan)}${basis === "exclusion" ? "&x=1" : ""}${health ? "&hc=1" : ""}${reading === "permits" ? "&w=permits" : ""}`, onclick: () => track("Option Opened in Build", { option }) }, "Open in Build a plan"),
-          plan.open.length === 2 && plan.msMerge && !plan.prekCenter
+          plan.open.length === 2 && plan.msMerge && !plan.prekCenter && !plan.center56
             ? [
                 " · ",
                 h(
@@ -300,7 +301,7 @@ export default {
             metric("Change schools next fall", range(family.map((x) => x.moved))),
             metric(MOST_SCHOOLS, `${range(family.map((x) => x.valleyMax))} / ${range(family.map((x) => x.wbMax))}`)
           ),
-          o.notes.map((n) => h("p", { class: "opt-note" }, n, " ", cite(ref("meeting1028", "straw poll")))),
+          o.notes.map((n) => h("p", { class: "opt-note" }, n, " ", cite(ref("meeting1104", "straw poll, 3:56-3:59")))),
           inValley ? h("p", { class: "opt-note" }, fiveSixNote(`the ${inValley} versions that keep them there`, "them"), fiveSixCite()) : null
         );
       }

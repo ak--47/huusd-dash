@@ -20,24 +20,30 @@ const K4 = ["K", "1", "2", "3", "4"];
 const sum = (byGrade, grades) => grades.reduce((a, g) => a + (byGrade?.[g] ?? 0), 0);
 const pairKey = (pair) => [...pair].sort().join("+");
 
-// This year's K-6 students at each valley school, the children a closed town sends elsewhere.
+// This year's K-6 (or K-4) students at each valley school, the children a closed town sends elsewhere.
 export const townK6 = (town) => sum(ATT[VALLEY.find((id) => SCHOOLS[id].town === town)], K6);
+export const townK4 = (town) => sum(ATT[VALLEY.find((id) => SCHOOLS[id].town === town)], K4);
 
+// From a K-6 table, K-6 children; from a Pre-K to 4 table, K-4 children (its Crossett Brook column holds every valley
+// 5th and 6th grader, so only K-4 shows where a town's children go).
 function sharesFrom(t) {
+  const k4 = t.config === "PK4";
+  const grades = k4 ? K4 : K6;
+  const size = k4 ? townK4 : townK6;
   const col = (id, grades) => sum(Object.fromEntries(Object.entries(t.rows).map(([g, v]) => [g, v[t.cols.indexOf(id)]])), grades);
   const towns = VALLEY.filter((id) => !t.pair.includes(id)).map((id) => SCHOOLS[id].town);
   const stops = [...t.pair, "BPS"];
   const order = (town) => NEAREST[town].filter((id) => stops.includes(id));
-  const gain = Object.fromEntries(t.pair.map((id) => [id, col(id, K6) - sum(ATT[id], K6)]));
-  gain.BPS = col("BPS", K4) - sum(ATT.BPS, K4) + (col("CBMS", ["5", "6"]) - sum(ATT.CBMS, ["5", "6"]));
+  const gain = Object.fromEntries(t.pair.map((id) => [id, col(id, grades) - sum(ATT[id], grades)]));
+  gain.BPS = col("BPS", K4) - sum(ATT.BPS, K4) + (k4 ? 0 : col("CBMS", ["5", "6"]) - sum(ATT.CBMS, ["5", "6"]));
   const nearest = new Set(towns.map((town) => order(town)[0]));
   const out = Object.fromEntries(towns.map((town) => [town, {}]));
   for (const [school, n] of Object.entries(gain)) {
     if (n <= 0 || nearest.has(school)) continue;
     const takers = towns.filter((town) => order(town)[1] === school);
     // shared by size, so each taking town sends the same share
-    const size = takers.reduce((a, town) => a + townK6(town), 0);
-    for (const town of takers) out[town][school] = Math.min(1, Math.round((100 * n) / size) / 100);
+    const total = takers.reduce((a, town) => a + size(town), 0);
+    for (const town of takers) out[town][school] = Math.min(1, Math.round((100 * n) / total) / 100);
   }
   return out;
 }
@@ -46,6 +52,12 @@ function sharesFrom(t) {
 // closed town's K-6 children the district's table places somewhere other than the town's nearest open school.
 export const DISTRICT_SHARES = Object.fromEntries(
   PAIRS.map((pair) => [pairKey(pair), sharesFrom(DISTRICT_TABLES.find((t) => t.config === "K6" && t.pair.every((id) => pair.includes(id))))])
+);
+
+// The same, read from each pair's Pre-K to 4 table (K-4 children). Shown on What we checked; the model applies the
+// K-6 shares to every grade, since they come from the larger count of children.
+export const DISTRICT_SHARES_K4 = Object.fromEntries(
+  PAIRS.map((pair) => [pairKey(pair), sharesFrom(DISTRICT_TABLES.find((t) => t.config === "PK4" && t.pair.every((id) => pair.includes(id))))])
 );
 
 export const districtShares = (open) => (open.length === 2 ? (DISTRICT_SHARES[pairKey(open)] ?? null) : null);
