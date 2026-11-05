@@ -62,6 +62,13 @@ test("straw poll: 9 to 4 as announced, 64.45 weighted points; by members' own sh
   assert.ok(t.asVoted["MES+WRN"].points < 6667);
 });
 
+test("Pre-K to 4 tables: the K-4 shares each implies", () => {
+  assert.deepEqual(M.DISTRICT_SHARES_K4["MES+WRN"], { fayston: { MES: 0.09 }, waitsfield: { MES: 0.09 } });
+  assert.deepEqual(M.DISTRICT_SHARES_K4["WES+WRN"], { fayston: { WRN: 0.03 }, moretown: { BPS: 0.14 } });
+  // the K-6 shares are unchanged
+  assert.deepEqual(M.DISTRICT_SHARES["MES+WRN"], { fayston: { MES: 0.07 }, waitsfield: { MES: 0.07 } });
+});
+
 test("grades 5-6 center: savings, buildings, and where children go", () => {
   const want = { WES: [3733431, 457], WRN: [3745948, 470], MES: [3743601, 497] };
   for (const [c, [savings, moved]] of Object.entries(want)) {
