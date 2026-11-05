@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-05: November 4 work promoted to live
+
+- At the owner's request ("promote staging to live"), PR #30 promoted staging to live with a merge commit, carrying staging PRs #27 (the Nov 4 promotion note), #28 (the November 4 meeting: decision page, grades 5-6 center plan, findings, timeline), and #29 (neutral Start here headline, Pre-K to 4 placement shares). The live deploy passed; `staging:diff` shows nothing.
+
 ## 2026-11-05: the November 4 board meeting (staging only)
 
 Inputs from the owner (in `~/Desktop/tmp/huusd-11-04-updates`, not in the repo): the agenda, the meeting transcript, the November 4 deck, the district's workbook and dashboard of board members' scores, the chair's open meeting law statement, and, unofficial and kept out of the repo, a working-group member's (Lynn's) grades 5-6 center sketch, her questions from the meeting, and her email to the board.
