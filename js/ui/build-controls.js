@@ -62,7 +62,17 @@ export const centerPlan = (school = "MES") => {
   return v.plan ?? o.plan;
 };
 
-// Which starting point a plan is, if any: "today", "A", "B", "one", "k4x3", "hybrid", "center", or null.
+// The resident's grades 5-6 center plan on Options: Fayston closes, two valley schools teach Pre-K to 4, and a third
+// valley building teaches every 5th and 6th grader in the district (the card's three versions, Waitsfield first).
+const c56Card = () => OPTIONS.find((o) => o.id === "center56");
+export const CENTER56_SCHOOLS = ["WES", "WRN", "MES"];
+export const center56Plan = (school = "WES") => {
+  const o = c56Card();
+  const v = o.versions.find((x) => x.center56 === school) ?? o.versions[0];
+  return v.plan ?? o.plan;
+};
+
+// Which starting point a plan is, if any: "today", "A", "B", "one", "k4x3", "hybrid", "center", "c56", or null.
 export function presetOf(plan) {
   const kind = presetKind(matchNamed(plan));
   if (kind) return kind;
@@ -71,6 +81,7 @@ export function presetOf(plan) {
   if (plan.open.length === 3 && same(onePlan(shut, 6))) return "one";
   if (plan.open.length === 3 && same(onePlan(shut, 4))) return "k4x3";
   if (same(hybridPlan())) return "hybrid";
+  if (CENTER56_SCHOOLS.some((id) => same(center56Plan(id)))) return "c56";
   // the Waitsfield version chooses Moretown for Waitsfield's children, so its receiving choice counts
   return CENTER_SCHOOLS.some((id) => encodePlan(centerPlan(id)) === encodePlan(plan)) ? "center" : null;
 }
@@ -205,6 +216,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ["k4x3", "One closure, Path B's grades"],
     ["hybrid", "Merger + smaller cuts"],
     ["center", "Pre-K center plan"],
+    ["c56", "Grades 5-6 center"],
   ].map(([kind, label]) => h("button", { type: "button", class: "wonk-btn bp-preset", "aria-pressed": "false", "data-kind": kind }, label));
 
   // Each starts on an empty choice unless exactly two valley schools are open, so the box never disagrees
@@ -251,12 +263,21 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     h("option", { value: "", disabled: true }, "Pick one"),
     CENTER_SCHOOLS.map((id) => h("option", { value: id }, SCHOOLS[id].short))
   );
+  // the building that teaches every 5th and 6th grader in "Grades 5-6 center"
+  const c56Pick = h(
+    "select",
+    { class: "wonk-select", id: "bp-c56pick", "aria-describedby": "bp-c56pick-hint" },
+    h("option", { value: "", disabled: true }, "Pick one"),
+    CENTER56_SCHOOLS.map((id) => h("option", { value: id }, SCHOOLS[id].short))
+  );
+  c56Pick.value = startPreset === "c56" ? startPlan.center56 : "";
   const chosen = () => ({
     pair: PAIRS.find((p) => pairId(p) === pairSel.value) ?? PAIRS[2],
     top: Number(topSel.value) === 6 ? 6 : 4,
     closed: VALLEY.includes(oneSel.value) ? oneSel.value : "FES",
     closedK4: VALLEY.includes(k4Sel.value) ? k4Sel.value : "FES",
     center: CENTER_SCHOOLS.includes(centerPick.value) ? centerPick.value : "MES",
+    c56: CENTER56_SCHOOLS.includes(c56Pick.value) ? c56Pick.value : "WES",
   });
   for (const b of presetBtns) b.addEventListener("click", () => onPreset(b.dataset.kind, chosen()));
   pairSel.addEventListener("change", () => onPreset("B", chosen()));
@@ -264,6 +285,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   oneSel.addEventListener("change", () => onPreset("one", chosen()));
   k4Sel.addEventListener("change", () => onPreset("k4x3", chosen()));
   centerPick.addEventListener("change", () => onPreset("center", chosen()));
+  c56Pick.addEventListener("change", () => onPreset("c56", chosen()));
 
   const matched = h("p", { class: "bp-matched" });
   const undoText = h("span", {});
@@ -278,7 +300,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
   const g1 = group(
     1,
     "Start from",
-    "Load no change, one of the district's plans, or one of four other starting points, then change anything below.",
+    "Load no change, one of the district's plans, or one of five other starting points, then change anything below.",
     h("div", { class: "bp-presets" }, presetBtns),
     h(
       "div",
@@ -295,7 +317,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       h(
         "p",
         { class: "bp-bversion-hint", id: "bp-one-hint" },
-        `Path B's middle-school move with one valley school closing instead of two, and grades 5 and 6 staying in the valley. The district put this at about ${moneyShort(ONE_CLOSURE.amount)} in all on November 2.`
+        `Path B's middle-school move with one valley school closing instead of two, and grades 5 and 6 staying in the valley. The district put this at ${moneyShort(ONE_CLOSURE.amount)} in all on November 4.`
       ),
       h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-one" }, h("span", { class: "wonk-sr" }, "Close one school: "), "School that closes"), oneSel)
     ),
@@ -326,6 +348,17 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         "Residents' suggestion, in two versions. Fayston closes and a second valley building becomes the district's Pre-K center; the two other valley schools and Brookside teach K-6; the middle schools merge and Crossett Brook's building holds no classes. Each version starts from the shares its suggesters chose."
       ),
       h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-centerpick" }, "Pre-K center building"), centerPick)
+    ),
+    h(
+      "div",
+      { class: "bp-bversion" },
+      h("p", { class: "bp-sub" }, "Grades 5-6 center"),
+      h(
+        "p",
+        { class: "bp-bversion-hint", id: "bp-c56pick-hint" },
+        "A resident's suggestion after November 4. Fayston closes; two valley schools teach Pre-K to 4 and a third teaches every 5th and 6th grader in the district; every 7th and 8th grader goes to Harwood, so Crossett Brook's building is empty for repairs. Not costed by the district: we use its Path B figures less the center building's operating costs."
+      ),
+      h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-c56pick" }, "Grades 5-6 center building"), c56Pick)
     ),
     matched,
     undoRow
@@ -491,6 +524,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     { class: "bp-fix-note", id: "bp-bps6-d" },
     "Brookside teaches K-6, and Crossett Brook's building holds no classes, which could leave it free for repairs. No savings are counted for the empty building: the district has published no operating cost for Crossett Brook. Needs the move to Harwood and valley schools through grade 6."
   );
+  // a closed valley building teaches every 5th and 6th grader in the district, so Crossett Brook holds no classes
+  const c56Sel = h("select", { class: "wonk-select", id: "bp-c56", "aria-describedby": "bp-c56-d" });
+  c56Sel.addEventListener("change", () => onPlan((p) => ({ ...p, center56: c56Sel.value || null })));
+  const c56Note = h(
+    "p",
+    { class: "bp-fix-note", id: "bp-c56-d" },
+    "Every 5th and 6th grader in the district, Crossett Brook's included, goes to one closed valley school's building, and Crossett Brook's building holds no classes. Saves less than closing that building: its operating costs come back (our estimate). Nothing is counted for the empty Crossett Brook. Needs the move to Harwood and valley schools through grade 4."
+  );
+  const c56Off = h("p", { class: "bp-off", hidden: true }, "To use this, choose valley schools through grade 4 (step 3), the move to Harwood, and close a valley school in step 2.");
   const g4 = group(
     4,
     "Middle schools",
@@ -502,7 +544,8 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     ),
     h("div", { class: "choice bp-choice-stack" }, msRadios.map((r) => r.label)),
     h("label", { class: "wonk-check bp-prek" }, bpsBox, h("span", {}, "Crossett Brook's 5th and 6th graders move to Brookside")),
-    bpsNote
+    bpsNote,
+    h("div", { class: "bp-center" }, c56Off, h("div", { class: "wonk-field" }, h("label", { class: "wonk-label", for: "bp-c56" }, "Grades 5-6 center for the whole district"), c56Sel), c56Note)
   );
 
   // ---- 5. program cuts ----
@@ -858,7 +901,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       const center = plan.prekCenter?.school === c.id;
       c.status.textContent = open
         ? "Stays open"
-        : `${center ? "Becomes the Pre-K center" : "Closes"}. ${townName(town)} children go to ${schoolShort(receivingSchool(plan, town))}${
+        : `${center ? "Becomes the Pre-K center" : plan.center56 === c.id ? "Becomes the grades 5-6 center for the whole district" : "Closes"}. ${townName(town)} children${plan.center56 === c.id ? " in Pre-K to grade 4" : ""} go to ${schoolShort(receivingSchool(plan, town))}${
             sp.length ? `, except about ${listJoin(sp.map(([id, x]) => `${Math.round(x * 100)}% to ${schoolShort(id)}`))}` : ""
           }.`;
       c.limitEl.textContent = permitsOn ? PERMIT_WORDS[c.id] : slidesLimit(FACILITIES[c.id]);
@@ -896,6 +939,15 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     for (const m of msRadios) m.input.checked = plan.msMerge === m.v;
     bpsBox.checked = plan.bpsTop === 6;
     bpsBox.disabled = !plan.msMerge || plan.valleyTop !== 6;
+    const c56Options = plan.msMerge && plan.valleyTop === 4 ? VALLEY.filter((id) => !plan.open.includes(id) && plan.prekCenter?.school !== id) : [];
+    const c56Sig = c56Options.join(",");
+    if (c56Sig !== c56Sel.dataset.sig) {
+      c56Sel.replaceChildren(h("option", { value: "" }, "None: Crossett Brook teaches grades 5 and 6"), ...c56Options.map((id) => h("option", { value: id }, `${SCHOOLS[id].short}'s building`)));
+      c56Sel.dataset.sig = c56Sig;
+    }
+    c56Sel.value = plan.center56 ?? "";
+    c56Sel.disabled = !c56Options.length;
+    c56Off.hidden = c56Options.length > 0;
     for (const c of cutBoxes) c.cb.checked = plan.cuts.includes(c.id);
 
     // building changes: using 300 for Waitsfield does nothing while it is closed, or under the state permits
@@ -1018,9 +1070,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
     recvNone.hidden = anyClosed;
     recvDistrict.hidden = !(anyClosed && r.capacity.source === "district");
     centerPick.value = preset === "center" ? (CENTER_SCHOOLS.find((id) => plan.prekCenter?.school === id) ?? "") : "";
+    c56Pick.value = preset === "c56" ? plan.center56 : "";
 
     // Pre-K center: only a closed valley school can be one, and not with the Pre-K tuition cut
-    const closedValley = VALLEY.filter((id) => !plan.open.includes(id));
+    const closedValley = VALLEY.filter((id) => !plan.open.includes(id) && plan.center56 !== id);
     const centerSig = closedValley.join(",");
     if (centerSig !== centerSel.dataset.sig) {
       centerSel.replaceChildren(h("option", { value: "" }, "None: Pre-K stays in the schools"), ...closedValley.map((id) => h("option", { value: id }, `${SCHOOLS[id].short}'s building`)));

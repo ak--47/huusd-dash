@@ -39,11 +39,11 @@ export default {
     el.append(
       pageHead({
         kicker: "Independent guide · HUUSD FY28 budget decision",
-        title: "The school board has agreed to keep working on Path B. It has not decided which two valley schools would close.",
+        title: "The board's straw poll chose Moretown + Warren. Its own scores had ranked Waitsfield + Warren first.",
         lede: [
           `District leaders say next year's budget needs about ${moneyShort(BUDGET.requiredCut)} in savings to stay under Vermont's `,
           term("threshold", "excess spending threshold"),
-          ", a state limit on education spending per pupil; going over raises local property taxes. Path A keeps all 7 buildings and cuts programs. Path B closes 2 of the 4 valley elementary schools and moves Crossett Brook's 7th and 8th graders to Harwood. On November 4 the board is set to decide which buildings to consider and whether to start the public hearings required to close a school.",
+          ", a state limit on education spending per pupil; going over raises local property taxes. The board has dropped Path A's program cuts and is working on Path B: close 2 of the 4 valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. On November 4 it chose, in a straw poll, to plan around keeping Moretown and Warren open, which would close Fayston and Waitsfield. Nothing is final until the public hearings and a two-thirds vote, set for January 6.",
         ],
       }),
 
@@ -54,28 +54,42 @@ export default {
         h(
           "ul",
           { class: "status-list" },
-          h("li", {}, h("strong", {}, "October 28: "), "in a straw poll at the end of the meeting, not a formal vote, the board agreed to keep developing Path B: closing two of the four valley elementary schools and moving Crossett Brook's 7th and 8th graders to Harwood. ", cite(ref("meeting1028", "straw poll"))),
           h(
             "li",
             {},
-            h("strong", {}, "Asked for next time: "),
-            "a board member asked to see a version of Path B that keeps valley 5th and 6th graders in temporary classrooms in the valley, alongside the version that sends them to Crossett Brook, and the administration said it would bring it. ",
-            cite(ref("meeting1028", "board discussion"))
+            h("strong", {}, "November 4, the scores: "),
+            "every board member scored the six possible pairs of valley schools to keep open. Added up, Waitsfield + Warren came first (248 points) and Moretown + Warren second (241). ",
+            cite(ref("deck1104", "slide 22"))
           ),
           h(
             "li",
             {},
-            h("strong", {}, "November 2: "),
-            `at a board committee meeting, the finance director said lower health insurance rates take about ${moneyShort(HEALTH_UPDATE.amount)} off next year's budget, and gave the district's first figure for closing one valley school instead of two: about ${moneyShort(ONE_CLOSURE.amount)} in all with the middle-school merger and grades 5-6 kept in the valley, against ${moneyShort(PATH_B_SAVINGS.total)} for Path B, still leaving a penalty. The superintendent said the administration still recommends Path B. `,
-            cite(ref("meeting1102", "closing one school"))
+            h("strong", {}, "November 4, the straw poll: "),
+            "at about 9:55 PM the board chose Moretown + Warren, 9 to 4, as the pair to plan the budget around. Three members chose it after scoring Waitsfield + Warren higher on their own sheets. An earlier straw poll dropped Path A unanimously. ",
+            cite(ref("meeting1104", "straw poll, 3:56-3:59")),
+            " ",
+            h("a", { href: "#/decision" }, "See each member's scores and vote")
           ),
-          h("li", {}, h("strong", {}, "Next: "), "board members' scores of the six possible pairs of valley schools to keep open, due November 3, shown publicly with names; and the board meeting on November 4, where the decision is which buildings to consider and whether to start the three public hearings required before closing a school. ", cite(ref("meeting1028", "homework timeline")), " ", cite(ref("aoa", "Article 6(E)"))),
-          h("li", {}, h("strong", {}, "Not decided: "), "which two schools, where grades 5 and 6 go, and the later phases of the district's draft roadmap, including a new valley building in 2029. ", cite(ref("oct14", "Draft Proposal for School Reconfiguration & Consolidation Roadmap"))),
-          h("li", {}, h("strong", {}, "What we checked: "), "several items in the district's numbers that could change which options work, including the wastewater limits and the size of the cut. ", h("a", { href: "#/findings" }, "See them, and questions to ask the board"))
+          h(
+            "li",
+            {},
+            h("strong", {}, "What it would mean: "),
+            "Fayston and Waitsfield are the schools proposed to close. The administration and every principal recommend Pre-K to 4 in the valley schools, grades 5-6 together at Crossett Brook, and grades 7-12 at Harwood; the board has not voted on grades. ",
+            cite(ref("meeting1104", "principals' letter"))
+          ),
+          h(
+            "li",
+            {},
+            h("strong", {}, "Next: "),
+            "school visits the week of November 9; on November 18, a vote to schedule three public hearings, one in each of Fayston and Waitsfield; hearings through December 16; and the closure vote on January 6, which needs two-thirds of the board's weighted vote. ",
+            cite(ref("deck1104", "slide 25"))
+          ),
+          h("li", {}, h("strong", {}, "Still open: "), "what Moretown's kitchen would need and cost, where grades 5 and 6 go once Brookside moves to Crossett Brook, and bus routes. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))
         ),
         h(
           "div",
           { class: "btn-row" },
+          h("a", { class: "wonk-btn wonk-btn--primary", href: "#/decision", onclick: opens("Decision Opened") }, "How the board decided"),
           h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "See options beyond A and B"),
           h("a", { class: "wonk-btn", href: "#/vote", onclick: opens("Vote Simulator Opened") }, "Try the board vote simulator")
         )
@@ -131,7 +145,7 @@ export default {
           pathCard({
             letter: "B",
             title: "Close 2 valley elementary schools, merge the middle schools",
-            sub: "Which two of Fayston, Moretown, Waitsfield, and Warren would close is not decided. The board agreed in a straw poll on October 28 to keep developing this path.",
+            sub: "The path the board is working on. In a straw poll on November 4 it chose to plan around keeping Moretown and Warren open; the closure vote is set for January 6.",
             facts: [
               [
                 "Saves",
@@ -202,7 +216,7 @@ export default {
         h(
           "div",
           { class: "beyond-grid" },
-          ["B-FW-K6", "B-MW-K6", "MS+cuts", "MS+close-FES", "K4x3"].map((id) => OPTIONS.find((o) => o.id === id)).map((o) => {
+          ["center56", "K4x3", "MS+close-FES", "MS+cuts", "B-FW-K6", "B-MW-K6"].map((id) => OPTIONS.find((o) => o.id === id)).map((o) => {
             const r = evaluate(o.plan);
             const withHealth = evaluate(o.plan, { health: true }).budget;
             const { savings, gap, upperBound, oneTime } = r.budget;
@@ -214,7 +228,9 @@ export default {
               h(
                 "h3",
                 {},
-                o.id === "K4x3"
+                o.id === "center56"
+                  ? "A grades 5-6 center in the valley, with Crossett Brook emptied for repairs (Waitsfield as the center)"
+                  : o.id === "K4x3"
                   ? "Close one valley school instead of two, with Path B's grades (Fayston, as an example)"
                   : o.id === "MS+close-FES"
                     ? "Merge the middle schools and close one valley school, grades 5-6 in the valley (Fayston, as an example)"
@@ -337,6 +353,18 @@ export default {
       ),
 
       section(
+        { id: "meeting-1104", title: "From the November 4 meeting", intro: "About four hours, with an hour of public comment. What board members said about the scores, the time, and their votes, in their own words, is on the decision page." },
+        h(
+          "ul",
+          { class: "prose" },
+          h("li", {}, "The superintendent: \u201cwe feel educationally the best alignment and the best path forward is the P the preK to four five six uh and then 7 through 12 at Harwood.\u201d ", cite(ref("meeting1104", "1:56:06"))),
+          h("li", {}, "The principals, in a letter read at the meeting: \u201cWhile we remain neutral on the specific facility decisions under consideration by the board tonight, we firmly believe that moving away for our from our current multi-building structure toward aligned grade configurations across elementary, upper elementary, and secondary levels is one of the most important steps we can take\u201d ", cite(ref("meeting1104", "2:00:04"))),
+          h("li", {}, "The board chair opened by responding to an open meeting law complaint about October 28: after consulting the board's attorney, the board's position is that it did not violate the law, and it extended public comment to three minutes a speaker. ", cite(ref("omlResponse1104")))
+        ),
+        h("p", {}, h("a", { class: "wonk-btn", href: "#/decision?at=reasons" }, "Read the reasons given on the record"))
+      ),
+
+      section(
         { id: "meeting", title: "From the October 28 meeting", intro: "What was said, beyond the slides. Quotes come from a transcript of the public recording; it has no speaker labels, so we name people only where the recording makes it clear." },
         h(
           "div",
@@ -383,10 +411,10 @@ export default {
         h(
           "ol",
           { class: "timeline" },
-          TIMELINE.filter((t) => t.key || ["2026-10-28", "2026-11-02", "2027-01", "2027-01-13", "2027-08"].includes(t.date)).map((t) =>
+          TIMELINE.filter((t) => t.key || ["2026-11-04", "2026-12-16", "2027-01-13", "2027-08"].includes(t.date) || t.title.startsWith("Three public hearings")).map((t) =>
             h(
               "li",
-              { class: [t.key ? "is-key" : "", t.date < "2026-10-29" ? "is-past" : ""].join(" ") },
+              { class: [t.key ? "is-key" : "", t.date < "2026-11-05" ? "is-past" : ""].join(" ") },
               h("span", { class: "when" }, dateLong(t.date)),
               h("span", { class: "what" }, t.title),
               t.detail ? h("p", { class: "detail" }, t.detail, " ", cite(t.src)) : null

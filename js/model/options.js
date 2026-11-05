@@ -20,7 +20,7 @@ export const OPTIONS = [
     name: "Path B",
     what: "Close two of the four valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. Twelve versions: six pairs of schools, with grades 5-6 at Crossett Brook or in the valley.",
     family: PAIRS.flatMap((pair) => [pathB(pair, 4), pathB(pair, 6)]),
-    notes: ["In a straw poll on October 28, the board agreed to keep developing Path B. Which two schools is not decided."],
+    notes: ["In a straw poll on November 4, the board chose to plan around Moretown + Warren staying open (Fayston and Waitsfield closing). The closure vote is set for January 6."],
   },
   {
     id: "B-FW-K6",
@@ -111,11 +111,11 @@ export const OPTIONS = [
     what: "Waitsfield's building becomes a Pre-K center for valley families; Fayston, Moretown, and Warren teach K-6, and grades 5-6 stay in the valley. Crossett Brook's 7th and 8th graders move to Harwood. No building closes. Waitsfield's K-6 children go to the nearest open school, Fayston, unless you split them in Build a plan. Suggested by a resident, who proposed testing each valley building as the center, Waitsfield first because it sits near the middle of the valley.",
     plan: makePlan({ id: "K6x3-center", open: ["FES", "MES", "WRN"], valleyTop: 6, msMerge: true, prekCenter: { school: "WES", scope: "valley" } }),
     notes: [
-      "Savings: the district's November 2 figure for closing one valley school with the middle schools merged and grades 5-6 kept in the valley, about $2.3 million in all, minus Waitsfield's building operating costs ($196,038). That is about $2.10M: about $1.24 million short of the district's target and about $735,000 short of the lower one (about $435,000 short of it counting the November 2 health insurance update). With Fayston, Moretown, or Warren as the center instead, only the building's operating costs change (about $2.11M to $2.13M). Before November 2 the site used our own estimate here, about $2.82M.",
+      "Savings: the district's figure for closing one valley school with the middle schools merged and grades 5-6 kept in the valley, $2,304,281 in all (November 4), minus Waitsfield's building operating costs ($196,038). That is about $2.11M: about $1.23 million short of the district's target and about $731,000 short of the lower one (about $431,000 short of it counting the health insurance update). With Fayston, Moretown, or Warren as the center instead, only the building's operating costs change (about $2.12M to $2.13M). Before November 2 the site used our own estimate here, about $2.82M.",
       "Its suggester proposed accepting a smaller budget increase or penalty in FY28 while the state's funding formula changes. On November 2 the superintendent said of moving Pre-K: \"We would not recommend that for next year without... a lot of further work and research.\"",
       "Every building stays in use, so its deferred maintenance stays too. Fayston would hold about 190 K-6 students: under its 250 on the slides, and 51 over the consultant's 139. Moretown (137) and Warren (87) have room, so a split of Waitsfield's children would ease Fayston. Brookside keeps its own Pre-K.",
     ],
-    refs: [ref("meeting1102", "closing one school"), ref("deck", "slide 23"), ref("truexCap", "Capacities")],
+    refs: [ref("deck1104", "slide 10"), ref("deck", "slide 23"), ref("truexCap", "Capacities")],
   },
   {
     id: "MS-only",
@@ -133,7 +133,7 @@ export const OPTIONS = [
     plan: makePlan({ id: "MS+cuts", msMerge: true, cuts: ["special", "prek", "athletics"] }),
     notes: [
       "Every plan that closes no school and keeps busing has to merge the middle schools and make at least three of Path A's five smaller cuts; this is one of those combinations. The students who change schools are about 130 Crossett Brook 7th and 8th graders, the same students who move in every Path B version, and district Pre-K classes end (about 118 children a year).",
-      "Its largest number comes from Path B. The district costed the merger ($2,102,942) with valley 5th and 6th graders filling Crossett Brook; on October 28 the finance director said keeping only Crossett Brook's own 5th and 6th graders there means fewer staff cuts. This version meets the district's target only if the merger still saves at least $1,926,000; on October 14 the district put the merger at $1,783,005. Against the lower target it needs $1,425,812. On November 2 the district put the merger plus one closure, with grades 5-6 in the valley, at about $2.3 million in all, so, if that total is simply the merger plus the one closure (our arithmetic), the merger alone would reach $1,926,000 only if closing that school saved less than about $374,000.",
+      "Its largest number comes from Path B. The district costed the merger ($2,102,942) with valley 5th and 6th graders filling Crossett Brook; on October 28 the finance director said keeping only Crossett Brook's own 5th and 6th graders there means fewer staff cuts. This version meets the district's target only if the merger still saves at least $1,926,000; on October 14 the district put the merger at $1,783,005. Against the lower target it needs $1,425,812. On November 4 the district put the merger plus one closure, with grades 5-6 in the valley, at $2,304,281 in all, so, if that total is simply the merger plus the one closure (our arithmetic), the merger alone would reach $1,926,000 only if closing that school saved less than about $378,000.",
       "The three cuts are among those the district called devastating. Special programming (Farm to School, outdoor education, and learning center supports) has not been itemized; the athletics line includes $85,000 of athletic travel; and the district says private Pre-K programs lack room.",
     ],
     refs: [ref("deck", "slides 13 and 18"), ref("oct14", "savings estimates"), ref("meeting1028", "merger without valley grades 5-6")],
@@ -146,9 +146,9 @@ export const OPTIONS = [
     what: "Crossett Brook's 7th and 8th graders move to Harwood, and one valley school closes; its students go to the nearest open school. Grades 5-6 stay in the valley.",
     plan: makePlan({ id: `MS+close-${closed}`, msMerge: true, open: ["FES", "MES", "WES", "WRN"].filter((x) => x !== closed) }),
     notes: [
-      "Savings: the district's first figure for this plan, said aloud at the November 2 committee meeting and to be presented on November 4: about $2.3 million in all, with 21 positions (Path B: $3.93 million and 32.5). The finance director said keeping valley 5th and 6th graders in the valley leaves about 131 students at Crossett Brook, which \"still impacts the merger of the middle schools.\" Counting the lower health insurance rates she announced the same day, she said it would still mean a penalty of $165,324 in FY28 and at least $350,000 more to cut for FY29. No portable classrooms would be needed, \"but they're larger, much larger class sizes.\" She did not say which school; the site uses the figure for each.",
+      "Savings: the district's figure for this plan, given at the November 2 committee meeting and presented on November 4: $2,304,281 in all, with 21 positions (Path B: $3.93 million and 32.5), which its slide calls a net loss of $1,625,188 in savings. The finance director said keeping valley 5th and 6th graders in the valley leaves about 131 students at Crossett Brook, which \"still impacts the merger of the middle schools.\" Counting the lower health insurance rates she announced the same day, it would still mean a penalty of $165,324 in FY28, and in FY29 either a $325,299 penalty or at least $350,000 more in cuts. No portable classrooms would be needed, \"but they're larger, much larger class sizes.\" She did not say which school; the site uses the figure for each.",
     ],
-    refs: [ref("meeting1102", "closing one school"), ref("qdoc", "closing one school")],
+    refs: [ref("deck1104", "slides 10-11"), ref("meeting1102", "closing one school"), ref("qdoc", "closing one school")],
   })),
   {
     id: "K4x3",
@@ -220,6 +220,59 @@ export const OPTIONS = [
     ],
     // the caveat Start here shows under the card's measures
     startNote: "The district has not costed one closure with grades 5-6 at Crossett Brook; its question-and-answer document says closing one school \"does not look like it would save enough money to make it worthwhile.\"",
+  },
+  {
+    id: "center56",
+    group: "other",
+    name: "Grades 5-6 center in the valley: close Fayston and empty Crossett Brook for repairs",
+    what: "Fayston closes. Two valley schools teach Pre-K to grade 4, and the third becomes a grades 5-6 school for the whole district: valley 5th and 6th graders and Crossett Brook's own. Every 7th and 8th grader goes to Harwood, so Crossett Brook's building holds no classes and is free for renovation. Brookside stays Pre-K to 4 until a renovated Crossett Brook can take it. The grade setup is the one the administration and principals recommend (Pre-K to 4, 5-6, 7-12); only the 5-6 building differs. Suggested by a resident after the November 4 meeting, shown with each valley building as the center, and scored the same way as the others.",
+    // the first version is the card's plan (Build's "Grades 5-6 center" starting point)
+    plan: makePlan({ id: "center56", open: ["MES", "WRN"], valleyTop: 4, msMerge: true, center56: "WES" }),
+    versions: [
+      {
+        id: "center56",
+        center56: "WES",
+        name: "Waitsfield as the grades 5-6 center",
+        what: "Moretown and Warren teach Pre-K to 4, the two schools the board's November 4 straw poll chose to study. Waitsfield's building, near the middle of the valley, teaches grades 5 and 6.",
+        notes: [
+          "Savings: the district's Path B figures, minus Waitsfield's building operating costs ($196,038). That is $394,158 over the target on paper.",
+          "Waitsfield would hold about 256 5th and 6th graders: 26 over the slides' 230, under the 1991 permit's 300, and 82 over the consultant's 174. They need about 12 classes and Waitsfield has 11 classrooms, so about one portable unit (two rooms), or a room now used for something else. The town sewer the school is to join by about fall 2028 would end the wastewater question. Waitsfield has a full kitchen. Moretown (about 134) and Warren (about 227) match the district's own classroom chart for this pair: Moretown needs 6 of its 11 classrooms and Warren 12 of its 14. Warren is over its 237 if staff count, as its permit says.",
+          "By car, Waitsfield is about 21 minutes from Waterbury village and 13 from Warren village; in Path B, valley 5th and 6th graders ride to Duxbury, about 31 minutes from Warren village.",
+        ],
+      },
+      {
+        id: "center56-WRN",
+        center56: "WRN",
+        name: "Warren as the grades 5-6 center",
+        what: "Moretown and Waitsfield teach Pre-K to 4. Warren's building, the largest in the valley (14 classrooms), teaches grades 5 and 6.",
+        plan: makePlan({ id: "center56-WRN", open: ["MES", "WES"], valleyTop: 4, msMerge: true, center56: "WRN" }),
+        notes: [
+          "Savings: the same figures, minus Warren's building operating costs ($183,521). That is $406,675 over the target on paper.",
+          "Warren is the only valley building with room for the 12 classes on the district's count of classrooms. Its 256 students would be 19 over its permit of 237 even without staff, which its permit counts, and 101 over the consultant's 155. Waitsfield would hold about 217 children in Pre-K to 4: under 230, but 13 classes for 11 classrooms; on the district's chart for this pair, sending some children to Moretown, which has room, would fit both.",
+          "Warren is the farthest valley school from Waterbury: about 35 minutes by car from Waterbury village.",
+        ],
+      },
+      {
+        id: "center56-MES",
+        center56: "MES",
+        name: "Moretown as the grades 5-6 center",
+        what: "Waitsfield and Warren teach Pre-K to 4, the pair the board's scores ranked first. Moretown's building, the closest valley school to Waterbury, teaches grades 5 and 6.",
+        plan: makePlan({ id: "center56-MES", open: ["WES", "WRN"], valleyTop: 4, msMerge: true, center56: "MES" }),
+        notes: [
+          "Savings: the same figures, minus Moretown's building operating costs ($185,868). That is $404,328 over the target on paper.",
+          "Moretown would hold about 256 5th and 6th graders: 21 over its 235 even without staff, 91 over the consultant's 165, and 12 classes for 11 classrooms. Its kitchen is a prep kitchen whose meals come from Harwood by car. Waitsfield would hold about 239 children in Pre-K to 4, over the slides' 230 and the consultant's 174.",
+          "About 17 minutes by car from Waterbury village, and 23 from Warren village. This version moves the most students next fall (about 497 in K-12).",
+        ],
+      },
+    ],
+    notes: [
+      "How the savings are figured, an estimate: the staffing is Path B's (Pre-K to 4 in two valley schools, every 5th and 6th grader in one building, every 7th and 8th grader at Harwood), so we use the district's Path B figures and give back the center building's operating costs, as for the Pre-K center plan. Nothing is counted for emptying Crossett Brook: the district has published no operating cost for it, and an empty building still needs heat, power, and upkeep. Busing changes too: about 131 Waterbury and Duxbury 5th and 6th graders would ride to the valley, instead of about 125 valley children riding to Duxbury; neither is costed.",
+      "It moves more students next fall than Path B: about 460 to 500 in K-12, against 352 to 398 in the Pre-K to 4 versions of Path B, because Crossett Brook's current 5th graders and Brookside's 4th graders go to the center instead of Crossett Brook, and Crossett Brook's 7th graders go to Harwood. Every child would attend 4 K-12 schools, as in Path B, and younger Fayston children 5.",
+      "Why a resident suggested it: the administration's long-term plan moves Brookside into Crossett Brook, and its principals named \"potential relocation of the Waterbury Duxbury Elementary School to the current CBMS campus\" among the changes their recommended grade setup leaves room for. A board member's published notes say Crossett Brook could not then hold valley 5th and 6th graders too: Brookside plus Crossett Brook's own 5th and 6th graders is about 470 students, the consultant modeled room for up to 515 with a small addition, and adding about 125 valley children comes to about 600. A 5-6 center in the valley gives those grades a home that does not depend on that sequence.",
+      "Its weak points: renovating Crossett Brook needs a bond, and under Act 169 payments on a new bond count against the threshold; the superintendent said on November 4 that construction takes years from planning to opening. Until then Crossett Brook stands empty and Brookside keeps its building. No district table or costing covers this plan, every center building is over the consultant's capacity, and on the slides' limits the center is over its wastewater number in every version.",
+    ],
+    refs: [ref("deck", "slides 17-18"), ref("deck1104", "slides 6-9"), ref("meeting1104", "principals' letter"), ref("maconScores", "Why sequence matters"), ref("meeting1104", "bonds and construction"), ref("truexCap", "Capacities"), ref("osrm", "table service, towns and schools")],
+    startNote: "No district table or costing covers this plan. Renovating Crossett Brook needs a bond, which under Act 169 counts against the threshold.",
   },
   {
     id: "two-only",

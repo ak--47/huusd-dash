@@ -92,6 +92,14 @@ export function budget(plan, { basis = "district", health = false } = {}) {
     const id = plan.prekCenter.school;
     items.push({ id: "prekCenter", label: `Keep ${SCHOOLS[id].short} open as a Pre-K center`, amount: -FACILITIES[id].operatingCost, fte: null, kind: "estimate" });
   }
+  // A grades 5-6 center keeps a closed school's building in use, so its operating costs are given back. The
+  // staffing is the same as Path B's (Pre-K to 4 in two valley schools, every 5th and 6th grader in one building),
+  // but Crossett Brook's building, not a valley one, holds no classes, and the district has published no operating
+  // cost for it, so nothing is counted for emptying it.
+  if (plan.center56) {
+    const id = plan.center56;
+    items.push({ id: "center56", label: `Keep ${SCHOOLS[id].short} open as the grades 5-6 center`, amount: -FACILITIES[id].operatingCost, fte: null, kind: "estimate" });
+  }
   for (const id of plan.cuts) {
     const c = PATH_A_CUTS.items.find((x) => x.id === id);
     items.push({ id: `cut:${id}`, label: c.name, amount: c.amount, fte: null, kind: "district" });

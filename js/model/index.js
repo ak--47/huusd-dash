@@ -20,15 +20,15 @@ const cache = new Map();
 export function evaluate(plan, { classSize, basis = "district", reading = "slides", health = false } = {}) {
   const key = JSON.stringify([plan, classSize ?? null, basis, reading, Boolean(health)]);
   if (cache.has(key)) return cache.get(key);
-  // a Pre-K center's building stays in use, though no K-12 grade is taught there
-  const center = plan.prekCenter?.school;
-  const closed = closedSchools(plan).filter((id) => id !== center);
-  const keptBuildings = ["BPS", ...plan.open, ...(center ? [center] : [])];
+  // a Pre-K center's or a grades 5-6 center's building stays in use
+  const kept = [plan.prekCenter?.school, plan.center56].filter(Boolean);
+  const closed = closedSchools(plan).filter((id) => !kept.includes(id));
+  const keptBuildings = ["BPS", ...plan.open, ...kept];
   const result = {
     plan,
     closed,
-    // Crossett Brook's building holds no classes when Brookside teaches its 5th and 6th graders
-    buildingsOpen: 7 - closed.length - (plan.bpsTop === 6 ? 1 : 0),
+    // Crossett Brook's building holds no classes when Brookside or a grades 5-6 center teaches its 5th and 6th graders
+    buildingsOpen: 7 - closed.length - (plan.bpsTop === 6 || plan.center56 ? 1 : 0),
     budget: budget(plan, { basis, health: Boolean(health) }),
     capacity: capacity(plan, { ...(classSize ? { classSize } : {}), reading }),
     moved: movedNextFall(plan),
