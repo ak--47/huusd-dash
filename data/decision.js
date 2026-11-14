@@ -181,7 +181,7 @@ export const MEETING_1112 = {
         { who: "Emily Dolloff (Duxbury), after touring Waitsfield and Moretown", at: "0:43:53", text: "could one of these schools could these schools expand in some capacity if necessary down the future or down the road" },
         { who: "Pam Eaton (Waterbury), on Moretown", at: "2:33:11", text: "Moretown does have a flood insurance policy on it because of past events, but that doesn't necessarily mean it's going to happen in the future." },
         { who: "Pam Eaton (Waterbury), on Moretown's meals", at: "2:38:24", text: "there is food that's prepared there, but there's also food that gets transported to that kitchen to be reheated" },
-        { who: "Pam Eaton (Waterbury), asked whether Waitsfield's sewer grant is at risk if the school closes", at: "2:36:42", text: "I have not heard from JB on the clarification as to whether that's true or not true" },
+        { who: "Pam Eaton (Waterbury), asked whether Waitsfield's sewer grant is at risk if the school closes (JB Weir is a Waitsfield board member)", at: "2:36:42", text: "I have not heard from JB on the clarification as to whether that's true or not true" },
         { who: "The superintendent, on moving Brookside to Crossett Brook", at: "1:37:49", text: "you're looking at at least three years... maybe longer." },
       ],
     },
@@ -219,12 +219,12 @@ export const FINALIST_FACTS = {
   kitchen: {
     WES: "Full kitchen, renovated about three years ago (about $1.1 million, a board member said); it also sends meals to Fayston.",
     WRN: "Full kitchen; limited cafeteria seating.",
-    MES: "Prep kitchen only. Meals are cooked at Harwood and carried over in staff members' own cars; the dishwasher needs replacing and more refrigeration is needed. On November 4 the board asked for the cost of a van, or a new kitchen, for the larger school; not yet priced.",
+    MES: "Prep kitchen only. Much of the food is cooked at Harwood and carried over in staff members' own cars, and some is made on site (a board member, November 12); the dishwasher needs replacing and more refrigeration is needed. On November 4 the board asked for the cost of a van, or a new kitchen, for the larger school; not yet priced.",
   },
   land: {
     WES: "7.7 acres, owned by the district. Town sewer targeted for about fall 2028, partly funded by a grant of about $1 million premised on expanding the school; its leach fields would then free land for additions. Whether the grant is at risk if the school closes was still unanswered on November 12.",
     WRN: "The building sits on town land under an easement; additions need the town's written permission. No flood or wetland limits were noted.",
-    MES: "About 2 acres. Most of the site is in the 500-year flood zone and the rear is out of it. The school flooded twice in the past three years from blocked culverts on a private road above it, which a board member said have since been cleared. The district carries flood insurance on it \"because of past events,\" a board member said on November 12.",
+    MES: "About 2 acres. Most of the site is in the 500-year flood zone and the rear is out of it. The school flooded twice in the past three years from blocked culverts on a private road above it, which a board member said have since been cleared. The district carries flood insurance on it \"because of past events,\" a board member said on November 12, adding \"that doesn't necessarily mean it's going to happen in the future.\" Residents disagree about the risk now: one said the culvert and the downstream bridge have been rebuilt.",
   },
   src: [ref("deck", "slides 22-24"), ref("meeting1104", "kitchens, flooding, and expansion"), ref("meeting1102", "Moretown's meals"), ref("maconScores", "Building and kitchen notes"), ref("forum1112", "2:33-2:38")],
 };
