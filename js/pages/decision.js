@@ -4,7 +4,7 @@
 
 import { h, money, num, dateLong } from "../ui/dom.js";
 import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag } from "../ui/kit.js";
-import { CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, MEETING_1104, ASKED_1104, SCORES, STRAW_POLL } from "../../data/decision.js";
+import { CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, MEETING_1104, MEETING_1112, ASKED_1104, SCORES, STRAW_POLL } from "../../data/decision.js";
 import { FACILITIES } from "../../data/schools.js";
 import { TIMELINE, CLOSURE_PROCESS } from "../../data/timeline.js";
 import { ref } from "../../data/sources.js";
@@ -195,7 +195,7 @@ export default {
     );
 
     // ---- next steps ----
-    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-05" && x.date <= "2027-03-02");
+    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-13" && x.date <= "2027-03-02");
 
     el.append(
       pageHead({
@@ -334,6 +334,24 @@ export default {
           cites(FINALIST_FACTS.src)
         ),
         h("p", {}, h("a", { class: "wonk-btn", href: "#/compare" }, "Compare all six pairs"), " ", h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/options?at=option-center56" }, "A grades 5-6 center in the valley"))
+      ),
+
+      section(
+        { id: "since", title: "Since November 4: the Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
+        h(
+          "div",
+          { class: "meeting" },
+          MEETING_1112.groups.map((g) =>
+            h(
+              "div",
+              { class: "dc-quotes" },
+              h("h3", {}, g.title),
+              h("ul", { class: "quotes" }, g.items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, `${q.who}, ${q.at}`))))
+            )
+          ),
+          h("p", { class: "small" }, "No board member at the forum said they had changed their straw-poll choice or proposed reopening the choice between Moretown and Waitsfield; a Duxbury resident called the preference for Moretown over Waitsfield a mistake, citing flooding. The figures given ($1.8 million for closing two valley schools, $2.1 million for the middle-school merger, about $3.9 million together) match the district's October 28 figures this site already uses. ", cite(MEETING_1112.src)),
+          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1112.publicComment, " ", cite(MEETING_1112.src))
+        )
       ),
 
       section(

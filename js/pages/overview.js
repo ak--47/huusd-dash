@@ -80,8 +80,17 @@ export default {
           h(
             "li",
             {},
+            h("strong", {}, "November 12: "),
+            "at a Waterbury-Duxbury forum, board members from those towns argued for closing two valley schools rather than one, merging the middle schools, and later moving Brookside to Crossett Brook. The finance director said new bus routes have not been worked out yet. ",
+            cite(ref("forum1112", "transcript of the recording")),
+            " ",
+            h("a", { href: "#/decision?at=since" }, "What was said")
+          ),
+          h(
+            "li",
+            {},
             h("strong", {}, "Next: "),
-            "school visits the week of November 9; on November 18, a vote to schedule three public hearings, one in each of Fayston and Waitsfield; hearings through December 16; and the closure vote on January 6, which needs two-thirds of the board's weighted vote. ",
+            "a Warren forum on November 16; on November 18, a vote to schedule three public hearings, one in each of Fayston and Waitsfield; hearings through December 16; and the closure vote on January 6, which needs two-thirds of the board's weighted vote. ",
             cite(ref("deck1104", "slide 25"))
           ),
           h("li", {}, h("strong", {}, "Still open: "), "what Moretown's kitchen would need and cost, where grades 5 and 6 go once Brookside moves to Crossett Brook, and bus routes. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))

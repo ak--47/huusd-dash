@@ -6,6 +6,15 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-14: the November 12 Waterbury-Duxbury forum (staging only)
+
+Input from the owner: a transcript of the forum (`~/Downloads/HUUSD Waterbury-Duxbury Community Forum 2026-11-12 transcript.txt`, made from YouTube captions with voice matching; video https://www.youtube.com/watch?v=Ss4PUSNzY5s). Cached, redacted, at `sources/2026-11-12-community-forum/forum-transcript.txt` (residents as "member of the public 1-18"; children's and family names, kinship, and home streets removed).
+
+- **Numbers: nothing changes.** The board members' figures ($1.8M for two valley closures with 16 FTE, $2.1M for the merger with 16.5 FTE, $3.9M together, $3.3M target, health insurance up 2.5%) match `PATH_B_SAVINGS`, `BUDGET`, and `HEALTH_UPDATE`. The district has still not restated its target, so the health checkbox stays off by default.
+- **New facts:** next year's bus contract is signed (about $1.3M, 13 buses, without special ed) and rebid in the spring; routes not worked out "until we know the path forward"; the superintendent says busing valley 5-6 to Crossett Brook rides the existing Harwood runs and is "built into the budget"; diesel base $3.50 with a surcharge (about $6.50 now). A board member said Moretown carries flood insurance "because of past events"; Moretown has no backup generator; Waitsfield's kitchen was paid district-wide; whether Waitsfield's ~$1M sewer grant is at risk if it closes is still unanswered (waiting on JB Weir). Brookside's classroom count in the modeling excludes the Children's Room. Moving Brookside to Crossett Brook needs a bond, 3+ years. Board members toured Waitsfield and Moretown the week of Nov 9; a Duxbury member is weighing which valley schools could expand if a single valley school never comes.
+- **Board members' positions (5 of 14: Waterbury's 3 present and Duxbury's 2):** firmly for two closures over one ("puts us on a back foot", "closing one school is not enough"), and against going over the threshold. No one said they had changed their straw-poll choice or proposed reopening Moretown vs Waitsfield. Residents presented a one-closure budget ($51,874,839 vs $51,809,651 for two closures with their transport estimate, both assuming Pre-K moves to private providers); not on the site beyond a sentence in the public comment summary (no document seen).
+- **On the site:** `MEETING_1112` in `data/decision.js` (test checks every quote against the cached transcript), shown in a new "Since November 4" section on the decision page (`?at=since`); Start here's status card; timeline (Nov 9 visits, Nov 12 forum); findings `transport`, `finalists`, `grades56-home`; `FINALIST_FACTS`; source key `forum1112`; UPDATES line. The decision page's dates now start at Nov 13.
+
 ## 2026-11-05: November 4 work promoted to live
 
 - At the owner's request ("promote staging to live"), PR #30 promoted staging to live with a merge commit, carrying staging PRs #27 (the Nov 4 promotion note), #28 (the November 4 meeting: decision page, grades 5-6 center plan, findings, timeline), and #29 (neutral Start here headline, Pre-K to 4 placement shares). The live deploy passed; `staging:diff` shows nothing.
@@ -164,6 +173,8 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 
 ## Open items
 
+- Waitsfield's sewer grant (about $1M): the board was still waiting on Nov 12 for an answer on whether closing the school puts it at risk. Update `finalists` and `FINALIST_FACTS.land.WES` when answered.
+- Nov 16 Warren forum: add what was said (as for Nov 12, in `data/decision.js`).
 - Cindy Senning's November 4 straw-poll answer is inferred (no open microphone). Check the board's minutes when approved and update `STRAW_POLL` in `data/decision.js`.
 - After November 18: record the vote to warn the hearings (who voted how), the hearing dates and places, and any kitchen/van costing for Moretown or early-retirement modeling.
 - The grades 5-6 center plan (`center56`) has no district costing; if the district prices it or Crossett Brook's operating cost, replace the estimate.
