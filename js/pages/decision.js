@@ -349,7 +349,7 @@ export default {
               h("ul", { class: "quotes" }, g.items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, `${q.who}, ${q.at}`))))
             )
           ),
-          h("p", { class: "small" }, "No board member at the forum said they had changed their straw-poll choice or proposed reopening the choice between Moretown and Waitsfield; a Duxbury resident called the preference for Moretown over Waitsfield a mistake, citing flooding. The figures given ($1.8 million for closing two valley schools, $2.1 million for the middle-school merger, about $3.9 million together) match the district's October 28 figures this site already uses. ", cite(MEETING_1112.src)),
+          h("p", { class: "small" }, "No board member at the forum said they had changed their straw-poll choice or proposed reopening the choice between Moretown and Waitsfield; residents disagreed about flood risk at Moretown, one calling the preference for Moretown over Waitsfield a mistake and another saying the culvert and the downstream bridge have been rebuilt. The figures given ($1.8 million for closing two valley schools, $2.1 million for the middle-school merger, about $3.9 million together) match the district's October 28 figures this site already uses. ", cite(MEETING_1112.src)),
           h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1112.publicComment, " ", cite(MEETING_1112.src))
         )
       ),
