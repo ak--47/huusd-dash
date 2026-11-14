@@ -17,6 +17,14 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## November 12, 2026 Waterbury-Duxbury community forum
+
+Provided by the site's owner on November 14: a transcript made from the YouTube auto-captions, with speakers matched by voice and context. In this copy the residents who spoke are shown as "member of the public 1" to "18", and children's and family members' names, family relationships, and home streets are removed; repeated caption lines are dropped. Board members and staff keep their names.
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [forum-transcript.txt](2026-11-12-community-forum/forum-transcript.txt) | Transcript of the forum (2:41), with timestamps. The slides the board members presented are not cached. | `forum1112` | [YouTube](https://www.youtube.com/watch?v=Ss4PUSNzY5s) |
+
 ## November 4, 2026 board meeting
 
 Provided by the site's owner on November 5. The transcript is an automatic transcript of the meeting recording with machine speaker names, some of them wrong (see AGENTS.md, "Sources and verification"); residents who spoke in public comment are shown as "member of the public 1" to "17", and two students' names are removed. Board members and staff keep their names.

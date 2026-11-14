@@ -100,6 +100,14 @@ export const SOURCES = {
     url: "https://www.youtube.com/watch?v=F8DYbxu1FDw",
     note: "About four hours: the board chair's statement on the October 28 open meeting law complaint, about an hour of public comment, the administration's classroom modeling, the principals' letter, and the straw polls. Quotes come from an automatic transcript of the recording; board members are named, staff by role, and residents who spoke in public comment are not named. The transcript's speaker labels are wrong in places during the straw poll; each member's answer there was checked against the video.",
   },
+  forum1112: {
+    title: "HUUSD Waterbury-Duxbury community forum, November 12, 2026 (public recording)",
+    by: "HUUSD board members",
+    date: "2026-11-12",
+    kind: "district",
+    url: "https://www.youtube.com/watch?v=Ss4PUSNzY5s",
+    note: "About two hours and forty minutes at Crossett Brook: a slide presentation by the Waterbury and Duxbury board members, then questions and comments. Not a board meeting; no votes were taken. Quotes come from a transcript made from the automatic captions; board members are named, staff by role, and residents who spoke are not named.",
+  },
   agenda1104: {
     title: "HUUSD Board of Directors agenda, November 4, 2026",
     by: "HUUSD",
