@@ -144,6 +144,52 @@ export const MEETING_1104 = {
     "The chair opened with the board's response to an open meeting law complaint about October 28: after consulting its attorney, the board's position is that it did not violate the law, and it extended public comment to three minutes a speaker. Fifteen people spoke, about half of them from Moretown's school community. Most asked the board to keep Moretown open, slow down, model more options, or weigh what closing a school does to a town; others asked for care with 5th and 6th graders who might move twice, raised long bus rides, and two supported consolidation and bringing middle-school students together.",
 };
 
+// The Waterbury-Duxbury community forum, November 12, 2026, at Crossett Brook: five board members (the Waterbury and
+// Duxbury representatives) with the superintendent and the finance director. Not a board meeting; no votes. Quotes from
+// the cached transcript (automatic captions with speaker matching); residents who spoke are not named.
+export const MEETING_1112 = {
+  src: ref("forum1112", "transcript of the recording"),
+  groups: [
+    {
+      id: "plan",
+      title: "The plan as the board members presented it",
+      items: [
+        { who: "Theo Hanna (Waterbury), on closing two valley schools", at: "0:18:43", text: "And this would save us about $1.8 million." },
+        { who: "Theo Hanna (Waterbury), on the middle schools", at: "0:18:43", text: "So, fifth and sixth moving to Crossett for the entire... district and seventh and eighth for the entire district moving to Harwood. This would save about $2.1 million" },
+        { who: "Cindy Senning (Duxbury, vice chair)", at: "0:47:00", text: "one of the things that this board has been thinking about very seriously and would be planning to do for next year... is to move our seventh and eighth graders back to Harwood." },
+        { who: "Pam Eaton (Waterbury)", at: "2:18:54", text: "We're sitting here looking at you guys tonight saying Brookside is going to close and we're going to move our kids here." },
+        { who: "Pam Eaton (Waterbury), on renovating Crossett Brook for Brookside", at: "0:59:56", text: "So for that to happen, we need a bond." },
+      ],
+    },
+    {
+      id: "one-or-two",
+      title: "One closure or two",
+      items: [
+        { who: "Pam Eaton (Waterbury)", at: "0:30:32", text: "The three school option just really kind of puts us on a back foot. We'll be in the same position again next year." },
+        { who: "Rob Dabrowski (Waterbury)", at: "0:32:25", text: "So regardless of whether we close one school, two schools, zero schools, your taxes are going up, right? So closing one school is not enough." },
+        { who: "Theo Hanna (Waterbury)", at: "1:17:01", text: "So if we did close just one valley school, we will be in the same position next year." },
+        { who: "Emily Dolloff (Duxbury), on going over the threshold", at: "2:22:22", text: "We as a board do not believe that the community as a whole with students or without would support that." },
+        { who: "Theo Hanna (Waterbury)", at: "2:00:59", text: "it does cost about a million dollars to operate two schools just year year to year." },
+      ],
+    },
+    {
+      id: "open",
+      title: "Buses, buildings, and kitchens",
+      items: [
+        { who: "The finance director, on bus routes", at: "0:26:29", text: "until we know the path forward we haven't worked with the transportation department to look at the new routes but we'll we'll be working within our transportation contract for next year." },
+        { who: "The superintendent, on busing valley 5th and 6th graders to Crossett Brook", at: "0:28:29", text: "So so it's built into the budget. It is possible and... it is feasible without going beyond the budget." },
+        { who: "Emily Dolloff (Duxbury), after touring Waitsfield and Moretown", at: "0:43:53", text: "could one of these schools could these schools expand in some capacity if necessary down the future or down the road" },
+        { who: "Pam Eaton (Waterbury), on Moretown", at: "2:33:11", text: "Moretown does have a flood insurance policy on it because of past events, but that doesn't necessarily mean it's going to happen in the future." },
+        { who: "Pam Eaton (Waterbury), on Moretown's meals", at: "2:38:24", text: "there is food that's prepared there, but there's also food that gets transported to that kitchen to be reheated" },
+        { who: "Pam Eaton (Waterbury), asked whether Waitsfield's sewer grant is at risk if the school closes (JB Weir is a Waitsfield board member)", at: "2:36:42", text: "I have not heard from JB on the clarification as to whether that's true or not true" },
+        { who: "The superintendent, on moving Brookside to Crossett Brook", at: "1:37:49", text: "you're looking at at least three years... maybe longer." },
+      ],
+    },
+  ],
+  publicComment:
+    "About eighteen residents spoke over two hours, from Waterbury, Duxbury, Moretown, Waitsfield, and Warren. Most from Waterbury and Duxbury supported closing two valley schools and merging the middle schools, citing the high school, programs, and years of delay; several asked the board to keep Pre-K in the schools. Valley residents asked the board to price new bus routes, to reconsider closing one school (two residents presented their own estimates, which assume Pre-K moves to private providers), and raised Waitsfield's sewer grant and village businesses, Moretown's kitchen, and flood risk at Moretown, which residents described differently.",
+};
+
 // Asked for at the meeting, for the next steps.
 export const ASKED_1104 = [
   { who: "JB Weir", what: "The cost of what Moretown's kitchen would need to serve the larger school: a new kitchen, or a van to bring meals from Harwood, and everything that entails." },
@@ -173,12 +219,12 @@ export const FINALIST_FACTS = {
   kitchen: {
     WES: "Full kitchen, renovated about three years ago (about $1.1 million, a board member said); it also sends meals to Fayston.",
     WRN: "Full kitchen; limited cafeteria seating.",
-    MES: "Prep kitchen only. Meals are cooked at Harwood and carried over in staff members' own cars; the dishwasher needs replacing and more refrigeration is needed. On November 4 the board asked for the cost of a van, or a new kitchen, for the larger school; not yet priced.",
+    MES: "Prep kitchen only. Much of the food is cooked at Harwood and carried over in staff members' own cars, and some is made on site (a board member, November 12); the dishwasher needs replacing and more refrigeration is needed. On November 4 the board asked for the cost of a van, or a new kitchen, for the larger school; not yet priced.",
   },
   land: {
-    WES: "7.7 acres, owned by the district. Town sewer targeted for about fall 2028, partly funded by a grant of about $1 million premised on expanding the school; its leach fields would then free land for additions.",
+    WES: "7.7 acres, owned by the district. Town sewer targeted for about fall 2028, partly funded by a grant of about $1 million premised on expanding the school; its leach fields would then free land for additions. Whether the grant is at risk if the school closes was still unanswered on November 12.",
     WRN: "The building sits on town land under an easement; additions need the town's written permission. No flood or wetland limits were noted.",
-    MES: "About 2 acres. Most of the site is in the 500-year flood zone and the rear is out of it. The school flooded twice in the past three years from blocked culverts on a private road above it, which a board member said have since been cleared.",
+    MES: "About 2 acres. Most of the site is in the 500-year flood zone and the rear is out of it. The school flooded twice in the past three years from blocked culverts on a private road above it, which a board member said have since been cleared. The district carries flood insurance on it \"because of past events,\" a board member said on November 12, adding \"that doesn't necessarily mean it's going to happen in the future.\" Residents disagree about the risk now: one said the culvert and the downstream bridge have been rebuilt.",
   },
-  src: [ref("deck", "slides 22-24"), ref("meeting1104", "kitchens, flooding, and expansion"), ref("meeting1102", "Moretown's meals"), ref("maconScores", "Building and kitchen notes")],
+  src: [ref("deck", "slides 22-24"), ref("meeting1104", "kitchens, flooding, and expansion"), ref("meeting1102", "Moretown's meals"), ref("maconScores", "Building and kitchen notes"), ref("forum1112", "2:33-2:38")],
 };
