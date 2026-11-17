@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-17: November 16 forum promoted to live
+
+- With the owner's OK given up front, PR #37 promoted staging to live with a merge commit, carrying #35 (the Nov 14 promotion note) and #36 (the Nov 16 forum). The live deploy passed.
+
 ## 2026-11-17: the November 16 Warren forum (staging, then live at the owner's OK)
 
 Input from the owner: a transcript of the forum (`~/Downloads/HUUSD Warren Community Forum 2026-11-16 transcript.txt`, YouTube captions with voice matching; video https://www.youtube.com/watch?v=YUHwhRkJooM). Cached, redacted, at `sources/2026-11-16-community-forum/forum-transcript.txt` (residents as "member of the public 1-16"; names, family details, jobs, and private business owners' names removed; the Warren select board chair and legislators by role). The owner said this one can go from staging to live without a separate ask.
