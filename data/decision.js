@@ -190,6 +190,64 @@ export const MEETING_1112 = {
     "About eighteen residents spoke over two hours, from Waterbury, Duxbury, Moretown, Waitsfield, and Warren. Most from Waterbury and Duxbury supported closing two valley schools and merging the middle schools, citing the high school, programs, and years of delay; several asked the board to keep Pre-K in the schools. Valley residents asked the board to price new bus routes, to reconsider closing one school (two residents presented their own estimates, which assume Pre-K moves to private providers), and raised Waitsfield's sewer grant and village businesses, Moretown's kitchen, and flood risk at Moretown, which residents described differently.",
 };
 
+// The Warren community forum, November 16, 2026, at Warren School: the chair and three other board members in the room
+// (Warren, Fayston, Waitsfield, Duxbury) and one Warren member on Zoom; the superintendent and finance director were not
+// there. Not a board meeting; no votes. Karl Naden (Fayston) spoke from the floor during public comment. Quotes from the
+// cached transcript (automatic captions with speaker matching); residents who spoke are not named.
+export const MEETING_1116 = {
+  src: ref("forum1116", "transcript of the recording"),
+  groups: [
+    {
+      id: "wednesday",
+      title: "What November 18 will and will not decide",
+      items: [
+        { who: "The board chair, Ashley Woods (Warren)", at: "1:35:45", text: "we are not taking a vote to close we're taking a vote to advance for consideration of closure." },
+        { who: "Ashley Woods (Warren), on the board's scores", at: "0:34:43", text: "so that data was not ignored. It was weighed in." },
+        { who: "Ashley Woods (Warren)", at: "0:34:43", text: "It's not necessarily going to end how anybody thinks it's going to end." },
+        { who: "Ashley Woods (Warren), on the meeting's format", at: "1:07:11", text: "It's divided into three questions. Each board member is going to talk about where they stand on that given topic... people will have chances to make motions. We really don't know." },
+        { who: "Langford Davidson (Fayston), on January 6", at: "1:37:18", text: "Each school is voted individually" },
+        { who: "Ashley Woods (Warren), if the closure vote fails", at: "1:38:11", text: "If it doesn't happen, we have to revert to option A" },
+      ],
+    },
+    {
+      id: "grades56",
+      title: "Grades 5 and 6, and buses",
+      items: [
+        { who: "Emily Dolloff (Duxbury), on sending grades 5-6 to Crossett Brook", at: "0:30:35", text: "We don't need to have any major modifications to fit the K through 4." },
+        { who: "Ashley Woods (Warren), on bringing grades 5-6 back to the valley later", at: "1:00:26", text: "If we go to two schools and we want our fifth and sixth grade back, but we like the two school model, we can expand on the two schools we keep open." },
+        { who: "Ashley Woods (Warren)", at: "1:02:14", text: "But it doesn't have to be forever is the you know we can't promise it." },
+        { who: "Alexina Cather (Waitsfield), on the bus route", at: "1:04:07", text: "once they get to drop the kids off at Harwood, they go straight from Harwood to Crossett." },
+        { who: "Langford Davidson (Fayston), on the bus contract", at: "0:50:57", text: "we can add bus routes to our contract. We just can't remove them." },
+        { who: "Langford Davidson (Fayston)", at: "0:49:39", text: "I will be the first to admit that not everyone has bus access... it's $87,000 a year to add a bus" },
+        { who: "Macon Phillips (Warren, on Zoom)", at: "2:13:30", text: "to me understanding buses around the fifth six stuff is like absolutely the top of my list." },
+      ],
+    },
+    {
+      id: "why-two",
+      title: "Why two closures, and what fewer buildings would pay for",
+      items: [
+        { who: "Macon Phillips (Warren, on Zoom)", at: "1:18:12", text: "the board has decided we can't put forward a budget that goes over the threshold this year to the public." },
+        { who: "Macon Phillips (Warren, on Zoom), on a bond for Crossett Brook", at: "1:18:12", text: "right now a bond also counts against our educational spend and towards a penalty." },
+        { who: "Ashley Woods (Warren)", at: "1:26:35", text: "I also have heard a million people offer this three school model which does not financially work." },
+        { who: "Emily Dolloff (Duxbury)", at: "0:45:13", text: "the elementary schools do not have a full-time nurse... So with fewer buildings, we can have a greater... educational options for students." },
+        { who: "Ashley Woods (Warren), on staff cuts", at: "2:10:15", text: "we're going to work to offer incentives so that older teachers retire" },
+      ],
+    },
+    {
+      id: "buildings",
+      title: "Closed buildings and the valley",
+      items: [
+        { who: "Ashley Woods (Warren), on what happens to a closed building", at: "1:55:27", text: "it's up to the towns. I mean, we'll have the opportunity to sell the t to offer it back to the town. They don't have to buy it." },
+        { who: "Karl Naden (Fayston), from the floor during public comment", at: "1:42:28", text: "Can we imagine a situation where we can have that Waitsfield school be a community center that supports the district?" },
+        { who: "Karl Naden (Fayston)", at: "1:42:28", text: "We're still able to support those families on the other side of Moretown Mountain Road because we still have a school in Moretown." },
+        { who: "The Warren select board chair", at: "1:57:58", text: "the campus belongs to the town and we are ready and willing to talk about how to make that most beneficial for the entire valley." },
+      ],
+    },
+  ],
+  publicComment:
+    "About fifteen residents spoke over about an hour and a half, most from Warren and Waitsfield, with families from Granville who send their children to Warren and one from Moretown. Several asked the board to keep grades 5 and 6 in the valley or not move them twice, citing long rides (Granville families described drives near 50 minutes to Crossett Brook); asked for a full transportation cost before the vote; and asked about the effect on the valley's economy. Waitsfield residents said village businesses depend on families at the school (several owners told one resident that closing it would cut their business, one by about 30%) and raised the school's generator and emergency-shelter role, its sewer grant, and its kitchen. Others asked what happens to closed buildings and who pays to keep them up, and how the board will help staff who lose their jobs. A few spoke for consolidation, for larger classes, and several asked the state's legislators to change the law.",
+};
+
 // Asked for at the meeting, for the next steps.
 export const ASKED_1104 = [
   { who: "JB Weir", what: "The cost of what Moretown's kitchen would need to serve the larger school: a new kitchen, or a van to bring meals from Harwood, and everything that entails." },

@@ -111,3 +111,15 @@ test("every November 12 forum quote appears in the cached transcript, piece by p
     }
   }
 });
+
+test("every November 16 forum quote appears in the cached transcript, piece by piece", async () => {
+  const { MEETING_1116 } = await import("../data/decision.js");
+  const transcript = norm(readFileSync(new URL("../sources/2026-11-16-community-forum/forum-transcript.txt", import.meta.url), "utf8"));
+  for (const g of MEETING_1116.groups) {
+    for (const q of g.items) {
+      for (const piece of q.text.split("...").map(norm).filter(Boolean)) {
+        assert.ok(transcript.includes(piece), `not in the transcript (${q.who}): "${piece}"`);
+      }
+    }
+  }
+});
