@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-14: November 12 forum promoted to live
+
+- At the owner's request ("push it up to staging, and then, after a review, promote staging to live"), PR #34 promoted staging to live with a merge commit, carrying #31 (the Nov 5 promotion note), #32 (the Nov 12 forum), and #33 (review fixes). An independent review before promotion found incomplete redaction in the cached transcript (residents' jobs, places, and connections; now removed) and two places where Moretown got a negative fact without its caveat (flood insurance) or the favorable one (some food made on site); both fixed in #33. The live deploy passed; `staging:diff` shows nothing.
+
 ## 2026-11-14: the November 12 Waterbury-Duxbury forum (staging only)
 
 Input from the owner: a transcript of the forum (`~/Downloads/HUUSD Waterbury-Duxbury Community Forum 2026-11-12 transcript.txt`, made from YouTube captions with voice matching; video https://www.youtube.com/watch?v=Ss4PUSNzY5s). Cached, redacted, at `sources/2026-11-12-community-forum/forum-transcript.txt` (residents as "member of the public 1-18"; children's and family names, kinship, and home streets removed).
