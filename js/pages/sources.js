@@ -57,6 +57,18 @@ export default {
       ),
 
       section(
+        { id: "meeting-method", title: "How the meeting quotes are made" },
+        methodItem("Recordings", [
+          "Every board meeting, committee meeting, and community forum quoted on this site is a public recording on the district's YouTube channel (youtube.com/@huwebapp1013). We downloaded the public videos and transcribed them offline, on our own computer, with a speech-to-text model that runs locally, alongside YouTube's automatic captions. Speakers were matched by voice and by context: self-introductions, names called by the chair, and who was presenting.",
+        ]),
+        methodItem("Checking", [
+          "Machine transcripts get names, crosstalk, and short replies wrong. Every quote on the site is checked word for word against the saved transcript by an automated test, and is trimmed only with ellipses. A speaker is named only where the recording makes it clear; where the transcript's label was wrong, we checked the video (for example, each answer in the November 4 straw poll).",
+          "Board members are named, since they are the officials deciding. Staff are named by role. Residents who spoke in public comment are not named. Redacted copies of the transcripts, with residents' names and family details removed, are kept in the site's public code repository, not on the site.",
+        ]),
+        h("p", {}, h("a", { href: "#/meetings" }, "Read what was said at each meeting"), " ", cite(ref("ytChannel")))
+      ),
+
+      section(
         { id: "method", title: "How we calculate" },
         methodItem("Which school a child attends", [
           "Plans take effect in fall 2027 (FY28) and stay in place through grade 12. Where the draft roadmap is shown, valley students move into one new building in fall 2029. At the October 28 meeting its author said she would keep 5th and 6th graders at Crossett Brook, though in her example a Waitsfield 2nd grader moves to the new building after grade 4. We default to Pre-K to 4, which matches the roadmap's Phase 3; Pre-K to 5 (its Phase 2 text) and Pre-K to 6 (the feasibility study) are options.",

@@ -76,6 +76,14 @@ export const SOURCES = {
     kind: "state",
     url: "https://education.vermont.gov/schools/school-governance/education-transformation",
   },
+  ytChannel: {
+    title: "HUUSD meeting recordings on YouTube (@huwebapp1013)",
+    by: "HUUSD",
+    date: "2026-11-16",
+    kind: "district",
+    url: "https://www.youtube.com/@huwebapp1013",
+    note: "The public YouTube channel where the district posts recordings of board meetings, committee meetings, and community forums. Every meeting quoted on this site came from a recording here.",
+  },
   meeting1028: {
     title: "HUUSD board meeting, October 28, 2026 (public recording)",
     by: "HUUSD",

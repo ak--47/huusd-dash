@@ -5,7 +5,6 @@ import { track } from "../ui/track.js";
 import { BUDGET, HEALTH_UPDATE, ONE_CLOSURE, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { PREK_2026 } from "../../data/enrollment.js";
 import { TIMELINE } from "../../data/timeline.js";
-import { MEETING, MEETING_1102 } from "../../data/meeting.js";
 import { OPTIONS, PATH_B_PLANS, PLAN_A, evaluate, studentsAtLeast, withRoadmap } from "../model/index.js";
 import { ref } from "../../data/sources.js";
 
@@ -84,7 +83,7 @@ export default {
             "at a Waterbury-Duxbury forum, board members from those towns argued for closing two valley schools rather than one, merging the middle schools, and later moving Brookside to Crossett Brook. The finance director said new bus routes have not been worked out yet. ",
             cite(ref("forum1112", "transcript of the recording")),
             " ",
-            h("a", { href: "#/decision?at=since-1112" }, "What was said")
+            h("a", { href: "#/meetings?at=m-1112" }, "What was said")
           ),
           h(
             "li",
@@ -93,7 +92,7 @@ export default {
             "at a Warren forum, the chair said the board's scores were weighed in and that November 18's outcome is open. Board members said the board will not go over the threshold, that valley 5th and 6th graders would ride the Harwood buses on to Crossett Brook, and that grades 5-6 could come back to the valley if the two remaining schools expand; a Fayston member asked whether a closed Waitsfield school could become a community center, and Waitsfield residents said village businesses depend on families at the school. ",
             cite(ref("forum1116", "transcript of the recording")),
             " ",
-            h("a", { href: "#/decision?at=since" }, "What was said")
+            h("a", { href: "#/meetings?at=m-1116" }, "What was said")
           ),
           h(
             "li",
@@ -373,57 +372,17 @@ export default {
       ),
 
       section(
-        { id: "meeting-1104", title: "From the November 4 meeting", intro: "About four hours, with an hour of public comment. What board members said about the scores, the time, and their votes, in their own words, is on the decision page." },
+        { id: "meetings", title: "What was said at the meetings", intro: "Each public meeting and forum since October 28, with a short summary and quotes in people's own words." },
         h(
           "ul",
           { class: "prose" },
-          h("li", {}, "The superintendent: \u201cwe feel educationally the best alignment and the best path forward is the P the preK to four five six uh and then 7 through 12 at Harwood.\u201d ", cite(ref("meeting1104", "1:56:06"))),
-          h("li", {}, "The principals, in a letter read at the meeting: \u201cWhile we remain neutral on the specific facility decisions under consideration by the board tonight, we firmly believe that moving away for our from our current multi-building structure toward aligned grade configurations across elementary, upper elementary, and secondary levels is one of the most important steps we can take\u201d ", cite(ref("meeting1104", "2:00:04"))),
-          h("li", {}, "The board chair opened by responding to an open meeting law complaint about October 28: after consulting the board's attorney, the board's position is that it did not violate the law, and it extended public comment to three minutes a speaker. ", cite(ref("omlResponse1104")))
+          h("li", {}, h("a", { href: "#/meetings?at=m-1116" }, "November 16"), ": Warren community forum"),
+          h("li", {}, h("a", { href: "#/meetings?at=m-1112" }, "November 12"), ": Waterbury-Duxbury community forum"),
+          h("li", {}, h("a", { href: "#/meetings?at=m-1104" }, "November 4"), ": board meeting, the scores and the straw poll"),
+          h("li", {}, h("a", { href: "#/meetings?at=m-1102" }, "November 2"), ": committee meeting on the school buildings"),
+          h("li", {}, h("a", { href: "#/meetings?at=m-1028" }, "October 28"), ": board meeting, budget presentation #2")
         ),
-        h("p", {}, h("a", { class: "wonk-btn", href: "#/decision?at=reasons" }, "Read the reasons given on the record"))
-      ),
-
-      section(
-        { id: "meeting", title: "From the October 28 meeting", intro: "What was said, beyond the slides. Quotes come from a transcript of the public recording; it has no speaker labels, so we name people only where the recording makes it clear." },
-        h(
-          "div",
-          { class: "meeting" },
-          MEETING.groups.map((g) =>
-            fold(
-              g.title,
-              h(
-                "ul",
-                { class: "quotes" },
-                g.items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, q.who)))
-              )
-            )
-          ),
-          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING.publicComment, " ", cite(MEETING.src))
-        )
-      ),
-
-      section(
-        {
-          id: "meeting-1102",
-          title: "From the November 2 committee meeting",
-          intro: "The board's Building Use & Visioning Committee met on Zoom with the superintendent and the finance director. Figures said there are preliminary; the finance director said she would present them on November 4. Quotes come from a transcript of the recording; we name people by role.",
-        },
-        h(
-          "div",
-          { class: "meeting" },
-          MEETING_1102.groups.map((g) =>
-            fold(
-              g.title,
-              h(
-                "ul",
-                { class: "quotes" },
-                g.items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, q.who)))
-              )
-            )
-          ),
-          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1102.publicComment, " ", cite(MEETING_1102.src))
-        )
+        h("p", {}, h("a", { class: "wonk-btn", href: "#/meetings" }, "Read what was said"))
       ),
 
       section(

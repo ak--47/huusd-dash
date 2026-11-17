@@ -19,6 +19,7 @@ const ROUTES = {
   sources: () => import("./pages/sources.js"),
   vote: () => import("./pages/vote.js"),
   decision: () => import("./pages/decision.js"),
+  meetings: () => import("./pages/meetings.js"),
 };
 
 const SITE = "Harwood School Plans Explorer";
