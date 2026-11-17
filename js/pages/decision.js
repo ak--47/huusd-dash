@@ -4,7 +4,7 @@
 
 import { h, money, num, dateLong } from "../ui/dom.js";
 import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag } from "../ui/kit.js";
-import { CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, MEETING_1104, MEETING_1112, ASKED_1104, SCORES, STRAW_POLL } from "../../data/decision.js";
+import { CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, MEETING_1104, MEETING_1112, MEETING_1116, ASKED_1104, SCORES, STRAW_POLL } from "../../data/decision.js";
 import { FACILITIES } from "../../data/schools.js";
 import { TIMELINE, CLOSURE_PROCESS } from "../../data/timeline.js";
 import { ref } from "../../data/sources.js";
@@ -18,6 +18,17 @@ const [TOP, SECOND] = STRAW_POLL.choices;
 const pts = (n) => num(n / 100, 2);
 const share = (a, b) => `${num((a / b) * 100, 1)}%`;
 const avg = (n, of) => num(n / of, 2);
+
+// Quote groups from a community forum (MEETING_1112, MEETING_1116).
+const forumQuotes = (m) =>
+  m.groups.map((g) =>
+    h(
+      "div",
+      { class: "dc-quotes" },
+      h("h3", {}, g.title),
+      h("ul", { class: "quotes" }, g.items.map((q) => h("li", {}, h("blockquote", {}, `\u201c${q.text}\u201d`), h("p", { class: "who" }, `${q.who}, ${q.at}`))))
+    )
+  );
 
 export default {
   title: "The November 4 decision",
@@ -195,7 +206,7 @@ export default {
     );
 
     // ---- next steps ----
-    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-13" && x.date <= "2027-03-02");
+    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-17" && x.date <= "2027-03-02");
 
     el.append(
       pageHead({
@@ -337,18 +348,22 @@ export default {
       ),
 
       section(
-        { id: "since", title: "Since November 4: the Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
+        { id: "since", title: "Since November 4: the Warren forum", intro: "On November 16 the board chair and four other board members (Warren, Fayston, Waitsfield, and Duxbury; one Warren member by Zoom) held the last community forum before the November 18 meeting, at Warren School. The superintendent and the finance director did not attend. It was not a board meeting and nothing was voted on. Board members are named; the Warren select board chair by role." },
         h(
           "div",
           { class: "meeting" },
-          MEETING_1112.groups.map((g) =>
-            h(
-              "div",
-              { class: "dc-quotes" },
-              h("h3", {}, g.title),
-              h("ul", { class: "quotes" }, g.items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, `${q.who}, ${q.at}`))))
-            )
-          ),
+          forumQuotes(MEETING_1116),
+          h("p", { class: "small" }, "No board member said they had changed their straw-poll choice. The chair said the board's scores were \u201cweighed in,\u201d that the board will no longer use the term \u201cstraw poll\u201d (\u201ca bad mechanism in my view\u201d), and that after touring the three schools members filled in a second, simpler comparison sheet, which has not been published. The chair gave the savings as about $2.2 million for the middle-school merger and $1.7 million for closing two valley schools; the district's figures are $2.1 million and $1.8 million, and the total, about $3.9 million, is the same, so this site keeps the district's figures. A resident put the staff reduction at 34.5 positions; the district's figure is 32.5. ", cite(MEETING_1116.src)),
+          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1116.publicComment, " ", cite(MEETING_1116.src))
+        )
+      ),
+
+      section(
+        { id: "since-1112", title: "The Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
+        h(
+          "div",
+          { class: "meeting" },
+          forumQuotes(MEETING_1112),
           h("p", { class: "small" }, "No board member at the forum said they had changed their straw-poll choice or proposed reopening the choice between Moretown and Waitsfield; residents disagreed about flood risk at Moretown, one calling the preference for Moretown over Waitsfield a mistake and another saying the culvert and the downstream bridge have been rebuilt. The figures given ($1.8 million for closing two valley schools, $2.1 million for the middle-school merger, about $3.9 million together) match the district's October 28 figures this site already uses. ", cite(MEETING_1112.src)),
           h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1112.publicComment, " ", cite(MEETING_1112.src))
         )

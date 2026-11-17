@@ -17,6 +17,14 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## November 16, 2026 Warren community forum
+
+Provided by the site's owner on November 17: a transcript made from the YouTube auto-captions, with speakers matched by voice and context. In this copy the residents who spoke are shown as "member of the public 1" to "16", and their names, family details, jobs, and home locations, and the names of business owners and other private people, are removed; the Warren select board chair and state legislators are shown by role. Board members and staff keep their names. Karl Naden (Fayston board member) spoke from the floor in public comment; the original labels him as public.
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [forum-transcript.txt](2026-11-16-community-forum/forum-transcript.txt) | Transcript of the forum (2:17), with timestamps. Zoom listeners could not hear the room for about 0:09-0:31. The slides are not cached. | `forum1116` | [YouTube](https://www.youtube.com/watch?v=YUHwhRkJooM) |
+
 ## November 12, 2026 Waterbury-Duxbury community forum
 
 Provided by the site's owner on November 14: a transcript made from the YouTube auto-captions, with speakers matched by voice and context. In this copy the residents who spoke are shown as "member of the public 1" to "18", and children's and family members' names, family relationships, and home streets are removed; repeated caption lines are dropped. Board members and staff keep their names.
