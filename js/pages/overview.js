@@ -84,14 +84,25 @@ export default {
             "at a Waterbury-Duxbury forum, board members from those towns argued for closing two valley schools rather than one, merging the middle schools, and later moving Brookside to Crossett Brook. The finance director said new bus routes have not been worked out yet. ",
             cite(ref("forum1112", "transcript of the recording")),
             " ",
+            h("a", { href: "#/decision?at=since-1112" }, "What was said")
+          ),
+          h(
+            "li",
+            {},
+            h("strong", {}, "November 16: "),
+            "at a Warren forum, the chair said the board's scores were weighed in and that November 18's outcome is open. Board members said the board will not go over the threshold, that valley 5th and 6th graders would ride the Harwood buses on to Crossett Brook, and that grades 5-6 could come back to the valley if the two remaining schools expand; a Fayston member asked whether a closed Waitsfield school could become a community center, and Waitsfield residents said village businesses depend on families at the school. ",
+            cite(ref("forum1116", "transcript of the recording")),
+            " ",
             h("a", { href: "#/decision?at=since" }, "What was said")
           ),
           h(
             "li",
             {},
             h("strong", {}, "Next: "),
-            "a Warren forum on November 16; on November 18, a vote to schedule three public hearings, one in each of Fayston and Waitsfield; hearings through December 16; and the closure vote on January 6, which needs two-thirds of the board's weighted vote. ",
-            cite(ref("deck1104", "slide 25"))
+            "on November 18, a vote to advance the closures to three public hearings, one in each of Fayston and Waitsfield (not a vote to close); hearings through December 16; and the closure votes on January 6, one school at a time, each needing two-thirds of the board's weighted vote. ",
+            cite(ref("deck1104", "slide 25")),
+            " ",
+            cite(ref("forum1116", "1:35-1:38"))
           ),
           h("li", {}, h("strong", {}, "Still open: "), "what Moretown's kitchen would need and cost, where grades 5 and 6 go once Brookside moves to Crossett Brook, and bus routes. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))
         ),

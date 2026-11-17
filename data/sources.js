@@ -108,6 +108,14 @@ export const SOURCES = {
     url: "https://www.youtube.com/watch?v=Ss4PUSNzY5s",
     note: "About two hours and forty minutes at Crossett Brook: a slide presentation by the Waterbury and Duxbury board members, then questions and comments. Not a board meeting; no votes were taken. Quotes come from a transcript made from the automatic captions; board members are named, staff by role, and residents who spoke are not named.",
   },
+  forum1116: {
+    title: "HUUSD Warren community forum, November 16, 2026 (public recording)",
+    by: "HUUSD board members",
+    date: "2026-11-16",
+    kind: "district",
+    url: "https://www.youtube.com/watch?v=YUHwhRkJooM",
+    note: "About two hours and fifteen minutes at Warren School: the board chair's slide presentation, then questions and comments. Four board members were in the room and one joined by Zoom; the superintendent and finance director did not attend. Not a board meeting; no votes were taken. Zoom listeners could not hear the room for the first half hour. Quotes come from a transcript made from the automatic captions; board members are named, the Warren select board chair by role, and residents who spoke are not named.",
+  },
   agenda1104: {
     title: "HUUSD Board of Directors agenda, November 4, 2026",
     by: "HUUSD",

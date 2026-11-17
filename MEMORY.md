@@ -6,6 +6,14 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-17: the November 16 Warren forum (staging, then live at the owner's OK)
+
+Input from the owner: a transcript of the forum (`~/Downloads/HUUSD Warren Community Forum 2026-11-16 transcript.txt`, YouTube captions with voice matching; video https://www.youtube.com/watch?v=YUHwhRkJooM). Cached, redacted, at `sources/2026-11-16-community-forum/forum-transcript.txt` (residents as "member of the public 1-16"; names, family details, jobs, and private business owners' names removed; the Warren select board chair and legislators by role). The owner said this one can go from staging to live without a separate ask.
+
+- **Numbers: nothing changes.** The chair said about $2.2M for the merger and $1.7M for two closures; the district's figures are $2,102,942 and $1,826,527, same ~$3.9M total, so `PATH_B_SAVINGS` stays. A resident said 34.5 FTE; the district's is 32.5.
+- **New facts:** Nov 18 is a vote to advance closures to hearings, not to close; three questions per member, then motions; the chair says the outcome is open, the scores were "weighed in", "straw poll" retired as a term; members filled in a second, simpler comparison sheet after touring Waitsfield, Moretown, and Warren (Nov 16), not published. January 6 votes one school at a time. If they fail, back to Path A. Bus contract: 13 routes, can add but not remove, about $87,000/yr per added bus (Langford Davidson, who is working on routes); grades 5-6 ride Harwood buses on to Crossett Brook. Grades 5-6 could return to the valley if the two kept schools expand ("can't promise it"). Early-retirement incentives planned. Karl Naden (Fayston board member, from the floor in public comment; the transcript labels him "public") suggested a closed Waitsfield school become a community center; the Warren select board chair said the town is ready to help.
+- **On the site:** `MEETING_1116` in `data/decision.js` (test checks every quote), decision page section `?at=since` (Nov 16; Nov 12 moved to `?at=since-1112`), Start here status card, timeline, findings `straw-poll`, `finalists`, `grades56-home`, `transport`, `path-a`; source key `forum1116`; UPDATES line.
+
 ## 2026-11-14: November 12 forum promoted to live
 
 - At the owner's request ("push it up to staging, and then, after a review, promote staging to live"), PR #34 promoted staging to live with a merge commit, carrying #31 (the Nov 5 promotion note), #32 (the Nov 12 forum), and #33 (review fixes). An independent review before promotion found incomplete redaction in the cached transcript (residents' jobs, places, and connections; now removed) and two places where Moretown got a negative fact without its caveat (flood insurance) or the favorable one (some food made on site); both fixed in #33. The live deploy passed; `staging:diff` shows nothing.
@@ -178,7 +186,7 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 ## Open items
 
 - Waitsfield's sewer grant (about $1M): the board was still waiting on Nov 12 for an answer on whether closing the school puts it at risk. Update `finalists` and `FINALIST_FACTS.land.WES` when answered.
-- Nov 16 Warren forum: add what was said (as for Nov 12, in `data/decision.js`).
+- The comparison sheets board members filled in after the school visits (mentioned Nov 16) are not published; add them if they are.
 - Cindy Senning's November 4 straw-poll answer is inferred (no open microphone). Check the board's minutes when approved and update `STRAW_POLL` in `data/decision.js`.
 - After November 18: record the vote to warn the hearings (who voted how), the hearing dates and places, and any kitchen/van costing for Moretown or early-retirement modeling.
 - The grades 5-6 center plan (`center56`) has no district costing; if the district prices it or Crossett Brook's operating cost, replace the estimate.
