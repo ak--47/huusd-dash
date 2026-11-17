@@ -348,7 +348,7 @@ export default {
       ),
 
       section(
-        { id: "since", title: "Since November 4: the Warren forum", intro: "On November 16 the board chair and four other board members (Warren, Fayston, Waitsfield, and Duxbury; one Warren member by Zoom) held the last community forum before the November 18 meeting, at Warren School. The superintendent and the finance director did not attend. It was not a board meeting and nothing was voted on. Board members are named; the Warren select board chair by role." },
+        { id: "since", title: "November 16: the Warren forum", intro: "On November 16 the board chair and four other board members (Warren, Fayston, Waitsfield, and Duxbury; one Warren member by Zoom) held the last community forum before the November 18 meeting, at Warren School. The superintendent and the finance director did not attend. It was not a board meeting and nothing was voted on. Board members are named; the Warren select board chair by role." },
         h(
           "div",
           { class: "meeting" },
@@ -359,7 +359,7 @@ export default {
       ),
 
       section(
-        { id: "since-1112", title: "The Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
+        { id: "since-1112", title: "November 12: the Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
         h(
           "div",
           { class: "meeting" },
