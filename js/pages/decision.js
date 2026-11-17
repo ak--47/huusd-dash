@@ -19,17 +19,6 @@ const pts = (n) => num(n / 100, 2);
 const share = (a, b) => `${num((a / b) * 100, 1)}%`;
 const avg = (n, of) => num(n / of, 2);
 
-// Quote groups from a community forum (MEETING_1112, MEETING_1116).
-const forumQuotes = (m) =>
-  m.groups.map((g) =>
-    h(
-      "div",
-      { class: "dc-quotes" },
-      h("h3", {}, g.title),
-      h("ul", { class: "quotes" }, g.items.map((q) => h("li", {}, h("blockquote", {}, `\u201c${q.text}\u201d`), h("p", { class: "who" }, `${q.who}, ${q.at}`))))
-    )
-  );
-
 export default {
   title: "The November 4 decision",
   render(el) {
@@ -348,24 +337,12 @@ export default {
       ),
 
       section(
-        { id: "since", title: "November 16: the Warren forum", intro: "On November 16 the board chair and four other board members (Warren, Fayston, Waitsfield, and Duxbury; one Warren member by Zoom) held the last community forum before the November 18 meeting, at Warren School. The superintendent and the finance director did not attend. It was not a board meeting and nothing was voted on. Board members are named; the Warren select board chair by role." },
+        { id: "since", title: "Since November 4", intro: "Board members held two community forums before the November 18 meeting. What was said at each, in their words, is on the meetings page." },
         h(
-          "div",
-          { class: "meeting" },
-          forumQuotes(MEETING_1116),
-          h("p", { class: "small" }, "No board member said they had changed their straw-poll choice. The chair said the board's scores were \u201cweighed in,\u201d that the board will no longer use the term \u201cstraw poll\u201d (\u201ca bad mechanism in my view\u201d), and that after touring the three schools members filled in a second, simpler comparison sheet, which has not been published. The chair gave the savings as about $2.2 million for the middle-school merger and $1.7 million for closing two valley schools; the district's figures are $2.1 million and $1.8 million, and the total, about $3.9 million, is the same, so this site keeps the district's figures. A resident put the staff reduction at 34.5 positions; the district's figure is 32.5. ", cite(MEETING_1116.src)),
-          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1116.publicComment, " ", cite(MEETING_1116.src))
-        )
-      ),
-
-      section(
-        { id: "since-1112", title: "November 12: the Waterbury-Duxbury forum", intro: "On November 12 the five Waterbury and Duxbury board members held a community forum at Crossett Brook with the superintendent and the finance director. It was not a board meeting and nothing was voted on. Board members are named; staff by role." },
-        h(
-          "div",
-          { class: "meeting" },
-          forumQuotes(MEETING_1112),
-          h("p", { class: "small" }, "No board member at the forum said they had changed their straw-poll choice or proposed reopening the choice between Moretown and Waitsfield; residents disagreed about flood risk at Moretown, one calling the preference for Moretown over Waitsfield a mistake and another saying the culvert and the downstream bridge have been rebuilt. The figures given ($1.8 million for closing two valley schools, $2.1 million for the middle-school merger, about $3.9 million together) match the district's October 28 figures this site already uses. ", cite(MEETING_1112.src)),
-          h("p", { class: "small" }, h("strong", {}, "Public comment. "), MEETING_1112.publicComment, " ", cite(MEETING_1112.src))
+          "ul",
+          { class: "prose" },
+          h("li", {}, h("a", { href: "#/meetings?at=m-1116" }, "November 16: the Warren forum"), ". The chair said the board's scores were weighed in and the November 18 outcome is open; members described the bus plan for grades 5-6 and how they could return to the valley later. ", cite(MEETING_1116.src)),
+          h("li", {}, h("a", { href: "#/meetings?at=m-1112" }, "November 12: the Waterbury-Duxbury forum"), ". Waterbury and Duxbury members argued for closing two valley schools rather than one, and for later moving Brookside to Crossett Brook. ", cite(MEETING_1112.src))
         )
       ),
 

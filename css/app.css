@@ -353,3 +353,7 @@ tr.is-wrong td { background: var(--wrong-bg); }
 .quotes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--ak-s4); }
 .quotes blockquote { margin: 0; padding-left: var(--ak-s4); border-left: 3px solid var(--ak-hairline-strong); color: var(--ak-ink); font-size: var(--ak-text-md); }
 .quotes .who { margin: var(--ak-s1) 0 0 var(--ak-s4); font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
+
+/* Meetings page: jump list */
+.meetings-toc { max-width: 52rem; margin-bottom: var(--ak-s8); }
+.meetings-toc ul { margin: var(--ak-s2) 0; padding-left: var(--ak-s5); display: grid; gap: var(--ak-s1); }

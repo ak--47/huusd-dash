@@ -6,6 +6,12 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-17: Meetings page (staging, then live at the owner's OK)
+
+- Owner's request: an easy way, for first-time and returning readers, to jump to what was said at each meeting. New page `#/meetings` ("Meetings" in the sidebar, after The Nov. 4 decision; page title "What was said at the meetings"): a jump list, then each meeting newest first (Nov 16, Nov 12, Nov 4, Nov 2, Oct 28) with what it was, who attended, the timeline's summary, quotes, and public comment. Links: `#/meetings?at=m-1116` etc.
+- Start here's three meeting sections (Nov 4, Oct 28, Nov 2) became one short list linking to the page; the decision page's two forum sections became a short "Since November 4" section linking there. Old `#/?at=meeting`, `?at=meeting-1102`, and `#/decision?at=since-1112` links now land at the top of their page.
+- Sources page: new "How the meeting quotes are made" (`?at=meeting-method`): recordings from the district's YouTube channel (@huwebapp1013, source key `ytChannel`), transcribed offline with a local speech-to-text model alongside YouTube's captions, every quote checked by a test. Top bar data date now Nov 16.
+
 ## 2026-11-17: November 16 forum promoted to live
 
 - With the owner's OK given up front, PR #37 promoted staging to live with a merge commit, carrying #35 (the Nov 14 promotion note) and #36 (the Nov 16 forum). The live deploy passed.
