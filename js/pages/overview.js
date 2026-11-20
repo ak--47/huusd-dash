@@ -57,7 +57,7 @@ export default {
             "li",
             {},
             h("strong", {}, "November 18, the votes: "),
-            "in roll calls, the board advanced Moretown (9 yes, 2 no) and Fayston (11 yes, 0 no) for possible closure; two members' answers are not heard on the recording. Advancing takes a majority of the weighted votes cast. No other school was proposed. ",
+            "in roll calls, the board advanced Moretown (11 yes, 2 no) and Fayston (13 yes, unanimous) for possible closure. Advancing takes a majority of the weighted votes cast. No other school was proposed. ",
             cite(ref("meeting1118", "action items, 4:50-4:57")),
             " ",
             h("a", { href: "#/decision?at=nov18" }, "How each member voted")
@@ -73,7 +73,7 @@ export default {
             "li",
             {},
             h("strong", {}, "How it changed: "),
-            "on November 4 the board's scores ranked Waitsfield + Warren first (248 to 241), but a straw poll chose Moretown + Warren, 9 to 4. On November 18, six of those nine voted to send Moretown to hearings; several explained in the discussion why they had changed their view. ",
+            "on November 4 the board's scores ranked Waitsfield + Warren first (248 to 241), but a straw poll chose Moretown + Warren, 9 to 4. On November 18, seven of those nine voted to send Moretown to hearings; several explained in the discussion why they had changed their view. ",
             cite(ref("deck1104", "slide 22")),
             " ",
             cite(ref("meeting1118", "third round, 3:53-4:37"))
