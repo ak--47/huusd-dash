@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-19: Nov 18 recount and cleanup promoted to live
+
+- At the owner's request, PR #48 promoted #47 (the Nov 18 recount in the model; What we checked removed) and #46 to live. The live deploy passed; `staging:diff` showed nothing.
+
 ## 2026-11-19: Nov 18 counts in the model; What we checked removed (staging, then live at the owner's OK)
 
 - Owner's calls: use the Nov 18 student counts in the model; remove the What we checked + questions page and anything else stale or moot; keep the vote simulator; keep the health insurance box off by default and note it.
