@@ -20,7 +20,7 @@ export const OPTIONS = [
     name: "Path B",
     what: "Close two of the four valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. Twelve versions: six pairs of schools, with grades 5-6 at Crossett Brook or in the valley.",
     family: PAIRS.flatMap((pair) => [pathB(pair, 4), pathB(pair, 6)]),
-    notes: ["In a straw poll on November 4, the board chose to plan around Moretown + Warren staying open (Fayston and Waitsfield closing). The closure vote is set for January 6."],
+    notes: ["On November 18 the board sent Moretown and Fayston to closure hearings, so Waitsfield + Warren are the schools proposed to stay open (a November 4 straw poll had chosen Moretown + Warren). The closure votes are set for January 6."],
   },
   {
     id: "B-FW-K6",
@@ -146,9 +146,9 @@ export const OPTIONS = [
     what: "Crossett Brook's 7th and 8th graders move to Harwood, and one valley school closes; its students go to the nearest open school. Grades 5-6 stay in the valley.",
     plan: makePlan({ id: `MS+close-${closed}`, msMerge: true, open: ["FES", "MES", "WES", "WRN"].filter((x) => x !== closed) }),
     notes: [
-      "Savings: the district's figure for this plan, given at the November 2 committee meeting and presented on November 4: $2,304,281 in all, with 21 positions (Path B: $3.93 million and 32.5), which its slide calls a net loss of $1,625,188 in savings. The finance director said keeping valley 5th and 6th graders in the valley leaves about 131 students at Crossett Brook, which \"still impacts the merger of the middle schools.\" Counting the lower health insurance rates she announced the same day, it would still mean a penalty of $165,324 in FY28, and in FY29 either a $325,299 penalty or at least $350,000 more in cuts. No portable classrooms would be needed, \"but they're larger, much larger class sizes.\" She did not say which school; the site uses the figure for each.",
+      "Savings: the district's figure for this plan, given at the November 2 committee meeting and presented on November 4: $2,304,281 in all, with about 24 positions on the November 18 slide (21 said on November 2; Path B: $3.93 million and 32.5), which its slide calls a net loss of $1,625,188 in savings. The finance director said keeping valley 5th and 6th graders in the valley leaves about 131 students at Crossett Brook, which \"still impacts the merger of the middle schools.\" Counting the lower health insurance rates she announced the same day, it would still mean a penalty of $165,324 in FY28, and in FY29 either a $325,299 penalty or at least $350,000 more in cuts. No portable classrooms would be needed, \"but they're larger, much larger class sizes.\" She did not say which school; the site uses the figure for each.",
     ],
-    refs: [ref("deck1104", "slides 10-11"), ref("meeting1102", "closing one school"), ref("qdoc", "closing one school")],
+    refs: [ref("deck1104", "slides 10-11"), ref("deck1118", "slide 3"), ref("meeting1102", "closing one school"), ref("qdoc", "closing one school")],
   })),
   {
     id: "K4x3",
@@ -233,10 +233,10 @@ export const OPTIONS = [
         id: "center56",
         center56: "WES",
         name: "Waitsfield as the grades 5-6 center",
-        what: "Moretown and Warren teach Pre-K to 4, the two schools the board's November 4 straw poll chose to study. Waitsfield's building, near the middle of the valley, teaches grades 5 and 6.",
+        what: "Moretown and Warren teach Pre-K to 4, the pair the board's November 4 straw poll chose (on November 18 the board advanced Moretown for closure instead). Waitsfield's building, near the middle of the valley, teaches grades 5 and 6.",
         notes: [
           "Savings: the district's Path B figures, minus Waitsfield's building operating costs ($196,038). That is $394,158 over the target on paper.",
-          "Waitsfield would hold about 256 5th and 6th graders: 26 over the slides' 230, under the 1991 permit's 300, and 82 over the consultant's 174. They need about 12 classes and Waitsfield has 11 classrooms, so about one portable unit (two rooms), or a room now used for something else. The town sewer the school is to join by about fall 2028 would end the wastewater question. Waitsfield has a full kitchen. Moretown (about 134) and Warren (about 227) match the district's own classroom chart for this pair: Moretown needs 6 of its 11 classrooms and Warren 12 of its 14. Warren is over its 237 if staff count, as its permit says.",
+          "Waitsfield would hold about 256 5th and 6th graders: 26 over the slides' 230, under the 1991 permit's 300, and 82 over the consultant's 174. They need about 12 classes and Waitsfield has 11 classrooms, so about one portable unit (two rooms), or a room now used for something else. The town sewer the school is to join by about fall 2028 would end the wastewater question. Waitsfield has a full kitchen. Moretown (about 134) and Warren (about 227) match the district's November 4 classroom chart for this pair: Moretown needs 6 of its 11 classrooms and Warren 12 of its 14. (The district's November 18 count for fall 2027, with grades 5-6 at Crossett Brook rather than Waitsfield, has Moretown using all 11.) Warren is over its 237 if staff count, as its permit says.",
           "By car, Waitsfield is about 21 minutes from Waterbury village and 13 from Warren village; in Path B, valley 5th and 6th graders ride to Duxbury, about 31 minutes from Warren village.",
         ],
       },

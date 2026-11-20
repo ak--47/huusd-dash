@@ -1,14 +1,25 @@
 // Meetings: what was said at each public meeting and forum, newest first. Quotes live in data/meeting.js
-// (October 28, November 2) and data/decision.js (November 4, 12, 16); summaries reuse the timeline's entries.
+// (October 28, November 2) and data/decision.js (November 4, 12, 16, 18); summaries reuse the timeline's entries.
 
 import { h, dateLong } from "../ui/dom.js";
 import { cite, fold, pageHead, section } from "../ui/kit.js";
 import { MEETING, MEETING_1102 } from "../../data/meeting.js";
-import { MEETING_1104, MEETING_1112, MEETING_1116 } from "../../data/decision.js";
+import { MEETING_1104, MEETING_1112, MEETING_1116, MEETING_1118 } from "../../data/decision.js";
 import { TIMELINE } from "../../data/timeline.js";
 import { ref } from "../../data/sources.js";
 
 const MEETINGS = [
+  {
+    id: "m-1118",
+    date: "2026-11-18",
+    title: "Board meeting: Moretown and Fayston sent to closure hearings",
+    kind: "Board meeting at Harwood, about five hours and fifteen minutes, with about 55 public comments.",
+    who: "The full board (the chair did not speak in the discussion and was not called in the roll calls), the superintendent, the finance director, and a district director.",
+    data: MEETING_1118,
+    timeline: "Board meeting: Moretown and Fayston sent to closure hearings",
+    note: "On a slide titled as revised for the lower 2.5% health insurance rate, the administration still gave $3,339,273 as the cut needed, though that slide's level-service budget less this year's is $3,039,273 (our arithmetic). It and put one valley closure (grades 5-6 kept in the valley) at $2,304,281 and about 24 positions, leaving a $165,324 penalty. With two closures and the merger the budget would be $51,294,651, $255.76 per pupil under the threshold, and the finance director said it would stay under in FY29 with a 2.5% increase, using a low estimate of the state's yield. Fall 2027 headcounts by home address: Waitsfield + Warren, Waitsfield 180, Warren 117, Brookside 380; Moretown + Warren, Moretown 195, Warren 147, Brookside 335, all within each building's classrooms. Moretown's kitchen: $134,033, plus $41,250 for siding and heating controls. The two Moretown members put priority 1 repairs at about $366,000 for Moretown and about $622,000 to $633,000 for Waitsfield, one of them counting a roof of about $400,000 spread over a few years. The superintendent said the bus company, First Student, is ready to model routes once the board settles on a plan, and hopes to have details within about a month, and that 5th graders sharing a bus with high schoolers is possible but not decided.",
+    more: { href: "#/decision?at=nov18", label: "How each member voted" },
+  },
   {
     id: "m-1116",
     date: "2026-11-16",

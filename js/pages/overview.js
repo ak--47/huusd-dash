@@ -42,7 +42,7 @@ export default {
         lede: [
           `District leaders say next year's budget needs about ${moneyShort(BUDGET.requiredCut)} in savings to stay under Vermont's `,
           term("threshold", "excess spending threshold"),
-          ", a state limit on education spending per pupil; going over raises local property taxes. The board has dropped Path A's program cuts and is working on Path B: close 2 of the 4 valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. Nothing is final until the public hearings and a two-thirds vote, set for January 6.",
+          ", a state limit on education spending per pupil; going over raises local property taxes. The board has dropped Path A's program cuts and is working on Path B: close 2 of the 4 valley elementary schools and move Crossett Brook's 7th and 8th graders to Harwood. On November 18 it sent Moretown and Fayston to public hearings on closing, so Waitsfield and Warren are the valley schools proposed to stay open. Nothing is final until the hearings and the closure votes, each needing two-thirds of the board, set for January 6.",
         ],
       }),
 
@@ -56,59 +56,50 @@ export default {
           h(
             "li",
             {},
-            h("strong", {}, "November 4, the scores: "),
-            "every board member scored the six possible pairs of valley schools to keep open. Added up, Waitsfield + Warren came first (248 points) and Moretown + Warren second (241). ",
-            cite(ref("deck1104", "slide 22"))
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "November 4, the straw poll: "),
-            "at about 9:55 PM the board chose Moretown + Warren, 9 to 4, as the pair to plan the budget around. Three members chose it after scoring Waitsfield + Warren higher on their own sheets. An earlier straw poll dropped Path A unanimously. ",
-            cite(ref("meeting1104", "straw poll, 3:56-3:59")),
+            h("strong", {}, "November 18, the votes: "),
+            "in roll calls, the board advanced Moretown (9 yes, 2 no) and Fayston (11 yes, 0 no) for possible closure; two members' answers are not heard on the recording. Advancing takes a majority of the weighted votes cast. No other school was proposed. ",
+            cite(ref("meeting1118", "action items, 4:50-4:57")),
             " ",
-            h("a", { href: "#/decision" }, "See each member's scores and vote")
+            h("a", { href: "#/decision?at=nov18" }, "How each member voted")
           ),
           h(
             "li",
             {},
             h("strong", {}, "What it would mean: "),
-            "Fayston and Waitsfield are the schools proposed to close. The administration and every principal recommend Pre-K to 4 in the valley schools, grades 5-6 together at Crossett Brook, and grades 7-12 at Harwood; the board has not voted on grades. ",
+            "Waitsfield and Warren stay open. The administration and every principal recommend Pre-K to 4 in the valley schools, grades 5-6 together at Crossett Brook, and grades 7-12 at Harwood; the board has not voted on grades. ",
             cite(ref("meeting1104", "principals' letter"))
           ),
           h(
             "li",
             {},
-            h("strong", {}, "November 12: "),
-            "at a Waterbury-Duxbury forum, board members from those towns argued for closing two valley schools rather than one, merging the middle schools, and later moving Brookside to Crossett Brook. The finance director said new bus routes have not been worked out yet. ",
-            cite(ref("forum1112", "transcript of the recording")),
+            h("strong", {}, "How it changed: "),
+            "on November 4 the board's scores ranked Waitsfield + Warren first (248 to 241), but a straw poll chose Moretown + Warren, 9 to 4. On November 18, six of those nine voted to send Moretown to hearings; several explained in the discussion why they had changed their view. ",
+            cite(ref("deck1104", "slide 22")),
             " ",
-            h("a", { href: "#/meetings?at=m-1112" }, "What was said")
+            cite(ref("meeting1118", "third round, 3:53-4:37"))
           ),
           h(
             "li",
             {},
-            h("strong", {}, "November 16: "),
-            "at a Warren forum, the chair said the board's scores were weighed in and that November 18's outcome is open. Board members said the board will not go over the threshold, that valley 5th and 6th graders would ride the Harwood buses on to Crossett Brook, and that grades 5-6 could come back to the valley if the two remaining schools expand; a Fayston member asked whether a closed Waitsfield school could become a community center, and Waitsfield residents said village businesses depend on families at the school. ",
-            cite(ref("forum1116", "transcript of the recording")),
+            h("strong", {}, "Also on November 18: "),
+            "the administration's fall 2027 counts, matching each child to the nearest open school by home address, fit both finalist pairs in their classrooms (Waitsfield 180, Warren 117, Brookside 380). Moretown's kitchen was priced at $134,033. Asked about tax increases regardless of school closings, the finance director said she has heard figures higher than 10%; the state's December 1 letter will say more. The superintendent hopes to have bus routes from the bus company within about a month. ",
+            cite(ref("deck1118", "slides 7-8")),
             " ",
-            h("a", { href: "#/meetings?at=m-1116" }, "What was said")
+            h("a", { href: "#/meetings?at=m-1118" }, "What was said")
           ),
           h(
             "li",
             {},
             h("strong", {}, "Next: "),
-            "on November 18, a vote to advance the closures to three public hearings, one in each of Fayston and Waitsfield (not a vote to close); hearings through December 16; and the closure votes on January 6, one school at a time, each needing two-thirds of the board's weighted vote. ",
-            cite(ref("deck1104", "slide 25")),
-            " ",
-            cite(ref("forum1116", "1:35-1:38"))
+            "public hearings on Tuesday, December 1 in Moretown, Thursday, December 3 in Fayston, and Monday, December 14 at Brookside in Waterbury, each at 6 PM; on December 16, a vote to warn the closure votes; on January 6, a closure vote for each school, each needing two-thirds of the board's weighted vote. ",
+            cite(ref("meeting1118", "hearing dates, 4:57-5:12"))
           ),
-          h("li", {}, h("strong", {}, "Still open: "), "what Moretown's kitchen would need and cost, where grades 5 and 6 go once Brookside moves to Crossett Brook, and bus routes. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))
+          h("li", {}, h("strong", {}, "Still open: "), "bus routes and ride times, especially for valley 5th and 6th graders; how long grades 5 and 6 stay at Crossett Brook once Brookside moves there; and the architects' study, whose scope the board must now set. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))
         ),
         h(
           "div",
           { class: "btn-row" },
-          h("a", { class: "wonk-btn wonk-btn--primary", href: "#/decision", onclick: opens("Decision Opened") }, "How the board decided"),
+          h("a", { class: "wonk-btn wonk-btn--primary", href: "#/decision", onclick: opens("Decision Opened") }, "How the board voted"),
           h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "See options beyond A and B"),
           h("a", { class: "wonk-btn", href: "#/vote", onclick: opens("Vote Simulator Opened") }, "Try the board vote simulator")
         )
@@ -164,7 +155,7 @@ export default {
           pathCard({
             letter: "B",
             title: "Close 2 valley elementary schools, merge the middle schools",
-            sub: "The path the board is working on. In a straw poll on November 4 it chose to plan around keeping Moretown and Warren open; the closure vote is set for January 6.",
+            sub: "The path the board is working on. On November 18 it sent Moretown and Fayston to closure hearings, keeping Waitsfield and Warren; the closure votes are set for January 6.",
             facts: [
               [
                 "Saves",
@@ -376,6 +367,7 @@ export default {
         h(
           "ul",
           { class: "prose" },
+          h("li", {}, h("a", { href: "#/meetings?at=m-1118" }, "November 18"), ": board meeting, Moretown and Fayston sent to closure hearings"),
           h("li", {}, h("a", { href: "#/meetings?at=m-1116" }, "November 16"), ": Warren community forum"),
           h("li", {}, h("a", { href: "#/meetings?at=m-1112" }, "November 12"), ": Waterbury-Duxbury community forum"),
           h("li", {}, h("a", { href: "#/meetings?at=m-1104" }, "November 4"), ": board meeting, the scores and the straw poll"),

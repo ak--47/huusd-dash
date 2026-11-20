@@ -254,7 +254,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
   // the November 2 health insurance update, when the reader counts it (Advanced)
   const healthWords = b.health
     ? [
-        ` The target here also takes off about ${money(HEALTH_UPDATE.amount)} for the lower health insurance rates the finance director reported on November 2; the district has not yet published a target that includes them. `,
+        ` The target here also takes off about ${money(HEALTH_UPDATE.amount)} for the lower health insurance rates the finance director reported on November 2; the district's November 18 slide, which uses those rates, still labels the cut $3,339,273. `,
         cite(HEALTH_UPDATE.src),
       ]
     : null;
@@ -404,7 +404,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
                   ? h(
                       "span",
                       { class: "bp-item-note" },
-                      `The district's figure, first given at the November 2 committee meeting and presented on November 4: ${money(ONE_CLOSURE.amount)} in all, with ${ONE_CLOSURE.fte} positions, against ${money(PATH_B_SAVINGS.total)} for Path B. It keeps valley 5th and 6th graders in the valley, which she said leaves about 131 students at Crossett Brook and "still impacts the merger of the middle schools." She did not say which school; it is used for each.`
+                      `The district's figure, first given at the November 2 committee meeting and presented on November 4 and 18: ${money(ONE_CLOSURE.amount)} in all, with about ${ONE_CLOSURE.fte} positions, against ${money(PATH_B_SAVINGS.total)} for Path B. It keeps valley 5th and 6th graders in the valley, which she said leaves about 131 students at Crossett Brook and "still impacts the merger of the middle schools." She did not say which school; it is used for each.`
                     )
                   : it.kind === "estimate"
                     ? h(
@@ -571,7 +571,7 @@ function budgetSection(plan, r, named, keptFold, onShowBasis) {
           ? h(
               "li",
               {},
-              `Health insurance: on November 2 the superintendent said next year's increase came in at about 2.5% for most plans, lower than projected, and the finance director called it "roughly a ${money(HEALTH_UPDATE.amount)} savings in our level service." She said spending per pupil over the threshold with no change falls from ${money(HEALTH_UPDATE.perPupilBefore)} to ${money(HEALTH_UPDATE.perPupilAfter, 2)}. The target here is lowered by that ${money(HEALTH_UPDATE.amount)}; the district has not published a restated target. `,
+              `Health insurance: on November 2 the superintendent said next year's increase came in at about 2.5% for most plans, lower than projected, and the finance director called it "roughly a ${money(HEALTH_UPDATE.amount)} savings in our level service." She said spending per pupil over the threshold with no change falls from ${money(HEALTH_UPDATE.perPupilBefore)} to ${money(HEALTH_UPDATE.perPupilAfter, 2)}. The target here is lowered by that ${money(HEALTH_UPDATE.amount)}; the district's November 18 slide, which uses the 2.5% rate, still labels the cut $3,339,273. `,
               cite(HEALTH_UPDATE.src)
             )
           : null,
@@ -1003,7 +1003,7 @@ function compareSection(plan, r, classSize) {
   const basis = r.budget.basis;
   const lower = lowerTarget(r.budget);
   const pairB = plan.open.length === 2;
-  const planB = pairB ? pathB(plan.open, plan.valleyTop === 4 ? 4 : 6) : pathB(["MES", "WRN"], 4);
+  const planB = pairB ? pathB(plan.open, plan.valleyTop === 4 ? 4 : 6) : pathB(["WES", "WRN"], 4); // the pair the board kept on November 18
   const reading = r.capacity.reading;
   const health = r.budget.health;
   const a = evaluate(PLAN_A, { classSize, basis, reading, health });

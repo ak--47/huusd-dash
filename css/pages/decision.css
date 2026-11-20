@@ -19,3 +19,15 @@
 .dc-finalists th[scope="row"] { min-width: 9rem; vertical-align: top; }
 .dc-finalists td { vertical-align: top; min-width: 14rem; }
 .dc-line { display: block; margin-bottom: var(--ak-s1); }
+/* November 18 roll calls */
+.dc-meter { position: relative; display: flex; height: 0.9rem; margin: var(--ak-s3) 0 var(--ak-s2); border: 1px solid var(--ak-hairline-strong); border-radius: 2px; background: var(--ak-surface-2); }
+.dc-seg { display: block; height: 100%; }
+.dc-seg--yes { background: var(--ak-ok); }
+.dc-seg--no { background: var(--ak-err); }
+.dc-seg--unheard { background: var(--ak-ink-3); }
+.dc-seg--chair { background: var(--ak-hairline-strong); }
+.dc-mark { position: absolute; top: -0.3rem; bottom: -0.3rem; width: 0; border-left: 2px solid var(--ak-ink); transform: translateX(-1px); }
+.dc-mark--dash { border-left-style: dashed; }
+.dc-vote { font-weight: 700; }
+.dc-vote--no { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.dc-roll td { white-space: nowrap; }
