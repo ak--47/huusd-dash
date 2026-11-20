@@ -102,8 +102,8 @@ export default {
           }),
           ` Count the November 2 health insurance update: about ${moneyShort(HEALTH_UPDATE.amount)} less to cut, from either target`
         ),
-        h("p", { class: "hint" }, "Next year's health insurance rates came in lower than projected; the finance director called it \"roughly a $300,000 savings in our level service.\" The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). ", cite(HEALTH_UPDATE.src, "Nov 2 committee"), " ", cite(ref("deck1118", "slide 2"))),
-        h("p", { class: "hint" }, "Why there are two targets: ", h("a", { href: "#/findings?at=finding-debt-basis" }, "What we checked"), ". ", cite(ref("vsa4001", "§ 4001(6)(B)"), "State law"))
+        h("p", { class: "hint" }, "Next year's health insurance rates came in lower than projected; the finance director called it \"roughly a $300,000 savings in our level service.\" The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). So this box starts off, and the site uses the district's $3,339,273. ", cite(HEALTH_UPDATE.src, "Nov 2 committee"), " ", cite(ref("deck1118", "slide 2"))),
+        h("p", { class: "hint" }, "Why there are two targets: ", h("a", { href: "#/budget?at=options" }, "The budget"), ". ", cite(ref("vsa4001", "§ 4001(6)(B)"), "State law"))
       ),
       h(
         "fieldset",
@@ -123,7 +123,7 @@ export default {
             "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate."
           )
         ),
-        h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/findings?at=finding-permits" }, "What we checked"), ". ", cite(ref("permitWES", "PDF p. 12, condition 1.2")))
+        h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/sources?at=method" }, "How we calculate"), ". ", cite(ref("permitWES", "PDF p. 12, condition 1.2")))
       )
     );
     assumptions.classList.add("no-print", "opt-assumptions");
@@ -199,7 +199,7 @@ export default {
           ),
           h("li", {}, "District mergers under Act 170, which could change the budget picture from FY29 on.")
         ),
-        h("p", {}, h("a", { href: "#/findings?at=ideas" }, "More on these ideas"), ", or ", h("a", { href: "#/build" }, "build your own combination"), ".")
+        h("p", {}, h("a", { href: "#/build" }, "Build your own combination"), ".")
       )
     );
 

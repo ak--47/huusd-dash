@@ -724,7 +724,7 @@ function buildingsSection(plan, r, cs, keptFold) {
     source = h(
       "p",
       { class: "bp-source" },
-      `Student counts for the elementary schools: the district's table for this pairing${noPreK ? ", without its Pre-K rows (this plan ends district Pre-K classes)" : ""}. `,
+      `Student counts for the elementary schools: the district's ${cap.table.updated ? "November 18 recount for this pairing (fall 2027, each child placed by home address)" : "table for this pairing"}${noPreK ? ", without its Pre-K rows (this plan ends district Pre-K classes)" : ""}. `,
       tag("district"),
       cite(cap.table.src)
     );
@@ -749,7 +749,7 @@ function buildingsSection(plan, r, cs, keptFold) {
       "p",
       { class: "bp-source" },
       `The district did not publish a table for this combination, so the counts are our estimate: this year's students move with their school to the school that receives them${
-        plan.open.length === 2 ? ", split the way the district's table for this pair places them unless you changed the shares in step 2" : Object.keys(plan.split).length ? ", split by the shares in step 2" : ""
+        plan.open.length === 2 ? `, split the way the district's table for this pair places them unless you changed the shares in step 2${plan.valleyTop === 4 && ["WES", "MES"].some((id) => plan.open.includes(id)) && plan.open.includes("WRN") ? ". These are this year's students, so they differ from the district's November 18 recount for fall 2027, which this page uses when you leave the district's placement as it is" : ""}` : Object.keys(plan.split).length ? ", split by the shares in step 2" : ""
       }, and ${
         noPreK ? "Pre-K is left out (this plan ends district Pre-K classes)" : `Pre-K follows the district's planning numbers, ${PK_WORDS}`
       }. `,
@@ -832,8 +832,11 @@ function buildingsSection(plan, r, cs, keptFold) {
         h(
           "li",
           {},
-          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. With the Pre-K cut, Pre-K is left out of every building. `,
-          cite(ref("deck", "slides 27-32"))
+          `When exactly two valley schools stay open, the counts come from the district's capacity table for that pairing, which includes its Pre-K planning numbers; for Waitsfield + Warren and Moretown + Warren with grades 5-6 at Crossett Brook, from its November 18 recount for fall 2027. With all four open, they are this year's students (October 1, 2026), including Pre-K. Otherwise we place this year's students where this plan would send them, and Pre-K follows the district's planning numbers from its capacity tables: ${PK_WORDS}. With the Pre-K cut, Pre-K is left out of every building. `,
+          cite(ref("deck", "slides 27-32")),
+          " ",
+          cite(ref("deck1118", "slide 7")),
+          " Our classes-needed estimate can differ from the district's own classroom count on that slide (for Moretown + Warren it says Moretown needs 11 of its 11 rooms)."
         ),
         h("li", {}, "A portable unit adds 2 classrooms but does not change the wastewater limit. Using 300 for Waitsfield changes only its limit.")
       )

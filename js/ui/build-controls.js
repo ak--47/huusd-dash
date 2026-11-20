@@ -749,7 +749,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
           "p",
           { class: "hint", id: "bp-basis-hint" },
           "Why there are two targets: ",
-          h("a", { href: "#/findings" }, "What we checked"),
+          h("a", { href: "#/sources?at=method" }, "How we calculate"),
           ". ",
           cite(ref("vsa4001", "§ 4001(6)(B)"), "State law")
         ),
@@ -758,7 +758,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         h(
           "p",
           { class: "hint" },
-          "The finance director said next year's health insurance rates came in lower than projected. The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). ",
+          "The finance director said next year's health insurance rates came in lower than projected. The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). So this box starts off, and the site uses the district's $3,339,273. ",
           cite(HEALTH_UPDATE.src, "Nov 2 committee"),
           " ",
           cite(ref("deck1118", "slide 2"))
@@ -768,7 +768,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         "fieldset",
         { class: "bp-subgroup", "aria-describedby": "bp-reading-hint" },
         h("legend", {}, "Which wastewater limits?"),
-        h("p", { class: "hint", id: "bp-reading-hint" }, "The slides and the state permits disagree. ", h("a", { href: "#/findings" }, "What we checked"), ". ", cite(ref("permitWES", "condition 1.2"), "Waitsfield permit")),
+        h("p", { class: "hint", id: "bp-reading-hint" }, "The slides and the state permits disagree. ", h("a", { href: "#/sources?at=method" }, "How we calculate"), ". ", cite(ref("permitWES", "condition 1.2"), "Waitsfield permit")),
         h("div", { class: "choice bp-choice-stack" }, readingRadios.map((r) => r.label))
       ),
       h(
@@ -797,7 +797,7 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
       "The district's tables place children by home address, so most of a town goes to its nearest open school and some go elsewhere. With two valley schools open, the shares start where the district's table puts them (our calculation); otherwise every child goes to the nearest open school. We do not know where families live, so set the shares to what you think is right. Under the Articles of Agreement, families can ask for the closest school, and the board also weighs space and class sizes. ",
       cite(ref("aoa", "Article 6(E)"), "Articles"),
       " ",
-      h("a", { href: "#/findings?at=finding-placement" }, "How the district placed children")
+      h("a", { href: "#/sources?at=method" }, "How the district placed children")
     ),
     recvNone,
     ...recvRows.map((r) => r.wrap),

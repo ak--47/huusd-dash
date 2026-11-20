@@ -309,8 +309,8 @@ export const HEARINGS_1118 = {
 
 // The administration's November 18 headcounts and classrooms for the two finalists in fall 2027: this year's students
 // moved up a grade and placed at the nearest open school by home address, checked student by student (deck slide 7).
-// Pre-K to 4. These differ from the October 28 tables this site's model uses (built from this year's enrollment): most
-// at Waitsfield (245 to 180) for Waitsfield + Warren, and at Warren (227 to 147) and Moretown (136 to 195) for Moretown +
+// Pre-K to 4. The model uses the same counts (UPDATED_TABLES in district-scenarios.js). They differ from the October 28
+// tables (built from this year's enrollment): most at Waitsfield (245 to 180) for Waitsfield + Warren, and at Warren (227 to 147) and Moretown (136 to 195) for Moretown +
 // Warren. need/have: classrooms.
 export const CLASSROOM_1118 = {
   src: ref("deck1118", "slide 7"),
