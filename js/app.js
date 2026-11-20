@@ -1,6 +1,6 @@
 // Boot and hash router. Each page module exports { title, render(el, ctx) } and may return a cleanup function.
-// A link can point at a section: #/findings?at=questions opens the page scrolled to the element with
-// id "questions", with focus on its heading.
+// A link can point at a section: #/sources?at=method opens the page scrolled to the element with
+// id "method", with focus on its heading.
 
 import { track, pageview } from "./ui/track.js";
 import { h, scrollRegions } from "./ui/dom.js";
@@ -15,7 +15,6 @@ const ROUTES = {
   build: () => import("./pages/build.js"),
   budget: () => import("./pages/budget.js"),
   schools: () => import("./pages/schools.js"),
-  findings: () => import("./pages/findings.js"),
   sources: () => import("./pages/sources.js"),
   vote: () => import("./pages/vote.js"),
   decision: () => import("./pages/decision.js"),
@@ -60,6 +59,11 @@ async function route() {
   const backTo = spot ? spots.get(spot) : undefined;
   // ids stay unique across reloads, which keep history entries but empty the map
   if (!spot) history.replaceState({ ...history.state, spot: `${Date.now().toString(36)}-${++spotCount}` }, "");
+  // the What we checked page was removed on November 19; its old links land on Sources and method
+  if (parseHash().path === "findings") {
+    location.replace("#/sources?at=method");
+    return;
+  }
   const { path, params } = parseHash();
   const load = ROUTES[path];
   if (!load) {

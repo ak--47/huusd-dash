@@ -146,7 +146,8 @@ test("capacity: the district's own wastewater verdicts, except Fayston + Warren"
   assert.deepEqual(verdict(["MES", "WRN"], 4), []);
   assert.deepEqual(verdict(["MES", "WES"], 4), []);
   assert.deepEqual(verdict(["MES", "FES"], 4), []);
-  assert.deepEqual(verdict(["WES", "WRN"], 4), ["WES"]);
+  // Waitsfield + Warren Pre-K to 4 uses the November 18 recount (fall 2027, by address): Waitsfield 180, under 230
+  assert.deepEqual(verdict(["WES", "WRN"], 4), []);
   assert.deepEqual(verdict(["WES", "FES"], 4), ["WES"]);
   assert.deepEqual(verdict(["MES", "WRN"], 6), ["WRN"]);
   assert.deepEqual(verdict(["MES", "WES"], 6), ["WES"]);
@@ -258,15 +259,15 @@ test("health insurance update (November 2): either target falls by $300,000", ()
 
 test("capacity, permit reading: each permit's own wording, staff counted where the permit counts them", () => {
   const permits = (pair, top) => M.capacity(M.pathB(pair, top), { reading: "permits" }).overPeople;
-  // Warren's permit is 237 students AND staff: 227 students alone nearly fill it
-  assert.deepEqual(permits(["MES", "WRN"], 4), ["WRN"]);
+  // Warren's permit is 237 students AND staff: on the October table 227 students nearly filled it; the November 18
+  // recount puts 147 there. Moretown's 2,820 gallons (235 people) counts staff: 195 students plus about 49 staff (our
+  // estimate) is over
+  assert.deepEqual(permits(["MES", "WRN"], 4), ["MES"]);
+  assert.deepEqual(permits(["MES", "WRN"], 6), ["WRN"]);
   // Waitsfield's 1991 permit allows a student population of 300
   assert.deepEqual(permits(["MES", "WES"], 4), []);
   assert.deepEqual(permits(["WES", "WRN"], 4), []);
   assert.deepEqual(permits(["MES", "WES"], 6), []);
-  // the verdicts that depend on staff hold even at today's staff levels
-  const wrn = M.capacity(M.pathB(["MES", "WRN"], 4), { reading: "permits" }).schools.find((s) => s.id === "WRN");
-  assert.ok(wrn.total + 25.63 > 237, "Warren is over with today's staff, before any growth");
   // with all four schools open, staff are today's
   const today = M.capacity(M.PLAN_TODAY, { reading: "permits" });
   assert.equal(today.schools.find((s) => s.id === "FES").staff, 25.63);
@@ -460,6 +461,7 @@ test("district shares: what each K-6 table implies for each closed town", () => 
   for (const t of DISTRICT_TABLES) {
     const plan = M.makePlan({ open: t.pair, valleyTop: t.config === "K6" ? 6 : 4, msMerge: true });
     const table = M.capacity(plan);
+    if (table.table !== t) continue; // replaced by the November 18 recount (a different year), checked below
     const model = M.capacity({ ...plan, receiving: { none: 1 } });
     assert.equal(table.source, "district");
     assert.equal(model.source, "model");
@@ -531,4 +533,18 @@ test("option: three valley K-6 schools and a Pre-K center, every building kept",
   assert.equal(r.capacity.schools.find((s) => s.id === "FES").total, 190);
   assert.deepEqual(r.capacity.overConsultant, ["FES"]);
   assert.equal(r.moved.k12, 213);
+});
+
+test("the November 18 recount replaces the October Pre-K to 4 tables for the two finalist pairs", async () => {
+  const { UPDATED_TABLES } = await import("../data/district-scenarios.js");
+  for (const t of UPDATED_TABLES) {
+    const c = M.capacity(M.pathB(t.pair, 4));
+    assert.equal(c.table, t, t.id);
+    assert.deepEqual(c.mismatches, [], `${t.id}: rows add to the printed totals`);
+  }
+  const at = (pair, id) => M.capacity(M.pathB(pair, 4)).schools.find((s) => s.id === id).total;
+  assert.deepEqual([at(["WES", "WRN"], "WES"), at(["WES", "WRN"], "WRN"), at(["WES", "WRN"], "BPS")], [180, 117, 380]);
+  assert.deepEqual([at(["MES", "WRN"], "MES"), at(["MES", "WRN"], "WRN"), at(["MES", "WRN"], "BPS")], [195, 147, 335]);
+  // the K-6 versions keep the October tables
+  assert.equal(M.capacity(M.pathB(["WES", "WRN"], 6)).table.slide, 27);
 });

@@ -6,6 +6,14 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-19: Nov 18 counts in the model; What we checked removed (staging, then live at the owner's OK)
+
+- Owner's calls: use the Nov 18 student counts in the model; remove the What we checked + questions page and anything else stale or moot; keep the vote simulator; keep the health insurance box off by default and note it.
+- Model: `UPDATED_TABLES` in `data/district-scenarios.js` (deck1118 slide 7) replaces the October Pre-K to 4 tables for Waitsfield + Warren and Moretown + Warren in `districtTableFor`; the October tables stay in `DISTRICT_TABLES` for the slides' own verdicts on Compare. Waitsfield + Warren Pre-K to 4 now fits every limit (Waitsfield 180); under the permits reading Moretown + Warren puts Moretown over (195 students plus about 49 staff, our estimate, against 235). `DISTRICT_SHARES_K4` removed (only the findings page used it).
+- Removed: `js/pages/findings.js`, `data/findings.js`, `data/context.js`, `css/pages/findings.css`, the nav item, Start here's "What we found" and "Beyond A and B" sections, the decision page's questions button, journey's research link, and the findings analytics events. `#/findings` now opens Sources and method. Links that pointed at findings now go to Sources' method or the Budget page.
+- Your child's path defaults to Waitsfield + Warren (was Moretown + Fayston, the first pair in the list).
+- Health insurance: the Budget page's "Teacher health insurance" item says the Nov 18 slide still labels the cut $3,339,273 while its own budgets differ by $3,039,273, and that the site's box is off by default.
+
 ## 2026-11-19: November 18 meeting promoted to live
 
 - With the owner's OK given up front, PR #43 promoted #42 (the November 18 meeting) to live, and PR #45 promoted #44: the owner's correction that Cindy Senning and Robert Dabrowski voted Yes on both motions (Moretown 11-2, Fayston 13-0; first published as 9-2 and 11-0 with two not heard). Both live deploys passed; `staging:diff` showed nothing.
@@ -211,14 +219,14 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 - The comparison sheets board members filled in after the school visits (mentioned Nov 16) are not published; add them if they are.
 - Cindy Senning's November 4 straw-poll answer is inferred (no open microphone). Check the board's minutes when approved and update `STRAW_POLL` in `data/decision.js`.
 - Cindy Senning's and Robert Dabrowski's November 18 roll-call answers are not clear on the recording; recorded as Yes on both per the owner. Confirm against the approved minutes.
-- The November 18 fall 2027 counts by address (`CLASSROOM_1118`) cover only two pairs. Owner decision: whether the model should use them for Waitsfield + Warren and Moretown + Warren (it would mix years across pairs on Compare), or wait for the district to publish all six.
+- The Nov 18 recount covers only two pairs' Pre-K to 4 versions; if the district recounts the other pairs or the K-6 versions, add them to `UPDATED_TABLES`.
 - After the hearings (Dec 1, 3, 14): add what was said; Dec 16: record the vote to warn the closure votes; Jan 6: the closure votes. Still open: bus routes (First Student, about a month), early-retirement modeling, the architects' study scope.
 - The grades 5-6 center plan (`center56`) has no district costing; if the district prices it or Crossett Brook's operating cost, replace the estimate.
 - Analytics: after the first deploy, check in Mixpanel that page views, the named events, and session replays arrive through the proxy. The browser checks only see the localhost stub (`window.__mpEvents`).
 - Before sharing widely (owner's call): consider a corrections channel residents will use (a form or a dedicated address, not the work email); GitHub issues is a barrier for most.
 - Owner decision: the `ak--47.github.io` host reads like "AK-47" in link previews. Moving to a GitHub organization or a custom domain means updating `og:url`, `og:image`, README links, and the GitHub links on the site.
 - Owner decision: whether to say the AI-assisted fact-check was "reviewed by the author" (only if true).
-- After Nov 4: replace the Nov 2 figures said aloud (`ONE_CLOSURE`, `HEALTH_UPDATE`, the `nov2-figures` finding, `MEETING_1102` notes) with the presentation's. If the district restates its target with the health insurance rates, make that the default target (or drop the checkbox). If it costs one closure with grades 5-6 at Crossett Brook, replace the `K4x3` estimate. Check whether its penalty figures leave out older bond payments, as the Nov 2 numbers suggest.
+- After Nov 4: replace the Nov 2 figures said aloud (`ONE_CLOSURE`, `HEALTH_UPDATE`, `MEETING_1102` notes) with the presentation's. If the district restates its target with the health insurance rates, make that the default target (or drop the checkbox). If it costs one closure with grades 5-6 at Crossett Brook, replace the `K4x3` estimate. Check whether its penalty figures leave out older bond payments, as the Nov 2 numbers suggest.
 - Ask the district: what one closure saves with valley 5th and 6th graders at Crossett Brook (decides `K4x3`); what the middle-school merger saves with only Crossett Brook's own 5th and 6th graders (the Nov 2 figure implies it is below the $1,926,000 `MS+cuts` needs unless one closure saves under about $374,000); bus routes and ride times by pairing.
 - Attendee notes from the Nov 2 and Nov 4 meetings: add to `data/meeting.js`, labeled "reported by attendees".
 - CI: the `ubuntu-22.04` runner retires in April 2027; upgrade Playwright (currently 1.44.1) and move the test job to `ubuntu-latest` before then. WebKit is not in CI; a WebKit overflow check on Your child's path would catch iPhone-only layout bugs.

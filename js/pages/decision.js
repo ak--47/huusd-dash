@@ -192,11 +192,10 @@ export default {
           finRow("Board members' scores", `${num(top.published)} points (${avg(top.total, membersN)} a member)`, `${num(second.published)} points (${avg(second.total, membersN)} a member)`, tag("district")),
           finRow("Schools that close", "Fayston and Moretown", "Fayston and Waitsfield"),
           finRow("Savings", "$3.93M (the district's figure is the same for every pair)", "$3.93M", tag("district")),
-          finRow("Students, fall 2027 by home address (November 18; Pre-K to 4)", fall27(TOP, "students"), fall27(SECOND, "students"), cite(CLASSROOM_1118.src)),
           finRow("Classrooms, fall 2027 by home address (November 18)", fall27(TOP, "rooms"), fall27(SECOND, "rooms"), cite(CLASSROOM_1118.src)),
           finRow("Classrooms, the administration's November 4 chart (Pre-K to 4, this year's students)", rooms(A, "pk4"), rooms(B, "pk4"), cite(CLASSROOM_CHART.src)),
           finRow("Classrooms, the administration's chart (Pre-K to 6)", rooms(A, "pk6"), rooms(B, "pk6"), cite(CLASSROOM_CHART.src)),
-          finRow("Students and limits (the district's October 28 table, this year's students)", people(A), people(B), cites([A.r4.capacity.table?.src, B.r4.capacity.table?.src])),
+          finRow("Students and limits (the district's November 18 counts for fall 2027, by home address)", people(A), people(B), cites([A.r4.capacity.table?.src, B.r4.capacity.table?.src])),
           finRow("Kitchens", A.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.kitchen[id]}`)), B.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.kitchen[id]}`))),
           finRow("Land and room to grow", A.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.land[id]}`)), B.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.land[id]}`))),
           finRow("Priority 1 and near-term repairs at the two buildings kept", money(repairs(A)), money(repairs(B)), cite(ref("deck", "slides 22-24"))),
@@ -470,9 +469,9 @@ export default {
           "p",
           { class: "small muted" },
           CLASSROOM_1118.note,
-          " The November 18 counts move this year's students up a grade and place each at the nearest open school by home address, so they differ from the October 28 tables this site's model uses: for Waitsfield + Warren, Waitsfield 180 instead of 245 and Brookside 380 instead of 357; for Moretown + Warren, Moretown 195 instead of 136 and Warren 147 instead of 227. ",
+          " The November 18 counts move this year's students up a grade and place each at the nearest open school by home address, and this site's model now uses them for these two pairs. They differ from the October 28 tables: for Waitsfield + Warren, Waitsfield 180 instead of 245 and Brookside 380 instead of 357; for Moretown + Warren, Moretown 195 instead of 136 and Warren 147 instead of 227. ",
           CLASSROOM_CHART.note,
-          " Students: the district's capacity tables (Pre-K to 4). Staff counts are our estimate. Students changing schools and the 5-school count are calculated on this site from the October 1 enrollment report. ",
+          " Staff counts are our estimate. Students changing schools and the 5-school count are calculated on this site from the October 1 enrollment report. ",
           cites(FINALIST_FACTS.src)
         ),
         h("p", {}, h("a", { class: "wonk-btn", href: "#/compare" }, "Compare all six pairs"), " ", h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/options?at=option-center56" }, "A grades 5-6 center in the valley"))
@@ -505,8 +504,7 @@ export default {
               x.detail ? h("p", { class: "detail" }, x.detail, " ", cite(x.src)) : null
             )
           )
-        ),
-        h("p", {}, h("a", { class: "wonk-btn wonk-btn--primary", href: "#/findings?at=questions" }, "Questions to ask the board"))
+        )
       )
     );
   },

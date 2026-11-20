@@ -25,7 +25,7 @@ const ROUTES = [
   ["build", "#/build"],
   ["budget", "#/budget"],
   ["schools", "#/schools"],
-  ["findings", "#/findings"],
+  ["findings-old-link", "#/findings"],
   ["sources", "#/sources"],
   // the other readings and settings each page offers
   ["compare-permits", "#/compare?w=permits&sort=fits"],
@@ -225,17 +225,17 @@ async function atLinks(page) {
   await page.waitForTimeout(1500); // the chart loads late; the section should stay put
   await landed("#/budget?at=path-a after the chart loads", "path-a-title");
 
-  await open(page, "#/findings");
-  await page.evaluate(() => (location.hash = "#/findings?at=questions"));
-  await landed("Changing only the query to ?at=questions", "questions-title");
+  await open(page, "#/decision");
+  await page.evaluate(() => (location.hash = "#/decision?at=hearings"));
+  await landed("Changing only the query to ?at=hearings", "hearings-title");
 
   await page.evaluate(() => {
     window.scrollTo(0, 0);
-    const a = Object.assign(document.createElement("a"), { href: location.hash, id: "same-hash-test", textContent: "Questions" });
+    const a = Object.assign(document.createElement("a"), { href: location.hash, id: "same-hash-test", textContent: "Hearings" });
     document.getElementById("view").prepend(a);
   });
   await page.click("#same-hash-test");
-  await landed("A link to the address already showing", "questions-title");
+  await landed("A link to the address already showing", "hearings-title");
 
   // start well down the page, and read the scroll position in the frame focus lands, so a smooth scroll
   // still under way counts as a miss
@@ -341,13 +341,6 @@ async function analytics(page) {
   await page.locator(".opt-health input").check();
   await expect("Options: count the health insurance update", "options", { "Savings Target Changed": { target: "lower", health_update: true } });
 
-  // What we checked: copy the questions (the clipboard is allowed above)
-  await visit("#/findings", "findings");
-  const questions = await page.locator("#view .question-list li").count();
-  await page.getByRole("button", { name: "Copy the questions" }).click();
-  await waitFor("Questions Copied");
-  await expect("What we checked: copy the questions", "findings", { "Questions Copied": { question_count: questions } });
-
   // Board vote simulator: one member's vote, then the motion, then everyone yes
   await visit("#/vote", "vote");
   await page.locator('[data-seat="waterbury-1"] .vt-btn--yes').click();
@@ -361,7 +354,7 @@ async function analytics(page) {
 
   const all = await log();
   const views = all.filter((e) => e[0] === "track_pageview").map((e) => e[1]?.page);
-  if (views.join() !== "build,compare,your-child,options,findings,vote") problems.push(`page views recorded: ${views.join(", ") || "none"}`);
+  if (views.join() !== "build,compare,your-child,options,vote") problems.push(`page views recorded: ${views.join(", ") || "none"}`);
   const scan = (v, where) => {
     if (typeof v === "string" && (v.includes("@") || v.length > 400)) problems.push(`${where} is ${JSON.stringify(v.slice(0, 80))}${v.length > 80 ? "..." : ""} (${v.length} characters)`);
     else if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) scan(x, `${where}.${k}`);
@@ -400,8 +393,8 @@ async function staging(page) {
 const STEPS = [
   ["phone-widths", ["journey", "overview", "sources"], phoneWidths],
   ["drawer", ["overview"], drawer],
-  ["at-links", ["budget", "findings"], atLinks],
-  ["analytics", ["build", "compare", "journey", "options", "findings", "vote"], analytics],
+  ["at-links", ["budget", "decision"], atLinks],
+  ["analytics", ["build", "compare", "journey", "options", "vote"], analytics],
   ["staging", ["build"], staging],
 ].filter(([name, pages]) => !only || only.includes(name) || pages.some((p) => only.includes(p)));
 

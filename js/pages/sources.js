@@ -45,7 +45,7 @@ export default {
           { class: "prose" },
           h("p", {}, h("strong", {}, "Built by Aaron Krivitzky, a Waitsfield parent."), " It is an independent project, not affiliated with or reviewed by the Harwood Unified Union School District. It does not endorse a plan. It shows the district's figures as published, checks the arithmetic, and adds measures the presentations leave out, mainly how many schools a child would attend."),
           h("p", {}, "Found a mistake? Please ", h("a", { href: "https://github.com/ak--47/huusd-dash/issues" }, "report it on GitHub"), ". Corrections will be posted with the date. The code and data are public at ", h("a", { href: "https://github.com/ak--47/huusd-dash" }, "github.com/ak--47/huusd-dash"), "."),
-          h("p", {}, "Last updated November 5, 2026.")
+          h("p", {}, "Last updated November 19, 2026.")
         ),
         h(
           "dl",
@@ -99,7 +99,7 @@ export default {
           ],
         ]),
         methodItem("Capacity", [
-          "For the six pairings the district tabled, student counts come from its tables, with totals recomputed from the grade rows. For other combinations, this year's students move with their school to the receiving school, and Pre-K follows the district's planning numbers (30 per valley school, 42 at Warren, 60 at Brookside).",
+          "For the six pairings the district tabled, student counts come from its tables, with totals recomputed from the grade rows. For Waitsfield + Warren and Moretown + Warren with grades 5-6 at Crossett Brook, they come from the district's November 18 recount for fall 2027, which moves this year's students up a grade and places each child at the nearest open school by home address. For other combinations, this year's students move with their school to the receiving school, and Pre-K follows the district's planning numbers (30 per valley school, 42 at Warren, 60 at Brookside).",
           "Wastewater can be read two ways, and the site shows both. As on the slides: students including Pre-K against 230 (Waitsfield), 250 (Fayston), 235 (Moretown), 237 (Warren), and Brookside's occupancy of 480. As the state permits read: Waitsfield 300 students (1991 permit); Fayston 235 and Warren 237 students and staff; Moretown 2,820 gallons a day, counted as 235 people at 12 gallons; Brookside 480 counting everyone.",
           "Where a permit counts staff, we estimate staff: with all four valley schools open, each building's staff today; otherwise today's valley staff minus the positions the district says closing schools removes, shared out by students. Brookside's staff grow with its students. This is an estimate.",
           "Classrooms are checked against the capacities the district's planning consultant, TruexCullins, calculated in March 2025 (State Board maximums of 20 students per K-4 classroom and 25 per grade 5-8 classroom), plus 40 students for each portable unit of two classrooms.",

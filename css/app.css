@@ -293,10 +293,6 @@ fieldset.group > legend { font-weight: 700; font-size: var(--ak-text-md); color:
 tr.is-wrong td { background: var(--wrong-bg); }
 .strike { text-decoration: line-through; text-decoration-color: var(--ak-err); text-decoration-thickness: 2px; }
 
-/* ---- findings ---- */
-.finding { padding: var(--ak-s6); display: grid; gap: var(--ak-s3); }
-.finding h3 { margin: 0; font-size: var(--ak-text-xl); }
-.finding .facts > dt { width: auto; }
 
 /* ---- print ---- */
 @media print {
@@ -344,10 +340,6 @@ tr.is-wrong td { background: var(--wrong-bg); }
 .status-card { padding: var(--ak-s6); margin-bottom: var(--ak-s12); border-left: 4px solid var(--ak-a1); max-width: 60rem; }
 .status-card h2 { font-size: var(--ak-text-xl); margin: 0 0 var(--ak-s3); }
 .status-list { margin: 0 0 var(--ak-s4); padding-left: 1.1rem; display: grid; gap: var(--ak-s2); color: var(--ak-ink-2); }
-.beyond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--ak-s4); }
-.beyond-card { padding: var(--ak-s4); }
-.beyond-card h3 { font-size: var(--ak-text-md); margin: 0 0 var(--ak-s2); }
-.beyond-facts { margin: 0; font-size: var(--ak-text-sm); color: var(--ak-ink-2); }
 .roadmap-pick { min-width: 16rem; }
 .meeting { max-width: 52rem; display: grid; gap: var(--ak-s2); }
 .quotes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--ak-s4); }

@@ -5,7 +5,7 @@
 //   rooms:  classrooms needed for single-grade classes at a chosen maximum class size, against the
 //           classrooms each building has (deck slides 21-25). The district did not publish this check.
 
-import { DISTRICT_TABLES } from "../../data/district-scenarios.js";
+import { DISTRICT_TABLES, UPDATED_TABLES } from "../../data/district-scenarios.js";
 import { ATTENDING, PREK_2026 } from "../../data/enrollment.js";
 import { CONSULTANT_CAPACITY, FACILITIES, SCHOOLS, VALLEY } from "../../data/schools.js";
 import { receivingSchool } from "./assign.js";
@@ -34,7 +34,9 @@ export function districtTableFor(plan) {
   if (plan.open.length !== 2 || ![4, 6].includes(plan.valleyTop) || plan.prekCenter || plan.center56 || plan.bpsTop === 6) return null;
   if (Object.keys(plan.split ?? {}).length || Object.keys(plan.receiving ?? {}).length) return null;
   const cfg = plan.valleyTop === 4 ? "PK4" : "K6";
-  return DISTRICT_TABLES.find((t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id))) ?? null;
+  // the November 18 recount (fall 2027, by home address) where the district has one, else the October 28 table
+  const match = (t) => t.config === cfg && t.pair.every((id) => plan.open.includes(id));
+  return UPDATED_TABLES.find(match) ?? DISTRICT_TABLES.find(match) ?? null;
 }
 
 // Students by school and grade from a district table, with totals computed from the rows.
