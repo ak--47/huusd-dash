@@ -1,15 +1,17 @@
-// The November 4 decision: the board's own scores of the six pairs of valley schools, the straw poll that followed,
-// how each member's vote compares with their own score sheet, the reasons given on the record, the two finalists
-// side by side, and what happens next. Board members are named (their scores and votes are public).
+// The board's decision. First November 18: the roll-call votes that sent Moretown and Fayston to closure hearings,
+// weighted by town, the hearing dates, and where each member stood. Then November 4: the board's own scores of the
+// six pairs of valley schools, the straw poll that followed, how each member's answer compares with their own score
+// sheet, the reasons given on the record, the two finalists side by side, and what happens next. Board members are
+// named (their scores and votes are public).
 
 import { h, money, num, dateLong } from "../ui/dom.js";
 import { cite, cites, fold, note, pageHead, schoolShort, section, status, tag } from "../ui/kit.js";
-import { CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, MEETING_1104, MEETING_1112, MEETING_1116, ASKED_1104, SCORES, STRAW_POLL } from "../../data/decision.js";
+import { CLASSROOM_1118, CLASSROOM_CHART, CRITERIA, FINALIST_FACTS, HEARINGS_1118, MEETING_1104, MEETING_1112, MEETING_1116, MEETING_1118, ASKED_1104, SCORES, STRAW_POLL, VOTES_1118 } from "../../data/decision.js";
 import { FACILITIES } from "../../data/schools.js";
 import { TIMELINE, CLOSURE_PROCESS } from "../../data/timeline.js";
 import { ref } from "../../data/sources.js";
-import { memberRows, pairTotals, pollTally } from "../model/decision.js";
-import { RULES, boardNeed } from "../model/vote.js";
+import { memberRows, pairTotals, pollTally, rollCall } from "../model/decision.js";
+import { RULES, TOTAL, boardNeed } from "../model/vote.js";
 import { evaluate, pathB } from "../model/index.js";
 
 const pairName = (pair) => pair.split("+").map(schoolShort).join(" + ");
@@ -20,7 +22,7 @@ const share = (a, b) => `${num((a / b) * 100, 1)}%`;
 const avg = (n, of) => num(n / of, 2);
 
 export default {
-  title: "The November 4 decision",
+  title: "The board's decision",
   render(el) {
     const totals = pairTotals();
     const top = totals.find((p) => p.pair === TOP);
@@ -166,6 +168,14 @@ export default {
           s.overConsultant ? ` (${num(s.total - s.consultantCapacity)} over)` : ""
         );
       });
+    const fall27 = (pair, what) => {
+      const c = CLASSROOM_1118.pairs[pair];
+      return Object.keys(c.students).map((id) =>
+        what === "students"
+          ? h("span", { class: "dc-line" }, `${schoolShort(id)}: ${num(c.students[id])} students`)
+          : h("span", { class: "dc-line" }, `${schoolShort(id)}: needs ${c.need[id]} of ${c.have[id]} `, c.need[id] > c.have[id] ? status(false, "", `${c.need[id] - c.have[id]} short`) : status(true, "fits", ""))
+      );
+    };
     const repairs = (f) => f.ids.reduce((a, id) => a + FACILITIES[id].priority1 + FACILITIES[id].impending, 0);
     const finRow = (label, a, b, src) => h("tr", {}, h("th", { scope: "row" }, label, src ? [" ", src] : null), h("td", {}, a), h("td", {}, b));
     const finalists = h(
@@ -182,9 +192,11 @@ export default {
           finRow("Board members' scores", `${num(top.published)} points (${avg(top.total, membersN)} a member)`, `${num(second.published)} points (${avg(second.total, membersN)} a member)`, tag("district")),
           finRow("Schools that close", "Fayston and Moretown", "Fayston and Waitsfield"),
           finRow("Savings", "$3.93M (the district's figure is the same for every pair)", "$3.93M", tag("district")),
-          finRow("Classrooms, the administration's chart (Pre-K to 4)", rooms(A, "pk4"), rooms(B, "pk4"), cite(CLASSROOM_CHART.src)),
+          finRow("Students, fall 2027 by home address (November 18; Pre-K to 4)", fall27(TOP, "students"), fall27(SECOND, "students"), cite(CLASSROOM_1118.src)),
+          finRow("Classrooms, fall 2027 by home address (November 18)", fall27(TOP, "rooms"), fall27(SECOND, "rooms"), cite(CLASSROOM_1118.src)),
+          finRow("Classrooms, the administration's November 4 chart (Pre-K to 4, this year's students)", rooms(A, "pk4"), rooms(B, "pk4"), cite(CLASSROOM_CHART.src)),
           finRow("Classrooms, the administration's chart (Pre-K to 6)", rooms(A, "pk6"), rooms(B, "pk6"), cite(CLASSROOM_CHART.src)),
-          finRow("Students and limits (the district's table)", people(A), people(B), cites([A.r4.capacity.table?.src, B.r4.capacity.table?.src])),
+          finRow("Students and limits (the district's October 28 table, this year's students)", people(A), people(B), cites([A.r4.capacity.table?.src, B.r4.capacity.table?.src])),
           finRow("Kitchens", A.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.kitchen[id]}`)), B.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.kitchen[id]}`))),
           finRow("Land and room to grow", A.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.land[id]}`)), B.ids.map((id) => h("span", { class: "dc-line" }, `${schoolShort(id)}: ${FINALIST_FACTS.land[id]}`))),
           finRow("Priority 1 and near-term repairs at the two buildings kept", money(repairs(A)), money(repairs(B)), cite(ref("deck", "slides 22-24"))),
@@ -194,27 +206,154 @@ export default {
       )
     );
 
+    // ---- November 18: the roll calls ----
+    const calls = VOTES_1118.motions.map((m) => rollCall(m.id));
+    const [mesCall, fesCall] = calls;
+    const word = { yes: "Yes", no: "No" };
+    const answer = (v) =>
+      v === "chair" ? h("span", { class: "muted" }, "Not called (chair)") : v == null ? h("span", { class: "muted" }, "Not heard") : h("span", { class: `dc-vote dc-vote--${v}` }, word[v]);
+    const rollTable = h(
+      "div",
+      { class: "table-scroll" },
+      h(
+        "table",
+        { class: "wonk-table dc-members dc-roll" },
+        h("caption", {}, "Each member's answer in the two roll calls, November 18"),
+        h(
+          "thead",
+          {},
+          h(
+            "tr",
+            {},
+            h("th", { scope: "col" }, "Member"),
+            h("th", { scope: "col", class: "num" }, "Vote weight"),
+            calls.map((c) => h("th", { scope: "col" }, `Send ${schoolShort(c.motion.school)} to hearings`))
+          )
+        ),
+        h(
+          "tbody",
+          {},
+          mesCall.rows.map((r, i) =>
+            h(
+              "tr",
+              {},
+              h("th", { scope: "row" }, h("span", { class: "dc-name" }, r.name), h("span", { class: "dc-town" }, r.town)),
+              h("td", { class: "num" }, `${pts(r.weight)}%`),
+              calls.map((c) => h("td", {}, answer(c.rows[i].vote)))
+            )
+          )
+        )
+      )
+    );
+    const bar = (c) => {
+      const seg = (cls, n, label) => (n ? h("span", { class: `dc-seg dc-seg--${cls}`, style: { width: `${(n / TOTAL) * 100}%` }, title: `${label}: ${pts(n)}` }) : null);
+      return h(
+        "div",
+        { class: "dc-meter", "aria-hidden": "true" },
+        seg("yes", c.yes, "Yes"),
+        seg("no", c.no, "No"),
+        seg("unheard", c.notHeard, "Not heard"),
+        seg("chair", c.chair, "Chair, not called"),
+        h("span", { class: "dc-mark", style: { left: "50%" } }),
+        h("span", { class: "dc-mark dc-mark--dash", style: { left: `${(200 / 3).toFixed(2)}%` } })
+      );
+    };
+    const callCard = (c) =>
+      h(
+        "div",
+        { class: "wonk-card dc-card" },
+        h("h3", {}, `Send ${schoolShort(c.motion.school)} to closure hearings`),
+        h("p", { class: "dc-big" }, `${c.count.yes} to ${c.count.no}`),
+        h("p", {}, `Passed. Weighted: ${pts(c.yes)} points Yes, ${pts(c.no)} No, ${pts(c.notHeard)} not heard, ${pts(c.chair)} the chair's, not cast. Yes is ${share(c.yes, c.yes + c.no)} of the points cast, and a majority even if both members not heard had voted No. `, tag("derived")),
+        bar(c),
+        h("p", { class: "small muted" }, `Moved by ${c.motion.by}, seconded by ${c.motion.second}, ${c.motion.at}. `, cite(VOTES_1118.src))
+      );
+    // the nine who chose Moretown + Warren in the November 4 straw poll, and how they voted on sending Moretown to hearings
+    const pollMES = STRAW_POLL.votes.filter((v) => v.vote === SECOND).map((v) => ({ name: v.name, now: VOTES_1118.motions[0].votes[v.name] }));
+    const nowYes = pollMES.filter((v) => v.now === "yes").map((v) => v.name);
+    const nowNo = pollMES.filter((v) => v.now === "no").map((v) => v.name);
+    const nowUnheard = pollMES.filter((v) => v.now == null).map((v) => v.name);
+    const names = (list) => list.map((n, i) => [i ? (i === list.length - 1 ? " and " : ", ") : "", n]);
+
     // ---- next steps ----
-    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-17" && x.date <= "2027-03-02");
+    const upcoming = TIMELINE.filter((x) => x.date >= "2026-11-19" && x.date <= "2027-03-02");
 
     el.append(
       pageHead({
-        kicker: `November 4, 2026 board meeting`,
-        title: `The board's own scores ranked ${pairName(TOP)} first. Its straw poll chose ${pairName(SECOND)}, 9 to 4.`,
+        kicker: "November 18, 2026 board meeting",
+        title: "The board sent Moretown and Fayston to closure hearings",
         lede: [
-          `Each board member scored the six possible pairs of valley schools to keep open, on five questions the district set. Added up, ${pairName(TOP)} came first with ${num(top.published)} points and ${pairName(SECOND)} second with ${num(second.published)}. At the end of a four-hour meeting, in a straw poll, nine members chose ${pairName(SECOND)}. Three of them had scored ${pairName(TOP)} higher on their own sheets. `,
-          cite(SCORES.slideSrc),
-          " ",
-          cite(STRAW_POLL.src),
+          `In two roll-call votes, the board advanced Moretown (${mesCall.count.yes} to ${mesCall.count.no}) and Fayston (${fesCall.count.yes} to ${fesCall.count.no}) for possible closure; two members' answers are not heard on the recording. No other school was proposed, so Waitsfield and Warren are the valley schools that would stay open. This was not a vote to close: three public hearings come first, and the closure votes, a separate vote for each school and each needing two-thirds of the board's weighted vote, are set for January 6. `,
+          cite(VOTES_1118.src),
         ],
       }),
       note(
         "info",
-        h("strong", {}, "A straw poll, not a vote to close a school. "),
-        `It tells the administration which pair to plan the budget around. Closing Fayston and Waitsfield would still take three public hearings, at least one in each town, ten days' notice, and a vote of two-thirds of the board, set for January 6. `,
-        cite(ref("meeting1104", "process and timeline")),
+        h("strong", {}, "Not a vote to close a school. "),
+        `The board's attorney advised that advancing a school to hearings takes a majority of the weighted votes cast. Closing it takes the hearings, ten days' notice of the vote, and two-thirds of the board. Only Moretown and Fayston can be voted on January 6. `,
+        cite(ref("meeting1118", "action items, 4:50-4:57")),
         " ",
         cite(CLOSURE_PROCESS.src)
+      ),
+
+      section(
+        { id: "nov18", title: "How each member voted on November 18", intro: "Each member answered aloud in a roll call. Votes are weighted by town (2021 weights)." },
+        h("div", { class: "dc-findings" }, calls.map(callCard)),
+        h("p", { class: "small muted" }, "Bars: green Yes, red No, gray not heard or the chair's. The solid line marks half of the whole board's 100 points and the dashed line two-thirds; the motions needed a majority of the points cast, which the cards give."),
+        rollTable,
+        h("p", { class: "small muted" }, VOTES_1118.notHeardNote, " ", cite(VOTES_1118.src)),
+        h(
+          "ul",
+          { class: "prose" },
+          h("li", {}, `Since November 4: of the ${pollMES.length} members who chose ${pairName(SECOND)} in the straw poll, ${nowYes.length} voted to send Moretown to hearings (`, names(nowYes), `), ${nowNo.length} voted no (`, names(nowNo), `), and ${nowUnheard.length} was not heard (`, names(nowUnheard), "). Several said in the discussion why they had changed their view; their words are below. ", tag("derived")),
+          h("li", {}, `For comparison with January 6, which needs two-thirds: the Yes votes heard on Moretown were ${pts(mesCall.yes)} points, not counting the ${pts(mesCall.notHeard)} points of the two members not heard or the chair's ${pts(mesCall.chair)}; that is ${share(mesCall.yes, mesCall.yes + mesCall.no)} of the points cast. Two-thirds of the whole board would be ${pts(need)}. On Fayston the Yes votes heard were ${pts(fesCall.yes)}. This is arithmetic on the November 18 votes, not a prediction: members can vote differently after the hearings, and the district's own Articles presentation cautions against turning two-thirds into points without confirming the rules with counsel. `, tag("derived"), " ", h("a", { href: "#/vote" }, "Try the board vote simulator"))
+        )
+      ),
+
+      section(
+        { id: "hearings", title: "The three hearings", intro: "Set by voice vote after the closure motions. Each starts at 6:00 PM." },
+        h(
+          "ol",
+          { class: "timeline" },
+          HEARINGS_1118.list.map((x) =>
+            h(
+              "li",
+              { class: "is-key" },
+              h("span", { class: "when" }, `${x.day}, ${dateLong(x.date)}`),
+              h("span", { class: "what" }, `${x.where}${x.school ? `: the hearing on ${schoolShort(x.school)}` : ": the third hearing, outside the two towns"}, ${x.time}`)
+            )
+          )
+        ),
+        h("p", { class: "small" }, HEARINGS_1118.note, " ", cite(HEARINGS_1118.src)),
+        h("p", {}, "After the hearings, on December 16, the board would vote to warn the closure votes for January 6. ", cite(ref("meeting1118", "5:05-5:07")))
+      ),
+
+      section(
+        { id: "said-1118", title: "Where each member stood", intro: "Before the votes, each member spoke in three rounds: what the evidence shows, the trade-offs, and where to go from here. From the third round, in their own words:" },
+        h(
+          "div",
+          { class: "meeting" },
+          h("ul", { class: "quotes" }, MEETING_1118.groups[0].items.map((q) => h("li", {}, h("blockquote", {}, `“${q.text}”`), h("p", { class: "who" }, `${q.who}, ${q.at}`)))),
+          h("p", { class: "small" }, cite(MEETING_1118.src), " ", h("a", { href: "#/meetings?at=m-1118" }, "More from November 18: the evidence, the trade-offs, and the administration's update"))
+        )
+      ),
+
+      section(
+        { id: "nov4", title: "November 4: the scores and the straw poll", intro: `The board's own scores ranked ${pairName(TOP)} first. Its straw poll, two weeks before the votes above, chose ${pairName(SECOND)}, 9 to 4.` },
+        h(
+          "p",
+          {},
+          `Each board member scored the six possible pairs of valley schools to keep open, on five questions the district set. Added up, ${pairName(TOP)} came first with ${num(top.published)} points and ${pairName(SECOND)} second with ${num(second.published)}. At the end of a four-hour meeting, in a straw poll, nine members chose ${pairName(SECOND)}. Three of them had scored ${pairName(TOP)} higher on their own sheets. `,
+          cite(SCORES.slideSrc),
+          " ",
+          cite(STRAW_POLL.src)
+        ),
+        note(
+          "info",
+          h("strong", {}, "A straw poll, not a vote. "),
+          "It told the administration which pair to plan the budget around. On November 18 the board advanced Moretown and Fayston instead, keeping Waitsfield and Warren. ",
+          cite(ref("meeting1104", "process and timeline"))
+        )
       ),
 
       section(
@@ -324,11 +463,13 @@ export default {
       ),
 
       section(
-        { id: "finalists", title: "The two finalists side by side", intro: "No single fact in the district's documents rules either pair out. Each has costs that are not yet priced: Moretown's kitchen for one, Waitsfield's wastewater limit and classroom count for the other, and Warren's in both." },
+        { id: "finalists", title: "The two finalists side by side", intro: "The two pairs the board weighed. On November 18 it advanced Moretown and Fayston for closure, which keeps Waitsfield + Warren. The administration's November 18 counts, by home address for fall 2027, show both pairs fitting in their classrooms." },
         finalists,
         h(
           "p",
           { class: "small muted" },
+          CLASSROOM_1118.note,
+          " The November 18 counts move this year's students up a grade and place each at the nearest open school by home address, so they differ from the October 28 tables this site's model uses: for Waitsfield + Warren, Waitsfield 180 instead of 245 and Brookside 380 instead of 357; for Moretown + Warren, Moretown 195 instead of 136 and Warren 147 instead of 227. ",
           CLASSROOM_CHART.note,
           " Students: the district's capacity tables (Pre-K to 4). Staff counts are our estimate. Students changing schools and the 5-school count are calculated on this site from the October 1 enrollment report. ",
           cites(FINALIST_FACTS.src)
@@ -337,7 +478,7 @@ export default {
       ),
 
       section(
-        { id: "since", title: "Since November 4", intro: "Board members held two community forums before the November 18 meeting. What was said at each, in their words, is on the meetings page." },
+        { id: "since", title: "Between November 4 and 18", intro: "Board members held two community forums between the straw poll and the votes. What was said at each, in their words, is on the meetings page." },
         h(
           "ul",
           { class: "prose" },
@@ -349,7 +490,7 @@ export default {
       section(
         { id: "next", title: "What happens next" },
         h("h3", {}, "Asked for on November 4"),
-        h("ul", { class: "prose" }, ASKED_1104.map((a) => h("li", {}, h("strong", {}, `${a.who}: `), a.what))),
+        h("ul", { class: "prose" }, ASKED_1104.map((a) => h("li", {}, h("strong", {}, `${a.who}: `), a.what, a.answered ? [" ", h("em", {}, a.answered), " ", cite(ref("deck1118", "slide 8"))] : null))),
         h("h3", {}, "Dates"),
         h(
           "ol",

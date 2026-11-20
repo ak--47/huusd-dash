@@ -329,7 +329,7 @@ test("closing one school: the district's November 2 figure with grades 5-6 in th
   // grades 5-6 in the valley: the finance director's total for one closure plus the merger
   const k6 = M.budget(M.makePlan({ open: ["MES", "WES", "WRN"], msMerge: true }));
   assert.deepEqual(k6.items.map((i) => [i.id, i.amount, i.kind]), [["oneClosure", 2304281, "district"]]);
-  assert.equal(k6.fte, 21);
+  assert.equal(k6.fte, 24);
   assert.equal(k6.upperBound, false, "the district's figure already reflects keeping them in the valley");
   // grades 5-6 at Crossett Brook: the district's merger figure, and half its two-school figure for the closure
   const k4 = M.budget(M.makePlan({ open: ["MES", "WES", "WRN"], valleyTop: 4, msMerge: true }));

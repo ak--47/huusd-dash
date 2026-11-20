@@ -1,8 +1,8 @@
 // The board's November 4 scores and straw poll, added up. Pure functions over data/decision.js and the board's
 // vote weights (js/model/vote.js), so the decision page and the tests share one set of numbers.
 
-import { CRITERIA, SCORES, SCORE_PAIRS, STRAW_POLL } from "../../data/decision.js";
-import { SEATS, TOTAL } from "./vote.js";
+import { CRITERIA, SCORES, SCORE_PAIRS, STRAW_POLL, VOTES_1118 } from "../../data/decision.js";
+import { RULES, SEATS, TOTAL, meets } from "./vote.js";
 
 const sum = (xs) => xs.reduce((a, b) => a + b, 0);
 export const seatOf = (name) => SEATS.find((s) => s.name === name);
@@ -69,5 +69,33 @@ export function pollTally() {
     chair,
     against: voters.filter((r) => r.matches === false),
     total: TOTAL,
+  };
+}
+
+// The November 18 roll calls. For each motion: one row per seat (in SEATS order) with the answer heard ("yes", "no",
+// null for not heard, "chair" for the chair, who was not called), and the weighted totals in hundredths. "passes"
+// is the attorney's rule, a majority of the weighted votes cast, checked even if every member not heard had voted
+// No, so it does not depend on them. twoThirds* compare the same totals with the January 6 closure rule.
+export function rollCall(id) {
+  const m = VOTES_1118.motions.find((x) => x.id === id);
+  const rows = SEATS.map((s) => ({ ...s, vote: s.name === VOTES_1118.chair ? "chair" : m.votes[s.name] ?? null }));
+  const pts = (v) => rows.filter((r) => r.vote === v).reduce((a, r) => a + r.weight, 0);
+  const n = (v) => rows.filter((r) => r.vote === v).length;
+  const yes = pts("yes");
+  const no = pts("no");
+  const notHeard = pts(null);
+  const chair = pts("chair");
+  return {
+    motion: m,
+    rows,
+    yes,
+    no,
+    notHeard,
+    chair,
+    count: { yes: n("yes"), no: n("no"), notHeard: n(null) },
+    passes: meets(yes, yes + no + notHeard, RULES.majority),
+    passesAsHeard: meets(yes, yes + no, RULES.majority),
+    twoThirdsBoard: meets(yes, TOTAL, RULES.closure),
+    twoThirdsCast: meets(yes, yes + no, RULES.closure),
   };
 }

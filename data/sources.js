@@ -124,6 +124,22 @@ export const SOURCES = {
     url: "https://www.youtube.com/watch?v=YUHwhRkJooM",
     note: "About two hours and fifteen minutes at Warren School: the board chair's slide presentation, then questions and comments. Four board members were in the room and one joined by Zoom; the superintendent and finance director did not attend. Not a board meeting; no votes were taken. Zoom listeners could not hear the room for the first half hour. Quotes come from a transcript made from the automatic captions; board members are named, the Warren select board chair by role, and residents who spoke are not named.",
   },
+  meeting1118: {
+    title: "HUUSD board meeting, November 18, 2026 (public recording)",
+    by: "HUUSD",
+    date: "2026-11-18",
+    kind: "district",
+    url: "https://www.youtube.com/watch?v=R00-0j2RPzI",
+    note: "About five hours and fifteen minutes at Harwood: about 55 public comments, the administration's update, the board's three rounds of discussion, and the roll-call votes that sent Moretown and Fayston to closure hearings (4:53-4:57). Quotes come from a transcript made from the automatic captions; board members are named, staff by role, and residents who spoke are not named. Two members' answers in the roll calls are not audible on the recording.",
+  },
+  deck1118: {
+    title: "School Board Meeting 11.18.26",
+    by: "HUUSD (superintendent and finance director)",
+    date: "2026-11-18",
+    kind: "district",
+    url: "https://docs.google.com/presentation/d/1_EJhS_6iEnNCkJkcDHJja9nYSIw45Ds2KrlQ4g5nVE4/edit",
+    note: "The administration's presentation, 10 slides: next year's budget with the 2.5% health care rate and the $3,339,273 target (slide 2), one valley closure (slides 3-4), two closures with the middle-school merger (slides 5-6), FY28 headcounts and classrooms for Moretown + Warren and Waitsfield + Warren with students matched to the nearest school by address (slide 7), Moretown's kitchen and building costs (slide 8), and grade alignment (slide 9). Linked from the agenda.",
+  },
   agenda1104: {
     title: "HUUSD Board of Directors agenda, November 4, 2026",
     by: "HUUSD",

@@ -123,3 +123,33 @@ test("every November 16 forum quote appears in the cached transcript, piece by p
     }
   }
 });
+
+test("every November 18 quote and motion appears in the cached transcript, piece by piece", async () => {
+  const { MEETING_1118, VOTES_1118 } = await import("../data/decision.js");
+  const transcript = norm(readFileSync(new URL("../sources/2026-11-18-board-meeting/meeting-transcript.txt", import.meta.url), "utf8"));
+  for (const g of MEETING_1118.groups) {
+    for (const q of g.items) {
+      for (const piece of q.text.split("...").map(norm).filter(Boolean)) {
+        assert.ok(transcript.includes(piece), `not in the transcript (${q.who}): "${piece}"`);
+      }
+    }
+  }
+  for (const m of VOTES_1118.motions) assert.ok(transcript.includes(norm(m.text)), m.id);
+  assert.ok(transcript.includes(VOTES_1118.ruleText));
+});
+
+test("November 18 roll calls: every member but the chair, weighted totals, and both motions pass on votes cast", async () => {
+  const { VOTES_1118 } = await import("../data/decision.js");
+  const names = Object.values(BOARD.members).flat().filter((n) => n !== VOTES_1118.chair).sort();
+  for (const m of VOTES_1118.motions) assert.deepEqual(Object.keys(m.votes).sort(), names, m.id);
+  const mes = D.rollCall("MES");
+  assert.deepEqual(mes.count, { yes: 9, no: 2, notHeard: 2 });
+  assert.deepEqual([mes.yes, mes.no, mes.notHeard, mes.chair], [6505, 1280, 1495, 720]);
+  assert.equal(mes.yes + mes.no + mes.notHeard + mes.chair, 10000);
+  assert.ok(mes.passes, "a majority of the points cast even if both members not heard voted No");
+  assert.equal(mes.twoThirdsBoard, false, "65.05 is under two-thirds of the whole board");
+  const fes = D.rollCall("FES");
+  assert.deepEqual(fes.count, { yes: 11, no: 0, notHeard: 2 });
+  assert.equal(fes.yes, 7785);
+  assert.ok(fes.passes && fes.twoThirdsBoard);
+});
