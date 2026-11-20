@@ -251,14 +251,17 @@ export const MEETING_1116 = {
 // The November 18, 2026 board meeting: roll-call votes to advance schools to the closure hearings Article 6(E)
 // requires. The board's attorney advised (read by the chair) that advancing takes a majority of the weighted votes
 // cast; closing takes two-thirds of the board, voted school by school, after the hearings. Each answer is from the
-// recording (4:53-4:57). The chair read some names in pairs ("Cindy Macon", "Rob, Caitlin"); no answer from Cindy
-// Senning or Robert Dabrowski is audible on either motion, so both are recorded as not heard. The chair was not called.
+// recording (4:53-4:57), except two: the chair read some names in pairs ("Cindy Macon", "Rob, Caitlin"), and Cindy
+// Senning's and Robert Dabrowski's answers are not clear on the recording (not picked up by a microphone). Both voted Yes
+// on both motions, as reported to this site by the owner (November 19); they are flagged in `unclear`. The chair was not
+// called. Check against the board's minutes when approved.
 export const VOTES_1118 = {
   src: ref("meeting1118", "action items, 4:50-4:57"),
   rule: "majority",
   ruleText: "advancing a school for consideration requires a majority weighted vote cast",
   chair: "Ashley Woods",
-  notHeardNote: "No answer from Cindy Senning or Robert Dabrowski is audible on the recording: the chair read their names together with the next member's (\"Cindy Macon,\" \"Rob, Caitlin\"). The chair was not called and did not vote.",
+  unclear: ["Cindy Senning", "Robert Dabrowski"],
+  unclearNote: "Cindy Senning's and Robert Dabrowski's answers are not clear on the recording: the chair read their names together with the next member's (\"Cindy Macon,\" \"Rob, Caitlin\") and their microphones did not pick up their replies. Both voted Yes on both motions, as reported to this site; the board's minutes, once approved, will confirm. The chair was not called and did not vote.",
   motions: [
     {
       id: "MES",
@@ -269,7 +272,7 @@ export const VOTES_1118 = {
       text: "I move to propose the consideration of Moretown for possible closure and to warn public meetings as stipulated in the HUUSD articles of agreement.",
       announced: "That motion will pass.",
       votes: {
-        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": null, "Macon Phillips": "yes", "Robert Dabrowski": null,
+        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": "yes", "Macon Phillips": "yes", "Robert Dabrowski": "yes",
         "Caitlin Lovegrove": "no", "Jillan Cantor-Sackett": "yes", "Emily Dolloff": "yes", "Pam Eaton": "yes",
         "Langford Davidson": "yes", "Karl Naden": "yes", "Theo Hanna": "yes", "Steve Rosenberg": "no",
       },
@@ -283,7 +286,7 @@ export const VOTES_1118 = {
       text: "With much sorrow and trepidation, I move that the board formally considers potential closure of Fayston",
       announced: "And that will pass.",
       votes: {
-        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": null, "Macon Phillips": "yes", "Robert Dabrowski": null,
+        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": "yes", "Macon Phillips": "yes", "Robert Dabrowski": "yes",
         "Caitlin Lovegrove": "yes", "Jillan Cantor-Sackett": "yes", "Emily Dolloff": "yes", "Pam Eaton": "yes",
         "Langford Davidson": "yes", "Karl Naden": "yes", "Theo Hanna": "yes", "Steve Rosenberg": "yes",
       },
