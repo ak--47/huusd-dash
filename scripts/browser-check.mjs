@@ -46,6 +46,8 @@ const ROUTES = [
   ["decision", "#/decision"],
   ["meetings", "#/meetings"],
   ["meetings-at", "#/meetings?at=m-1112"],
+  ["decision-nov18", "#/decision?at=nov18"],
+  ["meetings-1118", "#/meetings?at=m-1118"],
   ["build-center56", "#/build?o=MR&t=4&m=1&f=W"],
   ["build-center56-wrn", "#/build?o=MW&t=4&m=1&f=R&w=permits"],
   ["vote", "#/vote"],

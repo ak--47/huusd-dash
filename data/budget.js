@@ -116,7 +116,8 @@ export const PATH_B_SAVINGS = {
 // November 2, 2026 (committee meeting, said aloud; to be presented on November 4). Health insurance: next year's
 // increase came in at about 2.5% (one plan 2.9%), which the finance director said is "roughly a $300,000 savings in
 // our level service": spending per pupil over the threshold falls from $1,081 to $962.81, and the year-over-year
-// increase from 6.34% to 5.85%. The district has not published a restated target; the site offers it as a choice.
+// increase from 6.34% to 5.85%. The district's November 18 slide 2, "Revised FY28 Proposed Budget Impacts with Health
+// Care Cost 2.5%," still gives $3,339,273 as the target cut, so the site keeps that target and offers this as a choice.
 export const HEALTH_UPDATE = {
   amount: 300000,
   perPupilBefore: 1081,
@@ -138,9 +139,12 @@ export const HEALTH_UPDATE = {
 // about 131 students at Crossett Brook, which "still impacts the merger of the middle schools." It includes Pre-K.
 // November 4 deck, slide 10: $2,304,281 exactly, "a net loss of $1,625,188 in savings" against Path B; budget
 // $52,619,839 (+1.42%); penalty $165,324. Slide 11 (FY29): a $325,299 penalty, or about $350,000 of cuts.
+// November 18 deck, slides 3-4: the same figures, with "~24 FTE's" (the November 2 figure said aloud was 21).
 export const ONE_CLOSURE = {
   amount: 2304281,
-  fte: 21,
+  fte: 24,
+  fteSaid: 21,
+  fteSrc: ref("deck1118", "slide 3"),
   penaltyAfterHealth: 165324,
   fy29More: 350000,
   fy29Penalty: 325299,

@@ -17,6 +17,18 @@ Retrieved October 28-29, 2026. Text files (`.txt`) are plain-text exports or ext
 | [superintendents-report.txt](2026-10-28-board-meeting/superintendents-report.txt) | Superintendent's report to the board. | `supt` | [Google Docs](https://docs.google.com/document/d/1nTaq42IK9IvJ8IxNYPqLTzYnLkfn8XuA/edit) |
 | [articles-of-agreement-consolidation-slide-text.txt](2026-10-28-board-meeting/articles-of-agreement-consolidation-slide-text.txt) | Text of the slides on the Articles of Agreement's rules for closing a school. | `aoaDeck` | [Google Slides](https://docs.google.com/presentation/d/1s-DHcTxnXO3LyotmKGnqqf84tGEfEEo5/edit) |
 
+## November 18, 2026 board meeting
+
+Provided by the site's owner on November 19: a transcript made from the YouTube auto-captions, with speakers matched by voice and context, plus the agenda, the district's presentation, and the board leadership's discussion and decision protocol. In this copy of the transcript, public comment (0:05-1:33, about 55 speakers) is left out, and the names of private people mentioned in passing are removed. Board members and staff keep their names. Its labels "Rob", "Jill", "Carl", and "Lang Davidson" are Robert Dabrowski, Jillan Cantor-Sackett, Karl Naden, and Langford Davidson.
+
+| File | What it is | Key | Original |
+|---|---|---|---|
+| [meeting-transcript.txt](2026-11-18-board-meeting/meeting-transcript.txt) | Transcript of the board's part of the meeting (1:33-5:16), with timestamps. The roll calls are at 4:53-4:57. | `meeting1118` | [YouTube](https://www.youtube.com/watch?v=R00-0j2RPzI) |
+| [board-presentation.pptx](2026-11-18-board-meeting/board-presentation.pptx) | The district's presentation, "School Board Meeting 11.18.26" (10 slides): budget thresholds with the 2.5% health care rate, one closure, two closures, FY28 headcounts and classrooms by address, Moretown's kitchen costs. | `deck1118` | [Google Slides](https://docs.google.com/presentation/d/1_EJhS_6iEnNCkJkcDHJja9nYSIw45Ds2KrlQ4g5nVE4/edit) |
+| [board-presentation-slide-text.txt](2026-11-18-board-meeting/board-presentation-slide-text.txt) | Text of the slides, with slides 7-8 (images) transcribed by hand. | `deck1118` | |
+| [board-agenda.md](2026-11-18-board-meeting/board-agenda.md) | Meeting agenda. | `meeting1118` | |
+| [discussion-and-decision-protocol.pdf](2026-11-18-board-meeting/discussion-and-decision-protocol.pdf), [.txt](2026-11-18-board-meeting/discussion-and-decision-protocol.txt) | "Board – Proposed Discussion and Decision Protocol": the chair's script, the three discussion questions, and the voting rules from the board's attorney. | `meeting1118` | |
+
 ## November 16, 2026 Warren community forum
 
 Provided by the site's owner on November 17: a transcript made from the YouTube auto-captions, with speakers matched by voice and context. In this copy the residents who spoke are shown as "member of the public 1" to "16", and their names, family details, jobs, and home locations, and the names of business owners and other private people, are removed; the Warren select board chair and state legislators are shown by role. Board members and staff keep their names. Karl Naden (Fayston board member) spoke from the floor in public comment; the original labels him as public.

@@ -758,8 +758,10 @@ export function buildControls({ state, onPlan, onPreset, onUndo, onClassSize, on
         h(
           "p",
           { class: "hint" },
-          "The finance director said next year's health insurance rates came in lower than projected. The district has not yet published a target that includes it. ",
-          cite(HEALTH_UPDATE.src, "Nov 2 committee")
+          "The finance director said next year's health insurance rates came in lower than projected. The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). ",
+          cite(HEALTH_UPDATE.src, "Nov 2 committee"),
+          " ",
+          cite(ref("deck1118", "slide 2"))
         )
       ),
       h(

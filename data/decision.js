@@ -248,9 +248,163 @@ export const MEETING_1116 = {
     "About fifteen residents spoke over about an hour and a half, most from Warren and Waitsfield, with families from Granville who send their children to Warren and one from Moretown. Several asked the board to keep grades 5 and 6 in the valley or not move them twice, citing long rides (Granville families described drives near 50 minutes to Crossett Brook); asked for a full transportation cost before the vote; and asked about the effect on the valley's economy. Waitsfield residents said village businesses depend on families at the school (several owners told one resident that closing it would cut their business, one by about 30%) and raised the school's generator and emergency-shelter role, its sewer grant, and its kitchen. Others asked what happens to closed buildings and who pays to keep them up, and how the board will help staff who lose their jobs. A few spoke for consolidation, for larger classes, and several asked the state's legislators to change the law.",
 };
 
+// The November 18, 2026 board meeting: roll-call votes to advance schools to the closure hearings Article 6(E)
+// requires. The board's attorney advised (read by the chair) that advancing takes a majority of the weighted votes
+// cast; closing takes two-thirds of the board, voted school by school, after the hearings. Each answer is from the
+// recording (4:53-4:57). The chair read some names in pairs ("Cindy Macon", "Rob, Caitlin"); no answer from Cindy
+// Senning or Robert Dabrowski is audible on either motion, so both are recorded as not heard. The chair was not called.
+export const VOTES_1118 = {
+  src: ref("meeting1118", "action items, 4:50-4:57"),
+  rule: "majority",
+  ruleText: "advancing a school for consideration requires a majority weighted vote cast",
+  chair: "Ashley Woods",
+  notHeardNote: "No answer from Cindy Senning or Robert Dabrowski is audible on the recording: the chair read their names together with the next member's (\"Cindy Macon,\" \"Rob, Caitlin\"). The chair was not called and did not vote.",
+  motions: [
+    {
+      id: "MES",
+      school: "MES",
+      at: "4:53:28",
+      by: "Pam Eaton",
+      second: "Theo Hanna",
+      text: "I move to propose the consideration of Moretown for possible closure and to warn public meetings as stipulated in the HUUSD articles of agreement.",
+      announced: "That motion will pass.",
+      votes: {
+        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": null, "Macon Phillips": "yes", "Robert Dabrowski": null,
+        "Caitlin Lovegrove": "no", "Jillan Cantor-Sackett": "yes", "Emily Dolloff": "yes", "Pam Eaton": "yes",
+        "Langford Davidson": "yes", "Karl Naden": "yes", "Theo Hanna": "yes", "Steve Rosenberg": "no",
+      },
+    },
+    {
+      id: "FES",
+      school: "FES",
+      at: "4:55:46",
+      by: "Langford Davidson",
+      second: "Karl Naden",
+      text: "With much sorrow and trepidation, I move that the board formally considers potential closure of Fayston",
+      announced: "And that will pass.",
+      votes: {
+        "Alexina Cather": "yes", "JB Weir": "yes", "Cindy Senning": null, "Macon Phillips": "yes", "Robert Dabrowski": null,
+        "Caitlin Lovegrove": "yes", "Jillan Cantor-Sackett": "yes", "Emily Dolloff": "yes", "Pam Eaton": "yes",
+        "Langford Davidson": "yes", "Karl Naden": "yes", "Theo Hanna": "yes", "Steve Rosenberg": "yes",
+      },
+    },
+  ],
+  noOtherMotions: "The chair then asked for other motions; there were none. Members said afterward that Moretown and Fayston are therefore the only schools the board can vote to close on January 6, and the chair agreed.",
+};
+
+// The three hearings, as moved and agreed by voice vote at 4:59-5:12. The superintendent said he would confirm the
+// details with the principals the next morning.
+export const HEARINGS_1118 = {
+  src: ref("meeting1118", "hearing dates, 4:57-5:12"),
+  list: [
+    { date: "2026-12-01", day: "Tuesday", school: "MES", where: "Moretown", time: "6:00 PM" },
+    { date: "2026-12-03", day: "Thursday", school: "FES", where: "Fayston", time: "6:00 PM" },
+    { date: "2026-12-14", day: "Monday", school: null, where: "Brookside, Waterbury", time: "6:00 PM" },
+  ],
+  note: "A Moretown member asked to move one hearing so the board would not meet three evenings in a row (December 1-3, with a board meeting on December 2); the superintendent could not attend the following week, and the dates stayed. The superintendent said the hearings will be on Zoom and recorded.",
+};
+
+// The administration's November 18 headcounts and classrooms for the two finalists in fall 2027: this year's students
+// moved up a grade and placed at the nearest open school by home address, checked student by student (deck slide 7).
+// Pre-K to 4. These differ from the October 28 tables this site's model uses (built from this year's enrollment): most
+// at Waitsfield (245 to 180) for Waitsfield + Warren, and at Warren (227 to 147) and Moretown (136 to 195) for Moretown +
+// Warren. need/have: classrooms.
+export const CLASSROOM_1118 = {
+  src: ref("deck1118", "slide 7"),
+  pairs: {
+    "WES+WRN": { students: { WES: 180, WRN: 117, BPS: 380 }, need: { WES: 10, WRN: 7, BPS: 20 }, have: { WES: 11, WRN: 14, BPS: 24 } },
+    "MES+WRN": { students: { MES: 195, WRN: 147, BPS: 335 }, need: { MES: 11, WRN: 8, BPS: 18 }, have: { MES: 11, WRN: 14, BPS: 24 } },
+  },
+  note: "The administration said every scenario fits once this year's students are moved up a grade; with Moretown + Warren, Moretown would use all 11 of its classrooms.",
+};
+
+// Moretown's kitchen and building costs, the board's November 4 request (deck slide 8).
+export const MORETOWN_COSTS = {
+  src: ref("deck1118", "slide 8"),
+  kitchen: 134032.8,
+  dishwasher: 96463,
+  building: 41250,
+  total: 175282.8,
+};
+
+// What was said on November 18, verbatim from the cached transcript (sources/2026-11-18-board-meeting/), trimmed with
+// ellipses. A test checks each piece. The transcript labels some members by first name; see VOTES_1118.
+export const MEETING_1118 = {
+  src: ref("meeting1118", "transcript of the recording"),
+  groups: [
+    {
+      id: "where",
+      title: "Where each member stood (the third round)",
+      items: [
+        { who: "Theo Hanna (Waterbury)", at: "3:53:38", text: "I believe we should move forward considering uh Fayston and Moretown for potential closure." },
+        { who: "Steve Rosenberg (Moretown)", at: "3:59:37", text: "I actually think keeping Warren and Moretown open makes the most sense. And the strongest case is made by the families in North Moretown." },
+        { who: "Macon Phillips (Warren)", at: "4:02:12", text: "my current thinking is that Fayston and Moretown should move forward hearings and that Waitsfield and Warren should be our Valley schools... for me, choosing Waitsfield is a bet on the future." },
+        { who: "Alexina Cather (Waitsfield)", at: "4:03:34", text: "We should choose the buildings that will serve the most children most safely for the longest time." },
+        { who: "Pam Eaton (Waterbury)", at: "4:06:08", text: "I've already said keeping open Waitsfield and Warren is what makes sense for me." },
+        { who: "Robert Dabrowski (Waterbury)", at: "4:09:20", text: "Without naming a specific building tonight, I want to focus on the principle that should guide what moves forward to public hearings." },
+        { who: "JB Weir (Waitsfield)", at: "4:10:18", text: "The uh HUUSD board should move Moretown Elementary School and Fayston elementary school forward for public hearings on potential closure" },
+        { who: "Langford Davidson (Fayston)", at: "4:13:12", text: "As a longtime supporter of the Moretown Warren scenario, tonight I have to switch my vote and support Waitsfield and Warren for a number of reasons." },
+        { who: "Cindy Senning (Duxbury)", at: "4:15:15", text: "I do not think the Moretown School has the capacity to expand in a way that our future as a district will require." },
+        { who: "Caitlin Lovegrove (Moretown), who calls a Moretown-based school \"MRV North\" (the captions spell it MRB)", at: "4:21:31", text: "In my opinion, for all the reasons we've said, MRB North is still the ideal location for a preK through four school in the valley." },
+        { who: "Emily Dolloff (Duxbury)", at: "4:25:04", text: "the two schools that are Best suited to provide this are Warren and Waitsfield. These findings are different from my original findings a few weeks ago" },
+        { who: "Jillan Cantor-Sackett (Waterbury)", at: "4:28:31", text: "I think that I have to um say that I think we should move forward with keeping the Waitsfield School open." },
+        { who: "Karl Naden (Fayston), who named no school in this round, then seconded the Fayston motion and voted yes on both", at: "4:33:18", text: "at some level we can't close any of these three schools that we are discussing." },
+        { who: "The chair, Ashley Woods (Warren), after a member noted she had not spoken", at: "4:37:46", text: "I'm not going to make a statement. I'm going to maintain my position as the leader of this group." },
+      ],
+    },
+    {
+      id: "evidence",
+      title: "The evidence and the trade-offs (the first two rounds)",
+      items: [
+        { who: "Robert Dabrowski (Waterbury)", at: "2:34:23", text: "all of our aging schools carry similar maintenance needs. So this decision can't rest on a single spreadsheet line item." },
+        { who: "Macon Phillips (Warren)", at: "3:01:51", text: "There's there's really no obvious answer to me in this data. certainly no compelling one. Both schools can work. Each has a real weakness." },
+        { who: "Macon Phillips (Warren)", at: "3:26:00", text: "Waitsfield for the valley's economic development. Moretown for the valley's cohesion." },
+        { who: "JB Weir (Waitsfield), on flooding", at: "2:35:25", text: "More towns sites largely within the FEMA 500year flood plane." },
+        { who: "Steve Rosenberg (Moretown), on flooding", at: "2:59:18", text: "I think this issue is a minor consideration that's been blown out of proportion." },
+        { who: "Steve Rosenberg (Moretown), on repairs", at: "2:59:18", text: "priority one needs for Moretown are 366,000. Same for Waitsfield is 622,000." },
+        { who: "Cindy Senning (Duxbury), on access", at: "2:41:32", text: "Moretown was my bigger concern. It has three floors, no elevators" },
+        { who: "Caitlin Lovegrove (Moretown), on bus rides", at: "2:44:52", text: "that would push that timing for those students on that edge of town outside of an hour" },
+        { who: "Alexina Cather (Waitsfield), on kitchens", at: "3:29:22", text: "Choosing a building without an adequate adequate kitchen to meet the incoming need of children means paying twice." },
+        { who: "Langford Davidson (Fayston), on grades 5-6", at: "3:38:28", text: "the biggest trade-off that I see is sending our fifth and sixth graders to Crossett Brook for an undetermined amount of time." },
+        { who: "Pam Eaton (Waterbury)", at: "3:08:29", text: "this district can no longer afford to maintain the seven buildings we have." },
+      ],
+    },
+    {
+      id: "admin",
+      title: "The administration's update",
+      items: [
+        { who: "The finance director", at: "2:00:46", text: "just the minimum not to have an excess spending threshold to cut is $3.3 million." },
+        { who: "The superintendent, on the enrollment counts", at: "1:47:11", text: "we went through student by student, took a look at the addresses and and physically matched them." },
+        { who: "The finance director", at: "1:39:34", text: "in using and advancing um enrollments for fiscal year 28, um all the scenarios actually work." },
+        { who: "The finance director, on Moretown's kitchen", at: "1:48:04", text: "just to make the kitchenal functional, we would need to invest $134,000." },
+        { who: "The finance director, on two closures in FY29", at: "2:19:53", text: "So, we would still be under the excess spending threshold in fiscal year 29." },
+        { who: "The finance director, asked about tax increases \"regardless of school closings\"", at: "1:59:45", text: "it's higher than 10%." },
+        { who: "The finance director, on staffing two schools", at: "2:02:37", text: "you'll basically be having a nurse in one school, a nurse in another school rather than sharing nursing positions" },
+        { who: "The superintendent, on bus routes", at: "2:09:22", text: "Lisa and I have had conversations with first student uh they are prepared to do the necessary routing for uh this for this coming year." },
+        { who: "The superintendent, asked whether 5th graders would ride with high schoolers", at: "2:10:54", text: "We have not determined exactly what that schedule would look like today, but that is a possibility." },
+        { who: "The superintendent, on Brookside", at: "2:07:38", text: "10 years ago when she was a teacher at Brookside, they had about 100 more students than they have today." },
+      ],
+    },
+    {
+      id: "votes",
+      title: "The votes and what comes next",
+      items: [
+        { who: "The chair", at: "4:50:20", text: "this is not a vote to close a school. We are only deciding whether a school should be advanced for further consideration through public hearings." },
+        { who: "Steve Rosenberg (Moretown), on the hearing places", at: "5:08:06", text: "if the third meeting is in Waterbury then essentially that takes Waitsfield off the table and that's clearly the sense of the board." },
+        { who: "Langford Davidson (Fayston)", at: "5:09:29", text: "Those are the only two schools we can vote to close on January 6 because they're the only two motions that we made tonight." },
+        { who: "The superintendent", at: "5:05:11", text: "after the three hearings you have to take another vote to warrant a closure vote." },
+        { who: "Langford Davidson (Fayston), on the architects' study", at: "5:13:38", text: "the purpose of that meeting will be to redefine the scope of what we're asking for from the architects" },
+        { who: "Pam Eaton (Waterbury)", at: "5:15:00", text: "The board only authorized us to look at cabb in that RFP." },
+      ],
+    },
+  ],
+  publicComment:
+    "Over a hundred people signed up; about 55 spoke for a minute each, after four Waitsfield students opened. Most were from Moretown and Waitsfield, with others from Fayston, Warren, Duxbury families whose children attend Moretown by choice, the Waitsfield select board, the teachers' union, and a Roxbury resident on what a town does with a closed school. Moretown speakers cited its outdoor (ECO) program and forest classrooms, growth and lower home prices, northern Moretown families who would go to Brookside (a letter with about 75 signatures), shorter bus rides, lower priority 1 repairs, and that its flood risk is small. Waitsfield speakers cited the village's businesses, housing plans, and the town sewer, its kitchen, generator, and emergency-shelter role, and walking access to the library and after-school programs; a Green Mountain Power employee described a power project serving the valley. Several asked for more time, bus plans, and after-school care.",
+};
+
 // Asked for at the meeting, for the next steps.
 export const ASKED_1104 = [
-  { who: "JB Weir", what: "The cost of what Moretown's kitchen would need to serve the larger school: a new kitchen, or a van to bring meals from Harwood, and everything that entails." },
+  { who: "JB Weir", what: "The cost of what Moretown's kitchen would need to serve the larger school: a new kitchen, or a van to bring meals from Harwood, and everything that entails.", answered: "Answered November 18: $134,033 to make the kitchen functional (a dishwasher installation of $96,463 with electrical, plumbing, and ventilation, plus ovens, tables, and shelving). The same slide adds $41,250 of other Moretown building work (siding, heating controls). Asked for the same view of Waitsfield, the finance director named a boiler due for replacement (about $60,000) and a partial roof (about $400,000 over a couple of years)." },
   { who: "Theo Hanna", what: "Modeling of incentivized early retirement, instead of layoffs by seniority alone (the superintendent said this needs legal advice and an executive session)." },
   { who: "Pam Eaton and Alexina Cather", what: "Board visits to Moretown, Warren, and Waitsfield; the superintendent said walkthroughs would be scheduled the following week." },
 ];
@@ -277,12 +431,12 @@ export const FINALIST_FACTS = {
   kitchen: {
     WES: "Full kitchen, renovated about three years ago (about $1.1 million, a board member said); it also sends meals to Fayston.",
     WRN: "Full kitchen; limited cafeteria seating.",
-    MES: "Prep kitchen only. Much of the food is cooked at Harwood and carried over in staff members' own cars, and some is made on site (a board member, November 12); the dishwasher needs replacing and more refrigeration is needed. On November 4 the board asked for the cost of a van, or a new kitchen, for the larger school; not yet priced.",
+    MES: "Prep kitchen only. Much of the food is cooked at Harwood and carried over in staff members' own cars, and some is made on site (a board member, November 12); the dishwasher needs replacing and more refrigeration is needed. On November 18 the district priced a functional kitchen at $134,033, mostly a $96,463 dishwasher installation.",
   },
   land: {
-    WES: "7.7 acres, owned by the district. Town sewer targeted for about fall 2028, partly funded by a grant of about $1 million premised on expanding the school; its leach fields would then free land for additions. Whether the grant is at risk if the school closes was still unanswered on November 12.",
+    WES: "7.7 acres, owned by the district. Town sewer targeted for about fall 2028, partly funded by a grant of about $1 million premised on expanding the school; its leach fields would then free land for additions. Whether the grant was at risk if the school closed was not answered on the record before the November 18 votes, which did not advance Waitsfield.",
     WRN: "The building sits on town land under an easement; additions need the town's written permission. No flood or wetland limits were noted.",
     MES: "About 2 acres. Most of the site is in the 500-year flood zone and the rear is out of it. The school flooded twice in the past three years from blocked culverts on a private road above it, which a board member said have since been cleared. The district carries flood insurance on it \"because of past events,\" a board member said on November 12, adding \"that doesn't necessarily mean it's going to happen in the future.\" Residents disagree about the risk now: one said the culvert and the downstream bridge have been rebuilt.",
   },
-  src: [ref("deck", "slides 22-24"), ref("meeting1104", "kitchens, flooding, and expansion"), ref("meeting1102", "Moretown's meals"), ref("maconScores", "Building and kitchen notes"), ref("forum1112", "2:33-2:38")],
+  src: [ref("deck1118", "slide 8"), ref("deck", "slides 22-24"), ref("meeting1104", "kitchens, flooding, and expansion"), ref("meeting1102", "Moretown's meals"), ref("maconScores", "Building and kitchen notes"), ref("forum1112", "2:33-2:38")],
 };

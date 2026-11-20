@@ -6,6 +6,15 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-19: the November 18 board meeting (staging, then live at the owner's OK)
+
+Input from the owner: a transcript of the meeting (`~/Downloads/HUUSD Board 2026-11-18 transcript.txt`, YouTube captions with voice matching; video https://www.youtube.com/watch?v=R00-0j2RPzI), and the agenda, the district's 10-slide presentation, and board leadership's discussion and decision protocol (`~/Downloads/huusd_supporting_materials`). Cached in `sources/2026-11-18-board-meeting/` (public comment left out of the transcript copy; names of private people mentioned in passing removed). The owner asked for plain facts, no editorial, and said this can go from staging to live; and asked for a fact check and review before shipping.
+
+- **What happened:** after about 55 public comments and three rounds of discussion, the board advanced Moretown (9 yes, 2 no: Lovegrove, Rosenberg) and Fayston (11 yes, 0 no) to closure hearings by roll call. No answer from Cindy Senning or Robert Dabrowski is audible (the chair read their names paired with the next member's); the chair was not called. Weighted: Moretown 65.05 yes, 12.80 no, 14.95 not heard; Fayston 77.85 yes. Advancing needs a majority of the weighted votes cast (attorney's advice). No other school was proposed, so only Moretown and Fayston can be voted on January 6; Waitsfield and Warren would stay open. Six of the nine members who chose Moretown + Warren in the Nov 4 straw poll voted to advance Moretown. Hearings: Dec 1 Moretown, Dec 3 Fayston, Dec 14 Brookside, 6 PM; Dec 16 vote to warn; Jan 6 closure votes (two-thirds).
+- **New district figures:** fall 2027 headcounts and classrooms by home address (deck slide 7): Waitsfield + Warren 180 / 117 / Brookside 380; Moretown + Warren 195 / 147 / 335; both fit. Moretown kitchen $134,032.80 plus $41,250 building (slide 8). One closure: about 24 FTE (was 21 said on Nov 2; `ONE_CLOSURE.fte`). Two closures + merger: budget $51,294,651, $255.76 per pupil under; finance director says still under in FY29 at a 2.5% increase with a low yield. Tax increase "higher than 10%" (her words, answering about the two-year buy-down). Slide 2, titled as revised with 2.5% health care, still says $3,339,273 to cut, while its level service less this year's budget is $3,039,273 (our arithmetic); the health checkbox stays as a choice, with that note.
+- **Model:** no savings change. `rollCall()` added. Capacity still uses the October 28 tables for every pair (the Nov 18 counts are only for two pairs and a different year); shown side by side on the decision page and in the `finalists` finding.
+- **On the site:** decision page renamed "The board's decision" and opens with the roll calls (bars, table, comparison with two-thirds), hearings, and each member's third-round words; Nov 4 content below. Meetings `m-1118`; Start here lede, status card, Path B card; timeline; Options notes; findings `straw-poll`, `finalists`, `grades56-home`, `transport`, `nov2-figures`; vote simulator's majority note; source keys `meeting1118`, `deck1118`; data date Nov 18; UPDATES line.
+
 ## 2026-11-17: Meetings page (staging, then live at the owner's OK)
 
 - Owner's request: an easy way, for first-time and returning readers, to jump to what was said at each meeting. New page `#/meetings` ("Meetings" in the sidebar, after The Nov. 4 decision; page title "What was said at the meetings"): a jump list, then each meeting newest first (Nov 16, Nov 12, Nov 4, Nov 2, Oct 28) with what it was, who attended, the timeline's summary, quotes, and public comment. Links: `#/meetings?at=m-1116` etc.
@@ -195,10 +204,11 @@ Question from parents: "drop Pre-K and close only Fayston". Answer from the mode
 
 ## Open items
 
-- Waitsfield's sewer grant (about $1M): the board was still waiting on Nov 12 for an answer on whether closing the school puts it at risk. Update `finalists` and `FINALIST_FACTS.land.WES` when answered.
 - The comparison sheets board members filled in after the school visits (mentioned Nov 16) are not published; add them if they are.
 - Cindy Senning's November 4 straw-poll answer is inferred (no open microphone). Check the board's minutes when approved and update `STRAW_POLL` in `data/decision.js`.
-- After November 18: record the vote to warn the hearings (who voted how), the hearing dates and places, and any kitchen/van costing for Moretown or early-retirement modeling.
+- Cindy Senning's and Robert Dabrowski's November 18 roll-call answers are not audible on the recording; check the approved minutes and update `VOTES_1118`.
+- The November 18 fall 2027 counts by address (`CLASSROOM_1118`) cover only two pairs. Owner decision: whether the model should use them for Waitsfield + Warren and Moretown + Warren (it would mix years across pairs on Compare), or wait for the district to publish all six.
+- After the hearings (Dec 1, 3, 14): add what was said; Dec 16: record the vote to warn the closure votes; Jan 6: the closure votes. Still open: bus routes (First Student, about a month), early-retirement modeling, the architects' study scope.
 - The grades 5-6 center plan (`center56`) has no district costing; if the district prices it or Crossett Brook's operating cost, replace the estimate.
 - Analytics: after the first deploy, check in Mixpanel that page views, the named events, and session replays arrive through the proxy. The browser checks only see the localhost stub (`window.__mpEvents`).
 - Before sharing widely (owner's call): consider a corrections channel residents will use (a form or a dedicated address, not the work email); GitHub issues is a barrier for most.

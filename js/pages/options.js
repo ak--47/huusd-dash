@@ -102,7 +102,7 @@ export default {
           }),
           ` Count the November 2 health insurance update: about ${moneyShort(HEALTH_UPDATE.amount)} less to cut, from either target`
         ),
-        h("p", { class: "hint" }, "Next year's health insurance rates came in lower than projected; the finance director called it \"roughly a $300,000 savings in our level service.\" The district has not yet published a target that includes it. ", cite(HEALTH_UPDATE.src, "Nov 2 committee")),
+        h("p", { class: "hint" }, "Next year's health insurance rates came in lower than projected; the finance director called it \"roughly a $300,000 savings in our level service.\" The district's November 18 slide, titled as revised with the 2.5% health care rate, still gives $3,339,273 as the cut needed, though its level-service budget ($54,924,120) less this year's ($51,884,847) is $3,039,273 (our arithmetic). ", cite(HEALTH_UPDATE.src, "Nov 2 committee"), " ", cite(ref("deck1118", "slide 2"))),
         h("p", { class: "hint" }, "Why there are two targets: ", h("a", { href: "#/findings?at=finding-debt-basis" }, "What we checked"), ". ", cite(ref("vsa4001", "§ 4001(6)(B)"), "State law"))
       ),
       h(
@@ -221,8 +221,8 @@ export default {
         note(
           "info",
           h("p", {}, h("strong", {}, "Where things stand. "),
-          "On November 4 the board dropped Path A and, in a straw poll, chose to plan Path B around keeping Moretown and Warren open. The administration said temporary classrooms to keep grades 5-6 in the valley would push the budget over the threshold. These options are not before the board; they show what the same building blocks do in other combinations. ",
-          cite(ref("meeting1104", "straw poll, 3:56-3:59"))),
+          "On November 4 the board dropped Path A. On November 18 it sent Moretown and Fayston to closure hearings, so Path B with Waitsfield and Warren open is the plan before it. The administration said temporary classrooms to keep grades 5-6 in the valley would push the budget over the threshold. These options are not before the board; they show what the same building blocks do in other combinations. ",
+          cite(ref("meeting1118", "action items, 4:50-4:57"))),
           h("p", {}, h("a", { href: "#/decision" }, "How the board decided"))
         ),
         h("div", { class: "opt-list" }, rows.map(cardFor))
@@ -301,7 +301,7 @@ export default {
             metric("Change schools next fall", range(family.map((x) => x.moved))),
             metric(MOST_SCHOOLS, `${range(family.map((x) => x.valleyMax))} / ${range(family.map((x) => x.wbMax))}`)
           ),
-          o.notes.map((n) => h("p", { class: "opt-note" }, n, " ", cite(ref("meeting1104", "straw poll, 3:56-3:59")))),
+          o.notes.map((n) => h("p", { class: "opt-note" }, n, " ", cite(ref("meeting1118", "action items, 4:50-4:57")))),
           inValley ? h("p", { class: "opt-note" }, fiveSixNote(`the ${inValley} versions that keep them there`, "them"), fiveSixCite()) : null
         );
       }

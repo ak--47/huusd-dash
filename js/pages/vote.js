@@ -221,7 +221,7 @@ export default {
         h("p", { class: "vt-meter-key small muted" }, `The line marks ${m.need} of the whole board.`),
         first,
         second,
-        h("p", { class: "vt-src small muted" }, tag("derived"), " Weights ", cite(BOARD.src), motion === "majority" ? " · the majority rule is our assumption" : null)
+        h("p", { class: "vt-src small muted" }, tag("derived"), " Weights ", cite(BOARD.src), motion === "majority" ? " · the majority rule: the board's attorney, for advancing a school to hearings (November 18); our assumption for other motions" : null)
       );
 
       bar.replaceChildren(
@@ -330,7 +330,8 @@ export default {
           h("ol", {}, CLOSURE_PROCESS.steps.map((s) => h("li", {}, s))),
           h("p", {}, "So a vote to close a school comes after the hearings. The Articles do not say whether two-thirds counts the whole board or only members who vote. At the October 28 meeting the superintendent described it as a two-thirds weighted vote of the board. The district's Articles presentation says to confirm how absences, abstentions, and vacancies count with counsel and the clerk. ", cites([ref("meeting1028", "Articles of Agreement review"), ref("aoaDeck", "Article 6(E) hearings, notice and two-thirds Board vote")])),
           h("h3", {}, "Other motions"),
-          h("p", {}, tag("estimate"), " The Articles do not say what other board motions need. The superintendent said changing grade configuration, such as moving Crossett Brook's 7th and 8th graders to Harwood, is board authority under Article 12. This page assumes those motions need more than half of the weighted vote, and that a tie fails. The board's own rules may differ. ", cite(ref("meeting1028", "Articles of Agreement review")))
+          h("p", {}, tag("estimate"), " The Articles do not say what other board motions need. The superintendent said changing grade configuration, such as moving Crossett Brook's 7th and 8th graders to Harwood, is board authority under Article 12. This page assumes those motions need more than half of the weighted vote, and that a tie fails. The board's own rules may differ. ", cite(ref("meeting1028", "Articles of Agreement review"))),
+          h("p", {}, "On November 18 the chair read the board attorney's advice that advancing a school to closure hearings \"requires a majority weighted vote cast,\" which is the votes-cast reading on this page. The board used it to send Moretown and Fayston to hearings. ", cite(ref("meeting1118", "action items, 4:50")), " ", h("a", { href: "#/decision?at=nov18" }, "How each member voted"))
         )
       )
     );
