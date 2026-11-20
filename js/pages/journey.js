@@ -27,7 +27,8 @@ export default {
     const savedKids = store.get("kids");
     const state = {
       kids: (params.get("c") ?? (typeof savedKids === "string" ? savedKids : "waitsfield.0.WES")).split("~").map(decodeChild).filter(Boolean),
-      pair: PAIRS.find((p) => pairId(p) === (params.get("pair") ?? "").replace(/ /g, "+")) ?? PAIRS[0],
+      // default: Waitsfield + Warren, the schools left open when the board advanced Moretown and Fayston on November 18
+      pair: PAIRS.find((p) => pairId(p) === (params.get("pair") ?? "").replace(/ /g, "+")) ?? PAIRS.find((p) => p.includes("WES") && p.includes("WRN")),
       top: params.get("top") === "6" ? 6 : 4,
       rtop: ["4", "5", "6"].includes(params.get("rt")) ? Number(params.get("rt")) : 4,
       pk: params.get("pk") === "1",
@@ -87,7 +88,7 @@ export default {
         {
           plan: B,
           title: "Path B (one of 12 versions)",
-          sub: `Shown: ${pairLabel(state.pair)} stay open, ${gradesWord(state.top)}. Pick another version under "All twelve Path B versions for this child" below.`,
+          sub: `Shown: ${pairLabel(state.pair)} stay open, ${gradesWord(state.top)}${state.pair.includes("WES") && state.pair.includes("WRN") && state.top === 4 ? ", the pair left open after the November 18 votes, with grades 5-6 at Crossett Brook as the administration recommends" : ""}. Pick another version under "All twelve Path B versions for this child" below.`,
           label: `Path B with ${pairLabel(state.pair)} open and ${gradesWord(state.top)}, for this child`,
           isB: true,
         },
@@ -432,8 +433,7 @@ export default {
             h("li", {}, "Other studies find smaller differences once student and school differences are accounted for, and one finds 6th graders have fewer discipline problems when kept apart from older students, as Crossett Brook's 5th and 6th graders would be under Path B. Studies of school closures mostly find small, short-lived effects, though some find short-term harm, especially for students from small schools."),
             h("li", {}, "At the October 28 meeting, speakers noted that children make these moves with their classmates, and that every child in the district already changes schools at least twice. ", cite(ref("meeting1028", "board discussion"))),
             h("li", {}, "The district's case for Path B rests on other benefits: larger groups of classmates, full-time staff on site, and more middle-school offerings. ", h("a", { href: "#/budget?at=path-b" }, "What the district says consolidation would do"), ".")
-          ),
-          h("p", {}, h("a", { href: "#/findings?at=research" }, "Read the research summary"), " on the What we checked page.")
+          )
         )
       ),
 

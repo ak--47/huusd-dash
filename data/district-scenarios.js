@@ -89,6 +89,34 @@ export const DISTRICT_TABLES = [
   "No school exceeds wastewater capacity"),
 ];
 
+// The administration's November 18 recount for the two finalist pairs, Pre-K to 4 (deck1118 slide 7): this year's
+// students moved up a grade for fall 2027 (FY28) and placed at the nearest open school by home address, checked
+// student by student. The model uses these in place of the October 28 Pre-K to 4 tables for these two pairs
+// (districtTableFor); the October tables stay above, as printed, for the slides' own verdicts. No Crossett Brook column.
+const U = (pair, cols, rows, printedTotal) => ({
+  id: `${pair.join("+")}:PK4`,
+  pair,
+  config: "PK4",
+  src: ref("deck1118", "slide 7"),
+  slide: null,
+  updated: "2026-11-18",
+  year: "fall 2027",
+  cols,
+  rows,
+  printedTotal,
+  printedTotalNoPK: null,
+  headline: "Meets need (classrooms)",
+});
+
+export const UPDATED_TABLES = [
+  U(["WES", "WRN"], ["WES", "WRN", "BPS"], {
+    PK: [30, 42, 60], K: [20, 15, 68], 1: [28, 12, 57], 2: [33, 11, 68], 3: [34, 17, 68], 4: [35, 20, 59],
+  }, { WES: 180, WRN: 117, BPS: 380, all: 677 }),
+  U(["MES", "WRN"], ["MES", "WRN", "BPS"], {
+    PK: [30, 42, 60], K: [28, 17, 58], 1: [28, 18, 51], 2: [40, 17, 55], 3: [35, 23, 61], 4: [34, 30, 50],
+  }, { MES: 195, WRN: 147, BPS: 335, all: 677 }),
+];
+
 // The six pairings, in the order the deck's "homework" slide lists them (slide 34).
 export const PAIRS = [
   ["MES", "FES"],

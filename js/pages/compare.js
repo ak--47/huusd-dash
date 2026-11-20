@@ -90,14 +90,14 @@ export default {
         reading === "permits"
           ? `Read the way the state permits are written, ${fitCount} of the 12 versions keep every open school within its wastewater limit; they are listed under the choice above.`
           : `By the student counts in the district's own tables, ${fitCount} of the 12 versions keep every open school within its limit; they are listed under the choice above.${
-              slidesFit === fitCount ? "" : ` The slide headlines say ${slidesFit}${under ? "; the note under the table explains why" : ""}.`
+              slidesFit === fitCount ? "" : ` The October slide headlines say ${slidesFit}${under ? "; the note under the table explains why" : ""}, and Waitsfield + Warren and Moretown + Warren with grades 5-6 at Crossett Brook use the district's November 18 recount.`
             }`;
       // the permits reading counts only students at Waitsfield; these also fit with its staff counted
       const withWesStaff = pathB.filter((v) => v.r.capacity.schools.every((s) => (s.id === "WES" ? s.total + s.staff <= s.limit : !s.overPeople)));
       readingSaid.textContent =
         `${READING_NAME[reading]}: ${fitCount} of the 12 Path B versions keep every open school within its limit.${fitList}` +
         (reading === "slides" && slidesFit !== fitCount
-          ? ` The slide headlines say ${slidesFit}: this count adds up the Fayston + Warren tables' grade rows instead of their printed totals (see the note under the table).`
+          ? ` The October slide headlines say ${slidesFit}: this count adds up the Fayston + Warren tables' grade rows instead of their printed totals (see the note under the table), and uses the district's November 18 recount for Waitsfield + Warren and Moretown + Warren with grades 5-6 at Crossett Brook.`
           : "") +
         (reading === "permits" && withWesStaff.length !== fitCount
           ? ` This reading counts only students against Waitsfield's 300; if its staff count too, ${withWesStaff.length} fit${withWesStaff.length ? `: ${listJoin(withWesStaff.map(nameWithSetup))}` : ""}.`
@@ -191,7 +191,7 @@ export default {
             "Waitsfield: 300 students, as its 1991 permit words it. Elsewhere staff count too, and Fayston's limit is 235. Staff numbers are our estimate."
           )
         ),
-        h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/findings" }, "What we checked"), ". ", cite(ref("permitWES", "condition 1.2"), "Waitsfield permit")),
+        h("p", { class: "hint" }, "Why there are two readings: ", h("a", { href: "#/sources?at=method" }, "How we calculate"), ". ", cite(ref("permitWES", "condition 1.2"), "Waitsfield permit")),
         readingSaid
       ),
       h(
@@ -337,6 +337,8 @@ function howToRead(onBack) {
           "Fits the buildings?",
           "The district's own measure: each open school's students, counting Pre-K, against its wastewater limit, or Brookside's occupancy of 480. Student counts are the grade rows of the district's capacity tables. ",
           cite(ref("deck", "slides 21-32")),
+          " For Waitsfield + Warren and Moretown + Warren with grades 5-6 at Crossett Brook, they are the district's November 18 recount for fall 2027, with each child placed by home address; the other ten versions use the October 28 tables, built from this year's enrollment. ",
+          cite(ref("deck1118", "slide 7")),
           ` Pre-K counts in those tables are the district's planning numbers, not this year's enrollment: ${prekPlanText()}.${empty.length ? ` ${listJoin(empty)} ${empty.length === 1 ? "has" : "have"} no Pre-K classes now.` : ""} `,
           cite(PREK_2026.src, "Oct 1 report"),
           " Choose “As the state permits read” to use the limits written in the permits instead: Waitsfield 300 students, Fayston 235, and staff counted toward every limit except Waitsfield's. Staff numbers are our estimate. ",

@@ -11,21 +11,23 @@ Built by Aaron Krivitzky, a Waitsfield parent. Independent, not affiliated with 
 
 | Page | What it answers |
 |---|---|
-| Start here | Where the decision stands after the October 28 meeting, the district's two paths, and other combinations |
+| Start here | Where the decision stands, the district's two paths, and what happens next |
+| The board's decision | The November 18 votes sending Moretown and Fayston to closure hearings, weighted by town, and the November 4 scores and straw poll |
+| Meetings | What was said at each board meeting and forum, newest first |
+| Board vote simulator | Set each member's vote and see the weighted result |
 | Your child's path | Every school a child would attend, kindergarten through grade 12, under each plan, including the district's draft roadmap |
 | Compare the plans | Path A and all twelve versions of Path B on the same measures, plus the board's own scoring sheet with the data behind it |
 | Options beyond A and B | Other combinations of the same building blocks, scored the same way: merging only the middle schools, closing one school, keeping grades 5-6 in the valley, and the middle-school merger with smaller cuts |
 | Build a plan | Start from no change, Path A, Path B, closing one school, or the merger with smaller cuts; then choose which schools stay open and where their children go (including the share of a town's children going to each open school, to the percent, starting from the district's own placement), the grades valley schools teach (through grade 4, 5, or 6, with or without Pre-K), a Pre-K center in a closed school's building, the middle schools, program cuts, and building changes |
 | The budget | The four FY28 budgets, the state's excess spending threshold, the Path A cuts, the Path B savings, and what the district says each would do |
 | The schools | Enrollment, space, condition, and costs for each building, with a map and drive times |
-| What we checked + questions | What adds up, what does not, what is missing, and questions to bring to the board |
 | Sources and method | Every source, every formula, the history of earlier decisions, and an updates log |
 
 ## The decision in brief
 
 - The district says next year's budget needs about **$3.34 million** in savings to stay under Vermont's excess spending threshold. If payments on bonds approved before July 1, 2026 are left out of the test, as state law allows, the figure is about **$2.84 million**. The district's figures appear to count them.
 - **Path A** keeps all seven buildings and makes six program cuts: bus routes, district Pre-K classes, special programming, intervention staff, athletics and activities, and electives.
-- **Path B** closes two of the four valley elementary schools (Fayston, Moretown, Waitsfield, Warren) and moves Crossett Brook's 7th and 8th graders to Harwood. The district puts its savings at $3.93 million. On October 28 the board agreed in a straw poll, not a formal vote, to keep developing Path B.
+- **Path B** closes two of the four valley elementary schools (Fayston, Moretown, Waitsfield, Warren) and moves Crossett Brook's 7th and 8th graders to Harwood. The district puts its savings at $3.93 million. On November 18 the board voted to send Moretown and Fayston to closure hearings (Dec 1, 3, and 14); the closure votes, each needing two-thirds of the board, are set for January 6. Waitsfield and Warren would stay open.
 - Today every child attends 3 K-12 schools. Under Path B many attend 4 or 5, and with the district's draft roadmap some of today's youngest children would attend 6.
 
 ## Is there a plan that closes fewer schools?

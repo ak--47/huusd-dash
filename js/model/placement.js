@@ -54,12 +54,6 @@ export const DISTRICT_SHARES = Object.fromEntries(
   PAIRS.map((pair) => [pairKey(pair), sharesFrom(DISTRICT_TABLES.find((t) => t.config === "K6" && t.pair.every((id) => pair.includes(id))))])
 );
 
-// The same, read from each pair's Pre-K to 4 table (K-4 children). Shown on What we checked; the model applies the
-// K-6 shares to every grade, since they come from the larger count of children.
-export const DISTRICT_SHARES_K4 = Object.fromEntries(
-  PAIRS.map((pair) => [pairKey(pair), sharesFrom(DISTRICT_TABLES.find((t) => t.config === "PK4" && t.pair.every((id) => pair.includes(id))))])
-);
-
 export const districtShares = (open) => (open.length === 2 ? (DISTRICT_SHARES[pairKey(open)] ?? null) : null);
 
 // The shares a plan uses for each closed town: the plan's own (plan.split), or, with two valley schools open and

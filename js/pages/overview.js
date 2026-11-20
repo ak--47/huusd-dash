@@ -1,11 +1,11 @@
 import { h, moneyShort, num, dateLong } from "../ui/dom.js";
-import { cite, cites, fold, pageHead, section, tag, term, unsure } from "../ui/kit.js";
+import { cite, fold, pageHead, section, tag, term } from "../ui/kit.js";
 import { childForm, childProps } from "../ui/child-form.js";
 import { track } from "../ui/track.js";
-import { BUDGET, HEALTH_UPDATE, ONE_CLOSURE, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
+import { BUDGET, PATH_A_CUTS, PATH_B_SAVINGS } from "../../data/budget.js";
 import { PREK_2026 } from "../../data/enrollment.js";
 import { TIMELINE } from "../../data/timeline.js";
-import { OPTIONS, PATH_B_PLANS, PLAN_A, evaluate, studentsAtLeast, withRoadmap } from "../model/index.js";
+import { PATH_B_PLANS, PLAN_A, evaluate, studentsAtLeast, withRoadmap } from "../model/index.js";
 import { ref } from "../../data/sources.js";
 
 const range = (vals, f = num) => {
@@ -94,7 +94,7 @@ export default {
             "public hearings on Tuesday, December 1 in Moretown, Thursday, December 3 in Fayston, and Monday, December 14 at Brookside in Waterbury, each at 6 PM; on December 16, a vote to warn the closure votes; on January 6, a closure vote for each school, each needing two-thirds of the board's weighted vote. ",
             cite(ref("meeting1118", "hearing dates, 4:57-5:12"))
           ),
-          h("li", {}, h("strong", {}, "Still open: "), "bus routes and ride times, especially for valley 5th and 6th graders; how long grades 5 and 6 stay at Crossett Brook once Brookside moves there; and the architects' study, whose scope the board must now set. ", h("a", { href: "#/findings" }, "What we checked, and questions to ask the board"))
+          h("li", {}, h("strong", {}, "Still open: "), "bus routes and ride times, especially for valley 5th and 6th graders; how long grades 5 and 6 stay at Crossett Brook once Brookside moves there; and the architects' study, whose scope the board must now set.")
         ),
         h(
           "div",
@@ -222,147 +222,6 @@ export default {
       ),
 
       section(
-        { id: "beyond", title: "Beyond A and B", intro: "Path A and Path B are two combinations of a few building blocks. Other combinations of the same blocks, scored the same way:" },
-        h(
-          "div",
-          { class: "beyond-grid" },
-          ["center56", "K4x3", "MS+close-FES", "MS+cuts", "B-FW-K6", "B-MW-K6"].map((id) => OPTIONS.find((o) => o.id === id)).map((o) => {
-            const r = evaluate(o.plan);
-            const withHealth = evaluate(o.plan, { health: true }).budget;
-            const { savings, gap, upperBound, oneTime } = r.budget;
-            const valleyMax = Math.max(r.maxYoung.moretown, r.maxYoung.waitsfield, r.maxYoung.fayston, r.maxYoung.warren);
-            const wdMax = Math.max(r.maxYoung.waterbury, r.maxYoung.duxbury);
-            return h(
-              "article",
-              { class: "wonk-card beyond-card" },
-              h(
-                "h3",
-                {},
-                o.id === "center56"
-                  ? "A grades 5-6 center in the valley, with Crossett Brook emptied for repairs (Waitsfield as the center)"
-                  : o.id === "K4x3"
-                  ? "Close one valley school instead of two, with Path B's grades (Fayston, as an example)"
-                  : o.id === "MS+close-FES"
-                    ? "Merge the middle schools and close one valley school, grades 5-6 in the valley (Fayston, as an example)"
-                    : o.name
-              ),
-              // the option's first sentence says which schools stay open, e.g. "Fayston and Warren stay open as K-6 schools."
-              h("p", { class: "small muted" }, `${o.what.split(". ")[0].replace(/\.$/, "")}.`),
-              h(
-                "p",
-                { class: "beyond-facts" },
-                `Saves ${upperBound ? "up to " : ""}${moneyShort(savings)} a year `,
-                r.budget.hasEstimate ? tag("estimate") : null,
-                h("br"),
-                upperBound && gap <= 0
-                  ? [unsure("May fall short of the target"), ` (${moneyShort(-gap)} to spare only if the district's full figure holds)`]
-                  : gap <= 0
-                    ? `Meets the target with ${moneyShort(-gap)} to spare`
-                    : `${moneyShort(gap)}${upperBound ? " or more" : ""} short of the target`,
-                // where counting the November 2 health insurance update changes the picture
-                gap > 0 && !upperBound
-                  ? [h("br"), withHealth.gap <= 0 ? `Meets it with ${moneyShort(-withHealth.gap)} to spare` : `${moneyShort(withHealth.gap)} short`, " counting the November 2 health insurance update"]
-                  : null,
-                oneTime.portables
-                  ? [h("br"), `Plus about ${moneyShort(oneTime.portables.low)} to ${moneyShort(oneTime.portables.high)} for portable classrooms over about two years (the district's preliminary quote), not counted above`]
-                  : null,
-                h("br"),
-                `Highest number of K-12 schools for a child now in Pre-K to grade 2: ${valleyMax} in the valley, ${wdMax} in Waterbury and Duxbury (today: 3)`
-              ),
-              // the wastewater condition each "grades 5-6 stay in the valley" variant depends on
-              o.group === "b-variant" ? h("p", { class: "small muted" }, o.notes[0]) : null,
-              o.startNote ? h("p", { class: "small muted" }, o.startNote) : null
-            );
-          })
-        ),
-        h(
-          "p",
-          { class: "small muted" },
-          "“Up to,” “or more,” and “May fall short”: the district's savings figures assume valley 5th and 6th graders move to Crossett Brook. On October 28 an administrator said keeping them in the valley would save less, with “an impact in terms of a penalty.” ",
-          fiveSixCite(),
-          ` For closing one school with grades 5-6 at Crossett Brook we use half the district's figure for closing two, an estimate. With grades 5-6 kept in the valley, the district put one closure plus the merger at about ${moneyShort(ONE_CLOSURE.amount)} on November 2, about ${moneyShort(BUDGET.requiredCut - ONE_CLOSURE.amount)} short of the target. `,
-          cite(ONE_CLOSURE.src)
-        ),
-        h(
-          "div",
-          { class: "btn-row" },
-          h("a", { class: "wonk-btn", href: "#/options", onclick: opens("Options Opened") }, "Compare all the options"),
-          h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build", onclick: opens("Build Opened") }, "Build your own")
-        )
-      ),
-
-      section(
-        {
-          id: "missing",
-          title: "What we found when we checked the district's numbers",
-          intro: "Most of the district's arithmetic checks out, including the Path A cuts, the Path B savings, the October 1 enrollment report, and ten of the twelve capacity tables. These are the items that do not add up, or that are missing:",
-        },
-        h(
-          "ul",
-          { class: "prose findings-teaser" },
-          h(
-            "li",
-            {},
-            h("strong", {}, "How many schools a child attends. "),
-            "Path B adds one or two schools for many children. For every Waterbury and Duxbury child now in grade 7 or below, the added school is Harwood Union Middle School, in the high school's building, so they still attend 3 buildings. Valley children whose school closes attend one or two more. In the versions that send grades 5-6 to Crossett Brook, valley children whose school stays open follow the same path as Brookside children: their elementary school, then Crossett Brook, then Harwood. The district's draft roadmap adds another move for valley children in fall 2029."
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "The wastewater limits do not match the state permits. "),
-            "Waitsfield's 1991 permit says 300 students, but its design counted students and staff and a 1996 letter in the state file says 230; the slides use 230. Fayston's and Warren's permits count students and staff; the slides count students only. Under the permits as written, a different set of pairings fits. ",
-            cites([
-              ref("permitWES", "PDF p. 12, condition 1.2"),
-              ref("permitWES1996", "engineer's letter of July 18, 1996, PDF pp. 9-10"),
-              ref("permitFES", "PDF p. 8"),
-              ref("permitWRN", "PDF p. 341 of 346"),
-            ])
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "Every Path B version is over the consultant's classroom capacity somewhere. "),
-            "Measured against the classroom capacities the district's planning consultant counted in March 2025, each version puts more students in at least one receiving school than its current classrooms hold. The consultant did not study Path B, and any added space is not in the savings. ",
-            cite(ref("truexCap", "Capacities"))
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "The size of the cut depends on how bond payments are counted. "),
-            "State law leaves payments on bonds voters approved before July 1, 2026 out of the excess spending test. The district's slides indicate its $3.34M target counts them; a note on the slide says an earlier figure was \"corrected to remove the debt exclusion,\" without saying why. If the exclusion applies, the cut needed is about $500,000 smaller. ",
-            cite(ref("vsa4001", "§ 4001(6)(B)"), "State law"),
-            " ",
-            cite(ref("deck", "slide 10"))
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "The Fayston + Warren tables did not add up, and bus times are missing. "),
-            "Both Fayston + Warren tables printed a Brookside total of 513, which the slides used to rule the pairing out; the grade rows add to 439 students, under Brookside's occupancy of 480 if staff are not counted, and on November 2 the finance director confirmed 439 and corrected the slide. Building occupancy usually counts staff, and with staff Brookside would still be over. Ride times, which the board asked for on October 14, were not presented; an administrator said routes would be modeled with the bus contractor once the board narrows the options. ",
-            cite(ref("deck", "slides 29 and 32")),
-            " ",
-            cite(ref("meeting1028", "transportation"))
-          ),
-          h(
-            "li",
-            {},
-            h("strong", {}, "Path A's details are missing too. "),
-            "The deck does not say which bus routes would end. The superintendent said private Pre-K programs lack room for the children now in district Pre-K classes, and the finance director said Path A would mean more cuts each year as the threshold keeps stepping down. ",
-            cite(ref("deck", "slide 13")),
-            " ",
-            cite(ref("meeting1028", "Path A"))
-          )
-        ),
-        h(
-          "div",
-          { class: "btn-row" },
-          h("a", { class: "wonk-btn", href: "#/findings" }, "See everything we checked"),
-          h("a", { class: "wonk-btn", href: "#/findings?at=questions", onclick: opens("Questions Opened") }, "Questions to ask the board"),
-          h("a", { class: "wonk-btn wonk-btn--quiet", href: "#/build", onclick: opens("Build Opened") }, "Build your own plan")
-        )
-      ),
-
-      section(
         { id: "meetings", title: "What was said at the meetings", intro: "Each public meeting and forum since October 28, with a short summary and quotes in people's own words." },
         h(
           "ul",
@@ -382,10 +241,10 @@ export default {
         h(
           "ol",
           { class: "timeline" },
-          TIMELINE.filter((t) => t.key || ["2026-11-04", "2026-12-16", "2027-01-13", "2027-08"].includes(t.date) || t.title.startsWith("Three public hearings")).map((t) =>
+          TIMELINE.filter((t) => t.key || ["2026-11-04", "2026-12-16", "2027-01-13", "2027-08"].includes(t.date) || t.title.includes("closure hearing")).map((t) =>
             h(
               "li",
-              { class: [t.key ? "is-key" : "", t.date < "2026-11-05" ? "is-past" : ""].join(" ") },
+              { class: [t.key ? "is-key" : "", t.date < "2026-11-19" ? "is-past" : ""].join(" ") },
               h("span", { class: "when" }, dateLong(t.date)),
               h("span", { class: "what" }, t.title),
               t.detail ? h("p", { class: "detail" }, t.detail, " ", cite(t.src)) : null
