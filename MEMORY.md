@@ -6,6 +6,10 @@ What changed, when, and why, newest first, so any person or AI session can pick 
 
 ## Changelog
 
+## 2026-11-19: November 18 meeting promoted to live
+
+- With the owner's OK given up front, PR #43 promoted #42 (the November 18 meeting) to live, and PR #45 promoted #44: the owner's correction that Cindy Senning and Robert Dabrowski voted Yes on both motions (Moretown 11-2, Fayston 13-0; first published as 9-2 and 11-0 with two not heard). Both live deploys passed; `staging:diff` showed nothing.
+
 ## 2026-11-19: the November 18 board meeting (staging, then live at the owner's OK)
 
 Input from the owner: a transcript of the meeting (`~/Downloads/HUUSD Board 2026-11-18 transcript.txt`, YouTube captions with voice matching; video https://www.youtube.com/watch?v=R00-0j2RPzI), and the agenda, the district's 10-slide presentation, and board leadership's discussion and decision protocol (`~/Downloads/huusd_supporting_materials`). Cached in `sources/2026-11-18-board-meeting/` (public comment left out of the transcript copy; names of private people mentioned in passing removed). The owner asked for plain facts, no editorial, and said this can go from staging to live; and asked for a fact check and review before shipping.
