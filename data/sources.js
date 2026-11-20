@@ -130,7 +130,7 @@ export const SOURCES = {
     date: "2026-11-18",
     kind: "district",
     url: "https://www.youtube.com/watch?v=R00-0j2RPzI",
-    note: "About five hours and fifteen minutes at Harwood: about 55 public comments, the administration's update, the board's three rounds of discussion, and the roll-call votes that sent Moretown and Fayston to closure hearings (4:53-4:57). Quotes come from a transcript made from the automatic captions; board members are named, staff by role, and residents who spoke are not named. Two members' answers in the roll calls are not audible on the recording.",
+    note: "About five hours and fifteen minutes at Harwood: about 55 public comments, the administration's update, the board's three rounds of discussion, and the roll-call votes that sent Moretown and Fayston to closure hearings (4:53-4:57). Quotes come from a transcript made from the automatic captions; board members are named, staff by role, and residents who spoke are not named. Two members' answers in the roll calls are not clear on the recording; both voted Yes, as reported to this site.",
   },
   deck1118: {
     title: "School Board Meeting 11.18.26",

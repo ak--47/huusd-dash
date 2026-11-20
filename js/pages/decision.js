@@ -212,6 +212,7 @@ export default {
     const word = { yes: "Yes", no: "No" };
     const answer = (v) =>
       v === "chair" ? h("span", { class: "muted" }, "Not called (chair)") : v == null ? h("span", { class: "muted" }, "Not heard") : h("span", { class: `dc-vote dc-vote--${v}` }, word[v]);
+    const flag = (name) => (VOTES_1118.unclear.includes(name) ? h("span", { class: "dc-flag", title: VOTES_1118.unclearNote }, " *") : null);
     const rollTable = h(
       "div",
       { class: "table-scroll" },
@@ -239,7 +240,7 @@ export default {
               {},
               h("th", { scope: "row" }, h("span", { class: "dc-name" }, r.name), h("span", { class: "dc-town" }, r.town)),
               h("td", { class: "num" }, `${pts(r.weight)}%`),
-              calls.map((c) => h("td", {}, answer(c.rows[i].vote)))
+              calls.map((c) => h("td", {}, answer(c.rows[i].vote), c.rows[i].vote === "yes" || c.rows[i].vote === "no" ? flag(r.name) : null))
             )
           )
         )
@@ -264,7 +265,7 @@ export default {
         { class: "wonk-card dc-card" },
         h("h3", {}, `Send ${schoolShort(c.motion.school)} to closure hearings`),
         h("p", { class: "dc-big" }, `${c.count.yes} to ${c.count.no}`),
-        h("p", {}, `Passed. Weighted: ${pts(c.yes)} points Yes, ${pts(c.no)} No, ${pts(c.notHeard)} not heard, ${pts(c.chair)} the chair's, not cast. Yes is ${share(c.yes, c.yes + c.no)} of the points cast, and a majority even if both members not heard had voted No. `, tag("derived")),
+        h("p", {}, `Passed. Weighted: ${pts(c.yes)} points Yes, ${pts(c.no)} No${c.notHeard ? `, ${pts(c.notHeard)} not heard` : ""}, ${pts(c.chair)} the chair's, not cast. Yes is ${share(c.yes, c.yes + c.no)} of the points cast. `, tag("derived")),
         bar(c),
         h("p", { class: "small muted" }, `Moved by ${c.motion.by}, seconded by ${c.motion.second}, ${c.motion.at}. `, cite(VOTES_1118.src))
       );
@@ -283,7 +284,7 @@ export default {
         kicker: "November 18, 2026 board meeting",
         title: "The board sent Moretown and Fayston to closure hearings",
         lede: [
-          `In two roll-call votes, the board advanced Moretown (${mesCall.count.yes} to ${mesCall.count.no}) and Fayston (${fesCall.count.yes} to ${fesCall.count.no}) for possible closure; two members' answers are not heard on the recording. No other school was proposed, so Waitsfield and Warren are the valley schools that would stay open. This was not a vote to close: three public hearings come first, and the closure votes, a separate vote for each school and each needing two-thirds of the board's weighted vote, are set for January 6. `,
+          `In two roll-call votes, the board advanced Moretown (${mesCall.count.yes} to ${mesCall.count.no}) and Fayston (${fesCall.count.yes} to ${fesCall.count.no}, unanimous) for possible closure. No other school was proposed, so Waitsfield and Warren are the valley schools that would stay open. This was not a vote to close: three public hearings come first, and the closure votes, a separate vote for each school and each needing two-thirds of the board's weighted vote, are set for January 6. `,
           cite(VOTES_1118.src),
         ],
       }),
@@ -299,14 +300,14 @@ export default {
       section(
         { id: "nov18", title: "How each member voted on November 18", intro: "Each member answered aloud in a roll call. Votes are weighted by town (2021 weights)." },
         h("div", { class: "dc-findings" }, calls.map(callCard)),
-        h("p", { class: "small muted" }, "Bars: green Yes, red No, gray not heard or the chair's. The solid line marks half of the whole board's 100 points and the dashed line two-thirds; the motions needed a majority of the points cast, which the cards give."),
+        h("p", { class: "small muted" }, "Bars: green Yes, red No, gray the chair's, not cast. The solid line marks half of the whole board's 100 points and the dashed line two-thirds; the motions needed a majority of the points cast, which the cards give."),
         rollTable,
-        h("p", { class: "small muted" }, VOTES_1118.notHeardNote, " ", cite(VOTES_1118.src)),
+        h("p", { class: "small muted" }, "* ", VOTES_1118.unclearNote, " ", cite(VOTES_1118.src)),
         h(
           "ul",
           { class: "prose" },
-          h("li", {}, `Since November 4: of the ${pollMES.length} members who chose ${pairName(SECOND)} in the straw poll, ${nowYes.length} voted to send Moretown to hearings (`, names(nowYes), `), ${nowNo.length} voted no (`, names(nowNo), `), and ${nowUnheard.length} was not heard (`, names(nowUnheard), "). Several said in the discussion why they had changed their view; their words are below. ", tag("derived")),
-          h("li", {}, `For comparison with January 6, which needs two-thirds: the Yes votes heard on Moretown were ${pts(mesCall.yes)} points, not counting the ${pts(mesCall.notHeard)} points of the two members not heard or the chair's ${pts(mesCall.chair)}; that is ${share(mesCall.yes, mesCall.yes + mesCall.no)} of the points cast. Two-thirds of the whole board would be ${pts(need)}. On Fayston the Yes votes heard were ${pts(fesCall.yes)}. This is arithmetic on the November 18 votes, not a prediction: members can vote differently after the hearings, and the district's own Articles presentation cautions against turning two-thirds into points without confirming the rules with counsel. `, tag("derived"), " ", h("a", { href: "#/vote" }, "Try the board vote simulator"))
+          h("li", {}, `Since November 4: of the ${pollMES.length} members who chose ${pairName(SECOND)} in the straw poll, ${nowYes.length} voted to send Moretown to hearings (`, names(nowYes), `) and ${nowNo.length} voted no (`, names(nowNo), nowUnheard.length ? [`); ${nowUnheard.length} not heard (`, names(nowUnheard)] : null, "). Several said in the discussion why they had changed their view; their words are below. ", tag("derived")),
+          h("li", {}, `For comparison with January 6, which needs two-thirds: the Yes votes on Moretown were ${pts(mesCall.yes)} points, ${share(mesCall.yes, mesCall.yes + mesCall.no)} of the points cast, against ${pts(need)} for two-thirds of the whole board; on Fayston they were ${pts(fesCall.yes)}. This is arithmetic on the November 18 votes, not a prediction: members can vote differently after the hearings, and the district's own Articles presentation cautions against turning two-thirds into points without confirming the rules with counsel. `, tag("derived"), " ", h("a", { href: "#/vote" }, "Try the board vote simulator"))
         )
       ),
 
